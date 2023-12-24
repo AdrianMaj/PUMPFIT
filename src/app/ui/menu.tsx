@@ -15,8 +15,8 @@ const Menu = () => {
 		show: {
 			opacity: 1,
 			transition: {
-				staggerChildren: 0.3,
-				delayChildren: 0.1,
+				staggerChildren: 0.15,
+				delayChildren: 0.2,
 			},
 		},
 	}
