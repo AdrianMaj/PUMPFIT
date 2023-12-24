@@ -7,7 +7,9 @@
 	padding: 1em;
 	margin: -1em;
 	z-index: 3;
-	margin: auto 0;
+	margin-top: auto;
+	margin-bottom: auto;
+	cursor: pointer;
 }
 .container {
 	position: relative;

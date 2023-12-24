@@ -51,13 +51,13 @@ const Menu = () => {
 										Our trainers
 									</Link>
 								</motion.li>
-								<motion.li className={`${classes.listElement} ${classes.button} ${classes.filledButton}`} variants={item}>
-									<Link className={classes.link} href="/user-login">
+								<motion.li className={`${classes.listElementButton} ${classes.margin}`} variants={item}>
+									<Link className={`${classes.link} ${classes.button} ${classes.filledButton}`} href="/user-login">
 										User Login
 									</Link>
 								</motion.li>
-								<motion.li className={`${classes.listElement} ${classes.button} ${classes.textButton}`} variants={item}>
-									<Link className={classes.link} href="/trainer-login">
+								<motion.li className={`${classes.listElementButton}`} variants={item}>
+									<Link className={`${classes.link} ${classes.button} ${classes.textButton}`} href="/trainer-login">
 										Trainer Login
 									</Link>
 								</motion.li>

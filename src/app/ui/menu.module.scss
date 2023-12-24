@@ -23,18 +23,21 @@
 .listElement {
 	margin-bottom: 3em;
 }
+.listElementButton {
+	width: 100%;
+	a {
+		font-size: 1.8rem;
+	}
+}
+.margin {
+	margin-top: auto;
+}
 .button {
 	display: flex;
 	justify-content: center;
-
-	padding: 1.5em 2.25em;
-	margin-bottom: 0;
+	align-items: center;
+	padding: 0.8em;
 	width: 100%;
-	color: #fff;
-	a {
-		font-size: 1.8rem;
-		margin-bottom: 0;
-	}
 }
 .filledButton {
 	margin-top: auto;
@@ -48,7 +51,6 @@
 .link {
 	text-decoration: none;
 	color: #fff;
-	margin-bottom: 1em;
 	font-size: 2rem;
 }
 .list {
