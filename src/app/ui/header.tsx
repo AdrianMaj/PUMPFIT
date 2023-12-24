@@ -1,10 +1,14 @@
+'use client'
 import classes from '@/app/ui/header.module.scss'
+import Menu from './menu'
 const Header = () => {
 	return (
-		<header className={classes.header}>
-			<img src="./logo.svg" className={classes.logo} alt="PUMPFIT Logo" />
-			<div className={classes.burgerBtn}></div>
-		</header>
+		<div className={classes.header}>
+			<header>
+				<img src="./logo.svg" className={classes.logo} alt="PUMPFIT Logo" />
+			</header>
+			<Menu />
+		</div>
 	)
 }
 

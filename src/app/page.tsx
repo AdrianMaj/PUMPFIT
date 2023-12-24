@@ -5,9 +5,7 @@ export default function Page() {
 	return (
 		<div className={classes.wrapper}>
 			<Header />
-			<main>
-				<p>Test</p>
-			</main>
+			<main></main>
 		</div>
 	)
 }
