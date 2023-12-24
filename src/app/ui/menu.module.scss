@@ -1,3 +1,4 @@
+@use '../variables' as *;
 .menu {
 	display: block;
 	position: absolute;
@@ -5,7 +6,7 @@
 	padding-top: 10em;
 	top: 0;
 	right: 0;
-	height: 100%;
+	height: 100svh;
 	width: 70%;
 	z-index: 2;
 	text-align: right;
@@ -16,7 +17,7 @@
 	top: 0;
 	left: 0;
 	width: 100%;
-	height: 100%;
+	height: 100svh;
 	z-index: 1;
 	background-color: #0f0f0f50;
 }
@@ -41,12 +42,12 @@
 }
 .filledButton {
 	margin-top: auto;
-	background-color: #a50000;
+	background-color: $mainColor;
 	border: 1.5px solid transparent;
 }
 .textButton {
 	background-color: transparent;
-	border: 1.5px solid #a50000;
+	border: 1.5px solid $mainColor;
 }
 .link {
 	text-decoration: none;
@@ -60,4 +61,29 @@
 	flex-direction: column;
 	align-items: flex-end;
 	gap: 2em;
+}
+.desktopMenu {
+	display: flex;
+	align-items: center;
+	flex-wrap: nowrap;
+	height: 100%;
+	gap: 3em;
+	list-style-type: none;
+}
+.desktopLink {
+	text-decoration: none;
+	color: #fff;
+	font-size: 1.8rem;
+}
+.desktopButtonFilled {
+	background-color: $mainColor;
+	padding: 0.75em 1em;
+	font-size: 1.6rem;
+	border: 1.5px solid transparent;
+}
+.desktopButtonText {
+	background-color: transparent;
+	padding: 0.75em 1em;
+	font-size: 1.6rem;
+	border: 1.5px solid $mainColor;
 }

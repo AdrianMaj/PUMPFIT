@@ -3,11 +3,8 @@ import classes from '@/app/ui/menuButton.module.scss'
 import { motion } from 'framer-motion'
 
 const MenuButton: React.FC<{ isOpen: boolean; toggleMenu: () => void }> = ({ isOpen, toggleMenu }) => {
-	const handleMenu = () => {
-		toggleMenu()
-	}
 	return (
-		<motion.div onClick={handleMenu} className={classes['burger-btn']}>
+		<motion.div onClick={toggleMenu} className={classes['burger-btn']}>
 			<motion.div className={classes.container}>
 				<motion.div
 					className={classes.burgerLine}
