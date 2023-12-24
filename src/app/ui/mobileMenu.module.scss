@@ -62,28 +62,3 @@
 	align-items: flex-end;
 	gap: 2em;
 }
-.desktopMenu {
-	display: flex;
-	align-items: center;
-	flex-wrap: nowrap;
-	height: 100%;
-	gap: 3em;
-	list-style-type: none;
-}
-.desktopLink {
-	text-decoration: none;
-	color: #fff;
-	font-size: 1.8rem;
-}
-.desktopButtonFilled {
-	background-color: $mainColor;
-	padding: 0.75em 1em;
-	font-size: 1.6rem;
-	border: 1.5px solid transparent;
-}
-.desktopButtonText {
-	background-color: transparent;
-	padding: 0.75em 1em;
-	font-size: 1.6rem;
-	border: 1.5px solid $mainColor;
-}
