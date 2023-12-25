@@ -1,5 +1,5 @@
 'use client'
-import classes from '@/app/ui/header.module.scss'
+import classes from '@/app/components/header.module.scss'
 import Menu from './menu'
 import Link from 'next/link'
 const Header = () => {

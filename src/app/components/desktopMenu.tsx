@@ -1,7 +1,8 @@
 import React from 'react'
-import classes from '@/app/ui/desktopMenu.module.scss'
+import classes from '@/app/components/desktopMenu.module.scss'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
+import Button from './ui/button'
 
 const DesktopMenu = () => {
 	const MotionLink = motion(Link)
@@ -20,24 +21,12 @@ const DesktopMenu = () => {
 						</Link>
 					</li>
 					<li>
-						<MotionLink
-							whileHover={{
-								backgroundColor: '#750000',
-							}}
-							className={`${classes.buttonFilled} ${classes.link}`}
-							href="/user-login">
-							User Login
-						</MotionLink>
+						<Button filled linked="/user-login">
+							User login
+						</Button>
 					</li>
 					<li>
-						<MotionLink
-							whileHover={{
-								backgroundColor: '#a50000',
-							}}
-							className={`${classes.buttonText} ${classes.link}`}
-							href="/trainer-login">
-							Trainer Login
-						</MotionLink>
+						<Button linked="/user-login">Trainer login</Button>
 					</li>
 				</ul>
 			</nav>

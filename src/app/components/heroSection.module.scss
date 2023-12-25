@@ -1,0 +1,38 @@
+@use '../variables' as *;
+.main {
+	width: 100%;
+	padding: 2em 2.5em;
+	height: 100svh;
+	display: flex;
+	align-items: center;
+}
+.heroImg {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-image: url('../../../public/bgimg.png');
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position-x: center;
+	background-position-y: top;
+	z-index: -1;
+}
+.container {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+}
+.heading {
+	text-transform: uppercase;
+	font-size: clamp(3rem, 2.3469rem + 3.2653vw, 5rem);
+	margin-bottom: 0.5em;
+	letter-spacing: 3px;
+}
+.subtext {
+	color: $subtext;
+	font-size: clamp(1.4rem, 1.2041rem + 0.9796vw, 2rem);
+	width: 80%;
+	margin-bottom: 2.5em;
+}

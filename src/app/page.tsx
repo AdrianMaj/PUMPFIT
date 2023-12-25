@@ -1,11 +1,12 @@
-import Header from './ui/header'
+import Header from './components/header'
 import classes from '@/app/page.module.scss'
+import HeroSection from './components/heroSection'
 
 export default function Page() {
 	return (
 		<div className={classes.wrapper}>
 			<Header />
-			<main className={classes.main}>{/* <div className={classes.heroImg}></div> */}</main>
+			<HeroSection />
 		</div>
 	)
 }
