@@ -2,16 +2,17 @@
 import classes from '@/app/components/header.module.scss'
 import Menu from './menu'
 import Link from 'next/link'
+import { motion } from 'framer-motion'
 const Header = () => {
 	return (
-		<div className={classes.header}>
+		<motion.div className={classes.header}>
 			<header>
 				<Link href="/">
 					<img src="./logo.svg" className={classes.logo} alt="PUMPFIT Logo" />
 				</Link>
 			</header>
 			<Menu />
-		</div>
+		</motion.div>
 	)
 }
 

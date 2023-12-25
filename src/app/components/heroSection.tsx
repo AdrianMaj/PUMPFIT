@@ -5,7 +5,7 @@ import Button from './ui/button'
 
 const HeroSection = () => {
 	return (
-		<main className={classes.main}>
+		<section className={classes.main}>
 			<div className={classes.heroImg}></div>
 			<div className={classes.container}>
 				<h1 className={classes.heading}>Your Fitness Journey Starts Here.</h1>
@@ -14,7 +14,7 @@ const HeroSection = () => {
 					Find your trainer
 				</Button>
 			</div>
-		</main>
+		</section>
 	)
 }
 

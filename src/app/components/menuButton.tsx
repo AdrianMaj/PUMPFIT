@@ -4,7 +4,7 @@ import { motion } from 'framer-motion'
 
 const MenuButton: React.FC<{ isOpen: boolean; toggleMenu: () => void }> = ({ isOpen, toggleMenu }) => {
 	return (
-		<motion.div onClick={toggleMenu} className={classes['burger-btn']}>
+		<div onClick={toggleMenu} className={classes['burger-btn']}>
 			<motion.div className={classes.container}>
 				<motion.div
 					className={classes.burgerLine}
@@ -28,7 +28,7 @@ const MenuButton: React.FC<{ isOpen: boolean; toggleMenu: () => void }> = ({ isO
 					}}
 				/>
 			</motion.div>
-		</motion.div>
+		</div>
 	)
 }
 
