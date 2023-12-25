@@ -8,6 +8,7 @@ const MobileMenu = () => {
 	const [isOpen, setIsOpen] = useState(false)
 	const toggleMenu = () => {
 		setIsOpen(prevState => !prevState)
+		document.body.classList.toggle('overflow')
 	}
 	const container = {
 		hidden: { opacity: 0 },
@@ -41,7 +42,7 @@ const MobileMenu = () => {
 							}}
 							exit={{
 								width: '0%',
-								right: '-20%',
+								right: '-50%',
 							}}>
 							<motion.ul variants={container} initial="hidden" animate="show" className={classes.list}>
 								<motion.li className={classes.listElement} variants={item}>

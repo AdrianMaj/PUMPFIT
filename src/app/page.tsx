@@ -5,9 +5,7 @@ export default function Page() {
 	return (
 		<div className={classes.wrapper}>
 			<Header />
-			{/* <main className={classes.main}>
-				<div className={classes.heroImg}></div>
-			</main> */}
+			<main className={classes.main}>{/* <div className={classes.heroImg}></div> */}</main>
 		</div>
 	)
 }
