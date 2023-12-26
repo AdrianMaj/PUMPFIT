@@ -2,17 +2,45 @@
 import classes from '@/app/components/header.module.scss'
 import Menu from './menu'
 import Link from 'next/link'
-import { motion } from 'framer-motion'
+import { AnimatePresence, motion } from 'framer-motion'
+import { useEffect, useState } from 'react'
 const Header = () => {
+	const [scrollY, setScrollY] = useState(0)
+
+	const handleScroll = () => {
+		setScrollY(window.scrollY)
+	}
+
+	useEffect(() => {
+		window.addEventListener('scroll', handleScroll)
+		return () => {
+			window.removeEventListener('scroll', handleScroll)
+		}
+	}, [])
 	return (
-		<motion.div className={classes.header}>
-			<header>
-				<Link href="/">
-					<img src="./logo.svg" className={classes.logo} alt="PUMPFIT Logo" />
-				</Link>
-			</header>
-			<Menu />
-		</motion.div>
+		<>
+			<div className={classes.header}>
+				<AnimatePresence>
+					{scrollY > 0 && (
+						<motion.div
+							initial={{
+								opacity: 0,
+							}}
+							animate={{ opacity: 1 }}
+							exit={{
+								opacity: 0,
+							}}
+							className={classes.background}></motion.div>
+					)}
+				</AnimatePresence>
+				<header>
+					<Link href="/">
+						<img src="./logo.svg" className={classes.logo} alt="PUMPFIT Logo" />
+					</Link>
+				</header>
+				<Menu />
+			</div>
+		</>
 	)
 }
 
