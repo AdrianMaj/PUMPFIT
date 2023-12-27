@@ -1,7 +1,9 @@
+'use client'
 import React from 'react'
 import classes from './trainersSection.module.scss'
 import SectionHeading from '../ui/sectionHeading'
 import MainCard from './mainCard'
+import Button from '../ui/button'
 
 const TrainersSection = () => {
 	return (
@@ -25,7 +27,12 @@ const TrainersSection = () => {
 					image="dylan.png"
 				/>
 			</div>
-			<div></div>
+			<div className={classes.attribution}>
+				<p className={classes.attributionText}>Feel motivated? Find the best trainer for you.</p>
+				<Button linked="/trainers" filled fontSize="2rem">
+					See all of our trainers
+				</Button>
+			</div>
 		</section>
 	)
 }

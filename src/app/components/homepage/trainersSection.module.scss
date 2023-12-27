@@ -17,6 +17,17 @@
 	flex-direction: column;
 	gap: 3em;
 }
+.attribution {
+	margin-top: 5em;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 3em;
+}
+.attributionText {
+	font-size: clamp(1.4rem, 1.2041rem + 0.9796vw, 2rem);
+	color: $subtext;
+}
 @media (min-width: 992px) {
 	.section {
 		padding: 8em 3.5em;

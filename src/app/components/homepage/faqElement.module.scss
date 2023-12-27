@@ -1,0 +1,24 @@
+.questionContainer {
+	padding: 2.5em;
+	display: flex;
+	justify-content: space-between;
+	background-color: #0f0f0f;
+	cursor: pointer;
+}
+.answerContainer {
+	padding: 2.5em;
+	background-color: #1a1a1a;
+}
+.text {
+	font-size: clamp(1.4rem, 1.2041rem + 0.9796vw, 2rem);
+	color: #fff;
+}
+.textContainer {
+	display: flex;
+	flex-direction: column;
+	gap: 2em;
+	p {
+		font-size: clamp(1.4rem, 1.2041rem + 0.9796vw, 2rem);
+		color: #fff;
+	}
+}
