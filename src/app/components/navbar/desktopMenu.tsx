@@ -1,8 +1,8 @@
 import React from 'react'
-import classes from '@/app/components/desktopMenu.module.scss'
+import classes from '@/app/components/navbar/desktopMenu.module.scss'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
-import Button from './ui/button'
+import Button from '../ui/button'
 
 const DesktopMenu = () => {
 	const MotionLink = motion(Link)

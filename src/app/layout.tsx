@@ -7,7 +7,7 @@ const montserrat = Montserrat({ subsets: ['latin'] })
 export const metadata: Metadata = {
 	title: 'PUMPFIT | Personal trainer renting',
 	description: 'Hire best trainers in the world using PUMPFIT!',
-	icons: { icon: './' },
+	icons: { icon: './favicon.ico' },
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

@@ -1,5 +1,5 @@
 import React from 'react'
-import classes from '@/app/components/menuButton.module.scss'
+import classes from '@/app/components/navbar/menuButton.module.scss'
 import { motion } from 'framer-motion'
 
 const MenuButton: React.FC<{ isOpen: boolean; toggleMenu: () => void }> = ({ isOpen, toggleMenu }) => {

@@ -1,7 +1,7 @@
 'use client'
 import React from 'react'
-import classes from '@/app/components/heroSection.module.scss'
-import Button from './ui/button'
+import classes from '@/app/components/homepage/heroSection.module.scss'
+import Button from '../ui/button'
 
 const HeroSection = () => {
 	return (

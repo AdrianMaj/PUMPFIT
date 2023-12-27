@@ -1,4 +1,4 @@
-@use '../variables' as *;
+@use '../../variables' as *;
 .header {
 	display: flex;
 	justify-content: space-between;
@@ -12,11 +12,16 @@
 	width: 70%;
 }
 .background {
-	left: -100%;
+	left: -200%;
 	top: 0;
 	position: absolute;
-	width: 300%;
+	width: 500%;
 	height: 100%;
 	z-index: -1;
 	background-color: #090909;
+}
+@media (min-width: 992px) {
+	.header {
+		padding: 2em 3.5em;
+	}
 }

@@ -1,0 +1,28 @@
+@use '../../variables' as *;
+.section {
+	position: relative;
+	padding: 8em 2.5em;
+}
+.background {
+	position: absolute;
+	background-color: #0f0f0f;
+	width: 500%;
+	height: 100%;
+	z-index: -1;
+	top: 0;
+	left: -200%;
+}
+.cardContainer {
+	display: flex;
+	flex-direction: column;
+	gap: 3em;
+}
+@media (min-width: 992px) {
+	.section {
+		padding: 8em 3.5em;
+	}
+	.cardContainer {
+		flex-direction: row;
+		justify-content: center;
+	}
+}

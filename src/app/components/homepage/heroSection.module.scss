@@ -1,4 +1,4 @@
-@use '../variables' as *;
+@use '../../variables' as *;
 .main {
 	width: 100%;
 	padding: 2em 2.5em;
@@ -12,7 +12,7 @@
 	left: 0;
 	width: 100%;
 	height: 100%;
-	background-image: url('../../../public/bgimg.png');
+	background-image: url('../../../../public/bgimg.png');
 	background-size: cover;
 	background-repeat: no-repeat;
 	background-position-x: center;
@@ -36,4 +36,9 @@
 	font-size: clamp(1.4rem, 1.2041rem + 0.9796vw, 2rem);
 	width: 80%;
 	margin-bottom: 2.5em;
+}
+@media (min-width: 992px) {
+	.main {
+		padding: 2em 3.5em;
+	}
 }

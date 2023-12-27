@@ -1,7 +1,7 @@
 import { AnimatePresence, motion } from 'framer-motion'
 import React, { useState } from 'react'
 import MenuButton from './menuButton'
-import classes from '@/app/components/mobileMenu.module.scss'
+import classes from '@/app/components/navbar/mobileMenu.module.scss'
 import Link from 'next/link'
 
 const MobileMenu = () => {
