@@ -20,15 +20,23 @@
 .attribution {
 	margin-top: 5em;
 	display: flex;
+	flex-direction: column;
 	justify-content: center;
 	align-items: center;
 	gap: 3em;
 }
 .attributionText {
+	text-align: center;
 	font-size: clamp(1.4rem, 1.2041rem + 0.9796vw, 2rem);
 	color: $subtext;
 }
 @media (min-width: 992px) {
+	.attribution {
+		flex-direction: row;
+	}
+	.attributionText {
+		text-align: left;
+	}
 	.section {
 		padding: 8em 3.5em;
 	}

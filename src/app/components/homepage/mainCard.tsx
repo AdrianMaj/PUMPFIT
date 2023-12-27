@@ -16,7 +16,7 @@ const MainCard: React.FC<{ name: string; attributes: [string, string, string]; i
 				<p className={classes.title}>{name}</p>
 				<ul className={classes.list}>
 					{attributes.map(attribute => (
-						<li className={classes.listElement}>
+						<li key={attribute} className={classes.listElement}>
 							<img className={classes.listImage} src="../../../../listIcon.svg" alt="Fist bullet icon" />
 							<p className={classes.listText}>{attribute}</p>
 						</li>
