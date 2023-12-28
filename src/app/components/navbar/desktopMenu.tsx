@@ -1,11 +1,9 @@
 import React from 'react'
 import classes from '@/app/components/navbar/desktopMenu.module.scss'
 import Link from 'next/link'
-import { motion } from 'framer-motion'
 import Button from '../ui/button'
 
 const DesktopMenu = () => {
-	const MotionLink = motion(Link)
 	return (
 		<>
 			<nav>
@@ -21,12 +19,14 @@ const DesktopMenu = () => {
 						</Link>
 					</li>
 					<li>
-						<Button filled linked="/user-login">
-							User login
+						<Button padding="0.75em 1.5em" filled linked="/login">
+							Login
 						</Button>
 					</li>
 					<li>
-						<Button linked="/user-login">Trainer login</Button>
+						<Button padding="0.75em 1.5em" linked="/register">
+							Register
+						</Button>
 					</li>
 				</ul>
 			</nav>

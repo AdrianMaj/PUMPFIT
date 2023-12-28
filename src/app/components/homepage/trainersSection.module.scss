@@ -30,6 +30,13 @@
 	font-size: clamp(1.4rem, 1.2041rem + 0.9796vw, 2rem);
 	color: $subtext;
 }
+@media (min-width: 768px) {
+	.cardContainer {
+		flex-direction: row;
+		flex-wrap: wrap;
+		justify-content: center;
+	}
+}
 @media (min-width: 992px) {
 	.attribution {
 		flex-direction: row;
@@ -41,7 +48,6 @@
 		padding: 8em 3.5em;
 	}
 	.cardContainer {
-		flex-direction: row;
-		justify-content: center;
+		flex-wrap: nowrap;
 	}
 }

@@ -56,13 +56,13 @@ const MobileMenu = () => {
 									</Link>
 								</motion.li>
 								<motion.li className={`${classes.listElementButton} ${classes.margin}`} variants={item}>
-									<Link className={`${classes.link} ${classes.button} ${classes.filledButton}`} href="/user-login">
-										User Login
+									<Link className={`${classes.link} ${classes.button} ${classes.filledButton}`} href="/login">
+										Login
 									</Link>
 								</motion.li>
 								<motion.li className={`${classes.listElementButton}`} variants={item}>
-									<Link className={`${classes.link} ${classes.button} ${classes.textButton}`} href="/trainer-login">
-										Trainer Login
+									<Link className={`${classes.link} ${classes.button} ${classes.textButton}`} href="/register">
+										Register
 									</Link>
 								</motion.li>
 							</motion.ul>

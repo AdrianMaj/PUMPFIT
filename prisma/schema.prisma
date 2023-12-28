@@ -1,0 +1,65 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("POSTGRES_PRISMA_URL")
+  directUrl = env("POSTGRES_URL_NON_POOLING")
+}
+
+model User {
+  id        String    @default(cuid()) @id
+  name      String
+  email     String    @unique
+  password String
+  photo         String
+  emailVerified  DateTime?
+  createdAt DateTime  @default(now()) @map(name: "created_at")
+  updatedAt DateTime  @updatedAt @map(name: "updated_at")
+  @@map(name: "users")
+}
+
+model Trainer {
+  id            String       @default(cuid()) @id
+  name          String
+  email         String       @unique
+  password      String
+  promoted      Boolean
+  photo         String?
+  emailVerified  DateTime?
+  announcement  Announcement?
+  announcementId String?
+  createdAt     DateTime     @default(now()) @map(name: "created_at")
+  updatedAt     DateTime     @updatedAt @map(name: "updated_at")
+  @@map(name: "trainers")
+}
+
+model Announcement {
+  id            String         @default(cuid()) @id
+  experience    String
+  categories    String[]
+  price         Float
+  description   String
+  testimonials  Testimonial[]
+  trainer       Trainer      @relation(fields: [trainerId], references: [id])
+  trainerId     String       @unique
+  createdAt     DateTime       @default(now()) @map(name: "created_at")
+  updatedAt     DateTime       @updatedAt @map(name: "updated_at")
+  @@map(name: "announcements")
+}
+
+model Testimonial {
+  id            String         @default(cuid()) @id
+  name          String
+  photo         String
+  text          String
+  announcement  Announcement   @relation(fields: [announcementId], references: [id])
+  announcementId String
+  createdAt     DateTime       @default(now()) @map(name: "created_at")
+  updatedAt     DateTime       @updatedAt @map(name: "updated_at")
+  @@map(name: "testimonials")
+}
