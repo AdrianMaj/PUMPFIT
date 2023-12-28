@@ -1,3 +1,4 @@
+'use client'
 import { AnimatePresence, motion } from 'framer-motion'
 import React, { useState } from 'react'
 import classes from './faqElement.module.scss'
@@ -22,17 +23,25 @@ const FaqElement: React.FC<{ question: string; children: React.ReactNode }> = ({
 				{isOpen && (
 					<motion.div
 						className={classes.answerContainer}
-						initial={{
-							height: 0,
+						variants={{
+							hidden: { height: 0 },
+							visible: { height: 'auto' },
 						}}
-						animate={{
-							height: 'auto',
-						}}
-						exit={{
-							height: 0,
-						}}
+						initial="hidden"
+						animate="visible"
+						exit="hidden"
 						transition={{ duration: 0.3, ease: 'easeInOut' }}>
-						<div className={classes.textContainer}>{children}</div>
+						<motion.div
+							variants={{
+								hidden: { opacity: 0 },
+								visible: { opacity: 1 },
+							}}
+							initial="hidden"
+							animate="visible"
+							exit="hidden"
+							className={classes.textContainer}>
+							{children}
+						</motion.div>
 					</motion.div>
 				)}
 			</AnimatePresence>

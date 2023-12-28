@@ -6,19 +6,25 @@
 	cursor: pointer;
 }
 .answerContainer {
-	padding: 2.5em;
 	background-color: #1a1a1a;
+	overflow: hidden;
 }
 .text {
 	font-size: clamp(1.4rem, 1.2041rem + 0.9796vw, 2rem);
 	color: #fff;
 }
 .textContainer {
+	padding: 2.5em;
 	display: flex;
 	flex-direction: column;
 	gap: 2em;
 	p {
 		font-size: clamp(1.4rem, 1.2041rem + 0.9796vw, 2rem);
 		color: #fff;
+	}
+	a {
+		font-size: clamp(1.4rem, 1.2041rem + 0.9796vw, 2rem);
+		color: #fff;
+		text-decoration: underline;
 	}
 }
