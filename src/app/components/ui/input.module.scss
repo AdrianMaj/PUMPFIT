@@ -2,7 +2,6 @@
 .container {
 	display: flex;
 	position: relative;
-	margin-top: 2em;
 }
 .label {
 	position: absolute;
@@ -20,4 +19,5 @@
 	outline: none;
 	color: #fff;
 	border: 1px solid transparent;
+	width: 100%;
 }
