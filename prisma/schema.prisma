@@ -11,30 +11,35 @@ datasource db {
   directUrl = env("POSTGRES_URL_NON_POOLING")
 }
 
-model User {
+model Account {
   id        String    @default(cuid()) @id
   name      String
   email     String    @unique
   password String
-  photo         String
+  photo         String?
   emailVerified  DateTime?
+  isTrainer    Boolean
   createdAt DateTime  @default(now()) @map(name: "created_at")
   updatedAt DateTime  @updatedAt @map(name: "updated_at")
+  user User?
+  trainer Trainer?
+  @@map(name: "accounts")
+}
+
+model User {
+  id        String    @default(cuid()) @id
+  account   Account @relation(fields:[accountId], references: [id])
+  accountId String   @unique 
   @@map(name: "users")
 }
 
 model Trainer {
-  id            String       @default(cuid()) @id
-  name          String
-  email         String       @unique
-  password      String
+  id        String    @default(cuid()) @id
   promoted      Boolean
-  photo         String?
-  emailVerified  DateTime?
+  account   Account @relation(fields:[accountId], references: [id])
+  accountId String   @unique 
   announcement  Announcement?
   announcementId String?
-  createdAt     DateTime     @default(now()) @map(name: "created_at")
-  updatedAt     DateTime     @updatedAt @map(name: "updated_at")
   @@map(name: "trainers")
 }
 
