@@ -8,7 +8,7 @@ import Wrapper from './components/ui/wrapper'
 
 export default function Page() {
 	return (
-		<Wrapper>
+		<>
 			<Header />
 			<main>
 				<HeroSection />
@@ -17,6 +17,6 @@ export default function Page() {
 				<FaqSection />
 			</main>
 			<Footer />
-		</Wrapper>
+		</>
 	)
 }

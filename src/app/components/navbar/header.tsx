@@ -4,6 +4,7 @@ import Menu from './menu'
 import Link from 'next/link'
 import { AnimatePresence, motion } from 'framer-motion'
 import { useEffect, useState } from 'react'
+import Wrapper from '../ui/wrapper'
 const Header = () => {
 	const [scrollY, setScrollY] = useState(0)
 
@@ -33,12 +34,16 @@ const Header = () => {
 							className={classes.background}></motion.div>
 					)}
 				</AnimatePresence>
-				<header>
-					<Link href="/">
-						<img src="./logo.svg" className={classes.logo} alt="PUMPFIT Logo" />
-					</Link>
-				</header>
-				<Menu />
+				<Wrapper>
+					<div className={classes.content}>
+						<header>
+							<Link href="/">
+								<img src="./logo.svg" className={classes.logo} alt="PUMPFIT Logo" />
+							</Link>
+						</header>
+						<Menu />
+					</div>
+				</Wrapper>
 			</div>
 		</>
 	)
