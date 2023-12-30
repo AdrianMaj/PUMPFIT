@@ -1,17 +1,17 @@
 import React from 'react'
 import Header from '../components/navbar/header'
 import Footer from '../components/footer/footer'
-import HeroSection from '../components/homepage/heroSection'
-import Wrapper from '../components/ui/wrapper'
-const Page = () => {
+import CardSection from '../components/trainers/cardSection'
+
+const Page = async () => {
 	return (
-		<Wrapper>
+		<>
 			<Header />
 			<main>
-				<HeroSection />
+				<CardSection />
 			</main>
 			<Footer />
-		</Wrapper>
+		</>
 	)
 }
 

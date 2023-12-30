@@ -33,7 +33,7 @@
 }
 .subtext {
 	color: $subtext;
-	font-size: clamp(1.4rem, 1.2041rem + 0.9796vw, 2rem);
+	font-size: $subtextSize;
 	width: 80%;
 	margin-bottom: 2.5em;
 }

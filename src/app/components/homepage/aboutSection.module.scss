@@ -15,7 +15,7 @@
 }
 .text {
 	padding: 2em;
-	font-size: clamp(1.4rem, 1.2041rem + 0.9796vw, 2rem);
+	font-size: $subtextSize;
 	color: $subtext;
 	line-height: 2em;
 }

@@ -27,7 +27,7 @@
 }
 .attributionText {
 	text-align: center;
-	font-size: clamp(1.4rem, 1.2041rem + 0.9796vw, 2rem);
+	font-size: $subtextSize;
 	color: $subtext;
 }
 @media (min-width: 768px) {

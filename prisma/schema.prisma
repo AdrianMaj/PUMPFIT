@@ -27,7 +27,6 @@ model Account {
 }
 
 model User {
-  id        String    @default(cuid()) @id
   account   Account @relation(fields:[accountId], references: [id])
   accountId String   @unique 
   @@map(name: "users")
