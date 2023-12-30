@@ -1,0 +1,32 @@
+@use '../variables' as *;
+.header {
+	display: flex;
+	justify-content: space-between;
+	position: fixed;
+	top: 0;
+	width: 100svw;
+	padding: 2em 2.5em;
+	z-index: 1000;
+}
+.logo {
+	width: 70%;
+}
+.content {
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+}
+.background {
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	z-index: -1;
+	background-color: #090909;
+}
+@media (min-width: 992px) {
+	.header {
+		padding: 2em 3.5em;
+	}
+}

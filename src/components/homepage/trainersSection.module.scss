@@ -1,0 +1,53 @@
+@use '../variables' as *;
+.section {
+	position: relative;
+	padding: 8em 2.5em;
+}
+.background {
+	position: absolute;
+	background-color: #0f0f0f;
+	width: 100%;
+	height: 100%;
+	z-index: -1;
+	top: 0;
+	left: 0;
+}
+.cardContainer {
+	display: flex;
+	flex-direction: column;
+	gap: 3em;
+}
+.attribution {
+	margin-top: 5em;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	gap: 3em;
+}
+.attributionText {
+	text-align: center;
+	font-size: $subtextSize;
+	color: $subtext;
+}
+@media (min-width: 768px) {
+	.cardContainer {
+		flex-direction: row;
+		flex-wrap: wrap;
+		justify-content: center;
+	}
+}
+@media (min-width: 992px) {
+	.attribution {
+		flex-direction: row;
+	}
+	.attributionText {
+		text-align: left;
+	}
+	.section {
+		padding: 8em 3.5em;
+	}
+	.cardContainer {
+		flex-wrap: nowrap;
+	}
+}
