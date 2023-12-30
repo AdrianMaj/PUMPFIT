@@ -3,11 +3,13 @@ import prisma from '../../../../lib/prisma'
 import TrainerCard from './trainerCard'
 import Wrapper from '../ui/wrapper'
 
-export const getTrainer = async () => {
+export const getTrainerAnnoucement = async () => {
 	const trainers = await prisma.account.findMany({
 		where: {
 			NOT: {
-				trainer: null,
+				trainer: null && {
+					announcement: null,
+				},
 			},
 		},
 		include: {
@@ -22,7 +24,7 @@ export const getTrainer = async () => {
 }
 
 const CardSection = async () => {
-	const accounts = await getTrainer()
+	const accounts = await getTrainerAnnoucement()
 	return (
 		<section>
 			<Wrapper>
