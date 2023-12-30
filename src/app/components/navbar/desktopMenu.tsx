@@ -9,13 +9,13 @@ const DesktopMenu = () => {
 			<nav>
 				<ul className={classes.menu}>
 					<li>
-						<Link className={classes.link} href="/deals">
-							Special Deals
+						<Link className={classes.link} href="/trainers">
+							Our Trainers
 						</Link>
 					</li>
 					<li>
-						<Link className={classes.link} href="/trainers">
-							Our Trainers
+						<Link className={classes.link} href="/login">
+							Control Panel
 						</Link>
 					</li>
 					<li>

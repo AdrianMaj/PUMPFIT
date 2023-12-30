@@ -46,13 +46,13 @@ const MobileMenu = () => {
 							}}>
 							<motion.ul variants={container} initial="hidden" animate="show" className={classes.list}>
 								<motion.li className={classes.listElement} variants={item}>
-									<Link className={classes.link} href="/deals">
-										Special deals
+									<Link className={classes.link} href="/trainers">
+										Our trainers
 									</Link>
 								</motion.li>
 								<motion.li className={classes.listElement} variants={item}>
-									<Link className={classes.link} href="/trainers">
-										Our trainers
+									<Link className={classes.link} href="/login">
+										Control Panel
 									</Link>
 								</motion.li>
 								<motion.li className={`${classes.listElementButton} ${classes.margin}`} variants={item}>
