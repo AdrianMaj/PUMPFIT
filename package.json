@@ -1,30 +1,30 @@
 {
-  "name": "pumpfit",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
-  },
-  "dependencies": {
-    "@prisma/client": "^5.7.1",
-    "@reduxjs/toolkit": "^2.0.1",
-    "@vercel/postgres": "^0.5.1",
-    "framer-motion": "^10.16.16",
-    "next": "14.0.4",
-    "react": "^18",
-    "react-dom": "^18",
-    "react-redux": "^9.0.4",
-    "react-responsive": "^9.0.2",
-    "sass": "^1.69.5"
-  },
-  "devDependencies": {
-    "@types/node": "^20",
-    "@types/react": "^18",
-    "@types/react-dom": "^18",
-    "prisma": "^5.7.1",
-    "typescript": "^5"
-  }
+	"name": "pumpfit",
+	"version": "0.1.0",
+	"private": true,
+	"scripts": {
+		"dev": "next dev",
+		"build": "prisma generate && next build",
+		"start": "next start",
+		"lint": "next lint"
+	},
+	"dependencies": {
+		"@prisma/client": "^5.7.1",
+		"@reduxjs/toolkit": "^2.0.1",
+		"@vercel/postgres": "^0.5.1",
+		"framer-motion": "^10.16.16",
+		"next": "14.0.4",
+		"react": "^18",
+		"react-dom": "^18",
+		"react-redux": "^9.0.4",
+		"react-responsive": "^9.0.2",
+		"sass": "^1.69.5"
+	},
+	"devDependencies": {
+		"@types/node": "^20",
+		"@types/react": "^18",
+		"@types/react-dom": "^18",
+		"prisma": "^5.7.1",
+		"typescript": "^5"
+	}
 }
