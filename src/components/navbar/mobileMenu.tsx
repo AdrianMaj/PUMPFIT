@@ -7,7 +7,10 @@ import Link from 'next/link'
 const MobileMenu = () => {
 	const [isOpen, setIsOpen] = useState(false)
 	const toggleMenu = () => {
-		setIsOpen(prevState => !prevState)
+		setIsOpen(prevState => {
+			const newState = !prevState
+			return newState
+		})
 		document.body.classList.toggle('overflow')
 	}
 	const container = {

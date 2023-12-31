@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Suspense } from 'react'
 import TrainerCard from './trainerCard'
 import Wrapper from '../ui/wrapper'
 import fetchTrainers from '@/util/fetchTrainers'
