@@ -125,7 +125,7 @@ const FaqSection = () => {
 		<Wrapper>
 			<section className={classes.section}>
 				<SectionHeading>FAQ</SectionHeading>
-				<Switch state={questions} stateChanger={changeQuestions} />
+				<Switch layoutId="faq" state={questions} stateChanger={changeQuestions} />
 				<AnimatePresence>
 					{questions === true ? (
 						<div className={classes.container}>

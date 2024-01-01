@@ -2,7 +2,11 @@ import React from 'react'
 import classes from './switch.module.scss'
 import { motion } from 'framer-motion'
 
-const Switch: React.FC<{ stateChanger: () => void; state: boolean }> = ({ stateChanger, state }) => {
+const Switch: React.FC<{ stateChanger: () => void; state: boolean; layoutId: string }> = ({
+	stateChanger,
+	state,
+	layoutId,
+}) => {
 	return (
 		<div className={classes.buttons}>
 			<motion.button
@@ -10,7 +14,7 @@ const Switch: React.FC<{ stateChanger: () => void; state: boolean }> = ({ stateC
 				onClick={() => {
 					stateChanger()
 				}}>
-				{state === true && <motion.div layoutId="background" className={classes.background}></motion.div>}
+				{state === false && <motion.div layoutId={layoutId} className={classes.background}></motion.div>}
 				User
 			</motion.button>
 			<motion.button
@@ -18,7 +22,7 @@ const Switch: React.FC<{ stateChanger: () => void; state: boolean }> = ({ stateC
 				onClick={() => {
 					stateChanger()
 				}}>
-				{state === false && <motion.div layoutId="background" className={classes.background}></motion.div>}
+				{state === true && <motion.div layoutId={layoutId} className={classes.background}></motion.div>}
 				Trainer
 			</motion.button>
 		</div>

@@ -10,8 +10,8 @@ const LoginForm = () => {
 	return (
 		<>
 			<form className={classes.form}>
-				<Input type="email" label="E-mail" id="loginemail" />
-				<Input type="password" label="Password" id="loginpassword" />
+				{/* <Input type="email" label="E-mail" id="loginemail" />
+				<Input type="password" label="Password" id="loginpassword" /> */}
 				<MotionLink whileHover={{ color: '#fff' }} href="/forgot-password" className={classes.text}>
 					Forgot your password?
 				</MotionLink>

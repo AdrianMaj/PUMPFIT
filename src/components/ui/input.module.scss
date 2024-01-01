@@ -1,12 +1,14 @@
 @use '../variables' as *;
 .container {
 	display: flex;
+	flex-direction: column;
 	position: relative;
 }
 .label {
 	position: absolute;
-	top: 50%;
-	left: 1em;
+	top: 0%;
+	left: 0.4em;
+	padding: 0 0.15em;
 	transform: translateY(-50%);
 	color: $subtext;
 	font-size: clamp(1.6rem, 1.4041rem + 0.9796vw, 2.2rem);
@@ -32,4 +34,9 @@
 	color: #fff;
 	border: 1px solid transparent;
 	width: 100%;
+}
+.inputError {
+	margin-top: 0.5em;
+	font-size: clamp(1.2rem, 1.0041rem + 0.9796vw, 1.8rem);
+	color: $mainColor;
 }
