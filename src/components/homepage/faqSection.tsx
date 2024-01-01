@@ -1,5 +1,5 @@
 'use client'
-import React, { useState } from 'react'
+import React, { Fragment, useState } from 'react'
 import SectionHeading from '../ui/sectionHeading'
 import classes from './faqSection.module.scss'
 import FaqElement from './faqElement'
@@ -130,13 +130,17 @@ const FaqSection = () => {
 					{questions === true ? (
 						<div className={classes.container}>
 							{userQuestions.map(question => (
-								<FaqElement question={question.question}>{question.answer}</FaqElement>
+								<Fragment key={question.question}>
+									<FaqElement question={question.question}>{question.answer}</FaqElement>
+								</Fragment>
 							))}
 						</div>
 					) : (
 						<div className={classes.container}>
 							{trainerQuestions.map(question => (
-								<FaqElement question={question.question}>{question.answer}</FaqElement>
+								<Fragment key={question.question}>
+									<FaqElement question={question.question}>{question.answer}</FaqElement>
+								</Fragment>
 							))}
 						</div>
 					)}

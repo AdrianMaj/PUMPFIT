@@ -5,7 +5,7 @@ import * as z from 'zod'
 
 // Define a schema for input validation
 
-const userSchema = z.object({
+const accountSchema = z.object({
 	name: z.string().min(1, 'Username is required').max(100),
 	email: z.string().min(1, 'Email is required').email('Invalid email'),
 	password: z.string().min(1, 'Password is required').min(8, 'Password must have more than 8 characters'),
@@ -15,7 +15,7 @@ const userSchema = z.object({
 export const POST = async (req: Request) => {
 	try {
 		const body = await req.json()
-		const { email, name, password, isTrainer } = userSchema.parse(body)
+		const { email, name, password, isTrainer } = accountSchema.parse(body)
 
 		//EMAIL VERIFICATION
 		const existingUserByEmail = await prisma.account.findUnique({
@@ -27,7 +27,7 @@ export const POST = async (req: Request) => {
 
 		const hashedPassword = await hash(password, 10)
 
-		const newUser = await prisma.account.create({
+		const newAccount = await prisma.account.create({
 			data: {
 				name,
 				email,
@@ -35,10 +35,44 @@ export const POST = async (req: Request) => {
 				isTrainer,
 			},
 		})
+		let newTrainer
+		let newUser
+		if (isTrainer) {
+			newTrainer = await prisma.trainer.create({
+				data: {
+					account: {
+						connect: {
+							id: newAccount.id,
+						},
+					},
+					promoted: false,
+				},
+			})
+		} else if (!isTrainer) {
+			newUser = await prisma.user.create({
+				data: {
+					account: {
+						connect: {
+							id: newAccount.id,
+						},
+					},
+				},
+			})
+		}
 
-		const { password: newUserPassword, ...rest } = newUser
+		const { password: newAccountPassword, ...accountData } = newAccount
 
-		return NextResponse.json({ user: rest, message: 'User created successfully' }, { status: 201 })
+		if (newTrainer) {
+			return NextResponse.json(
+				{ user: { account: accountData, trainer: newTrainer }, message: 'Trainer account created successfully' },
+				{ status: 201 }
+			)
+		} else if (newUser) {
+			return NextResponse.json(
+				{ user: { account: accountData, user: newUser }, message: 'User account created successfully' },
+				{ status: 201 }
+			)
+		}
 	} catch (error) {
 		return NextResponse.json({ message: 'Something went wrong!' }, { status: 500 })
 	}
