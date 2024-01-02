@@ -4,6 +4,7 @@ import { authOptions } from '../../../lib/auth'
 
 const Page = async () => {
 	const session = await getServerSession(authOptions)
+	console.log(session)
 	if (session?.user) {
 		return <h2>Admin page - welcome back {session?.user.name}</h2>
 	}
