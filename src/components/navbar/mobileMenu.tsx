@@ -54,7 +54,7 @@ const MobileMenu = () => {
 									</Link>
 								</motion.li>
 								<motion.li className={classes.listElement} variants={item}>
-									<Link className={classes.link} href="/login">
+									<Link className={classes.link} href="/dashboard">
 										Control Panel
 									</Link>
 								</motion.li>

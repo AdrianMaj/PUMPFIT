@@ -1,5 +1,5 @@
 'use client'
-import React, { useRef, useState } from 'react'
+import React from 'react'
 import classes from './input.module.scss'
 import { motion } from 'framer-motion'
 import { FieldError, useFormContext } from 'react-hook-form'

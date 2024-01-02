@@ -14,7 +14,7 @@ const DesktopMenu = () => {
 						</Link>
 					</li>
 					<li>
-						<Link className={classes.link} href="/login">
+						<Link className={classes.link} href="/dashboard">
 							Control Panel
 						</Link>
 					</li>

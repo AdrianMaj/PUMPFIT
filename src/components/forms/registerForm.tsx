@@ -24,6 +24,7 @@ const FormSchema = z
 
 const RegisterForm = () => {
 	const [isTrainer, setIsTrainer] = useState(false)
+	const [isLoading, setIsLoading] = useState(false)
 	const router = useRouter()
 	const trainerToggle = () => {
 		setIsTrainer(prevState => {
@@ -43,8 +44,8 @@ const RegisterForm = () => {
 		},
 	})
 	const onSubmit = async (values: z.infer<typeof FormSchema>) => {
+		setIsLoading(true)
 		const isValid = await form.trigger()
-
 		if (isValid) {
 			const response = await fetch('/api/user', {
 				method: 'POST',
@@ -63,43 +64,60 @@ const RegisterForm = () => {
 				console.log('Successfully created an account!')
 				router.push('/')
 			} else {
-				console.error('Registration failed')
+				console.error('Unable to create an account. Please try again later.')
 			}
 		} else {
 			console.error('Form validation failed:', form.formState.errors)
 		}
+		setIsLoading(false)
 	}
 
 	return (
 		<>
-			<Switch layoutId="register" state={isTrainer} stateChanger={trainerToggle}></Switch>
-			<FormProvider {...form}>
-				<form
-					style={{
-						display: 'flex',
-						flexDirection: 'column',
-						gap: '3em',
-					}}
-					onSubmit={form.handleSubmit(onSubmit)}>
-					<Input type="text" label="Full Name" id="name" error={form.formState.errors.name} />
-					<Input type="email" label="Email Address" id="email" error={form.formState.errors.email} />
-					<Input type="password" label="Password" id="password" error={form.formState.errors.password} />
-					<Input
-						type="password"
-						label="Confirm Password"
-						id="confirmPassword"
-						error={form.formState.errors.confirmPassword}
-					/>
-					<motion.button
-						whileHover={{
-							backgroundColor: '#750000',
+			{isLoading ? (
+				<div className={classes.loadingContainer}>
+					<p className={classes.loadingText}>Creating account</p>
+					<motion.div
+						transition={{
+							repeat: Infinity,
+							ease: 'linear',
+							duration: 1,
 						}}
-						className={classes.button}
-						type="submit">
-						Create your account <img src="/arrow-login.svg" alt="Arrow Icon" className={classes.arrow} />
-					</motion.button>
-				</form>
-			</FormProvider>
+						animate={{ rotate: 360 }}
+						className={classes.spinner}></motion.div>
+				</div>
+			) : (
+				<>
+					<Switch layoutId="register" state={isTrainer} stateChanger={trainerToggle}></Switch>
+					<FormProvider {...form}>
+						<form
+							style={{
+								display: 'flex',
+								flexDirection: 'column',
+								gap: '3em',
+							}}
+							onSubmit={form.handleSubmit(onSubmit)}>
+							<Input type="text" label="Full Name" id="name" error={form.formState.errors.name} />
+							<Input type="email" label="Email Address" id="email" error={form.formState.errors.email} />
+							<Input type="password" label="Password" id="password" error={form.formState.errors.password} />
+							<Input
+								type="password"
+								label="Confirm Password"
+								id="confirmPassword"
+								error={form.formState.errors.confirmPassword}
+							/>
+							<motion.button
+								whileHover={{
+									backgroundColor: '#750000',
+								}}
+								className={classes.button}
+								type="submit">
+								Create your account <img src="/arrow-login.svg" alt="Arrow Icon" className={classes.arrow} />
+							</motion.button>
+						</form>
+					</FormProvider>
+				</>
+			)}
 		</>
 	)
 }
