@@ -62,3 +62,43 @@
 	align-items: flex-end;
 	gap: 2em;
 }
+
+@media (min-width: 992px) {
+	.menu {
+		position: static;
+		height: 100%;
+		display: flex;
+		flex-direction: row;
+		justify-content: flex-end;
+		background-color: transparent;
+		padding: 0;
+	}
+	.shadow {
+		display: none;
+	}
+	.list {
+		flex-direction: row;
+		align-items: center;
+		width: fit-content;
+		gap: 3em;
+		opacity: 1 !important;
+	}
+	.button {
+		width: auto;
+	}
+	.filledButton {
+		margin-top: 0;
+	}
+	.margin {
+		margin-top: 0;
+	}
+	.link {
+		text-wrap: nowrap;
+	}
+	.listElement {
+		margin-bottom: 0;
+	}
+	.button {
+		padding: 0.8em 1.2em;
+	}
+}

@@ -9,6 +9,7 @@
 	z-index: 3;
 	margin-top: auto;
 	margin-bottom: auto;
+	margin-left: auto;
 	cursor: pointer;
 }
 .container {
@@ -23,4 +24,9 @@
 	width: 100%;
 	height: 3px;
 	background: #fff;
+}
+@media (min-width: 992px) {
+	.burger-btn {
+		display: none;
+	}
 }
