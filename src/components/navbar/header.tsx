@@ -2,7 +2,7 @@ import classes from './header.module.scss'
 import Menu from './menu'
 import Wrapper from '../ui/wrapper'
 import HeaderBackground from './headerBackground'
-import HeaderLogo from './headerLogo'
+import Logo from '../ui/Logo'
 import { getServerSession } from 'next-auth'
 import { authOptions } from '../../../lib/auth'
 const Header = async () => {
@@ -13,7 +13,9 @@ const Header = async () => {
 				<HeaderBackground />
 				<Wrapper>
 					<div className={classes.content}>
-						<HeaderLogo />
+						<header>
+							<Logo width="70%" />
+						</header>
 						<Menu session={session} />
 					</div>
 				</Wrapper>

@@ -4,6 +4,7 @@ import { authOptions } from '../../../lib/auth'
 import { redirect } from 'next/navigation'
 import DashboardMenu from '@/components/dashboard/dashboardMenu'
 import prisma from '../../../lib/prisma'
+import LogoutButton from '@/components/ui/logoutButton'
 
 const Page = async () => {
 	const session = await getServerSession(authOptions)
@@ -27,12 +28,21 @@ const Page = async () => {
 				},
 			},
 		})
-		return (
-			<>
-				<DashboardMenu />
-				<h2>Admin page - welcome back {session.user.name}</h2>
-			</>
-		)
+		if (userAccount) {
+			return (
+				<div style={{ display: 'flex' }}>
+					<DashboardMenu name={userAccount.name} />
+					<main>
+						<h2>
+							Admin page - welcome back {session.user.name}{' '}
+							{userAccount?.isTrainer ? 'You are trainer' : 'You are regular user'}
+						</h2>
+					</main>
+				</div>
+			)
+		} else {
+			// error handling
+		}
 	}
 
 	return redirect('/login')

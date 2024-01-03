@@ -1,7 +1,6 @@
 'use client'
 import { motion } from 'framer-motion'
 import React from 'react'
-import classes from './logoutButton.module.scss'
 import { signOut } from 'next-auth/react'
 
 const LogoutButton: React.FC<{
