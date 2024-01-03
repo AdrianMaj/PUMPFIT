@@ -15,9 +15,6 @@ const MobileMenu = () => {
 		})
 		document.body.classList.toggle('overflow')
 	}
-	if (!isMobile) {
-		setIsOpen(true)
-	}
 	const container = {
 		closed: { opacity: 0 },
 		opened: {
@@ -28,7 +25,7 @@ const MobileMenu = () => {
 			},
 		},
 	}
-	const variants = isOpen ? 'opened' : 'closed'
+	const variants = isMobile ? (isOpen ? 'opened' : 'closed') : 'opened'
 
 	const item = {
 		closed: { opacity: 0 },
@@ -66,12 +63,24 @@ const MobileMenu = () => {
 							Control Panel
 						</Link>
 					</motion.li>
-					<motion.li className={`${classes.listElementButton} ${classes.margin}`} variants={item} animate={variants}>
+					<motion.li
+						whileHover={{
+							backgroundColor: '#750000',
+						}}
+						className={`${classes.listElementButton} ${classes.margin}`}
+						variants={item}
+						animate={variants}>
 						<Link className={`${classes.link} ${classes.button} ${classes.filledButton}`} href="/login">
 							Login
 						</Link>
 					</motion.li>
-					<motion.li className={`${classes.listElementButton}`} variants={item} animate={variants}>
+					<motion.li
+						whileHover={{
+							backgroundColor: '#a50000',
+						}}
+						className={`${classes.listElementButton}`}
+						variants={item}
+						animate={variants}>
 						<Link className={`${classes.link} ${classes.button} ${classes.textButton}`} href="/register">
 							Register
 						</Link>

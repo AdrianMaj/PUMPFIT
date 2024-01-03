@@ -130,17 +130,17 @@ const FaqSection = () => {
 					{questions === true ? (
 						<div className={classes.container}>
 							{userQuestions.map(question => (
-								<Fragment key={question.question}>
-									<FaqElement question={question.question}>{question.answer}</FaqElement>
-								</Fragment>
+								<FaqElement key={question.question} question={question.question}>
+									{question.answer}
+								</FaqElement>
 							))}
 						</div>
 					) : (
 						<div className={classes.container}>
 							{trainerQuestions.map(question => (
-								<Fragment key={question.question}>
-									<FaqElement question={question.question}>{question.answer}</FaqElement>
-								</Fragment>
+								<FaqElement key={question.question} question={question.question}>
+									{question.answer}
+								</FaqElement>
 							))}
 						</div>
 					)}
