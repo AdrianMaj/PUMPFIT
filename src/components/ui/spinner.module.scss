@@ -1,0 +1,16 @@
+@use '../variables' as *;
+.spinner {
+	width: 5em;
+	height: 5em;
+	border-radius: 50%;
+	border: 1rem solid $subtext;
+	border-top: 1rem solid $mainColor;
+}
+.loadingContainer {
+	display: flex;
+	align-items: center;
+	gap: 2em;
+}
+.loadingText {
+	font-size: clamp(1.6rem, 1.4041rem + 0.9796vw, 2.2rem);
+}

@@ -8,6 +8,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import * as z from 'zod'
 import { useRouter } from 'next/navigation'
 import classes from './registerForm.module.scss'
+import Spinner from '../ui/spinner'
 
 const FormSchema = z
 	.object({
@@ -75,17 +76,7 @@ const RegisterForm = () => {
 	return (
 		<>
 			{isLoading ? (
-				<div className={classes.loadingContainer}>
-					<p className={classes.loadingText}>Creating account</p>
-					<motion.div
-						transition={{
-							repeat: Infinity,
-							ease: 'linear',
-							duration: 1,
-						}}
-						animate={{ rotate: 360 }}
-						className={classes.spinner}></motion.div>
-				</div>
+				<Spinner text="Creating account..." />
 			) : (
 				<>
 					<Switch layoutId="register" state={isTrainer} stateChanger={trainerToggle}></Switch>

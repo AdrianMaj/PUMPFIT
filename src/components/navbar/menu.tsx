@@ -1,11 +1,14 @@
+'use client'
 import { motion } from 'framer-motion'
 import { useMediaQuery } from 'react-responsive'
 import React, { useState } from 'react'
 import MenuButton from './menuButton'
 import classes from './menu.module.scss'
 import Link from 'next/link'
+import { Session } from 'next-auth'
+import LogoutButton from '../ui/logoutButton'
 
-const MobileMenu = () => {
+const MobileMenu: React.FC<{ session: Session | null }> = ({ session }) => {
 	const [isOpen, setIsOpen] = useState(false)
 	const isMobile = useMediaQuery({ query: '(max-width: 991px)' })
 	const toggleMenu = () => {
@@ -31,6 +34,7 @@ const MobileMenu = () => {
 		closed: { opacity: 0 },
 		opened: { opacity: 1 },
 	}
+	const MotionLink = motion(Link)
 	return (
 		<>
 			<MenuButton isOpen={isOpen} toggleMenu={toggleMenu} />
@@ -63,28 +67,41 @@ const MobileMenu = () => {
 							Control Panel
 						</Link>
 					</motion.li>
-					<motion.li
-						whileHover={{
-							backgroundColor: '#750000',
-						}}
-						className={`${classes.listElementButton} ${classes.margin}`}
-						variants={item}
-						animate={variants}>
-						<Link className={`${classes.link} ${classes.button} ${classes.filledButton}`} href="/login">
-							Login
-						</Link>
-					</motion.li>
-					<motion.li
-						whileHover={{
-							backgroundColor: '#a50000',
-						}}
-						className={`${classes.listElementButton}`}
-						variants={item}
-						animate={variants}>
-						<Link className={`${classes.link} ${classes.button} ${classes.textButton}`} href="/register">
-							Register
-						</Link>
-					</motion.li>
+					{session?.user ? (
+						<LogoutButton
+							className={`${classes.link} ${classes.button} ${classes.textButton}`}
+							whileHover={{
+								backgroundColor: '#a50000',
+							}}>
+							Logout
+						</LogoutButton>
+					) : (
+						<>
+							<motion.li
+								className={`${classes.listElementButton} ${classes.margin}`}
+								variants={item}
+								animate={variants}>
+								<MotionLink
+									whileHover={{
+										backgroundColor: '#750000',
+									}}
+									className={`${classes.link} ${classes.button} ${classes.filledButton}`}
+									href="/login">
+									Login
+								</MotionLink>
+							</motion.li>
+							<motion.li className={`${classes.listElementButton}`} variants={item} animate={variants}>
+								<MotionLink
+									whileHover={{
+										backgroundColor: '#a50000',
+									}}
+									className={`${classes.link} ${classes.button} ${classes.textButton}`}
+									href="/register">
+									Register
+								</MotionLink>
+							</motion.li>
+						</>
+					)}
 				</motion.ul>
 			</motion.nav>
 		</>

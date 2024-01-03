@@ -63,7 +63,6 @@ export const authOptions: NextAuthOptions = {
 					id: token.id,
 				},
 			}
-			return session
 		},
 	},
 }
