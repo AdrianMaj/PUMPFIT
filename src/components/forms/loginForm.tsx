@@ -40,6 +40,7 @@ const LoginForm = () => {
 		} else {
 			router.push('/dashboard')
 		}
+		setIsLoading(false)
 	}
 	const MotionLink = motion(Link)
 	return (
