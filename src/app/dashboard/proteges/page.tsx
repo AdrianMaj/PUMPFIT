@@ -1,9 +1,9 @@
 import { getServerSession } from 'next-auth'
 import React from 'react'
-import { authOptions } from '../../../lib/auth'
+import { authOptions } from '../../../../lib/auth'
 import { redirect } from 'next/navigation'
 import DashboardMenu from '@/components/dashboard/dashboardMenu'
-import prisma from '../../../lib/prisma'
+import prisma from '../../../../lib/prisma'
 
 const Page = async () => {
 	const session = await getServerSession(authOptions)
@@ -40,7 +40,7 @@ const Page = async () => {
 							height: '100svh',
 						}}>
 						<h2 style={{ fontSize: '2.2rem' }}>
-							Admin page - welcome back {session.user.name}{' '}
+							Proteges page - welcome back {session.user.name}{' '}
 							{userAccount?.isTrainer ? 'You are trainer' : 'You are regular user'}
 						</h2>
 					</main>

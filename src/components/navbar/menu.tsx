@@ -37,14 +37,16 @@ const MobileMenu: React.FC<{ session: Session | null }> = ({ session }) => {
 	const MotionLink = motion(Link)
 	return (
 		<>
-			<MenuButton isOpen={isOpen} toggleMenu={toggleMenu} />
+			<MenuButton isOpen={isOpen} toggleMenu={toggleMenu} className={classes.menuBtn} />
 			<motion.div
+				initial={false}
 				onClick={toggleMenu}
 				animate={{
 					display: isOpen ? 'block' : 'none',
 				}}
 				className={`${classes.shadow}`}></motion.div>
 			<motion.nav
+				initial={false}
 				className={classes.menu}
 				variants={{
 					closed: {
@@ -56,20 +58,25 @@ const MobileMenu: React.FC<{ session: Session | null }> = ({ session }) => {
 					},
 				}}
 				animate={variants}>
-				<motion.ul variants={container} animate={variants} className={classes.list}>
-					<motion.li className={classes.listElement} variants={item} animate={variants}>
+				<motion.ul initial={false} variants={container} animate={variants} className={classes.list}>
+					<motion.li initial={false} className={classes.listElement} variants={item} animate={variants}>
 						<Link className={classes.link} href="/trainers">
 							Our trainers
 						</Link>
 					</motion.li>
-					<motion.li className={classes.listElement} variants={item} animate={variants}>
+					<motion.li initial={false} className={classes.listElement} variants={item} animate={variants}>
 						<Link className={classes.link} href="/dashboard">
 							Control Panel
 						</Link>
 					</motion.li>
 					{session?.user ? (
-						<motion.li className={`${classes.listElementButton} ${classes.margin}`} variants={item} animate={variants}>
+						<motion.li
+							initial={false}
+							className={`${classes.listElementButton} ${classes.margin}`}
+							variants={item}
+							animate={variants}>
 							<LogoutButton
+								initial={false}
 								path="/"
 								className={`${classes.link} ${classes.button} ${classes.textButton}`}
 								whileHover={{
@@ -81,6 +88,7 @@ const MobileMenu: React.FC<{ session: Session | null }> = ({ session }) => {
 					) : (
 						<>
 							<motion.li
+								initial={false}
 								className={`${classes.listElementButton} ${classes.margin}`}
 								variants={item}
 								animate={variants}>
@@ -93,7 +101,7 @@ const MobileMenu: React.FC<{ session: Session | null }> = ({ session }) => {
 									Login
 								</MotionLink>
 							</motion.li>
-							<motion.li className={`${classes.listElementButton}`} variants={item} animate={variants}>
+							<motion.li initial={false} className={`${classes.listElementButton}`} variants={item} animate={variants}>
 								<MotionLink
 									whileHover={{
 										backgroundColor: '#a50000',

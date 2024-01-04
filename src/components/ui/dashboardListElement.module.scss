@@ -1,0 +1,28 @@
+@use '../variables' as *;
+.listItem {
+	position: relative;
+	display: flex;
+	align-items: center;
+	text-decoration: none;
+	width: 100%;
+	p {
+		font-size: $subtextSize;
+		margin-left: 0.5em;
+	}
+}
+.link {
+	width: 100%;
+	display: flex;
+	text-decoration: none;
+}
+.activeIndicator {
+	position: absolute;
+	height: 100%;
+	width: 6px;
+	left: 0rem;
+	top: 0;
+}
+.text {
+	color: $subtext;
+	font-size: clamp(1.2rem, 1.0041rem + 0.9796vw, 1.8rem);
+}

@@ -4,16 +4,11 @@
 	flex-direction: column;
 	width: 100%;
 	position: fixed;
-	// min-width: 275px;
 	background-color: $secondaryBg;
 	height: 100svh;
 	padding: 3em;
 }
-.positioner {
-	height: 100svh;
-	position: sticky;
-	width: 20%;
-}
+
 .menuBtn {
 	width: 100%;
 }
@@ -24,6 +19,12 @@
 }
 .logo {
 	margin-right: auto;
+}
+.text {
+	margin-top: auto;
+	margin-bottom: 2em;
+	color: $subtext;
+	font-size: clamp(1.2rem, 1.0041rem + 0.9796vw, 1.8rem);
 }
 .logoutBtn {
 	background-color: transparent;
@@ -38,19 +39,18 @@
 	font-weight: bold;
 	font-size: clamp(1.2rem, 1.0041rem + 0.9796vw, 1.8rem);
 }
-.text {
-	margin-bottom: 1.5em;
-	margin-top: auto;
-	color: $subtext;
-	font-size: clamp(1.2rem, 1.0041rem + 0.9796vw, 1.8rem);
-}
+
 .list {
 	display: flex;
 	flex-direction: column;
-	gap: 1em;
-	margin-top: 2em;
+	gap: 2.5em;
+	margin-top: 4em;
 	list-style-type: none;
 }
-.listElement {
-	font-size: $subtextSize;
+
+@media (min-width: 992px) {
+	.menu {
+		position: sticky;
+		max-width: 275px;
+	}
 }

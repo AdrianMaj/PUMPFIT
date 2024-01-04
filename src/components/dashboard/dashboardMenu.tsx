@@ -3,9 +3,9 @@ import React, { useState } from 'react'
 import Logo from '../ui/Logo'
 import classes from './dashboardMenu.module.scss'
 import LogoutButton from '../ui/logoutButton'
-import Image from 'next/image'
-import { motion } from 'framer-motion'
+import { animate, motion } from 'framer-motion'
 import MenuButton from '../navbar/menuButton'
+import DashboardListElement from '../ui/dashboardListElement'
 
 const DashboardMenu: React.FC<{ name: string }> = ({ name }) => {
 	const [isOpen, setIsOpen] = useState(false)
@@ -18,27 +18,72 @@ const DashboardMenu: React.FC<{ name: string }> = ({ name }) => {
 	const navVariants = {
 		opened: {
 			width: '100%',
+			padding: '3em',
 		},
 		closed: {
-			width: '75px',
+			width: '6em',
 			padding: '3em 0',
 		},
 	}
 	const displayVariants = {
 		opened: {
 			opacity: '1',
+			width: '100%',
+			margin: '',
 		},
 		closed: {
 			opacity: '0',
-			width: '0',
+			width: '0%',
+			margin: 0,
 		},
 	}
 	const animateCondition = isOpen ? 'opened' : 'closed'
 
+	const LIST_ELEMENTS_TRAINER = [
+		{
+			text: 'Dashboard',
+			icon: '/dashboard.svg',
+			link: '',
+		},
+		{
+			text: 'My proteges',
+			icon: '/proteges.svg',
+			link: 'proteges',
+		},
+		{
+			text: 'Messages',
+			icon: '/messages.svg',
+			link: 'messages',
+		},
+		{
+			text: 'My profile',
+			icon: '/profile.svg',
+			link: 'profile',
+		},
+		{
+			text: 'Promote',
+			icon: '/promote.svg',
+			link: 'promote',
+		},
+		{
+			text: 'Account settings',
+			icon: '/account-settings.svg',
+			link: 'account-settings',
+		},
+	]
+
 	return (
 		<>
-			<motion.nav variants={navVariants} animate={animateCondition} className={classes.menu}>
+			<motion.nav
+				initial={false}
+				variants={navVariants}
+				transition={{
+					bounce: 0,
+				}}
+				animate={animateCondition}
+				className={`${classes.menu}`}>
 				<motion.div
+					initial={false}
 					animate={animateCondition}
 					variants={{
 						opened: {
@@ -49,21 +94,53 @@ const DashboardMenu: React.FC<{ name: string }> = ({ name }) => {
 						},
 					}}
 					className={classes.container}>
-					<Logo variants={displayVariants} animate={animateCondition} width="70%" className={classes.logo} />
+					<Logo
+						variants={{
+							opened: {
+								opacity: '1',
+								width: '70%',
+								margin: '',
+							},
+							closed: {
+								opacity: '0',
+								width: '0',
+								margin: 0,
+							},
+						}}
+						animate={animateCondition}
+						width="70%"
+						className={classes.logo}
+					/>
 					<MenuButton isOpen={isOpen} toggleMenu={toggleMenu} className={classes.menuBtn} />
 				</motion.div>
-				<motion.ul variants={displayVariants} animate={animateCondition} className={classes.list}>
-					<li className={classes.listElement}>Dashboard</li>
-					<li className={classes.listElement}>My proteges</li>
-					<li className={classes.listElement}>Messages</li>
-					<li className={classes.listElement}>My profile</li>
-					<li className={classes.listElement}>Promote</li>
-					<li className={classes.listElement}>Settings</li>
+				<motion.ul
+					initial={false}
+					animate={animateCondition}
+					variants={{
+						opened: {
+							alignItems: 'flex-start',
+						},
+						closed: {
+							alignItems: 'center',
+						},
+					}}
+					className={classes.list}>
+					{LIST_ELEMENTS_TRAINER.map(element => (
+						<DashboardListElement
+							key={element.text}
+							variants={displayVariants}
+							animate={animateCondition}
+							text={element.text}
+							link={element.link}
+							icon={element.icon}
+						/>
+					))}
 				</motion.ul>
-				<motion.p variants={displayVariants} animate={animateCondition} className={classes.text}>
+				<motion.p initial={false} variants={displayVariants} animate={animateCondition} className={classes.text}>
 					You're logged as <span className={classes.bold}>{name}</span>
 				</motion.p>
 				<LogoutButton
+					initial={false}
 					variants={displayVariants}
 					animate={animateCondition}
 					path="/"

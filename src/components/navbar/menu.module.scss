@@ -65,6 +65,9 @@
 }
 
 @media (min-width: 992px) {
+	.menuBtn {
+		display: none;
+	}
 	.menu {
 		position: static;
 		height: 100%;
