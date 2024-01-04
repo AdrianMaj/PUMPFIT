@@ -26,3 +26,11 @@
 	height: 3px;
 	background: #fff;
 }
+.mobile {
+	display: flex;
+}
+@media (min-width: 992px) {
+	.mobile {
+		display: none;
+	}
+}

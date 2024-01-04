@@ -8,11 +8,8 @@ const LogoutButton: React.FC<{
 	path: string
 	[x: string]: any
 }> = ({ children, path, ...props }) => {
-	const handleSignOut = async () => {
-		await signOut({ callbackUrl: path })
-	}
 	return (
-		<motion.button onClick={handleSignOut} {...props}>
+		<motion.button onClick={() => signOut({ callbackUrl: path })} {...props}>
 			{children}
 		</motion.button>
 	)

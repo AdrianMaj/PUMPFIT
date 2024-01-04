@@ -37,7 +37,7 @@ const MobileMenu: React.FC<{ session: Session | null }> = ({ session }) => {
 	const MotionLink = motion(Link)
 	return (
 		<>
-			<MenuButton isOpen={isOpen} toggleMenu={toggleMenu} className={classes.menuBtn} />
+			<MenuButton isOpen={isOpen} toggleMenu={toggleMenu} mobileOnly={true} />
 			<motion.div
 				initial={false}
 				onClick={toggleMenu}
@@ -55,6 +55,7 @@ const MobileMenu: React.FC<{ session: Session | null }> = ({ session }) => {
 					},
 					opened: {
 						width: '70%',
+						right: '0%',
 					},
 				}}
 				animate={variants}>

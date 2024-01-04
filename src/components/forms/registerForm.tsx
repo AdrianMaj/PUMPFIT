@@ -70,7 +70,6 @@ const RegisterForm = () => {
 		} else {
 			console.error('Form validation failed:', form.formState.errors)
 		}
-		setIsLoading(false)
 	}
 
 	return (
