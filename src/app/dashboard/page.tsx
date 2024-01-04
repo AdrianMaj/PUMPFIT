@@ -32,7 +32,7 @@ const Page = async () => {
 			return (
 				<div style={{ display: 'flex' }}>
 					<DashboardMenu name={userAccount.name} />
-					<main>
+					<main style={{ paddingLeft: '17.5%' }}>
 						<h2>
 							Admin page - welcome back {session.user.name}{' '}
 							{userAccount?.isTrainer ? 'You are trainer' : 'You are regular user'}
@@ -44,7 +44,6 @@ const Page = async () => {
 			// error handling
 		}
 	}
-
 	return redirect('/login')
 }
 

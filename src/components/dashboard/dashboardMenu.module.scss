@@ -2,11 +2,28 @@
 .menu {
 	display: flex;
 	flex-direction: column;
-	width: 20%;
-	min-width: 275px;
+	width: 100%;
+	position: fixed;
+	// min-width: 275px;
 	background-color: $secondaryBg;
 	height: 100svh;
 	padding: 3em;
+}
+.positioner {
+	height: 100svh;
+	position: sticky;
+	width: 20%;
+}
+.menuBtn {
+	width: 100%;
+}
+.container {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+.logo {
+	margin-right: auto;
 }
 .logoutBtn {
 	background-color: transparent;

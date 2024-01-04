@@ -2,9 +2,13 @@ import React from 'react'
 import classes from './menuButton.module.scss'
 import { motion } from 'framer-motion'
 
-const MenuButton: React.FC<{ isOpen: boolean; toggleMenu: () => void }> = ({ isOpen, toggleMenu }) => {
+const MenuButton: React.FC<{ isOpen: boolean; toggleMenu: () => void; [x: string]: any }> = ({
+	isOpen,
+	toggleMenu,
+	...props
+}) => {
 	return (
-		<div onClick={toggleMenu} className={classes['burger-btn']}>
+		<button {...props} onClick={toggleMenu} className={classes['burger-btn']}>
 			<motion.div className={classes.container}>
 				<motion.div
 					className={classes.burgerLine}
@@ -28,7 +32,7 @@ const MenuButton: React.FC<{ isOpen: boolean; toggleMenu: () => void }> = ({ isO
 					}}
 				/>
 			</motion.div>
-		</div>
+		</button>
 	)
 }
 

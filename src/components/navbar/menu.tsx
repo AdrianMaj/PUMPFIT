@@ -68,13 +68,16 @@ const MobileMenu: React.FC<{ session: Session | null }> = ({ session }) => {
 						</Link>
 					</motion.li>
 					{session?.user ? (
-						<LogoutButton
-							className={`${classes.link} ${classes.button} ${classes.textButton}`}
-							whileHover={{
-								backgroundColor: '#a50000',
-							}}>
-							Logout
-						</LogoutButton>
+						<motion.li className={`${classes.listElementButton} ${classes.margin}`} variants={item} animate={variants}>
+							<LogoutButton
+								path="/"
+								className={`${classes.link} ${classes.button} ${classes.textButton}`}
+								whileHover={{
+									backgroundColor: '#a50000',
+								}}>
+								Logout
+							</LogoutButton>
+						</motion.li>
 					) : (
 						<>
 							<motion.li
