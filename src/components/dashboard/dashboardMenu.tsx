@@ -57,7 +57,7 @@ const DashboardMenu: React.FC<{ name: string }> = ({ name }) => {
 		},
 		{
 			text: 'My profile',
-			icon: '/profile.svg',
+			icon: '/my-profile.svg',
 			link: 'profile',
 		},
 		{
