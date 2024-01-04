@@ -2,7 +2,7 @@ import React from 'react'
 import classes from './menuButton.module.scss'
 import { motion } from 'framer-motion'
 
-const MenuButton: React.FC<{ isOpen: boolean; toggleMenu: () => void; mobileOnly: boolean }> = ({
+const MenuButton: React.FC<{ isOpen: boolean; toggleMenu: () => void; mobileOnly?: boolean }> = ({
 	isOpen,
 	toggleMenu,
 	mobileOnly,

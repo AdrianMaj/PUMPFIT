@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import Logo from '../ui/Logo'
 import classes from './dashboardMenu.module.scss'
 import LogoutButton from '../ui/logoutButton'
-import { animate, motion } from 'framer-motion'
+import { motion } from 'framer-motion'
 import MenuButton from '../navbar/menuButton'
 import DashboardListElement from '../ui/dashboardListElement'
 
@@ -111,7 +111,7 @@ const DashboardMenu: React.FC<{ name: string }> = ({ name }) => {
 						width="70%"
 						className={classes.logo}
 					/>
-					<MenuButton isOpen={isOpen} toggleMenu={toggleMenu} className={classes.menuBtn} />
+					<MenuButton isOpen={isOpen} toggleMenu={toggleMenu} />
 				</motion.div>
 				<motion.ul
 					initial={false}
