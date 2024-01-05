@@ -58,7 +58,7 @@ const DashboardMenu: React.FC<{ name: string }> = ({ name }) => {
 		{
 			text: 'My profile',
 			icon: '/profile.svg',
-			link: 'profile',
+			link: 'my-profile',
 		},
 		{
 			text: 'Promote',
