@@ -1,69 +1,72 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("POSTGRES_PRISMA_URL")
+  provider  = "postgresql"
+  url       = env("POSTGRES_PRISMA_URL")
   directUrl = env("POSTGRES_URL_NON_POOLING")
 }
 
 model Account {
-  id        String    @default(cuid()) @id
-  name      String
-  email     String    @unique
-  password String
+  id            String    @id @default(cuid())
+  name          String
+  email         String    @unique
+  password      String
   photo         String?
-  emailVerified  DateTime?
-  isTrainer    Boolean
-  createdAt DateTime  @default(now()) @map(name: "created_at")
-  updatedAt DateTime  @updatedAt @map(name: "updated_at")
-  user User?
-  trainer Trainer?
-  @@map(name: "accounts")
+  emailVerified DateTime?
+  isTrainer     Boolean
+  createdAt     DateTime  @default(now()) @map("created_at")
+  updatedAt     DateTime  @updatedAt @map("updated_at")
+  trainer       Trainer?
+  user          User?
+
+  @@map("accounts")
 }
 
 model User {
-  account   Account @relation(fields:[accountId], references: [id])
-  accountId String   @unique 
-  @@map(name: "users")
+  accountId String  @unique
+  account   Account @relation(fields: [accountId], references: [id])
+
+  @@map("users")
 }
 
 model Trainer {
-  id        String    @default(cuid()) @id
-  promoted      Boolean
-  account   Account @relation(fields:[accountId], references: [id])
-  accountId String   @unique 
-  announcement  Announcement?
+  id             String        @id @default(cuid())
+  promoted       Boolean
+  accountId      String        @unique
   announcementId String?
-  @@map(name: "trainers")
+  announcement   Announcement?
+  account        Account       @relation(fields: [accountId], references: [id])
+
+  @@map("trainers")
 }
 
 model Announcement {
-  id            String         @default(cuid()) @id
-  experience    String
-  categories    String[]
-  price         Float
-  description   String
-  testimonials  Testimonial[]
-  trainer       Trainer      @relation(fields: [trainerId], references: [id])
-  trainerId     String       @unique
-  createdAt     DateTime       @default(now()) @map(name: "created_at")
-  updatedAt     DateTime       @updatedAt @map(name: "updated_at")
-  @@map(name: "announcements")
+  id           String        @id @default(cuid())
+  experience   String
+  categories   String[]
+  price        Float
+  description  String
+  isPublished  Boolean?
+  trainerId    String        @unique
+  createdAt    DateTime      @default(now()) @map("created_at")
+  updatedAt    DateTime      @updatedAt @map("updated_at")
+  trainer      Trainer       @relation(fields: [trainerId], references: [id])
+  testimonials Testimonial[]
+
+  @@map("announcements")
 }
 
 model Testimonial {
-  id            String         @default(cuid()) @id
-  name          String
-  photo         String
-  text          String
-  announcement  Announcement   @relation(fields: [announcementId], references: [id])
+  id             String       @id @default(cuid())
+  name           String
+  photo          String
+  text           String
   announcementId String
-  createdAt     DateTime       @default(now()) @map(name: "created_at")
-  updatedAt     DateTime       @updatedAt @map(name: "updated_at")
-  @@map(name: "testimonials")
+  createdAt      DateTime     @default(now()) @map("created_at")
+  updatedAt      DateTime     @updatedAt @map("updated_at")
+  announcement   Announcement @relation(fields: [announcementId], references: [id])
+
+  @@map("testimonials")
 }
