@@ -57,7 +57,7 @@ const DashboardListElement: React.FC<{
 							left: '0rem',
 						},
 					}}
-					// layoutId="activeIndicator"
+					layoutId="activeIndicator"
 					className={classes.activeIndicator}
 				/>
 				<Image width={0} height={0} sizes="100vw" style={{ width: 'auto', height: 'auto' }} alt={text} src={icon} />

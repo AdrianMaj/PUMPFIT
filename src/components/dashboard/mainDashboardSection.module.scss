@@ -1,0 +1,12 @@
+.main {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	padding: 4em 2em;
+	width: 100%;
+}
+@media (min-width: 992px) {
+	.main {
+		padding: 4em;
+	}
+}

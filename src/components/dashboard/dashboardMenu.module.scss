@@ -7,8 +7,14 @@
 	background-color: $secondaryBg;
 	height: 100svh;
 	padding: 3em;
+	z-index: 1000;
 }
-
+.positioner {
+	width: 6em;
+	padding: 0 3em;
+	height: 100svh;
+	position: sticky;
+}
 .menuBtn {
 	width: 100%;
 }
@@ -49,8 +55,20 @@
 }
 
 @media (min-width: 992px) {
+	.positioner {
+		display: none;
+	}
 	.menu {
 		position: sticky;
 		max-width: 275px;
+	}
+}
+@media (min-width: 1200px) {
+	.positioner {
+		display: none;
+	}
+	.menu {
+		position: sticky;
+		max-width: 325px;
 	}
 }

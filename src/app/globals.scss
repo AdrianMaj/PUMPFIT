@@ -13,3 +13,8 @@ body {
 .overflow {
 	overflow-y: hidden;
 }
+.react-select {
+	&__control {
+		background-color: #0f0f0f !important;
+	}
+}

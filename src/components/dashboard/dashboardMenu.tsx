@@ -74,6 +74,7 @@ const DashboardMenu: React.FC<{ name: string }> = ({ name }) => {
 
 	return (
 		<>
+			<div className={classes.positioner}></div>
 			<motion.nav
 				initial={false}
 				variants={navVariants}

@@ -1,0 +1,56 @@
+@use '../../variables' as *;
+.form {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	gap: 3em;
+}
+.inputNote {
+	color: $subtext;
+	margin-top: 0.5em;
+	font-size: clamp(1.2rem, 1.0694rem + 0.6531vw, 1.6rem);
+	a {
+		font-size: clamp(1.2rem, 1.0694rem + 0.6531vw, 1.6rem);
+		color: $subtext;
+	}
+}
+.priceExperienceContainer {
+	display: flex;
+	flex-direction: column;
+	gap: 3em;
+}
+.container {
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+}
+.inputSide {
+	width: fit-content;
+}
+.priceTag {
+	color: $subtext;
+	font-size: $subtextSize;
+	background-color: $secondaryBg;
+	text-align: center;
+	margin: 0 1em;
+	text-wrap: nowrap;
+}
+.experienceInput {
+	height: 100%;
+	background-color: $secondaryBg;
+	color: $subtext;
+	font-size: $subtextSize;
+	border: none;
+}
+.buttons {
+	width: 100%;
+	justify-content: flex-end;
+	display: flex;
+	gap: 1em;
+}
+
+@media (min-width: 992px) {
+	.priceExperienceContainer {
+		flex-direction: row;
+	}
+}
