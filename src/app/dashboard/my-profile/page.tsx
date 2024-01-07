@@ -10,7 +10,7 @@ const Page = async () => {
 			return (
 				<>
 					<SectionHeading>My profile</SectionHeading>
-					<MyProfileForm trainer={userAccount.trainer} />
+					<MyProfileForm />
 				</>
 			)
 		}
