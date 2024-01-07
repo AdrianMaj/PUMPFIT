@@ -23,34 +23,56 @@
 	display: flex;
 	align-items: center;
 	justify-content: flex-start;
+	background-color: $secondaryBg;
 }
 .inputSide {
 	width: fit-content;
+	padding: 0 1em;
+	:focus {
+		border: 1px solid white;
+	}
 }
 .priceTag {
 	color: $subtext;
 	font-size: $subtextSize;
 	background-color: $secondaryBg;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	width: fit-content;
 	text-align: center;
-	margin: 0 1em;
+	padding: 0 1em;
 	text-wrap: nowrap;
 }
 .experienceInput {
+	text-align: right;
 	height: 100%;
+	margin-left: 0.25em;
 	background-color: $secondaryBg;
 	color: $subtext;
 	font-size: $subtextSize;
 	border: none;
 }
 .buttons {
+	margin-top: auto;
 	width: 100%;
-	justify-content: flex-end;
 	display: flex;
+	justify-content: center;
+	flex-wrap: wrap;
 	gap: 1em;
+}
+.multiSelect {
+	border-width: 1px;
+	:focus {
+		border-width: 1px;
+	}
 }
 
 @media (min-width: 992px) {
 	.priceExperienceContainer {
 		flex-direction: row;
+	}
+	.buttons {
+		justify-content: flex-end;
 	}
 }

@@ -5,25 +5,60 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import * as z from 'zod'
 import classes from './myProfileForm.module.scss'
 import Link from 'next/link'
-
 import LinkButton from '@/components/ui/linkButton'
+import Button from '@/components/ui/button'
+import { useState } from 'react'
+import MultiSelect from '@/components/ui/multiSelect'
+import prisma from '../../../../lib/prisma'
 
 const FormSchema = z.object({
 	photourl: z.string(),
+	experience: z.string(),
+	experienceType: z.string(),
+	price: z.string(),
 })
 
 const MyProfileForm = () => {
+	const [selectedCategories, setSelectedCategories] = useState<string[]>([])
 	const form = useForm<z.infer<typeof FormSchema>>({
 		resolver: zodResolver(FormSchema),
 		defaultValues: {
 			photourl: '',
+			experience: '',
+			experienceType: 'Years',
+			price: '',
 		},
 	})
 	const onSubmit = async (values: z.infer<typeof FormSchema>) => {
 		console.log(values)
+		console.log(selectedCategories)
 	}
-	const handlePublish = () => {
-		console.log('working')
+	const handlePublish = async () => {
+		console.log('publishing...')
+	}
+
+	// CATEGORY HANDLERS
+	const categories = ['Calisthenics', 'Powerlifting', 'Body Building', 'Fitness']
+	const handleAddCategory = (e: React.MouseEvent<HTMLLIElement>) => {
+		const selectedValue = (e.target as HTMLLIElement).innerText
+		const isSelected = selectedCategories.includes(selectedValue)
+		if (selectedCategories.length < 3 && !isSelected) {
+			setSelectedCategories(prevCategories => {
+				const newArr = [...prevCategories, selectedValue]
+				return newArr
+			})
+		}
+	}
+	const handleRemoveCategory = (e: React.MouseEvent<HTMLLIElement>) => {
+		const selectedValue = (e.target as HTMLLIElement).innerText
+		setSelectedCategories(prevCategories => {
+			const newArr = prevCategories.filter(category => {
+				if (category !== selectedValue) {
+					return category
+				}
+			})
+			return newArr
+		})
 	}
 
 	return (
@@ -37,41 +72,46 @@ const MyProfileForm = () => {
 				</div>
 				<div className={classes.priceExperienceContainer}>
 					<div className={classes.container}>
-						<Input type="number" label="Experience" id="experience" />
-						<select className={`${classes.inputSide} ${classes.experienceInput}`} id="experience">
+						<Input min={0} max={100} type="number" label="Experience" id="experience" />
+						<select className={`${classes.inputSide} ${classes.experienceInput}`} {...form.register('experienceType')}>
 							<option value="Years">Years</option>
-							<option value="Years">Months</option>
+							<option value="Months">Months</option>
 						</select>
 					</div>
 					<div className={classes.container}>
-						<Input type="number" label="Price" id="price" />
+						<Input type="number" min={0} max={1000} label="Price" id="price" />
 						<p className={`${classes.inputSide} ${classes.priceTag}`}>$ / hr</p>
 					</div>
 				</div>
 				<div className={classes.selectContainer}>
-					{/* <label className={classes.label} htmlFor="categories">
-						Categories
-					</label> */}
-					<Input type="number" label="Categories" id="categories" />
-				</div>
-				<div className={classes.selectContainer}>
-					{/* <label className={classes.label} htmlFor="testimonials">
-						Testimonials
-					</label> */}
-					<Input type="number" label="Testimonials" id="testimonials" />
+					<MultiSelect
+						removeItem={handleRemoveCategory}
+						addItem={handleAddCategory}
+						selectedItems={selectedCategories}
+						items={categories}
+					/>
+					<p className={classes.inputNote}>Note: Select up to 3 categories that will be shown on your profile.</p>
 				</div>
 				<div className={classes.buttons}>
-					<LinkButton linked="/preview">Preview</LinkButton>
-					<LinkButton linked="/preview">Save</LinkButton>
-					<LinkButton filled linked="/preview">
-						Publish
+					<LinkButton linked="/preview" fontSize="clamp(1.6rem, 1.4041rem + 0.9796vw, 2.2rem)">
+						Preview
 					</LinkButton>
-					{/* <button className={classes.textButton} type="submit">
+					<Button
+						style={{
+							fontSize: 'clamp(1.6rem, 1.4041rem + 0.9796vw, 2.2rem)',
+						}}
+						type="submit">
 						Save
-					</button>
-					<button className={classes.filledButton} type="submit" onClick={handlePublish}>
+					</Button>
+					<Button
+						style={{
+							fontSize: 'clamp(1.6rem, 1.4041rem + 0.9796vw, 2.2rem)',
+						}}
+						filled
+						type="submit"
+						onClick={handlePublish}>
 						Publish
-					</button> */}
+					</Button>
 				</div>
 			</form>
 		</FormProvider>

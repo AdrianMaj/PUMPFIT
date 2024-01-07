@@ -5,9 +5,11 @@
 	width: 100%;
 	position: fixed;
 	background-color: $secondaryBg;
-	height: 100svh;
+	min-height: 100svh;
+	height: 100%;
 	padding: 3em;
 	z-index: 1000;
+	overflow: hidden;
 }
 .positioner {
 	width: 6em;

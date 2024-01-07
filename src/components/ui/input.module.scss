@@ -13,7 +13,7 @@
 	color: $subtext;
 	font-size: clamp(1.6rem, 1.4041rem + 0.9796vw, 2.2rem);
 	pointer-events: none;
-	z-index: 10;
+	z-index: 0;
 	&::before {
 		content: '';
 		position: absolute;

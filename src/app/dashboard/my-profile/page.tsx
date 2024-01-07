@@ -6,12 +6,14 @@ import MyProfileForm from '@/components/dashboard/my-profile/myProfileForm'
 const Page = async () => {
 	const userAccount = await fetchAccount()
 	if (userAccount) {
-		return (
-			<>
-				<SectionHeading>My profile</SectionHeading>
-				<MyProfileForm />
-			</>
-		)
+		if (userAccount.isTrainer && userAccount.trainer) {
+			return (
+				<>
+					<SectionHeading>My profile</SectionHeading>
+					<MyProfileForm trainer={userAccount.trainer} />
+				</>
+			)
+		}
 	}
 }
 
