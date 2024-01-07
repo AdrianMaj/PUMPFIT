@@ -9,8 +9,6 @@ import LinkButton from '@/components/ui/linkButton'
 import Button from '@/components/ui/button'
 import { useState } from 'react'
 import MultiSelect from '@/components/ui/multiSelect'
-import prisma from '../../../../lib/prisma'
-import { NextResponse } from 'next/server'
 import { handlePublish, updateAnnoucement } from '@/util/updateAnnoucement'
 
 const FormSchema = z.object({
@@ -31,66 +29,6 @@ const MyProfileForm: React.FC<{ trainerId: string }> = ({ trainerId }) => {
 			price: '',
 		},
 	})
-	// const updateAnnoucement = async (values: z.infer<typeof FormSchema>) => {
-	// 	let announcement
-	// 	try {
-	// 		announcement = await prisma.announcement.upsert({
-	// 			where: {
-	// 				trainerId: trainerId,
-	// 			},
-	// 			update: {
-	// 				description: 'nowy opis',
-	// 				experience: values.experience + ' ' + values.experienceType,
-	// 				categories: selectedCategories,
-	// 				price: +values.price,
-	// 				isPublished: false,
-	// 			},
-	// 			create: {
-	// 				trainer: {
-	// 					connect: {
-	// 						id: trainerId,
-	// 					},
-	// 				},
-	// 				description: 'nowy opis',
-	// 				experience: values.experience + ' ' + values.experienceType,
-	// 				categories: selectedCategories,
-	// 				price: +values.price,
-	// 				isPublished: false,
-	// 			},
-	// 		})
-	// 		if (announcement) {
-	// 			return NextResponse.json(
-	// 				{ announcement: { success: true, announcement }, message: 'Created new version of announcement' },
-	// 				{ status: 201 }
-	// 			)
-	// 		}
-	// 	} catch (error) {
-	// 		return NextResponse.json({ message: 'Something went wrong!' }, { status: 500 })
-	// 	}
-	// }
-	// const handlePublish = async () => {
-	// 	try {
-	// 		const announcement = await prisma.announcement.update({
-	// 			where: {
-	// 				trainerId: trainerId,
-	// 			},
-	// 			data: {
-	// 				isPublished: true,
-	// 			},
-	// 		})
-	// 		if (announcement) {
-	// 			return NextResponse.json(
-	// 				{ announcement: { success: true, announcement }, message: 'Published announcement' },
-	// 				{ status: 201 }
-	// 			)
-	// 		}
-	// 	} catch (error) {
-	// 		return NextResponse.json({ message: 'Something went wrong!' }, { status: 500 })
-	// 	}
-	// }
-
-	// CATEGORY HANDLERS
-
 	const categories = ['Calisthenics', 'Powerlifting', 'Body Building', 'Fitness']
 	const handleAddCategory = (e: React.MouseEvent<HTMLLIElement>) => {
 		const selectedValue = (e.target as HTMLLIElement).innerText
@@ -113,6 +51,11 @@ const MyProfileForm: React.FC<{ trainerId: string }> = ({ trainerId }) => {
 			return newArr
 		})
 	}
+	const formData = {
+		trainerId,
+		form: form.getValues(),
+		selectedCategories,
+	}
 	const handleUpdateAnnoucement = async (values: z.infer<typeof FormSchema>) => {
 		const response = await updateAnnoucement(values, trainerId, selectedCategories)
 		if (!response.ok) {
@@ -121,8 +64,13 @@ const MyProfileForm: React.FC<{ trainerId: string }> = ({ trainerId }) => {
 			console.log('Created an announcement')
 		}
 	}
-	const handlePublishing = () => {
-		handlePublish(trainerId)
+	const handlePublishing = async () => {
+		const response = await handlePublish(trainerId)
+		if (!response.ok) {
+			console.log(response)
+		} else {
+			console.log('Created an announcement')
+		}
 	}
 
 	return (

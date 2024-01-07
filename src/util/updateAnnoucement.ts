@@ -1,3 +1,4 @@
+'use server'
 import { NextResponse } from 'next/server'
 import prisma from '../../lib/prisma'
 
@@ -18,10 +19,10 @@ export const updateAnnoucement = async (
 				trainerId: trainerId,
 			},
 			update: {
-				description: 'nowy opis',
 				experience: values.experience + ' ' + values.experienceType,
 				categories: selectedCategories,
 				price: +values.price,
+				description: 'nowy opis',
 				isPublished: false,
 			},
 			create: {
@@ -30,22 +31,26 @@ export const updateAnnoucement = async (
 						id: trainerId,
 					},
 				},
-				description: 'nowy opis',
 				experience: values.experience + ' ' + values.experienceType,
 				categories: selectedCategories,
 				price: +values.price,
 				isPublished: false,
+				description: 'nowy opis',
+				testimonials: {},
 			},
 		})
+		console.log('dziala')
 		if (announcement) {
 			return NextResponse.json(
-				{ announcement: { success: true, announcement }, message: 'Created new version of announcement' },
+				{ announcement: { success: true }, message: 'Created new version of announcement' },
 				{ status: 201 }
 			)
 		} else {
+			console.error('Błąd w updateAnnoucement lub handlePublish:')
 			return NextResponse.json({ message: 'Something went wrong!' }, { status: 500 })
 		}
 	} catch (error) {
+		console.error('Błąd w updateAnnoucement lub handlePublish:')
 		return NextResponse.json({ message: 'Something went wrong!' }, { status: 500 })
 	}
 }
@@ -60,12 +65,10 @@ export const handlePublish = async (trainerId: string) => {
 			},
 		})
 		if (announcement) {
-			return NextResponse.json(
-				{ announcement: { success: true, announcement }, message: 'Published announcement' },
-				{ status: 201 }
-			)
+			return NextResponse.json({ announcement: { success: true }, message: 'Published announcement' }, { status: 201 })
+		} else {
+			return NextResponse.json({ message: 'Something went wrong!' }, { status: 500 })
 		}
-		console.log('done')
 	} catch (error) {
 		return NextResponse.json({ message: 'Something went wrong!' }, { status: 500 })
 	}
