@@ -1,17 +1,25 @@
 'use server'
 import { NextResponse } from 'next/server'
 import prisma from '../../lib/prisma'
+import fetchAccount from './fetchAccount'
 
-export const updateAnnoucement = async (
-	values: {
-		photourl: string
-		experience: string
-		experienceType: string
-		price: string
-	},
-	trainerId: string,
+export const updateAnnoucement = async ({
+	photourl,
+	experience,
+	experienceType,
+	price,
+	description,
+	trainerId,
+	selectedCategories,
+}: {
+	photourl: string
+	experience: string
+	experienceType: string
+	price: string
+	description: string
+	trainerId: string
 	selectedCategories: string[]
-) => {
+}) => {
 	let announcement
 	try {
 		announcement = await prisma.announcement.upsert({
@@ -19,11 +27,11 @@ export const updateAnnoucement = async (
 				trainerId: trainerId,
 			},
 			update: {
-				experience: values.experience + ' ' + values.experienceType,
+				experience: experience + ' ' + experienceType,
 				categories: selectedCategories,
-				price: +values.price,
-				description: 'nowy opis',
-				isPublished: false,
+				price: +price,
+				photo: photourl,
+				description: description,
 			},
 			create: {
 				trainer: {
@@ -31,11 +39,12 @@ export const updateAnnoucement = async (
 						id: trainerId,
 					},
 				},
-				experience: values.experience + ' ' + values.experienceType,
+				experience: experience + ' ' + experienceType,
 				categories: selectedCategories,
-				price: +values.price,
+				price: +price,
 				isPublished: false,
-				description: 'nowy opis',
+				description: description,
+				photo: photourl,
 				testimonials: {},
 			},
 		})

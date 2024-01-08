@@ -19,6 +19,7 @@ const fetchAccount = async () => {
 								testimonials: true,
 							},
 						},
+						account: true,
 					},
 				},
 			},

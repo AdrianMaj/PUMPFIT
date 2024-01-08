@@ -1,4 +1,4 @@
-import React, { Suspense } from 'react'
+import React from 'react'
 import TrainerCard from './trainerCard'
 import Wrapper from '../ui/wrapper'
 import fetchTrainers from '@/util/fetchTrainers'
@@ -18,7 +18,10 @@ const CardSection = async () => {
 								experience={account.trainer.announcement.experience}
 								description={account.trainer.announcement.description}
 								price={account.trainer.announcement.price}
-								photo={account.photo || 'https://i.pinimg.com/originals/b9/f2/19/b9f2193028967077ad84b60a2cced514.jpg'}
+								photo={
+									account.trainer.announcement.photo ||
+									'https://i.pinimg.com/originals/b9/f2/19/b9f2193028967077ad84b60a2cced514.jpg'
+								}
 								id={account.id}
 								key={account.id}
 							/>

@@ -10,7 +10,7 @@ const Layout: React.FC<{ children: React.ReactNode }> = async ({ children }) => 
 	if (userAccount) {
 		return (
 			<div className={classes.container}>
-				<DashboardMenu name={userAccount.name} />
+				<DashboardMenu name={userAccount.name} isTrainer={userAccount.isTrainer} />
 				<MainDashboardSection>{children}</MainDashboardSection>
 			</div>
 		)

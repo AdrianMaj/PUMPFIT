@@ -1,7 +1,8 @@
 import React from 'react'
 import fetchAccount from '@/util/fetchAccount'
 import SectionHeading from '@/components/ui/sectionHeading'
-import MyProfileForm from '@/components/dashboard/my-profile/myProfileForm'
+import MyProfileForm from '../../../components/my-profile/myProfileForm'
+import { redirect } from 'next/navigation'
 
 const Page = async () => {
 	const userAccount = await fetchAccount()
@@ -10,9 +11,11 @@ const Page = async () => {
 			return (
 				<>
 					<SectionHeading>My profile</SectionHeading>
-					<MyProfileForm trainerId={userAccount.trainer.id} />
+					<MyProfileForm trainerData={userAccount.trainer} />
 				</>
 			)
+		} else {
+			return redirect('/dashboard')
 		}
 	}
 }

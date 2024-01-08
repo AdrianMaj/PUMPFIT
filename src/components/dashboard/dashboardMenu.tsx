@@ -7,7 +7,7 @@ import { motion } from 'framer-motion'
 import MenuButton from '../navbar/menuButton'
 import DashboardListElement from '../ui/dashboardListElement'
 
-const DashboardMenu: React.FC<{ name: string }> = ({ name }) => {
+const DashboardMenu: React.FC<{ name: string; isTrainer: boolean }> = ({ name, isTrainer }) => {
 	const [isOpen, setIsOpen] = useState(false)
 	const toggleMenu = () => {
 		setIsOpen(prevState => {
@@ -71,6 +71,25 @@ const DashboardMenu: React.FC<{ name: string }> = ({ name }) => {
 			link: 'account-settings',
 		},
 	]
+	const LIST_ELEMENTS_USER = [
+		{
+			text: 'Dashboard',
+			icon: '/dashboard.svg',
+			link: '',
+		},
+		{
+			text: 'Messages',
+			icon: '/messages.svg',
+			link: 'messages',
+		},
+		{
+			text: 'Account settings',
+			icon: '/account-settings.svg',
+			link: 'account-settings',
+		},
+	]
+
+	const menuList = isTrainer ? LIST_ELEMENTS_TRAINER : LIST_ELEMENTS_USER
 
 	return (
 		<>
@@ -126,7 +145,7 @@ const DashboardMenu: React.FC<{ name: string }> = ({ name }) => {
 						},
 					}}
 					className={classes.list}>
-					{LIST_ELEMENTS_TRAINER.map(element => (
+					{menuList.map(element => (
 						<DashboardListElement
 							key={element.text}
 							variants={displayVariants}

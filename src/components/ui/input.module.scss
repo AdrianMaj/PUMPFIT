@@ -35,6 +35,11 @@
 	border: 1px solid transparent;
 	width: 100%;
 }
+.textarea {
+	max-width: 100%;
+	min-width: 100%;
+	font-family: 'Montserrat', sans-serif;
+}
 .inputError {
 	margin-top: 0.5em;
 	font-size: clamp(1.2rem, 1.0041rem + 0.9796vw, 1.8rem);

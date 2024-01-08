@@ -7,28 +7,36 @@ import classes from './myProfileForm.module.scss'
 import Link from 'next/link'
 import LinkButton from '@/components/ui/linkButton'
 import Button from '@/components/ui/button'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import MultiSelect from '@/components/ui/multiSelect'
 import { handlePublish, updateAnnoucement } from '@/util/updateAnnoucement'
+import { Trainer } from '@/types/databaseTypes'
 
 const FormSchema = z.object({
 	photourl: z.string(),
 	experience: z.string(),
 	experienceType: z.string(),
 	price: z.string(),
+	description: z.string(),
 })
 
-const MyProfileForm: React.FC<{ trainerId: string }> = ({ trainerId }) => {
+const MyProfileForm: React.FC<{ trainerData: Trainer }> = ({ trainerData }) => {
 	const [selectedCategories, setSelectedCategories] = useState<string[]>([])
+	const splittedExperience = trainerData?.announcement?.experience.split('') || ''
 	const form = useForm<z.infer<typeof FormSchema>>({
 		resolver: zodResolver(FormSchema),
 		defaultValues: {
-			photourl: '',
-			experience: '',
-			experienceType: 'Years',
-			price: '',
+			photourl: trainerData?.announcement?.photo || '',
+			experience: splittedExperience[0],
+			experienceType: splittedExperience[1],
+			price: trainerData?.announcement?.price.toString(),
+			description: trainerData?.announcement?.description,
 		},
 	})
+	useEffect(() => {
+		setSelectedCategories(trainerData?.announcement?.categories || [])
+	}, [trainerData])
+
 	const categories = ['Calisthenics', 'Powerlifting', 'Body Building', 'Fitness']
 	const handleAddCategory = (e: React.MouseEvent<HTMLLIElement>) => {
 		const selectedValue = (e.target as HTMLLIElement).innerText
@@ -51,13 +59,15 @@ const MyProfileForm: React.FC<{ trainerId: string }> = ({ trainerId }) => {
 			return newArr
 		})
 	}
-	const formData = {
-		trainerId,
-		form: form.getValues(),
-		selectedCategories,
-	}
 	const handleUpdateAnnoucement = async (values: z.infer<typeof FormSchema>) => {
-		const response = await updateAnnoucement(values, trainerId, selectedCategories)
+		const data = {
+			...values,
+			trainerId: trainerData.id,
+			selectedCategories,
+		}
+		const parsedData = JSON.parse(JSON.stringify(data))
+		console.log(parsedData)
+		const response = await updateAnnoucement(parsedData)
 		if (!response.ok) {
 			console.log(response)
 		} else {
@@ -65,7 +75,7 @@ const MyProfileForm: React.FC<{ trainerId: string }> = ({ trainerId }) => {
 		}
 	}
 	const handlePublishing = async () => {
-		const response = await handlePublish(trainerId)
+		const response = await handlePublish(trainerData.id)
 		if (!response.ok) {
 			console.log(response)
 		} else {
@@ -103,6 +113,9 @@ const MyProfileForm: React.FC<{ trainerId: string }> = ({ trainerId }) => {
 						items={categories}
 					/>
 					<p className={classes.inputNote}>Note: Select up to 3 categories that will be shown on your profile.</p>
+				</div>
+				<div className={classes.input}>
+					<Input isTextArea label="Description" id="description" />
 				</div>
 				<div className={classes.buttons}>
 					<LinkButton linked="/preview" fontSize="clamp(1.6rem, 1.4041rem + 0.9796vw, 2.2rem)">

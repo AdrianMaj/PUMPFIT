@@ -48,6 +48,7 @@ model Announcement {
   categories   String[]
   price        Float
   description  String
+  photo        String?
   isPublished  Boolean?
   trainerId    String        @unique
   createdAt    DateTime      @default(now()) @map("created_at")
