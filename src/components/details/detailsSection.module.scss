@@ -1,0 +1,76 @@
+@use '../variables' as *;
+.image {
+	width: 100%;
+	aspect-ratio: 4/3;
+	filter: grayscale(100%) brightness(55%);
+	object-fit: cover;
+	object-position: center;
+}
+.main {
+	padding: 10em 0;
+}
+.trainerInfo {
+	display: flex;
+	flex-direction: column;
+	padding: 2em;
+	margin: 0 2.5em;
+	background-color: $secondaryBg;
+	transform: translateY(-7em);
+}
+.name {
+	font-size: $headingSize;
+	font-weight: 600;
+}
+.categories {
+	display: flex;
+	flex-wrap: wrap;
+	width: 100%;
+	margin: 1.5em 0;
+	gap: 1.5em;
+	list-style-type: none;
+}
+.category {
+	font-size: 1.4rem;
+	color: $subtext;
+}
+.price {
+	font-size: $headingSize;
+	text-wrap: nowrap;
+	margin-bottom: 1em;
+}
+.container {
+	display: flex;
+	flex-direction: column;
+	gap: 8em;
+	padding: 0 2.5em;
+}
+.descriptionContainer {
+	padding: 1.5em;
+	background-color: $secondaryBg;
+}
+.descriptionText {
+	font-size: $subtextSize;
+	color: $subtext;
+}
+@media (min-width: 992px) {
+	.trainerInfo {
+		position: absolute;
+		width: 60%;
+		margin: 0;
+		right: 0;
+		bottom: 3em;
+	}
+	.btnContainer {
+		width: fit-content;
+	}
+	.heroInfo {
+		position: relative;
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+	}
+	.image {
+		width: 55%;
+		aspect-ratio: 20/17;
+	}
+}

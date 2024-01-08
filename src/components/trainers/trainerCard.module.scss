@@ -34,7 +34,7 @@
 	width: 100%;
 }
 .name {
-	font-size: clamp(1.6rem, 1.3388rem + 1.3061vw, 2.4rem);
+	font-size: $headingSize;
 	font-weight: 500;
 	margin-bottom: 0.5em;
 }

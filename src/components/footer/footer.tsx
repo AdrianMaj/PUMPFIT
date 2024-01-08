@@ -13,7 +13,7 @@ const Footer = () => {
 			<Wrapper>
 				<Link href="/">
 					<Image
-						src="./logoMono.svg"
+						src="/logoMono.svg"
 						width={0}
 						height={0}
 						sizes="100vw"

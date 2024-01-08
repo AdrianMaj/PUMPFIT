@@ -10,11 +10,13 @@ const LinkButton: React.FC<{
 	padding?: string
 	filled?: boolean
 	children: React.ReactNode
-}> = ({ linked, filled, children, fontSize, padding }) => {
+	[x: string]: any
+}> = ({ linked, filled, children, fontSize, padding, ...props }) => {
 	const MotionLink = motion(Link)
 	return (
 		<MotionLink
 			className={`${classes.link} ${filled ? classes.filledbutton : classes.textbutton}`}
+			{...props}
 			href={linked}
 			style={{
 				fontSize,
