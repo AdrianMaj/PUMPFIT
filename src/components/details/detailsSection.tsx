@@ -4,8 +4,8 @@ import classes from './detailsSection.module.scss'
 import LinkButton from '../ui/linkButton'
 import Image from 'next/image'
 import SectionHeading from '../ui/sectionHeading'
-import { Announcement } from '@/types/databaseTypes'
-const DetailsSection: React.FC<{ trainerName: string; trainerData: Announcement; id: string }> = ({
+import { AnnouncementWithTestimonials } from '@prisma/client'
+const DetailsSection: React.FC<{ trainerName: string; trainerData: AnnouncementWithTestimonials; id: string }> = ({
 	trainerName,
 	trainerData,
 	id,
