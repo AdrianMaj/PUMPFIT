@@ -3,15 +3,17 @@ import fetchAccount from '@/util/fetchAccount'
 import SectionHeading from '@/components/ui/sectionHeading'
 import MyProfileForm from '../../../components/my-profile/myProfileForm'
 import { redirect } from 'next/navigation'
+import { Trainer } from '@/types/databaseTypes'
 
 const Page = async () => {
 	const userAccount = await fetchAccount()
 	if (userAccount) {
 		if (userAccount.isTrainer && userAccount.trainer) {
+			const trainer = userAccount.trainer as Trainer
 			return (
 				<>
 					<SectionHeading>My profile</SectionHeading>
-					<MyProfileForm trainerData={userAccount.trainer} />
+					<MyProfileForm trainerData={trainer} />
 				</>
 			)
 		} else {
