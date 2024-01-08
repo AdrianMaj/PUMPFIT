@@ -24,6 +24,8 @@ export type Trainer = {
 	announcementId?: string | null
 	announcement?: Announcement | null
 	account: Account
+	createdAt: Date
+	updatedAt: Date
 }
 
 export type Announcement = {
