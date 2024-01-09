@@ -8,7 +8,7 @@ import Link from 'next/link'
 import { Session } from 'next-auth'
 import LogoutButton from '../ui/logoutButton'
 
-const MobileMenu: React.FC<{ session: Session | null }> = ({ session }) => {
+const Menu: React.FC<{ session: Session | null }> = ({ session }) => {
 	const [isOpen, setIsOpen] = useState(false)
 	const isMobile = useMediaQuery({ query: '(max-width: 991px)' })
 	const toggleMenu = () => {
@@ -16,7 +16,11 @@ const MobileMenu: React.FC<{ session: Session | null }> = ({ session }) => {
 			const newState = !prevState
 			return newState
 		})
-		document.body.classList.toggle('overflow')
+	}
+	if (isOpen) {
+		document.body.classList.add('overflow')
+	} else {
+		document.body.classList.remove('overflow')
 	}
 	const container = {
 		closed: { opacity: 0 },
@@ -120,4 +124,4 @@ const MobileMenu: React.FC<{ session: Session | null }> = ({ session }) => {
 	)
 }
 
-export default MobileMenu
+export default Menu

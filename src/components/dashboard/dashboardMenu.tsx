@@ -15,6 +15,11 @@ const DashboardMenu: React.FC<{ name: string; isTrainer: boolean }> = ({ name, i
 			return newState
 		})
 	}
+	if (isOpen) {
+		document.body.classList.add('overflow')
+	} else {
+		document.body.classList.remove('overflow')
+	}
 	const navVariants = {
 		opened: {
 			width: '100%',
