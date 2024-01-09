@@ -1,7 +1,7 @@
+@use '../variables' as *;
 .footer {
 	position: relative;
 	padding: 0 2.5em;
-	padding-top: 8em;
 }
 .background {
 	position: absolute;
@@ -24,10 +24,48 @@
 	font-size: clamp(1.2rem, 1.0694rem + 0.6531vw, 1.6rem);
 	color: rgba(255, 255, 255, 0.527);
 }
+.footerFlex {
+	display: flex;
+	flex-direction: column;
+	gap: 4em;
+	padding: 6em 0;
+}
+.footerLinks {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 4em;
+	width: 100%;
+	justify-content: space-around;
+}
+.footerContainer {
+	display: flex;
+	flex-direction: column;
+}
+.footerTitle {
+	font-size: $subtextSize;
+	font-weight: 600;
+	color: #fff;
+	margin-bottom: 1.2em;
+}
+.footerList {
+	list-style-type: none;
+	display: flex;
+	flex-direction: column;
+	gap: 1em;
+}
+.footerListElement {
+	a {
+		text-decoration: none;
+		color: $subtext;
+		font-size: $subtextSize;
+	}
+}
 
 @media (min-width: 992px) {
 	.footer {
 		padding: 0 3.5em;
-		padding-top: 8em;
+	}
+	.footerFlex {
+		flex-direction: row;
 	}
 }

@@ -22,7 +22,7 @@ const FaqElement: React.FC<{ question: string; children: React.ReactNode }> = ({
 					style={{ width: 'auto', height: 'auto' }}
 					alt="Red arrow"
 					animate={{
-						rotate: isOpen ? '180deg' : '0deg',
+						rotate: isOpen ? 180 : 0,
 					}}
 				/>
 			</div>

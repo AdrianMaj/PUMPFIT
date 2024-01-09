@@ -1,0 +1,19 @@
+@use '../variables' as *;
+.container {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	max-width: 650px;
+}
+.heading {
+	text-transform: uppercase;
+	font-size: clamp(3rem, 2.3469rem + 3.2653vw, 5rem);
+	margin-bottom: 0.5em;
+	letter-spacing: 3px;
+}
+.subtext {
+	color: $subtext;
+	font-size: $subtextSize;
+	width: 80%;
+	margin-bottom: 2.5em;
+}

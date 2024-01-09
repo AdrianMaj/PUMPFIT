@@ -2,6 +2,7 @@ import React from 'react'
 import classes from './mainCard.module.scss'
 import LinkButton from '../ui/linkButton'
 import Image from 'next/image'
+import { motion } from 'framer-motion'
 
 const MainCard: React.FC<{ name: string; attributes: [string, string, string]; image: string }> = ({
 	name,
@@ -9,7 +10,7 @@ const MainCard: React.FC<{ name: string; attributes: [string, string, string]; i
 	image,
 }) => {
 	return (
-		<div className={classes.card}>
+		<motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className={classes.card}>
 			<Image
 				className={classes.image}
 				width={0}
@@ -41,7 +42,7 @@ const MainCard: React.FC<{ name: string; attributes: [string, string, string]; i
 					More info
 				</LinkButton>
 			</div>
-		</div>
+		</motion.div>
 	)
 }
 
