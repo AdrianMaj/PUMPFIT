@@ -32,11 +32,12 @@ const DetailsSection: React.FC<{ trainerName: string; trainerData: Announcement;
 						))}
 					</ul>
 					<p className={classes.price}>From ${trainerData.price} / hour</p>
-					<div className={classes.btnContainer}>
-						<LinkButton filled linked={`/contact/${id}`}>
-							Message me now!
-						</LinkButton>
-					</div>
+					<LinkButton
+						style={{ fontSize: 'clamp(1.4rem, 1.2041rem + 0.9796vw, 2rem)', width: 'fit-content' }}
+						filled
+						linked={`/contact/${id}`}>
+						Message me now!
+					</LinkButton>
 				</div>
 			</section>
 			<Wrapper>
@@ -54,9 +55,12 @@ const DetailsSection: React.FC<{ trainerName: string; trainerData: Announcement;
 							<p key={testimonial.id}>{testimonial.name}</p>
 						))} */}
 					</section>
-					<div>
-						<p>Am I your perfect trainer?</p>{' '}
-						<LinkButton filled linked={`/contact/${id}`}>
+					<div className={classes.attribution}>
+						<p className={classes.attributionText}>Am I your perfect trainer?</p>{' '}
+						<LinkButton
+							style={{ fontSize: 'clamp(1.4rem, 1.2041rem + 0.9796vw, 2rem)' }}
+							filled
+							linked={`/contact/${id}`}>
 							Message me now!
 						</LinkButton>
 					</div>

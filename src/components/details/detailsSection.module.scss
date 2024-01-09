@@ -12,7 +12,7 @@
 .trainerInfo {
 	display: flex;
 	flex-direction: column;
-	padding: 2em;
+	padding: 3em;
 	margin: 0 2.5em;
 	background-color: $secondaryBg;
 	transform: translateY(-7em);
@@ -52,16 +52,27 @@
 	font-size: $subtextSize;
 	color: $subtext;
 }
+.attribution {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	gap: 2em;
+	.attributionText {
+		color: $subtext;
+		font-size: $subtextSize;
+	}
+}
 @media (min-width: 992px) {
 	.trainerInfo {
 		position: absolute;
 		width: 60%;
 		margin: 0;
 		right: 0;
-		bottom: 3em;
+		bottom: 0;
 	}
-	.btnContainer {
-		width: fit-content;
+	.descriptionContainer {
+		margin-top: 8em;
 	}
 	.heroInfo {
 		position: relative;
@@ -72,5 +83,8 @@
 	.image {
 		width: 55%;
 		aspect-ratio: 20/17;
+	}
+	.attribution {
+		flex-direction: row;
 	}
 }

@@ -19,6 +19,5 @@ const fetchTrainerData = async (trainerId: string) => {
 		},
 	})
 	return trainers
-}
-
+} 
 export default fetchTrainerData

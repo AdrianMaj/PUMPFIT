@@ -23,11 +23,13 @@
 	display: flex;
 	align-items: center;
 	justify-content: flex-start;
+	width: fit-content;
 	background-color: $secondaryBg;
 }
 .inputSide {
 	width: fit-content;
 	padding: 0 1em;
+	margin-left: 0.25em;
 	:focus {
 		border: 1px solid white;
 	}
@@ -47,7 +49,6 @@
 .experienceInput {
 	text-align: right;
 	height: 100%;
-	margin-left: 0.25em;
 	background-color: $secondaryBg;
 	color: $subtext;
 	font-size: $subtextSize;

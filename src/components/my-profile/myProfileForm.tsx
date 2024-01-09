@@ -9,7 +9,7 @@ import LinkButton from '@/components/ui/linkButton'
 import Button from '@/components/ui/button'
 import { useEffect, useState } from 'react'
 import MultiSelect from '@/components/ui/multiSelect'
-import { handlePublish, updateAnnoucement } from '@/util/updateAnnoucement'
+import { handlePublish, handleUnpublish, updateAnnoucement } from '@/util/updateAnnoucement'
 import { Trainer } from '@/types/databaseTypes'
 
 const FormSchema = z.object({
@@ -82,6 +82,14 @@ const MyProfileForm: React.FC<{ trainerData: Trainer }> = ({ trainerData }) => {
 			console.log('Created an announcement')
 		}
 	}
+	const handleUnpublishing = async () => {
+		const response = await handleUnpublish(trainerData.id)
+		if (!response.ok) {
+			console.log(response)
+		} else {
+			console.log('Created an announcement')
+		}
+	}
 
 	return (
 		<FormProvider {...form}>
@@ -94,7 +102,7 @@ const MyProfileForm: React.FC<{ trainerData: Trainer }> = ({ trainerData }) => {
 				</div>
 				<div className={classes.priceExperienceContainer}>
 					<div className={classes.container}>
-						<Input min={0} max={100} type="number" label="Experience" id="experience" />
+						<Input min={0} max={1000} type="number" label="Experience" id="experience" />
 						<select className={`${classes.inputSide} ${classes.experienceInput}`} {...form.register('experienceType')}>
 							<option value="Years">Years</option>
 							<option value="Months">Months</option>
@@ -118,7 +126,11 @@ const MyProfileForm: React.FC<{ trainerData: Trainer }> = ({ trainerData }) => {
 					<Input isTextArea label="Description" id="description" />
 				</div>
 				<div className={classes.buttons}>
-					<LinkButton linked="/preview" fontSize="clamp(1.6rem, 1.4041rem + 0.9796vw, 2.2rem)">
+					<LinkButton
+						linked={`/dashboard/preview/${trainerData.accountId}`}
+						style={{
+							fontSize: 'clamp(1.6rem, 1.4041rem + 0.9796vw, 2.2rem)',
+						}}>
 						Preview
 					</LinkButton>
 					<Button
@@ -128,15 +140,27 @@ const MyProfileForm: React.FC<{ trainerData: Trainer }> = ({ trainerData }) => {
 						type="submit">
 						Save
 					</Button>
-					<Button
-						style={{
-							fontSize: 'clamp(1.6rem, 1.4041rem + 0.9796vw, 2.2rem)',
-						}}
-						filled
-						type="submit"
-						onClick={handlePublishing}>
-						Publish
-					</Button>
+					{trainerData.announcement?.isPublished ? (
+						<Button
+							style={{
+								fontSize: 'clamp(1.6rem, 1.4041rem + 0.9796vw, 2.2rem)',
+							}}
+							filled
+							type="submit"
+							onClick={handleUnpublishing}>
+							Unpublish
+						</Button>
+					) : (
+						<Button
+							style={{
+								fontSize: 'clamp(1.6rem, 1.4041rem + 0.9796vw, 2.2rem)',
+							}}
+							filled
+							type="submit"
+							onClick={handlePublishing}>
+							Publish
+						</Button>
+					)}
 				</div>
 			</form>
 		</FormProvider>

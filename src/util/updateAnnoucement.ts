@@ -82,3 +82,22 @@ export const handlePublish = async (trainerId: string) => {
 		return NextResponse.json({ message: 'Something went wrong!' }, { status: 500 })
 	}
 }
+export const handleUnpublish = async (trainerId: string) => {
+	try {
+		const announcement = await prisma.announcement.update({
+			where: {
+				trainerId: trainerId,
+			},
+			data: {
+				isPublished: false,
+			},
+		})
+		if (announcement) {
+			return NextResponse.json({ announcement: { success: true }, message: 'Published announcement' }, { status: 201 })
+		} else {
+			return NextResponse.json({ message: 'Something went wrong!' }, { status: 500 })
+		}
+	} catch (error) {
+		return NextResponse.json({ message: 'Something went wrong!' }, { status: 500 })
+	}
+}
