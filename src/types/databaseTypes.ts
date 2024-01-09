@@ -1,3 +1,5 @@
+import { Prisma } from '@prisma/client'
+
 export type Account = {
 	id: string
 	name: string
@@ -53,3 +55,10 @@ export type Testimonial = {
 	updatedAt: Date
 	announcement: Announcement
 }
+
+export type AnnouncementWithTestimonialsAndTrainer = Prisma.AnnouncementGetPayload<{
+	include: {
+		trainer: true
+		testimonials: true
+	}
+}>

@@ -4,12 +4,13 @@ import classes from './detailsSection.module.scss'
 import LinkButton from '../ui/linkButton'
 import Image from 'next/image'
 import SectionHeading from '../ui/sectionHeading'
-import { Announcement } from '@prisma/client'
-const DetailsSection: React.FC<{ trainerName: string; trainerData: Announcement; id: string }> = ({
-	trainerName,
-	trainerData,
-	id,
-}) => {
+import { AnnouncementWithTestimonialsAndTrainer } from '@/types/databaseTypes'
+
+const DetailsSection: React.FC<{
+	trainerName: string
+	trainerData: AnnouncementWithTestimonialsAndTrainer
+	id: string
+}> = ({ trainerName, trainerData, id }) => {
 	return (
 		<main className={classes.main}>
 			<section className={classes.heroInfo}>
@@ -50,10 +51,10 @@ const DetailsSection: React.FC<{ trainerName: string; trainerData: Announcement;
 						<p>There will be photos in the future...</p>
 					</section>
 					<section className={classes.testimonials}>
-						{/* <SectionHeading>Testimonials</SectionHeading>
+						<SectionHeading>Testimonials</SectionHeading>
 						{trainerData.testimonials.map(testimonial => (
 							<p key={testimonial.id}>{testimonial.name}</p>
-						))} */}
+						))}
 					</section>
 					<div className={classes.attribution}>
 						<p className={classes.attributionText}>Am I your perfect trainer?</p>{' '}
