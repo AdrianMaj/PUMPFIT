@@ -24,7 +24,6 @@ const AccountSettingsForm: React.FC<{ accountData: Account }> = ({ accountData }
 	return (
 		<FormProvider {...form}>
 			<form className={classes.form}>
-				{/* <div className={classes.inputs}> */}
 				<Input label="Name" id="name" type="text" />
 				<Input label="Email" id="email" type="email" />
 				<div>
@@ -39,7 +38,6 @@ const AccountSettingsForm: React.FC<{ accountData: Account }> = ({ accountData }
 						Note: Upload your photo to <Link href="https://imgur.com/">Imgur</Link> and then paste the URL here
 					</p>
 				</div>
-				{/* </div> */}
 				<div className={classes.buttons}>
 					<Button
 						style={{

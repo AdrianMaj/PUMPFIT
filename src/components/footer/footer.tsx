@@ -3,7 +3,6 @@ import classes from './footer.module.scss'
 import Link from 'next/link'
 import Wrapper from '../ui/wrapper'
 import Image from 'next/image'
-import SocialIcon from './socialIcon'
 
 const Footer = () => {
 	const date = new Date()
@@ -51,10 +50,10 @@ const Footer = () => {
 							<p className={classes.footerTitle}>Socials</p>
 							<ul className={classes.footerList}>
 								<li className={classes.footerListElement}>
-									<Link href="/dashboard">Facebook</Link>
+									<Link href="https://www.facebook.com/">Facebook</Link>
 								</li>
 								<li className={classes.footerListElement}>
-									<Link href="/trainers">Twitter / X</Link>
+									<Link href="https://twitter.com/">Twitter / X</Link>
 								</li>
 							</ul>
 						</div>
