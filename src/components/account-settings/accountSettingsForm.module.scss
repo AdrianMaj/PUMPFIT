@@ -1,0 +1,30 @@
+@use '../variables' as *;
+.form {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	gap: 3em;
+}
+.inputNote {
+	color: $subtext;
+	margin-top: 0.5em;
+	font-size: clamp(1.2rem, 1.0694rem + 0.6531vw, 1.6rem);
+	a {
+		font-size: clamp(1.2rem, 1.0694rem + 0.6531vw, 1.6rem);
+		color: $subtext;
+	}
+}
+.buttons {
+	margin-top: auto;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	flex-wrap: wrap;
+	gap: 1em;
+}
+
+@media (min-width: 992px) {
+	.buttons {
+		justify-content: flex-end;
+	}
+}
