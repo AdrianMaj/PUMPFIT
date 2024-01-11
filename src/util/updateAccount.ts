@@ -36,6 +36,24 @@ export const updateAccount = async ({
 	}
 }
 
+export const deleteAccount = async ({ accountId }: { accountId: string }) => {
+	let account
+	try {
+		account = await prisma.account.delete({
+			where: {
+				id: accountId,
+			},
+		})
+		if (account) {
+			return NextResponse.json({ account: { success: true }, message: 'Updated password' }, { status: 201 })
+		} else {
+			return NextResponse.json({ message: 'Something went wrong!' }, { status: 500 })
+		}
+	} catch (error) {
+		return NextResponse.json({ message: 'Something went wrong!' }, { status: 500 })
+	}
+}
+
 export const changePassword = async ({ password, accountId }: { password: string; accountId: string }) => {
 	let account
 	const hashedPassword = await hash(password, 10)
@@ -56,4 +74,9 @@ export const changePassword = async ({ password, accountId }: { password: string
 	} catch (error) {
 		return NextResponse.json({ message: 'Something went wrong!' }, { status: 500 })
 	}
+}
+
+export const hashPassword = async ({ password }: { password: string }) => {
+	const hashedPassword = await hash(password, 10)
+	return hashedPassword
 }

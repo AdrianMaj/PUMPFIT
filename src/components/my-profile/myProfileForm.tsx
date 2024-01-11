@@ -95,21 +95,28 @@ const MyProfileForm: React.FC<{ trainerData: Trainer }> = ({ trainerData }) => {
 		<FormProvider {...form}>
 			<form onSubmit={form.handleSubmit(handleUpdateAnnoucement)} className={classes.form}>
 				<div className={classes.input}>
-					<Input type="text" label="Photo URL" id="photourl" />
+					<Input type="text" label="Photo URL" id="photourl" error={form.formState.errors.photourl} />
 					<p className={classes.inputNote}>
 						Note: Upload your photo to <Link href="https://imgur.com/">Imgur</Link> and then paste the URL here
 					</p>
 				</div>
 				<div className={classes.priceExperienceContainer}>
 					<div className={classes.container}>
-						<Input min={0} max={1000} type="number" label="Experience" id="experience" />
+						<Input
+							min={0}
+							max={1000}
+							type="number"
+							label="Experience"
+							id="experience"
+							error={form.formState.errors.experience}
+						/>
 						<select className={`${classes.inputSide} ${classes.experienceInput}`} {...form.register('experienceType')}>
 							<option value="Years">Years</option>
 							<option value="Months">Months</option>
 						</select>
 					</div>
 					<div className={classes.container}>
-						<Input type="number" min={0} max={1000} label="Price" id="price" />
+						<Input type="number" min={0} max={1000} label="Price" id="price" error={form.formState.errors.price} />
 						<p className={`${classes.inputSide} ${classes.priceTag}`}>$ / hr</p>
 					</div>
 				</div>
@@ -123,7 +130,7 @@ const MyProfileForm: React.FC<{ trainerData: Trainer }> = ({ trainerData }) => {
 					<p className={classes.inputNote}>Note: Select up to 3 categories that will be shown on your profile.</p>
 				</div>
 				<div className={classes.input}>
-					<Input isTextArea label="Description" id="description" />
+					<Input isTextArea label="Description" id="description" error={form.formState.errors.description} />
 				</div>
 				<div className={classes.buttons}>
 					<LinkButton
