@@ -48,7 +48,6 @@ export const updateAnnoucement = async ({
 				testimonials: {},
 			},
 		})
-		console.log('dziala')
 		if (announcement) {
 			return NextResponse.json(
 				{ announcement: { success: true }, message: 'Created new version of announcement' },

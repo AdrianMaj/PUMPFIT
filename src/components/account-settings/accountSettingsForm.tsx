@@ -8,28 +8,48 @@ import { Account } from '@prisma/client'
 import Link from 'next/link'
 import Button from '../ui/button'
 import classes from './accountSettingsForm.module.scss'
+import { updateAccount } from '@/util/updateAccount'
 
 const FormSchema = z.object({
 	name: z.string().min(1, 'Name is required').max(100),
 	email: z.string().min(1, 'Email is required').email('Invalid email'),
-	password: z.string().min(1, 'Password is required').min(8, 'Password must have more than 8 characters'),
 	photourl: z.string(),
 })
 
 const AccountSettingsForm: React.FC<{ accountData: Account }> = ({ accountData }) => {
 	const form = useForm<z.infer<typeof FormSchema>>({
 		resolver: zodResolver(FormSchema),
-		defaultValues: {},
+		defaultValues: {
+			name: accountData.name,
+			email: accountData.email,
+			photourl: accountData.photo || '',
+		},
 	})
+
+	const handleUpdateProfile = async (values: z.infer<typeof FormSchema>) => {
+		const data = {
+			name: values.name,
+			email: values.email,
+			photourl: values.photourl,
+			accountId: accountData.id,
+		}
+		const response = await updateAccount(data)
+		if (!response.ok) {
+			console.log(response)
+		} else {
+			console.log('Created an announcement')
+		}
+	}
+
 	return (
 		<FormProvider {...form}>
-			<form className={classes.form}>
+			<form className={classes.form} onSubmit={form.handleSubmit(handleUpdateProfile)}>
 				<Input label="Name" id="name" type="text" />
 				<Input label="Email" id="email" type="email" />
 				<div>
-					<Input label="Password" id="password" type="password" />
+					<Input disabled label="Password" id="password" value="xxxxxxxxxx" type="password" />
 					<p className={classes.inputNote}>
-						<Link href="https://imgur.com/">Change password</Link>
+						<Link href="/dashboard/account-settings/change-password">Change password</Link>
 					</p>
 				</div>
 				<div>
