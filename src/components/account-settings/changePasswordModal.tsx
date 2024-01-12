@@ -62,7 +62,7 @@ const ChangePasswordModal = forwardRef<ChangePasswordModalMethods, ChangePasswor
 	}))
 	const onSubmit = async (values: z.infer<typeof FormSchema>) => {
 		const response = await changePassword({ password: values.newPassword, accountId: props.id })
-		if (!response.account?.success) {
+		if (!response?.account?.success) {
 			console.log(response)
 		} else {
 			console.log('Password Changed')
