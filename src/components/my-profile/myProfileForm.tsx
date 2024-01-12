@@ -19,6 +19,18 @@ const FormSchema = z.object({
 	price: z.string(),
 	description: z.string(),
 })
+export const CATEGORIES = [
+	'Calisthenics',
+	'Powerlifting',
+	'Bodybuilding',
+	'Fitness',
+	'Cardio',
+	'Street workout',
+	'Running',
+	'Combat Sports',
+	'CrossFit',
+	'Weightlifting',
+]
 
 const MyProfileForm: React.FC<{ trainerData: Trainer }> = ({ trainerData }) => {
 	const [selectedCategories, setSelectedCategories] = useState<string[]>([])
@@ -40,7 +52,6 @@ const MyProfileForm: React.FC<{ trainerData: Trainer }> = ({ trainerData }) => {
 		setSelectedCategories(trainerData?.announcement?.categories || [])
 	}, [trainerData])
 
-	const categories = ['Calisthenics', 'Powerlifting', 'Body Building', 'Fitness']
 	const handleAddCategory = (e: React.MouseEvent<HTMLLIElement>) => {
 		const selectedValue = (e.target as HTMLLIElement).innerText
 		const isSelected = selectedCategories.includes(selectedValue)
@@ -131,7 +142,7 @@ const MyProfileForm: React.FC<{ trainerData: Trainer }> = ({ trainerData }) => {
 						removeItem={handleRemoveCategory}
 						addItem={handleAddCategory}
 						selectedItems={selectedCategories}
-						items={categories}
+						items={CATEGORIES}
 					/>
 					<p className={classes.inputNote}>Note: Select up to 3 categories that will be shown on your profile.</p>
 				</div>

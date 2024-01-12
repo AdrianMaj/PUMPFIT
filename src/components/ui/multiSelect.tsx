@@ -9,7 +9,8 @@ const MultiSelect: React.FC<{
 	removeItem: (e: React.MouseEvent<HTMLLIElement>) => void
 	items: string[]
 	selectedItems: string[]
-}> = ({ addItem, removeItem, items, selectedItems }) => {
+	[x: string]: any
+}> = ({ addItem, removeItem, items, selectedItems, ...props }) => {
 	const [isOpened, setIsOpened] = useState(false)
 	const toggleSelect = () => {
 		setIsOpened(prevState => {
@@ -19,7 +20,7 @@ const MultiSelect: React.FC<{
 	}
 	const MotionImage = motion(Image)
 	return (
-		<div className={classes.select}>
+		<div {...props} className={classes.select}>
 			<motion.div
 				whileFocus={{
 					border: '1px solid #a50000',

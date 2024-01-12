@@ -1,0 +1,20 @@
+@use '../variables' as *;
+.form {
+	margin-top: 8em;
+	display: flex;
+	flex-direction: column;
+	gap: 3em;
+}
+.searchRow {
+	display: flex;
+	justify-content: space-between;
+	gap: 2em;
+	width: 100%;
+}
+.filterRow {
+	display: flex;
+	gap: 2em;
+}
+.filterText {
+	font-size: $subtextSize;
+}

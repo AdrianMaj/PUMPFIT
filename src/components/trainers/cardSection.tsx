@@ -3,12 +3,17 @@ import TrainerCard from './trainerCard'
 import Wrapper from '../ui/wrapper'
 import fetchTrainers from '@/util/fetchTrainers'
 import classes from './cardSection.module.scss'
+import FilterBar from './filterBar'
+import SectionHeading from '../ui/sectionHeading'
 
 const CardSection = async () => {
 	const accounts = await fetchTrainers()
 	return (
 		<section className={classes.section}>
 			<Wrapper>
+				<div style={{ marginTop: '8em' }}></div>
+				<SectionHeading>Our trainers</SectionHeading>
+				<FilterBar />
 				{accounts.map(account => {
 					if (account.trainer && account.trainer.announcement) {
 						return (

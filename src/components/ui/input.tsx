@@ -10,13 +10,14 @@ const Input: React.FC<{
 	label: string
 	error?: FieldError | undefined
 	isTextArea?: boolean
+	width?: string
 	[x: string]: any
-}> = ({ type, id, label, error, isTextArea, ...props }) => {
+}> = ({ type, id, label, error, isTextArea, width, ...props }) => {
 	const { register } = useFormContext()
 	const { onChange, onBlur, name, ref } = register(id)
 
 	return (
-		<div className={classes.container}>
+		<div style={{ width: width || 'auto' }} className={classes.container}>
 			<label className={classes.label} htmlFor={id}>
 				{label}
 			</label>
