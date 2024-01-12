@@ -1,5 +1,5 @@
 'use client'
-import React, { useRef } from 'react'
+import React, { useRef, useState } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import * as z from 'zod'
@@ -21,6 +21,7 @@ const FormSchema = z.object({
 const AccountSettingsForm: React.FC<{ accountData: Account }> = ({ accountData }) => {
 	const deleteAccountModal = useRef<DeleteAccountModalMethods>(null)
 	const changePasswordModal = useRef<ChangePasswordModalMethods>(null)
+	const [isLoading, setisLoading] = useState(false)
 	const form = useForm<z.infer<typeof FormSchema>>({
 		resolver: zodResolver(FormSchema),
 		defaultValues: {
@@ -29,8 +30,8 @@ const AccountSettingsForm: React.FC<{ accountData: Account }> = ({ accountData }
 			photourl: accountData.photo || '',
 		},
 	})
-
 	const handleUpdateProfile = async (values: z.infer<typeof FormSchema>) => {
+		setisLoading(true)
 		const data = {
 			name: values.name,
 			email: values.email,
@@ -38,12 +39,39 @@ const AccountSettingsForm: React.FC<{ accountData: Account }> = ({ accountData }
 			accountId: accountData.id,
 		}
 		const response = await updateAccount(data)
-		if (!response.ok) {
+		if (!response.account?.success) {
+			setisLoading(false)
 			console.log(response)
 		} else {
+			setisLoading(false)
 			console.log('Created an announcement')
 		}
 	}
+
+	// const mutation = useMutation(
+	// 	(values: z.infer<typeof FormSchema>) => {
+	// 		const data = {
+	// 			name: values.name,
+	// 			email: values.email,
+	// 			photourl: values.photourl,
+	// 			accountId: accountData.id,
+	// 		}
+	// 		return updateAccount(data)
+	// 	},
+	// 	{
+	// 		onSuccess: () => {
+	// 			queryClient.invalidateQueries(['account', accountData.id])
+	// 		},
+	// 	}
+	// )
+
+	// const handleUpdateProfile = async (values: z.infer<typeof FormSchema>) => {
+	// 	try {
+	// 		await mutation.mutateAsync(values)
+	// 	} catch (error) {
+	// 		console.error('Updating profile failed.', error)
+	// 	}
+	// }
 
 	const handleShowDeleteModal = () => {
 		if (deleteAccountModal.current) {
@@ -79,6 +107,7 @@ const AccountSettingsForm: React.FC<{ accountData: Account }> = ({ accountData }
 					<div className={classes.buttons}>
 						<Button
 							onClick={handleShowDeleteModal}
+							type="button"
 							style={{
 								fontSize: 'clamp(1.6rem, 1.4041rem + 0.9796vw, 2.2rem)',
 							}}>
@@ -90,7 +119,7 @@ const AccountSettingsForm: React.FC<{ accountData: Account }> = ({ accountData }
 							}}
 							type="submit"
 							filled>
-							Save
+							{isLoading ? 'Saving...' : 'Save'}
 						</Button>
 					</div>
 				</form>

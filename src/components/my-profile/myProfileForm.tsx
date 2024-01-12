@@ -22,6 +22,9 @@ const FormSchema = z.object({
 
 const MyProfileForm: React.FC<{ trainerData: Trainer }> = ({ trainerData }) => {
 	const [selectedCategories, setSelectedCategories] = useState<string[]>([])
+	const [isPublishing, setIsPublishing] = useState(false)
+	const [isUnPublishing, setIsUnPublishing] = useState(false)
+	const [isUpdating, setIsUpdating] = useState(false)
 	const splittedExperience = trainerData?.announcement?.experience.split('') || ''
 	const form = useForm<z.infer<typeof FormSchema>>({
 		resolver: zodResolver(FormSchema),
@@ -60,6 +63,7 @@ const MyProfileForm: React.FC<{ trainerData: Trainer }> = ({ trainerData }) => {
 		})
 	}
 	const handleUpdateAnnoucement = async (values: z.infer<typeof FormSchema>) => {
+		setIsUpdating(true)
 		const data = {
 			...values,
 			trainerId: trainerData.id,
@@ -68,26 +72,28 @@ const MyProfileForm: React.FC<{ trainerData: Trainer }> = ({ trainerData }) => {
 		const parsedData = JSON.parse(JSON.stringify(data))
 		console.log(parsedData)
 		const response = await updateAnnoucement(parsedData)
-		if (!response.ok) {
+		if (!response?.announcement?.success) {
+			setIsUpdating(false)
 			console.log(response)
 		} else {
-			console.log('Created an announcement')
+			setIsUpdating(false)
+			console.log('Created / Updated an announcement')
 		}
 	}
 	const handlePublishing = async () => {
 		const response = await handlePublish(trainerData.id)
-		if (!response.ok) {
+		if (!response.announcement?.success) {
 			console.log(response)
 		} else {
-			console.log('Created an announcement')
+			console.log('Published an announcement')
 		}
 	}
 	const handleUnpublishing = async () => {
 		const response = await handleUnpublish(trainerData.id)
-		if (!response.ok) {
+		if (!response.announcement?.success) {
 			console.log(response)
 		} else {
-			console.log('Created an announcement')
+			console.log('Unpublished an announcement')
 		}
 	}
 
@@ -145,7 +151,7 @@ const MyProfileForm: React.FC<{ trainerData: Trainer }> = ({ trainerData }) => {
 							fontSize: 'clamp(1.6rem, 1.4041rem + 0.9796vw, 2.2rem)',
 						}}
 						type="submit">
-						Save
+						{isUpdating && !isPublishing && !isUnPublishing ? 'Saving...' : 'Save'}
 					</Button>
 					{trainerData.announcement?.isPublished ? (
 						<Button
@@ -153,9 +159,16 @@ const MyProfileForm: React.FC<{ trainerData: Trainer }> = ({ trainerData }) => {
 								fontSize: 'clamp(1.6rem, 1.4041rem + 0.9796vw, 2.2rem)',
 							}}
 							filled
-							type="submit"
-							onClick={handleUnpublishing}>
-							Unpublish
+							type="button"
+							onClick={async () => {
+								setIsUnPublishing(true)
+								await form.handleSubmit(async data => {
+									await handleUpdateAnnoucement(data)
+									await handleUnpublishing()
+								})()
+								setIsUnPublishing(false)
+							}}>
+							{isUnPublishing ? 'Unpublishing...' : 'Unpublish'}
 						</Button>
 					) : (
 						<Button
@@ -163,9 +176,16 @@ const MyProfileForm: React.FC<{ trainerData: Trainer }> = ({ trainerData }) => {
 								fontSize: 'clamp(1.6rem, 1.4041rem + 0.9796vw, 2.2rem)',
 							}}
 							filled
-							type="submit"
-							onClick={handlePublishing}>
-							Publish
+							type="button"
+							onClick={async () => {
+								setIsPublishing(true)
+								await form.handleSubmit(async data => {
+									await handleUpdateAnnoucement(data)
+									await handlePublishing()
+								})()
+								setIsPublishing(false)
+							}}>
+							{isPublishing ? 'Publishing...' : 'Publish'}
 						</Button>
 					)}
 				</div>

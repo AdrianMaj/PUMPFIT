@@ -20,9 +20,8 @@ export const updateAnnoucement = async ({
 	trainerId: string
 	selectedCategories: string[]
 }) => {
-	let announcement
 	try {
-		announcement = await prisma.announcement.upsert({
+		const announcement = await prisma.announcement.upsert({
 			where: {
 				trainerId: trainerId,
 			},
@@ -49,17 +48,10 @@ export const updateAnnoucement = async ({
 			},
 		})
 		if (announcement) {
-			return NextResponse.json(
-				{ announcement: { success: true }, message: 'Created new version of announcement' },
-				{ status: 201 }
-			)
-		} else {
-			console.error('Błąd w updateAnnoucement lub handlePublish:')
-			return NextResponse.json({ message: 'Something went wrong!' }, { status: 500 })
+			return { announcement: { success: true }, message: 'Created new version of announcement' }
 		}
 	} catch (error) {
-		console.error('Błąd w updateAnnoucement lub handlePublish:')
-		return NextResponse.json({ message: 'Something went wrong!' }, { status: 500 })
+		return { message: 'Something went wrong!' }
 	}
 }
 export const handlePublish = async (trainerId: string) => {
@@ -73,12 +65,12 @@ export const handlePublish = async (trainerId: string) => {
 			},
 		})
 		if (announcement) {
-			return NextResponse.json({ announcement: { success: true }, message: 'Published announcement' }, { status: 201 })
+			return { announcement: { success: true }, message: 'Published announcement' }
 		} else {
-			return NextResponse.json({ message: 'Something went wrong!' }, { status: 500 })
+			return { message: 'Something went wrong!' }
 		}
 	} catch (error) {
-		return NextResponse.json({ message: 'Something went wrong!' }, { status: 500 })
+		return { message: 'Something went wrong!' }
 	}
 }
 export const handleUnpublish = async (trainerId: string) => {
@@ -92,11 +84,11 @@ export const handleUnpublish = async (trainerId: string) => {
 			},
 		})
 		if (announcement) {
-			return NextResponse.json({ announcement: { success: true }, message: 'Published announcement' }, { status: 201 })
+			return { announcement: { success: true }, message: 'Unpublished announcement' }
 		} else {
-			return NextResponse.json({ message: 'Something went wrong!' }, { status: 500 })
+			return { message: 'Something went wrong!' }
 		}
 	} catch (error) {
-		return NextResponse.json({ message: 'Something went wrong!' }, { status: 500 })
+		return { message: 'Something went wrong!' }
 	}
 }

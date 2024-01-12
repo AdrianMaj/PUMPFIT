@@ -14,9 +14,8 @@ export const updateAccount = async ({
 	photourl: string
 	accountId: string
 }) => {
-	let account
 	try {
-		account = await prisma.account.update({
+		const account = await prisma.account.update({
 			where: {
 				id: accountId,
 			},
@@ -27,38 +26,36 @@ export const updateAccount = async ({
 			},
 		})
 		if (account) {
-			return NextResponse.json({ account: { success: true }, message: 'Updated account info' }, { status: 201 })
+			return { account: { success: true }, message: 'Updated account info' }
 		} else {
-			return NextResponse.json({ message: 'Something went wrong!' }, { status: 500 })
+			return { message: 'Something went wrong!' }
 		}
 	} catch (error) {
-		return NextResponse.json({ message: 'Something went wrong!' }, { status: 500 })
+		return { message: 'Something went wrong!' }
 	}
 }
 
 export const deleteAccount = async ({ accountId }: { accountId: string }) => {
-	let account
 	try {
-		account = await prisma.account.delete({
+		const account = await prisma.account.delete({
 			where: {
 				id: accountId,
 			},
 		})
 		if (account) {
-			return NextResponse.json({ account: { success: true }, message: 'Updated password' }, { status: 201 })
+			return { account: { success: true }, message: 'Updated password' }
 		} else {
-			return NextResponse.json({ message: 'Something went wrong!' }, { status: 500 })
+			return { message: 'Something went wrong!' }
 		}
 	} catch (error) {
-		return NextResponse.json({ message: 'Something went wrong!' }, { status: 500 })
+		return { message: 'Something went wrong!' }
 	}
 }
 
 export const changePassword = async ({ password, accountId }: { password: string; accountId: string }) => {
-	let account
 	const hashedPassword = await hash(password, 10)
 	try {
-		account = await prisma.account.update({
+		const account = await prisma.account.update({
 			where: {
 				id: accountId,
 			},
@@ -67,12 +64,10 @@ export const changePassword = async ({ password, accountId }: { password: string
 			},
 		})
 		if (account) {
-			return NextResponse.json({ account: { success: true }, message: 'Updated password' }, { status: 201 })
-		} else {
-			return NextResponse.json({ message: 'Something went wrong!' }, { status: 500 })
+			return { account: { success: true }, message: 'Updated password' }
 		}
 	} catch (error) {
-		return NextResponse.json({ message: 'Something went wrong!' }, { status: 500 })
+		return { message: 'Something went wrong!', error }
 	}
 }
 

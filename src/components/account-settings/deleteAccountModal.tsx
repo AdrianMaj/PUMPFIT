@@ -46,7 +46,7 @@ const DeleteAccountModal = forwardRef<DeleteAccountModalMethods, DeleteAccountMo
 	}))
 	const onSubmit = async () => {
 		const response = await deleteAccount({ accountId: props.id })
-		if (!response.ok) {
+		if (!response.account?.success) {
 			console.log(response)
 		} else {
 			console.log('Account deleted successfully')

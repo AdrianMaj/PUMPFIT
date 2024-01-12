@@ -9,6 +9,7 @@ import * as z from 'zod'
 import { useRouter } from 'next/navigation'
 import classes from './registerForm.module.scss'
 import Spinner from '../ui/spinner'
+import { signIn } from 'next-auth/react'
 
 const FormSchema = z
 	.object({
@@ -63,7 +64,16 @@ const RegisterForm = () => {
 
 			if (response.ok) {
 				console.log('Successfully created an account!')
-				router.push('/')
+				const result = await signIn('credentials', {
+					callbackUrl: '/',
+					email: values.email,
+					password: values.password,
+				})
+				if (!result?.ok) {
+					console.error('Unable to log in after register.')
+				} else {
+					console.log('Success!')
+				}
 			} else {
 				console.error('Unable to create an account. Please try again later.')
 			}

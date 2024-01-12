@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server'
 import prisma from '../../../../lib/prisma'
 import { hash } from 'bcrypt'
 import * as z from 'zod'
+import { signIn } from 'next-auth/react'
 
 // Define a schema for input validation
 
