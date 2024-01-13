@@ -9,21 +9,9 @@ import SectionHeading from '../ui/sectionHeading'
 
 const CardSection = async () => {
 	let accounts = await fetchTrainers()
-	// const handleFiltering = async (data: {
-	// 	searchTerm: string
-	// 	priceFrom: string
-	// 	priceTo: string
-	// 	selectedCategories: string[]
-	// 	checkbox: boolean
-	// }) => {
-	// 	accounts = await fetchTrainersWithFilters(data)
-	// }
 	return (
 		<section className={classes.section}>
 			<Wrapper>
-				<div style={{ marginTop: '8em' }}></div>
-				<SectionHeading>Our trainers</SectionHeading>
-				<FilterBar />
 				{accounts.map(account => {
 					if (account.trainer && account.trainer.announcement) {
 						return (
