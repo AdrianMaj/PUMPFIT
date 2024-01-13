@@ -11,24 +11,28 @@ import Button from '../ui/button'
 
 const FormSchema = z.object({
 	searchTerm: z.string(),
-	categories: z.string(),
 	priceFrom: z.string(),
 	priceTo: z.string(),
 })
 
 const FilterBar = () => {
 	const [selectedCategories, setSelectedCategories] = useState<string[]>([])
+	const [checkbox, setCheckbox] = useState<boolean>(false)
 	const form = useForm<z.infer<typeof FormSchema>>({
 		resolver: zodResolver(FormSchema),
 		defaultValues: {
 			searchTerm: '',
-			categories: '',
 			priceFrom: '',
 			priceTo: '',
 		},
 	})
 	const onSubmit = (values: z.infer<typeof FormSchema>) => {
-		console.log(values)
+		const data = {
+			...values,
+			selectedCategories,
+			checkbox,
+		}
+		console.log(data)
 	}
 	const handleAddCategory = (e: React.MouseEvent<HTMLLIElement>) => {
 		const selectedValue = (e.target as HTMLLIElement).innerText
@@ -52,6 +56,13 @@ const FilterBar = () => {
 		})
 	}
 
+	const toggleCheckbox = () => {
+		setCheckbox(prevState => {
+			const newState = !prevState
+			return newState
+		})
+	}
+
 	return (
 		<FormProvider {...form}>
 			<form className={classes.form} onSubmit={form.handleSubmit(onSubmit)}>
@@ -63,6 +74,7 @@ const FilterBar = () => {
 						width="90%"
 						error={form.formState.errors.searchTerm}></Input>
 					<Button
+						filled
 						style={{
 							width: 'fit-content',
 							fontSize: 'clamp(1.4rem, 1.2041rem + 0.9796vw, 2rem)',
@@ -71,22 +83,36 @@ const FilterBar = () => {
 						Search
 					</Button>
 				</div>
+				<div className={classes.checkboxContainer}>
+					<label className={classes.checkboxLabel} htmlFor="checkbox">
+						Search also in description
+					</label>
+					<input
+						onClick={toggleCheckbox}
+						className={`${classes.checkboxInput} ${checkbox ? classes.checked : ''}`}
+						type="checkbox"
+						name="checkbox"
+						id="checkbox"
+					/>
+				</div>
 				<p className={classes.filterText}>Filters</p>
 				<div className={classes.filterRow}>
-					<Input
-						width="25%"
-						type="number"
-						max={1000}
-						id="priceFrom"
-						label="From"
-						error={form.formState.errors.priceFrom}></Input>
-					<Input
-						width="25%"
-						type="number"
-						max={1000}
-						id="priceTo"
-						label="To"
-						error={form.formState.errors.priceTo}></Input>
+					<div className={classes.filterPriceTags}>
+						<Input
+							width="fit-content"
+							type="number"
+							max={1000}
+							id="priceFrom"
+							label="From"
+							error={form.formState.errors.priceFrom}></Input>
+						<Input
+							width="fit-content"
+							type="number"
+							max={1000}
+							id="priceTo"
+							label="To"
+							error={form.formState.errors.priceTo}></Input>
+					</div>
 					<MultiSelect
 						items={CATEGORIES}
 						removeItem={handleRemoveCategory}

@@ -13,6 +13,15 @@ export type Account = {
 	trainer?: Trainer | null
 	user?: User | null
 }
+export type AccountWithTrainer = Prisma.AnnouncementGetPayload<{
+	include: {
+		trainer: {
+			include: {
+				announcement: true
+			}
+		}
+	}
+}>
 
 export type User = {
 	accountId: string

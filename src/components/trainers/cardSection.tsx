@@ -1,13 +1,23 @@
+// 'use client'
 import React from 'react'
 import TrainerCard from './trainerCard'
 import Wrapper from '../ui/wrapper'
-import fetchTrainers from '@/util/fetchTrainers'
+import fetchTrainers, { fetchTrainersWithFilters } from '@/util/fetchTrainers'
 import classes from './cardSection.module.scss'
 import FilterBar from './filterBar'
 import SectionHeading from '../ui/sectionHeading'
 
 const CardSection = async () => {
-	const accounts = await fetchTrainers()
+	let accounts = await fetchTrainers()
+	// const handleFiltering = async (data: {
+	// 	searchTerm: string
+	// 	priceFrom: string
+	// 	priceTo: string
+	// 	selectedCategories: string[]
+	// 	checkbox: boolean
+	// }) => {
+	// 	accounts = await fetchTrainersWithFilters(data)
+	// }
 	return (
 		<section className={classes.section}>
 			<Wrapper>

@@ -13,8 +13,56 @@
 }
 .filterRow {
 	display: flex;
+	flex-direction: column;
+	gap: 2em;
+}
+.filterPriceTags {
+	display: flex;
 	gap: 2em;
 }
 .filterText {
 	font-size: $subtextSize;
+}
+.checkboxContainer {
+	display: flex;
+	flex-direction: row-reverse;
+	justify-content: flex-end;
+	align-items: center;
+	gap: 1em;
+}
+.checkboxInput {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	appearance: none;
+	background-color: $secondaryBg;
+	margin: 0;
+	width: 3em;
+	height: 3em;
+	border-radius: 2px;
+	cursor: pointer;
+	&::before {
+		content: '';
+		width: 2.6em;
+		height: 2.6em;
+		background-image: url('/checkmark.svg');
+		background-repeat: no-repeat;
+		background-position: center;
+		scale: 0;
+		transition: scale 0.3s;
+	}
+	&.checked {
+		&::before {
+			scale: 1;
+		}
+	}
+}
+.checkboxLabel {
+	font-size: $subtextSize;
+	color: $subtext;
+}
+@media (min-width: 992px) {
+	.filterRow {
+		flex-direction: row;
+	}
 }
