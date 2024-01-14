@@ -1,7 +1,6 @@
 import React from 'react'
 import SectionHeading from '@/components/ui/sectionHeading'
 import TrainerPromoteSectionCard from '@/components/promote/trainerPromoteSectionCard'
-import Wrapper from '@/components/ui/wrapper'
 
 const Page = () => {
 	return (
