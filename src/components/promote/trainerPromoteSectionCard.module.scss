@@ -1,0 +1,23 @@
+@use '../variables' as *;
+.section {
+	padding: 3em;
+	background-color: $secondaryBg;
+	width: 100%;
+	margin-bottom: 4em;
+}
+.heading {
+	font-size: $headingSize;
+	color: #fff;
+	margin-bottom: 1em;
+}
+.text {
+	font-size: $subtextSize;
+	color: $subtext;
+	margin-bottom: 1em;
+}
+.btnContainer {
+	width: 100%;
+	display: flex;
+	justify-content: flex-end;
+	margin-top: 2em;
+}

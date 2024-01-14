@@ -82,7 +82,6 @@ const Menu: React.FC<{ session: Session | null }> = ({ session }) => {
 							animate={variants}>
 							<LogoutButton
 								initial={false}
-								path="/"
 								className={`${classes.link} ${classes.button} ${classes.textButton}`}
 								whileHover={{
 									backgroundColor: '#a50000',

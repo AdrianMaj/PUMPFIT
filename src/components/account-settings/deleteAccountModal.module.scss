@@ -8,8 +8,17 @@
 	background-color: $mainBg;
 	z-index: 1000;
 	&::backdrop {
-		background-color: rgba(0, 0, 0, 0.808);
+		display: none;
 	}
+}
+.backdrop {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	left: 0;
+	top: 0;
+	z-index: 10000;
+	background-color: rgba(0, 0, 0, 0.808);
 }
 .modalContent {
 	display: flex;

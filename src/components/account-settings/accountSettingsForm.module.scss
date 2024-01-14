@@ -14,6 +14,13 @@
 		color: $subtext;
 	}
 }
+.changePasswordLink {
+	color: $subtext;
+	margin-top: 0.5em;
+	font-size: clamp(1.2rem, 1.0694rem + 0.6531vw, 1.6rem);
+	text-decoration: underline;
+	cursor: pointer;
+}
 .buttons {
 	margin-top: auto;
 	width: 100%;

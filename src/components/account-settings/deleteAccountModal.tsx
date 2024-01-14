@@ -1,5 +1,5 @@
 'use client'
-import React, { forwardRef, useImperativeHandle, useRef } from 'react'
+import React, { forwardRef, useImperativeHandle, useRef, useState } from 'react'
 import Input from '../ui/input'
 import { FormProvider, useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -26,6 +26,7 @@ const FormSchema = z
 
 const DeleteAccountModal = forwardRef<DeleteAccountModalMethods, DeleteAccountModalProps>((props, ref) => {
 	const modal = useRef<HTMLDialogElement>(null)
+	const [isOpen, setIsOpen] = useState(false)
 	const form = useForm<z.infer<typeof FormSchema>>({
 		resolver: zodResolver(FormSchema),
 		defaultValues: {
@@ -35,11 +36,13 @@ const DeleteAccountModal = forwardRef<DeleteAccountModalMethods, DeleteAccountMo
 	useImperativeHandle(ref, () => ({
 		openModal: () => {
 			if (modal.current) {
+				setIsOpen(true)
 				modal.current.showModal()
 			}
 		},
 		closeModal: () => {
 			if (modal.current) {
+				setIsOpen(false)
 				modal.current.close()
 			}
 		},
@@ -51,29 +54,39 @@ const DeleteAccountModal = forwardRef<DeleteAccountModalMethods, DeleteAccountMo
 		} else {
 			console.log('Account deleted successfully')
 			if (modal.current) {
+				setIsOpen(false)
 				modal.current.close()
 			}
 		}
 	}
+	const closeModal = () => {
+		if (modal.current) {
+			setIsOpen(false)
+			modal.current.close()
+		}
+	}
 
 	return (
-		<dialog ref={modal} className={classes.modal}>
-			<div className={classes.modalContent}>
-				<p className={classes.modalTitle}>Delete my account</p>
-				<p className={classes.modalText}>
-					Are you sure you want to delete your account? This operation is irreversible.
-				</p>
-				<p className={classes.modalText}>Type "I confirm that I want to delete my account."</p>
-				<FormProvider {...form}>
-					<form className={classes.modalForm} onSubmit={form.handleSubmit(onSubmit)}>
-						<Input label="" type="text" id="confirmation" error={form.formState.errors.confirmation} />
-						<Button style={{ fontSize: 'clamp(1.4rem, 1.2041rem + 0.9796vw, 2rem)' }} type="submit">
-							Delete my account
-						</Button>
-					</form>
-				</FormProvider>
-			</div>
-		</dialog>
+		<>
+			<dialog onCancel={closeModal} ref={modal} className={classes.modal}>
+				<div className={classes.modalContent}>
+					<p className={classes.modalTitle}>Delete my account</p>
+					<p className={classes.modalText}>
+						Are you sure you want to delete your account? This operation is irreversible.
+					</p>
+					<p className={classes.modalText}>Type "I confirm that I want to delete my account."</p>
+					<FormProvider {...form}>
+						<form className={classes.modalForm} onSubmit={form.handleSubmit(onSubmit)}>
+							<Input label="" type="text" id="confirmation" error={form.formState.errors.confirmation} />
+							<Button style={{ fontSize: 'clamp(1.4rem, 1.2041rem + 0.9796vw, 2rem)' }} type="submit">
+								Delete my account
+							</Button>
+						</form>
+					</FormProvider>
+				</div>
+			</dialog>
+			{isOpen && <div onClick={closeModal} className={classes.backdrop}></div>}
+		</>
 	)
 })
 

@@ -94,7 +94,7 @@ const AccountSettingsForm: React.FC<{ accountData: Account }> = ({ accountData }
 					<Input label="Email" id="email" type="email" error={form.formState.errors.email} />
 					<div>
 						<Input disabled label="Password" id="password" value="xxxxxxxxxx" type="password" />
-						<p onClick={handleShowChangePasswordModal} className={classes.inputNote}>
+						<p onClick={handleShowChangePasswordModal} className={classes.changePasswordLink}>
 							Change password
 						</p>
 					</div>

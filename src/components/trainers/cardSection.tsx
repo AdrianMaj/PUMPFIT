@@ -1,11 +1,8 @@
-// 'use client'
 import React from 'react'
 import TrainerCard from './trainerCard'
 import Wrapper from '../ui/wrapper'
-import fetchTrainers, { fetchTrainersWithFilters } from '@/util/fetchTrainers'
+import fetchTrainers from '@/util/fetchTrainers'
 import classes from './cardSection.module.scss'
-import FilterBar from './filterBar'
-import SectionHeading from '../ui/sectionHeading'
 
 const CardSection = async () => {
 	let accounts = await fetchTrainers()

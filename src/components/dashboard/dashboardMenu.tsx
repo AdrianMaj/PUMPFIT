@@ -168,7 +168,6 @@ const DashboardMenu: React.FC<{ name: string; isTrainer: boolean }> = ({ name, i
 					initial={false}
 					variants={displayVariants}
 					animate={animateCondition}
-					path="/"
 					className={classes.logoutBtn}
 					whileHover={{
 						backgroundColor: '#a50000',

@@ -48,19 +48,18 @@ export const deleteAccount = async ({ accountId }: { accountId: string }) => {
 			return { message: 'Something went wrong!' }
 		}
 	} catch (error) {
-		return { message: 'Something went wrong!' }
+		return { message: `message ${error}` }
 	}
 }
 
 export const changePassword = async ({ password, accountId }: { password: string; accountId: string }) => {
-	const hashedPassword = await hash(password, 10)
 	try {
 		const account = await prisma.account.update({
 			where: {
 				id: accountId,
 			},
 			data: {
-				password: hashedPassword,
+				password: password,
 			},
 		})
 		if (account) {

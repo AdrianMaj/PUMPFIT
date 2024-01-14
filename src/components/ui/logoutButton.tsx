@@ -5,11 +5,10 @@ import { signOut } from 'next-auth/react'
 
 const LogoutButton: React.FC<{
 	children: React.ReactNode
-	path: string
 	[x: string]: any
-}> = ({ children, path, ...props }) => {
+}> = ({ children, ...props }) => {
 	return (
-		<motion.button onClick={() => signOut({ callbackUrl: path })} {...props}>
+		<motion.button onClick={() => signOut({ callbackUrl: 'http://localhost:3000/' })} {...props}>
 			{children}
 		</motion.button>
 	)

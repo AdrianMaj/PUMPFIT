@@ -1,5 +1,5 @@
 'use client'
-import React, { forwardRef, useImperativeHandle, useRef } from 'react'
+import React, { forwardRef, useImperativeHandle, useRef, useState } from 'react'
 import Input from '../ui/input'
 import { FormProvider, useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -26,19 +26,22 @@ const ChangePasswordModal = forwardRef<ChangePasswordModalMethods, ChangePasswor
 			newPassword: z.string().min(1, 'New password is required').min(8, 'New password must have 8 or more characters'),
 			confirmNewPassword: z.string(),
 		})
-		.refine(
-			async data => {
-				const response = await hashPassword({ password: data.oldPassword })
-				response === props.userPassword
-			},
-			{ message: 'Old password is incorrect!' }
-		)
-		.refine(
-			data => {
-				data.confirmNewPassword === data.newPassword
-			},
-			{ message: 'Passwords do not match.' }
-		)
+		.refine(async data => {
+			const response = await hashPassword({ password: data.oldPassword })
+			console.log(response)
+			console.log(props.userPassword)
+			if (response !== props.userPassword) {
+				throw new z.ZodError([{ path: ['oldPassword'], message: 'Old password is incorrect!', code: 'custom' }])
+			}
+			return true
+		})
+		.refine(data => {
+			if (data.confirmNewPassword !== data.newPassword) {
+				throw new z.ZodError([{ path: ['confirmNewPassword'], message: 'Passwords do not match.', code: 'custom' }])
+			}
+			return true
+		})
+	const [isLoading, setIsLoading] = useState(false)
 	const modal = useRef<HTMLDialogElement>(null)
 	const form = useForm<z.infer<typeof FormSchema>>({
 		resolver: zodResolver(FormSchema),
@@ -61,10 +64,13 @@ const ChangePasswordModal = forwardRef<ChangePasswordModalMethods, ChangePasswor
 		},
 	}))
 	const onSubmit = async (values: z.infer<typeof FormSchema>) => {
+		setIsLoading(true)
 		const response = await changePassword({ password: values.newPassword, accountId: props.id })
 		if (!response?.account?.success) {
+			setIsLoading(false)
 			console.log(response)
 		} else {
+			setIsLoading(false)
 			console.log('Password Changed')
 		}
 	}
@@ -84,7 +90,7 @@ const ChangePasswordModal = forwardRef<ChangePasswordModalMethods, ChangePasswor
 							error={form.formState.errors.confirmNewPassword}
 						/>
 						<Button style={{ fontSize: 'clamp(1.4rem, 1.2041rem + 0.9796vw, 2rem)' }} type="submit">
-							Change password
+							{isLoading ? 'Please wait...' : 'Change password'}
 						</Button>
 					</form>
 				</FormProvider>

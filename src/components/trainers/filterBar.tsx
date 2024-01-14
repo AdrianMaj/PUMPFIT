@@ -8,6 +8,7 @@ import Input from '../ui/input'
 import MultiSelect from '../ui/multiSelect'
 import { CATEGORIES } from '../my-profile/myProfileForm'
 import Button from '../ui/button'
+import { fetchTrainersWithFilters } from '@/util/fetchTrainers'
 
 const FormSchema = z.object({
 	searchTerm: z.string(),
@@ -26,13 +27,14 @@ const FilterBar = () => {
 			priceTo: '',
 		},
 	})
-	const onSubmit = (values: z.infer<typeof FormSchema>) => {
+	const onSubmit = async (values: z.infer<typeof FormSchema>) => {
 		const data = {
 			...values,
 			selectedCategories,
 			checkbox,
 		}
-		console.log(data)
+		const response = await fetchTrainersWithFilters(data)
+		console.log(response)
 	}
 	const handleAddCategory = (e: React.MouseEvent<HTMLLIElement>) => {
 		const selectedValue = (e.target as HTMLLIElement).innerText

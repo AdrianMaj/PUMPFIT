@@ -36,9 +36,26 @@ export const fetchTrainersWithFilters = async (data: {
 		where: {
 			...(data.searchTerm.length > 0
 				? {
-						name: {
-							contains: data.searchTerm,
-						},
+						OR: [
+							{
+								name: {
+									contains: data.searchTerm,
+									mode: 'insensitive',
+								},
+							},
+							data.checkbox === true
+								? {
+										trainer: {
+											announcement: {
+												description: {
+													contains: data.searchTerm,
+													mode: 'insensitive',
+												},
+											},
+										},
+								  }
+								: {},
+						],
 				  }
 				: {}),
 			trainer: {
@@ -62,13 +79,6 @@ export const fetchTrainersWithFilters = async (data: {
 						? {
 								price: {
 									lt: +data.priceTo,
-								},
-						  }
-						: {}),
-					...(data.checkbox === true
-						? {
-								description: {
-									contains: data.searchTerm,
 								},
 						  }
 						: {}),
