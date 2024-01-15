@@ -2,9 +2,6 @@ import { NextResponse } from 'next/server'
 import prisma from '../../../../lib/prisma'
 import { hash } from 'bcrypt'
 import * as z from 'zod'
-import { signIn } from 'next-auth/react'
-
-// Define a schema for input validation
 
 const accountSchema = z.object({
 	name: z.string().min(1, 'Name is required').max(100),

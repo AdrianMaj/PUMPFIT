@@ -36,11 +36,11 @@ const LoginForm = () => {
 		})
 
 		if (signInData?.error) {
-			console.log(signInData.error)
+			console.log(signInData)
+			setIsLoading(false)
 		} else {
 			router.push('/dashboard')
 		}
-		setIsLoading(false)
 	}
 	const MotionLink = motion(Link)
 	return (

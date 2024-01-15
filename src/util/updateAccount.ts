@@ -1,6 +1,6 @@
 'use server'
 import prisma from '../../lib/prisma'
-import { compare } from 'bcrypt'
+import { compare, hash } from 'bcrypt'
 
 export const updateAccount = async ({
 	name,
@@ -52,13 +52,14 @@ export const deleteAccount = async ({ accountId }: { accountId: string }) => {
 }
 
 export const changePassword = async ({ password, accountId }: { password: string; accountId: string }) => {
+	const hashedPassword = await hash(password, 10)
 	try {
 		const account = await prisma.account.update({
 			where: {
 				id: accountId,
 			},
 			data: {
-				password: password,
+				password: hashedPassword,
 			},
 		})
 		if (account) {

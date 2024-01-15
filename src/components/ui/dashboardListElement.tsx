@@ -47,12 +47,10 @@ const DashboardListElement: React.FC<{
 					animate={animate}
 					variants={{
 						opened: {
-							justifyContent: 'flex-start',
 							backgroundColor: active ? '#a50000' : 'rgba(0, 0, 0, 0)',
 							left: '-3em',
 						},
 						closed: {
-							justifyContent: 'center',
 							backgroundColor: active ? '#a50000' : 'rgba(0, 0, 0, 0)',
 							left: '0rem',
 						},

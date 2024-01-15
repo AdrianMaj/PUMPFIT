@@ -27,7 +27,6 @@ const FormSchema = z
 const RegisterForm = () => {
 	const [isTrainer, setIsTrainer] = useState(false)
 	const [isLoading, setIsLoading] = useState(false)
-	const router = useRouter()
 	const trainerToggle = () => {
 		setIsTrainer(prevState => {
 			const newState = !prevState
@@ -71,16 +70,18 @@ const RegisterForm = () => {
 				})
 				if (!result?.ok) {
 					console.error('Unable to log in after register.')
+					setIsLoading(false)
 				} else {
 					console.log('Success!')
 				}
 			} else {
 				console.error('Unable to create an account. Please try again later.')
+				setIsLoading(false)
 			}
 		} else {
 			console.error('Form validation failed:', form.formState.errors)
+			setIsLoading(false)
 		}
-		setIsLoading(false)
 	}
 
 	return (

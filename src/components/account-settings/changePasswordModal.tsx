@@ -34,10 +34,13 @@ const ChangePasswordModal = forwardRef<ChangePasswordModalMethods, ChangePasswor
 			}
 		})
 		.refine(data => {
+			console.log(data.confirmNewPassword)
+			console.log(data.newPassword)
 			if (data.confirmNewPassword !== data.newPassword) {
 				throw new z.ZodError([{ path: ['confirmNewPassword'], message: 'Passwords do not match.', code: 'custom' }])
+			} else {
+				return true
 			}
-			return true
 		})
 	const [isLoading, setIsLoading] = useState(false)
 	const modal = useRef<HTMLDialogElement>(null)
@@ -84,7 +87,7 @@ const ChangePasswordModal = forwardRef<ChangePasswordModalMethods, ChangePasswor
 						<Input
 							label="Confirm new password"
 							type="password"
-							id="confirmPassword"
+							id="confirmNewPassword"
 							error={form.formState.errors.confirmNewPassword}
 						/>
 						<Button style={{ fontSize: 'clamp(1.4rem, 1.2041rem + 0.9796vw, 2rem)' }} type="submit">
