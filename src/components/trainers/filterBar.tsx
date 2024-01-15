@@ -9,6 +9,7 @@ import MultiSelect from '../ui/multiSelect'
 import { CATEGORIES } from '../my-profile/myProfileForm'
 import Button from '../ui/button'
 import { fetchTrainersWithFilters } from '@/util/fetchTrainers'
+import { useSearchParams, usePathname, useRouter } from 'next/navigation'
 
 const FormSchema = z.object({
 	searchTerm: z.string(),
@@ -17,24 +18,54 @@ const FormSchema = z.object({
 })
 
 const FilterBar = () => {
-	const [selectedCategories, setSelectedCategories] = useState<string[]>([])
+	const searchParams = useSearchParams()
+	const pathname = usePathname()
+	const { replace } = useRouter()
+	const params = new URLSearchParams(searchParams)
+	const initialData = params.get('categories')?.split(',')
+	const [selectedCategories, setSelectedCategories] = useState<string[]>(initialData || [])
 	const [checkbox, setCheckbox] = useState<boolean>(false)
 	const form = useForm<z.infer<typeof FormSchema>>({
 		resolver: zodResolver(FormSchema),
 		defaultValues: {
-			searchTerm: '',
-			priceFrom: '',
-			priceTo: '',
+			searchTerm: params.get('searchTerm') || '',
+			priceFrom: params.get('priceMin') || '',
+			priceTo: params.get('priceMax') || '',
 		},
 	})
-	const onSubmit = async (values: z.infer<typeof FormSchema>) => {
+	const onSubmit = (values: z.infer<typeof FormSchema>) => {
+		console.log(params)
 		const data = {
 			...values,
 			selectedCategories,
 			checkbox,
 		}
-		const response = await fetchTrainersWithFilters(data)
-		console.log(response)
+		if (data.searchTerm !== '') {
+			params.set('searchTerm', data.searchTerm)
+		} else {
+			params.delete('searchTerm')
+		}
+		if (data.checkbox) {
+			params.set('description', 'true')
+		} else {
+			params.delete('description')
+		}
+		if (data.priceFrom !== '') {
+			params.set('priceMin', data.priceFrom)
+		} else {
+			params.delete('priceMin')
+		}
+		if (data.priceFrom !== '') {
+			params.set('priceMax', data.priceTo)
+		} else {
+			params.delete('priceMax')
+		}
+		if (data.selectedCategories.length > 0) {
+			params.set('categories', data.selectedCategories.join(','))
+		} else {
+			params.delete('categories')
+		}
+		replace(`${pathname}?${params.toString()}`)
 	}
 	const handleAddCategory = (e: React.MouseEvent<HTMLLIElement>) => {
 		const selectedValue = (e.target as HTMLLIElement).innerText

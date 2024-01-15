@@ -1,11 +1,23 @@
 import React from 'react'
 import TrainerCard from './trainerCard'
 import Wrapper from '../ui/wrapper'
-import fetchTrainers from '@/util/fetchTrainers'
+import fetchTrainers, { fetchTrainersWithFilters } from '@/util/fetchTrainers'
 import classes from './cardSection.module.scss'
 
-const CardSection = async () => {
+const CardSection: React.FC<{ params: { [key: string]: string | undefined } }> = async ({ params }) => {
 	let accounts = await fetchTrainers()
+	if (params && Object.keys(params).length > 0) {
+		const selectedCategories = params.categories?.split(',')
+		const data = {
+			searchTerm: params.searchTerm || '',
+			priceFrom: params.priceMin || '',
+			priceTo: params.priceMax || '',
+			selectedCategories: selectedCategories || [],
+			checkbox: params.description === 'true',
+		}
+		console.log(data)
+		accounts = await fetchTrainersWithFilters(data)
+	}
 	return (
 		<section className={classes.section}>
 			<Wrapper>

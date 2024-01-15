@@ -8,14 +8,19 @@ import SectionHeading from '@/components/ui/sectionHeading'
 import Wrapper from '@/components/ui/wrapper'
 import HeadingSection from '@/components/trainers/headingSection'
 
-const Page = () => {
+type Props = {
+	params: {}
+	searchParams: { [key: string]: string | undefined }
+}
+
+const Page = (props: Props) => {
 	return (
 		<>
 			<Header />
 			<main>
 				<HeadingSection />
 				<Suspense fallback={<CardLoading />}>
-					<CardSection />
+					<CardSection params={props.searchParams} />
 				</Suspense>
 			</main>
 			<Footer />
