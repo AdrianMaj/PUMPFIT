@@ -71,14 +71,14 @@ export const fetchTrainersWithFilters = async (data: {
 					...(data.priceFrom.length > 0
 						? {
 								price: {
-									gt: +data.priceFrom,
+									gte: +data.priceFrom,
 								},
 						  }
 						: {}),
 					...(data.priceTo.length > 0
 						? {
 								price: {
-									lt: +data.priceTo,
+									lte: +data.priceTo,
 								},
 						  }
 						: {}),

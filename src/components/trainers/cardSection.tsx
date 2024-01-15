@@ -15,7 +15,6 @@ const CardSection: React.FC<{ params: { [key: string]: string | undefined } }> =
 			selectedCategories: selectedCategories || [],
 			checkbox: params.description === 'true',
 		}
-		console.log(data)
 		accounts = await fetchTrainersWithFilters(data)
 	}
 	return (

@@ -8,7 +8,7 @@ const LogoutButton: React.FC<{
 	[x: string]: any
 }> = ({ children, ...props }) => {
 	return (
-		<motion.button onClick={() => signOut({ callbackUrl: 'http://localhost:3000/' })} {...props}>
+		<motion.button onClick={() => signOut({ callbackUrl: '/' })} {...props}>
 			{children}
 		</motion.button>
 	)

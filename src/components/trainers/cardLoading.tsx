@@ -1,11 +1,12 @@
 import React from 'react'
 import classes from './cardLoading.module.scss'
 import Wrapper from '../ui/wrapper'
+import Spinner from '../ui/spinner'
 const CardLoading = () => {
 	return (
 		<Wrapper>
 			<div className={classes.card}>
-				<p>Loading...</p>
+				<Spinner text="Loading trainers..." />
 			</div>
 		</Wrapper>
 	)

@@ -1,7 +1,6 @@
 'use server'
-import { NextResponse } from 'next/server'
 import prisma from '../../lib/prisma'
-import { hash } from 'bcrypt'
+import { compare } from 'bcrypt'
 
 export const updateAccount = async ({
 	name,
@@ -70,7 +69,14 @@ export const changePassword = async ({ password, accountId }: { password: string
 	}
 }
 
-export const hashPassword = async ({ password }: { password: string }) => {
-	const hashedPassword = await hash(password, 10)
-	return hashedPassword
+export const comparePassword = ({ password, hashedPassword }: { password: string; hashedPassword: string }) => {
+	return new Promise<boolean>((resolve, reject) => {
+		compare(password, hashedPassword, (err, result) => {
+			if (err) {
+				reject(err)
+			} else {
+				resolve(result as boolean)
+			}
+		})
+	})
 }

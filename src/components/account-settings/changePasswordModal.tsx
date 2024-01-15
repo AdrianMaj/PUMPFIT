@@ -5,9 +5,8 @@ import { FormProvider, useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import * as z from 'zod'
 import Button from '../ui/button'
-import { changePassword, hashPassword } from '@/util/updateAccount'
+import { changePassword, comparePassword } from '@/util/updateAccount'
 import classes from './changePasswordModal.module.scss'
-import { hash } from 'bcrypt'
 
 interface ChangePasswordModalProps {
 	id: string
@@ -27,13 +26,12 @@ const ChangePasswordModal = forwardRef<ChangePasswordModalMethods, ChangePasswor
 			confirmNewPassword: z.string(),
 		})
 		.refine(async data => {
-			const response = await hashPassword({ password: data.oldPassword })
-			console.log(response)
-			console.log(props.userPassword)
-			if (response !== props.userPassword) {
+			const response = await comparePassword({ password: data.oldPassword, hashedPassword: props.userPassword })
+			if (!response) {
 				throw new z.ZodError([{ path: ['oldPassword'], message: 'Old password is incorrect!', code: 'custom' }])
+			} else {
+				return true
 			}
-			return true
 		})
 		.refine(data => {
 			if (data.confirmNewPassword !== data.newPassword) {
