@@ -99,14 +99,7 @@ const DashboardMenu: React.FC<{ name: string; isTrainer: boolean }> = ({ name, i
 	return (
 		<>
 			<div className={classes.positioner}></div>
-			<motion.nav
-				initial={false}
-				variants={navVariants}
-				transition={{
-					bounce: 0,
-				}}
-				animate={animateCondition}
-				className={`${classes.menu}`}>
+			<motion.nav initial={false} variants={navVariants} animate={animateCondition} className={`${classes.menu}`}>
 				<motion.div
 					initial={false}
 					animate={animateCondition}

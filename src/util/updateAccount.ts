@@ -42,7 +42,7 @@ export const deleteAccount = async ({ accountId }: { accountId: string }) => {
 			},
 		})
 		if (account) {
-			return { account: { success: true }, message: 'Updated password' }
+			return { account: { success: true }, message: 'Deleted account' }
 		} else {
 			return { message: 'Something went wrong!' }
 		}

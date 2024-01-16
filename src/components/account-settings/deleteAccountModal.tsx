@@ -7,6 +7,7 @@ import * as z from 'zod'
 import Button from '../ui/button'
 import { deleteAccount } from '@/util/updateAccount'
 import classes from './deleteAccountModal.module.scss'
+import { signOut } from 'next-auth/react'
 
 interface DeleteAccountModalProps {
 	id: string
@@ -53,6 +54,7 @@ const DeleteAccountModal = forwardRef<DeleteAccountModalMethods, DeleteAccountMo
 			console.log(response)
 		} else {
 			console.log('Account deleted successfully')
+			await signOut({ callbackUrl: '/' })
 			if (modal.current) {
 				setIsOpen(false)
 				modal.current.close()

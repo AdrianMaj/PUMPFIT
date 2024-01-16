@@ -26,7 +26,7 @@ model Account {
 
 model User {
   accountId String  @unique
-  account   Account @relation(fields: [accountId], references: [id])
+  account   Account @relation(fields: [accountId], references: [id], onDelete: Cascade )
 
   @@map("users")
 }
@@ -37,7 +37,7 @@ model Trainer {
   accountId      String        @unique
   announcementId String?
   announcement   Announcement?
-  account        Account       @relation(fields: [accountId], references: [id])
+  account        Account       @relation(fields: [accountId], references: [id], onDelete: Cascade)
 
   @@map("trainers")
 }
@@ -53,7 +53,7 @@ model Announcement {
   trainerId    String        @unique
   createdAt    DateTime      @default(now()) @map("created_at")
   updatedAt    DateTime      @updatedAt @map("updated_at")
-  trainer      Trainer       @relation(fields: [trainerId], references: [id])
+  trainer      Trainer       @relation(fields: [trainerId], references: [id], onDelete: Cascade)
   testimonials Testimonial[]
 
   @@map("announcements")
@@ -67,7 +67,7 @@ model Testimonial {
   announcementId String
   createdAt      DateTime     @default(now()) @map("created_at")
   updatedAt      DateTime     @updatedAt @map("updated_at")
-  announcement   Announcement @relation(fields: [announcementId], references: [id])
+  announcement   Announcement @relation(fields: [announcementId], references: [id], onDelete: Cascade)
 
   @@map("testimonials")
 }
