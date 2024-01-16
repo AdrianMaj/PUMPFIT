@@ -23,6 +23,7 @@ const FormSchema = z
 	})
 	.refine(data => data.confirmation === 'I confirm that I want to delete my account.', {
 		message: 'Text does not match',
+		path: ['confirmation'],
 	})
 
 const DeleteAccountModal = forwardRef<DeleteAccountModalMethods, DeleteAccountModalProps>((props, ref) => {

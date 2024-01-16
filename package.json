@@ -20,6 +20,7 @@
 		"framer-motion": "^10.16.16",
 		"next": "14.0.4",
 		"next-auth": "^4.24.5",
+		"node-mailjet": "^6.0.5",
 		"react": "^18",
 		"react-dom": "^18",
 		"react-hook-form": "^7.49.2",
@@ -27,6 +28,7 @@
 		"react-redux": "^9.0.4",
 		"react-responsive": "^9.0.2",
 		"sass": "^1.69.5",
+		"socket.io": "^4.7.4",
 		"zod": "^3.22.4"
 	},
 	"devDependencies": {

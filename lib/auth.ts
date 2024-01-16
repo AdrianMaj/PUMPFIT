@@ -30,6 +30,9 @@ export const authOptions: NextAuthOptions = {
 				if (!existingAccount) {
 					return null
 				}
+				if (!existingAccount.active) {
+					throw new Error('User is not active')
+				}
 				const passwordMatch = await compare(credentials.password, existingAccount.password)
 				if (!passwordMatch) {
 					return null

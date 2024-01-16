@@ -25,6 +25,7 @@ const FormSchema = z
 	})
 
 const RegisterForm = () => {
+	const router = useRouter()
 	const [isTrainer, setIsTrainer] = useState(false)
 	const [isLoading, setIsLoading] = useState(false)
 	const trainerToggle = () => {
@@ -63,17 +64,18 @@ const RegisterForm = () => {
 
 			if (response.ok) {
 				console.log('Successfully created an account!')
-				const result = await signIn('credentials', {
-					callbackUrl: '/',
-					email: values.email,
-					password: values.password,
-				})
-				if (!result?.ok) {
-					console.error('Unable to log in after register.')
-					setIsLoading(false)
-				} else {
-					console.log('Success!')
-				}
+				router.push('/login')
+				// const result = await signIn('credentials', {
+				// 	callbackUrl: '/',
+				// 	email: values.email,
+				// 	password: values.password,
+				// })
+				// if (!result?.ok) {
+				// 	console.error('Unable to log in after register.')
+				// 	setIsLoading(false)
+				// } else {
+				// 	console.log('Success!')
+				// }
 			} else {
 				console.error('Unable to create an account. Please try again later.')
 				setIsLoading(false)

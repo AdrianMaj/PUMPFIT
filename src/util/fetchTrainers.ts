@@ -3,6 +3,9 @@ import prisma from '../../lib/prisma'
 
 const fetchTrainers = async () => {
 	const trainers = await prisma.account.findMany({
+		orderBy: {
+			updatedAt: 'desc',
+		},
 		where: {
 			trainer: {
 				announcement: {
@@ -33,6 +36,9 @@ export const fetchTrainersWithFilters = async (data: {
 	checkbox: boolean
 }) => {
 	const trainers = await prisma.account.findMany({
+		orderBy: {
+			updatedAt: 'desc',
+		},
 		where: {
 			...(data.searchTerm.length > 0
 				? {

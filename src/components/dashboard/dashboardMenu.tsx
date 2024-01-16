@@ -1,5 +1,5 @@
 'use client'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Logo from '../ui/Logo'
 import classes from './dashboardMenu.module.scss'
 import LogoutButton from '../ui/logoutButton'
@@ -9,25 +9,40 @@ import DashboardListElement from '../ui/dashboardListElement'
 
 const DashboardMenu: React.FC<{ name: string; isTrainer: boolean }> = ({ name, isTrainer }) => {
 	const [isOpen, setIsOpen] = useState(false)
+	const [screenWidth, setScreenWidth] = useState<number | null>(null)
+
+	const updateScreenSize = () => {
+		setScreenWidth(window.innerWidth)
+	}
+
+	useEffect(() => {
+		window.addEventListener('resize', updateScreenSize)
+		updateScreenSize()
+		return () => {
+			window.removeEventListener('resize', updateScreenSize)
+		}
+	}, [])
 	const toggleMenu = () => {
 		setIsOpen(prevState => {
 			const newState = !prevState
 			return newState
 		})
 	}
-	if (isOpen) {
+	if (isOpen && screenWidth && screenWidth < 992) {
 		document.body.classList.add('overflow')
 	} else {
 		document.body.classList.remove('overflow')
 	}
 	const navVariants = {
 		opened: {
-			width: '100%',
+			width: screenWidth + 'px',
 			padding: '3em',
+			transition: { duration: 0.5 },
 		},
 		closed: {
-			width: '6em',
+			width: '60px',
 			padding: '3em 0',
+			transition: { duration: 0.5 },
 		},
 	}
 	const displayVariants = {
@@ -35,11 +50,13 @@ const DashboardMenu: React.FC<{ name: string; isTrainer: boolean }> = ({ name, i
 			opacity: '1',
 			width: '100%',
 			margin: '',
+			transition: { duration: 0.3 },
 		},
 		closed: {
 			opacity: '0',
 			width: '0%',
 			margin: 0,
+			transition: { duration: 0.3 },
 		},
 	}
 	const animateCondition = isOpen ? 'opened' : 'closed'
@@ -137,9 +154,11 @@ const DashboardMenu: React.FC<{ name: string; isTrainer: boolean }> = ({ name, i
 					variants={{
 						opened: {
 							alignItems: 'flex-start',
+							transition: { duration: 0.3 },
 						},
 						closed: {
 							alignItems: 'center',
+							transition: { duration: 0.5 },
 						},
 					}}
 					className={classes.list}>
