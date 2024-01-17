@@ -10,7 +10,7 @@ const GET = async (request: NextRequest, { params }: { params: { token: string }
                 some:{
                     AND: [
                         {
-                            activatedAt: null;
+                            activatedAt: null,
                         },
                         {
                             createdAt: {
