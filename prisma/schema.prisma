@@ -21,6 +21,7 @@ model Account {
   trainer       Trainer?
   user          User?
   ActivateToken ActivateToken[]
+  PasswordResetToken PasswordResetToken[]
 
   @@map("accounts")
 }
@@ -35,6 +36,16 @@ model ActivateToken {
 
   account       Account @relation(fields:[accountId], references: [id])
   accountId     String    
+}
+
+model PasswordResetToken { 
+  id            String    @id @default(cuid())
+  token         String    @unique
+  createdAt     DateTime  @default(now()) @map("created_at")
+  resetAt       DateTime?
+
+  account       Account @relation(fields:[accountId], references: [id])
+  accountId     String  
 }
 
 model User {

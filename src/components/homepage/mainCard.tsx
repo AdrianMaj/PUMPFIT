@@ -5,7 +5,12 @@ import LinkButton from '../ui/linkButton'
 import Image from 'next/image'
 import { motion } from 'framer-motion'
 
-const MainCard: React.FC<{ name: string; attributes: string[]; image: string }> = ({ name, attributes, image }) => {
+const MainCard: React.FC<{ name: string; attributes: string[]; image: string; id: string }> = ({
+	name,
+	attributes,
+	image,
+	id,
+}) => {
 	return (
 		<motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className={classes.card}>
 			<img
@@ -40,7 +45,7 @@ const MainCard: React.FC<{ name: string; attributes: string[]; image: string }> 
 						marginTop: 'auto',
 					}}
 					fontSize="1.8rem"
-					linked="/more-info">
+					linked={`/details/${id}`}>
 					More info
 				</LinkButton>
 			</div>

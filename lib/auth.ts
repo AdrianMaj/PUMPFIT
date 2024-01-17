@@ -22,20 +22,20 @@ export const authOptions: NextAuthOptions = {
 			},
 			async authorize(credentials) {
 				if (!credentials?.email || !credentials.password) {
-					return null
+					throw new Error('All fields must be filled.')
 				}
 				const existingAccount = await prisma.account.findUnique({
 					where: { email: credentials?.email },
 				})
 				if (!existingAccount) {
-					return null
+					throw new Error('Invalid email or password.')
 				}
 				if (!existingAccount.active) {
-					throw new Error('User is not active')
+					throw new Error('Account is not active. Please check your email for activation link.')
 				}
 				const passwordMatch = await compare(credentials.password, existingAccount.password)
 				if (!passwordMatch) {
-					return null
+					throw new Error('Invalid email or password.')
 				}
 
 				return {

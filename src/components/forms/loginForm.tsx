@@ -29,17 +29,16 @@ const LoginForm = () => {
 
 	const onSubmit = async (values: z.infer<typeof FormSchema>) => {
 		setIsLoading(true)
-		const signInData = await signIn('credentials', {
-			email: values.email,
-			password: values.password,
-			redirect: false,
-		})
-
-		if (signInData?.error) {
-			console.log(signInData)
-			setIsLoading(false)
-		} else {
+		try {
+			await signIn('credentials', {
+				email: values.email,
+				password: values.password,
+				redirect: false,
+			})
 			router.push('/dashboard')
+		} catch (error: any) {
+			setIsLoading(false)
+			console.error(error.response)
 		}
 	}
 	const MotionLink = motion(Link)

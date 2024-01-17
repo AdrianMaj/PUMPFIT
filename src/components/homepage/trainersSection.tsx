@@ -17,6 +17,7 @@ const TrainersSection = async () => {
 					{promotedAccounts.map(account => (
 						<MainCard
 							key={account.id}
+							id={account.id}
 							name={account.name}
 							attributes={account.trainer?.announcement?.categories || []}
 							image={
