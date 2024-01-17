@@ -3,7 +3,7 @@ import prisma from '../../../../lib/prisma'
 import { hash } from 'bcrypt'
 import * as z from 'zod'
 import { randomUUID } from 'crypto'
-import mailjet from 'node-mailjet'
+import { sendEmail } from '@/util/sendEmail'
 
 const accountSchema = z.object({
 	name: z.string().min(1, 'Name is required').max(100),
@@ -11,49 +11,6 @@ const accountSchema = z.object({
 	password: z.string().min(1, 'Password is required').min(8, 'Password must have more than 8 characters'),
 	isTrainer: z.boolean(),
 })
-
-const mailjetClient = mailjet.apiConnect(process.env.MAILJET_API_PUBLIC_KEY!, process.env.MAILJET_API_PRIVATE_KEY!)
-
-export async function sendEmail({
-	to,
-	from,
-	subject,
-	message,
-	recipentName,
-}: {
-	to: string
-	from: string
-	subject: string
-	message: string
-	recipentName: string
-}) {
-	const emailData = {
-		Messages: [
-			{
-				From: {
-					Email: from,
-					Name: 'PUMPFIT Company',
-				},
-				To: [
-					{
-						Email: to,
-						Name: recipentName,
-					},
-				],
-				Subject: subject,
-				HTMLPart: message,
-			},
-		],
-	}
-	try {
-		const result = await mailjetClient.post('send', { version: 'v3.1' }).request(emailData)
-		console.log('Email sent successfully!')
-		return result
-	} catch (error) {
-		console.error('Error sending email:', error)
-		throw error
-	}
-}
 
 export const POST = async (req: Request) => {
 	try {
