@@ -5,25 +5,32 @@ import React from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
 import { motion } from 'framer-motion'
 import Input from '../ui/input'
-import classes from './forgotPasswordForm.module.scss'
+import classes from './resetPasswordForm.module.scss'
 import Link from 'next/link'
-import { sendResetPasswordEmail } from '@/util/sendResetPasswordEmail'
+import { resetPassword } from '@/util/resetPassword'
 
-const FormSchema = z.object({
-	email: z.string().min(1, 'Email is required').email('Invalid email'),
-})
+const FormSchema = z
+	.object({
+		password: z.string().min(1, 'Password is required').min(8, 'Password must have more than 8 characters!'),
+		confirmPassword: z.string().min(1, 'Confirm Password is required!'),
+	})
+	.refine(data => data.password === data.confirmPassword, {
+		path: ['confirmPassword'],
+		message: 'Password do not match',
+	})
 
-const ForgotPasswordForm = () => {
+const ResetPasswordForm = ({ token }: { token: string }) => {
 	const form = useForm<z.infer<typeof FormSchema>>({
 		resolver: zodResolver(FormSchema),
 		defaultValues: {
-			email: '',
+			password: '',
+			confirmPassword: '',
 		},
 	})
 
 	const onSubmit = async (values: z.infer<typeof FormSchema>) => {
 		try {
-			await sendResetPasswordEmail(values.email)
+			resetPassword(values.password, token)
 		} catch (error) {
 			console.log(error)
 		}
@@ -33,14 +40,15 @@ const ForgotPasswordForm = () => {
 		<>
 			<FormProvider {...form}>
 				<form onSubmit={form.handleSubmit(onSubmit)} className={classes.form}>
-					<Input type="email" label="E-mail" id="email" error={form.formState.errors.email} />
+					<Input type="password" label="New password" id="password" error={form.formState.errors.password} />
+					<Input type="password" label="Confirm password" id="confirmPassword" error={form.formState.errors.password} />
 					<motion.button
 						whileHover={{
 							backgroundColor: '#750000',
 						}}
 						className={classes.button}
 						type="submit">
-						Recover password <img src="/arrow-login.svg" alt="Arrow Icon" className={classes.arrow} />
+						Change password <img src="/arrow-login.svg" alt="Arrow Icon" className={classes.arrow} />
 					</motion.button>
 				</form>
 			</FormProvider>
@@ -52,4 +60,4 @@ const ForgotPasswordForm = () => {
 	)
 }
 
-export default ForgotPasswordForm
+export default ResetPasswordForm
