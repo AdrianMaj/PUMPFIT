@@ -2,7 +2,7 @@ import { NextRequest } from 'next/server'
 import prisma from '../../../../lib/prisma'
 import { redirect } from 'next/navigation'
 
-const GET = async (request: NextRequest, { params }: { params: { token: string } }) => {
+export const GET = async (request: NextRequest, { params }: { params: { token: string } }) => {
 	const { token } = params
 	const account = await prisma.account.findFirst({
 		where: {
