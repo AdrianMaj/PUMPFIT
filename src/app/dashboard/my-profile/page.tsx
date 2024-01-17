@@ -9,7 +9,7 @@ const Page = async () => {
 	const userAccount = await fetchAccount()
 	if (userAccount) {
 		if (userAccount.isTrainer && userAccount.trainer) {
-			const trainer = userAccount.trainer as Trainer
+			const trainer = userAccount.trainer
 			return (
 				<>
 					<SectionHeading>My profile</SectionHeading>

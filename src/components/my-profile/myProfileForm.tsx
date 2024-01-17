@@ -10,7 +10,16 @@ import Button from '@/components/ui/button'
 import { useEffect, useState } from 'react'
 import MultiSelect from '@/components/ui/multiSelect'
 import { handlePublish, handleUnpublish, updateAnnoucement } from '@/util/updateAnnoucement'
-import { Trainer } from '@/types/databaseTypes'
+import { Announcement, Testimonial, Trainer } from '@prisma/client'
+
+type AnnouncementWithTestimonials =
+	| (Announcement & {
+			testimonials: Testimonial[]
+	  })
+	| null
+type TrainerWithAnnouncement = Trainer & {
+	announcement: AnnouncementWithTestimonials
+}
 
 const FormSchema = z.object({
 	photourl: z.string(),
@@ -32,7 +41,7 @@ export const CATEGORIES = [
 	'Weightlifting',
 ]
 
-const MyProfileForm: React.FC<{ trainerData: Trainer }> = ({ trainerData }) => {
+const MyProfileForm: React.FC<{ trainerData: TrainerWithAnnouncement }> = ({ trainerData }) => {
 	const [selectedCategories, setSelectedCategories] = useState<string[]>([])
 	const [isPublishing, setIsPublishing] = useState(false)
 	const [isUnPublishing, setIsUnPublishing] = useState(false)
