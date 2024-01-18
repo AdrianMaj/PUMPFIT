@@ -8,12 +8,14 @@ import Input from '../ui/input'
 import classes from './forgotPasswordForm.module.scss'
 import Link from 'next/link'
 import { sendResetPasswordEmail } from '@/util/sendResetPasswordEmail'
+import { useRouter } from 'next/navigation'
 
 const FormSchema = z.object({
 	email: z.string().min(1, 'Email is required').email('Invalid email'),
 })
 
 const ForgotPasswordForm = () => {
+	const router = useRouter()
 	const form = useForm<z.infer<typeof FormSchema>>({
 		resolver: zodResolver(FormSchema),
 		defaultValues: {
@@ -23,7 +25,10 @@ const ForgotPasswordForm = () => {
 
 	const onSubmit = async (values: z.infer<typeof FormSchema>) => {
 		try {
-			await sendResetPasswordEmail(values.email)
+			const data = await sendResetPasswordEmail(values.email)
+			if (data?.emailSent) {
+				router.push('/forgot-password/success')
+			}
 		} catch (error) {
 			console.log(error)
 		}

@@ -48,7 +48,7 @@ export const sendResetPasswordEmail = async (email: string) => {
             <p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:21px;color:#979797;font-size:14px"><b>© 2024 PUMPFIT Company</b></p></td></tr></table></td></tr></table></td></tr></table></td></tr></table></td></tr></table></div></body></html>`,
 			recipentName: account.name,
 		})
-		redirect('/forgot-password/success')
+		return { emailSent: true }
 	} catch (error) {
 		console.error('Error sending email:', error)
 		// Handle error
