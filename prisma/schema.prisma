@@ -9,48 +9,45 @@ datasource db {
 }
 
 model Account {
-  id            String    @id @default(cuid())
-  name          String
-  email         String    @unique
-  password      String
-  photo         String?
-  active        Boolean @default(false)
-  isTrainer     Boolean
-  createdAt     DateTime  @default(now()) @map("created_at")
-  updatedAt     DateTime  @updatedAt @map("updated_at")
-  trainer       Trainer?
-  user          User?
-  ActivateToken ActivateToken[]
+  id                 String               @id @default(cuid())
+  name               String
+  email              String               @unique
+  password           String
+  photo              String?
+  isTrainer          Boolean
+  createdAt          DateTime             @default(now()) @map("created_at")
+  updatedAt          DateTime             @updatedAt @map("updated_at")
+  active             Boolean              @default(false)
+  ActivateToken      ActivateToken[]
   PasswordResetToken PasswordResetToken[]
+  trainer            Trainer?
+  user               User?
 
   @@map("accounts")
 }
 
 model ActivateToken {
-  id            String    @id @default(cuid())
-  token         String    @unique
-  activatedAt   DateTime?
-
-  createdAt     DateTime  @default(now()) @map("created_at")
-  updatedAt     DateTime  @updatedAt @map("updated_at")
-
-  account       Account @relation(fields:[accountId], references: [id])
-  accountId     String    
+  id          String    @id @default(cuid())
+  token       String    @unique
+  activatedAt DateTime?
+  createdAt   DateTime  @default(now()) @map("created_at")
+  updatedAt   DateTime  @updatedAt @map("updated_at")
+  accountId   String
+  account     Account   @relation(fields: [accountId], references: [id])
 }
 
-model PasswordResetToken { 
-  id            String    @id @default(cuid())
-  token         String    @unique
-  createdAt     DateTime  @default(now()) @map("created_at")
-  resetAt       DateTime?
-
-  account       Account @relation(fields:[accountId], references: [id])
-  accountId     String  
+model PasswordResetToken {
+  id        String    @id @default(cuid())
+  token     String    @unique
+  createdAt DateTime  @default(now()) @map("created_at")
+  resetAt   DateTime?
+  accountId String
+  account   Account   @relation(fields: [accountId], references: [id])
 }
 
 model User {
   accountId String  @unique
-  account   Account @relation(fields: [accountId], references: [id], onDelete: Cascade )
+  account   Account @relation(fields: [accountId], references: [id], onDelete: Cascade)
 
   @@map("users")
 }
@@ -72,11 +69,11 @@ model Announcement {
   categories   String[]
   price        Float
   description  String
-  photo        String?
-  isPublished  Boolean?
   trainerId    String        @unique
   createdAt    DateTime      @default(now()) @map("created_at")
   updatedAt    DateTime      @updatedAt @map("updated_at")
+  isPublished  Boolean?
+  photo        String?
   trainer      Trainer       @relation(fields: [trainerId], references: [id], onDelete: Cascade)
   testimonials Testimonial[]
 

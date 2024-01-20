@@ -21,27 +21,32 @@ export const authOptions: NextAuthOptions = {
 				password: { label: 'Password', type: 'password' },
 			},
 			async authorize(credentials) {
-				if (!credentials?.email || !credentials.password) {
-					throw new Error('All fields must be filled.')
-				}
-				const existingAccount = await prisma.account.findUnique({
-					where: { email: credentials?.email },
-				})
-				if (!existingAccount) {
-					throw new Error('Invalid email or password.')
-				}
-				if (!existingAccount.active) {
-					throw new Error('Account is not active. Please check your email for activation link.')
-				}
-				const passwordMatch = await compare(credentials.password, existingAccount.password)
-				if (!passwordMatch) {
-					throw new Error('Invalid email or password.')
-				}
+				try {
+					if (!credentials?.email || !credentials.password) {
+						throw new Error('All fields must be filled.')
+					}
+					const existingAccount = await prisma.account.findUnique({
+						where: { email: credentials?.email },
+					})
+					if (!existingAccount) {
+						throw new Error('Invalid email or password.')
+					}
+					if (!existingAccount.active) {
+						throw new Error('Account is not active. Please check your email for activation link.')
+					}
+					const passwordMatch = await compare(credentials.password, existingAccount.password)
+					if (!passwordMatch) {
+						throw new Error('Invalid email or password.')
+					}
 
-				return {
-					id: existingAccount.id,
-					name: existingAccount.name,
-					email: existingAccount.email,
+					return {
+						id: existingAccount.id,
+						name: existingAccount.name,
+						email: existingAccount.email,
+					}
+				} catch (error: any) {
+					console.error('Authorization Error:', error.message)
+					throw error
 				}
 			},
 		}),
