@@ -17,6 +17,10 @@
 	margin-bottom: 2em;
 	cursor: pointer;
 }
+.errorMsg {
+	font-size: clamp(1.4rem, 1.2041rem + 0.9796vw, 2rem);
+	color: $mainColor;
+}
 .arrow {
 	margin-left: auto;
 }

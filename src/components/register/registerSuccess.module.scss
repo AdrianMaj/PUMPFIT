@@ -1,0 +1,19 @@
+@use '../variables' as *;
+.arrowReversed {
+	rotate: 180deg;
+	margin-right: 1em;
+}
+.link {
+	display: flex;
+	align-items: center;
+	text-decoration: none;
+	color: $subtext;
+	font-size: clamp(1.4rem, 1.2041rem + 0.9796vw, 2rem);
+	line-height: 1.5em;
+	text-wrap: nowrap;
+}
+.text {
+	font-size: clamp(1.4rem, 1.2041rem + 0.9796vw, 2rem);
+	color: $subtext;
+	margin-bottom: 8rem;
+}

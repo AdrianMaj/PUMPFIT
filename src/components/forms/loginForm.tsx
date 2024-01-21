@@ -18,6 +18,7 @@ const FormSchema = z.object({
 
 const LoginForm = () => {
 	const [isLoading, setIsLoading] = useState(false)
+	const [isError, setIsError] = useState<boolean>()
 	const router = useRouter()
 	const form = useForm<z.infer<typeof FormSchema>>({
 		resolver: zodResolver(FormSchema),
@@ -28,17 +29,23 @@ const LoginForm = () => {
 	})
 
 	const onSubmit = async (values: z.infer<typeof FormSchema>) => {
+		setIsError(false)
 		setIsLoading(true)
 		try {
-			await signIn('credentials', {
+			const result = await signIn('credentials', {
 				email: values.email,
 				password: values.password,
 				redirect: false,
 			})
-			router.push('/dashboard')
+			if (result && !result.error) {
+				router.push('/dashboard')
+			} else {
+				setIsLoading(false)
+				setIsError(true)
+			}
 		} catch (error: any) {
 			setIsLoading(false)
-			console.error(error.response)
+			console.error('Error during sign-in:', error)
 		}
 	}
 	const MotionLink = motion(Link)
@@ -52,6 +59,7 @@ const LoginForm = () => {
 						<form onSubmit={form.handleSubmit(onSubmit)} className={classes.form}>
 							<Input type="email" label="E-mail" id="email" error={form.formState.errors.email} />
 							<Input type="password" label="Password" id="password" error={form.formState.errors.password} />
+							{isError && <p className={classes.errorMsg}>Invalid email, password or your account is not active.</p>}
 							<MotionLink whileHover={{ color: '#fff' }} href="/forgot-password" className={classes.text}>
 								Forgot your password?
 							</MotionLink>

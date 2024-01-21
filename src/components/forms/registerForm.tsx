@@ -64,7 +64,7 @@ const RegisterForm = () => {
 
 			if (response.ok) {
 				console.log('Successfully created an account!')
-				router.push('/login')
+				router.push('/register/success')
 				// const result = await signIn('credentials', {
 				// 	callbackUrl: '/',
 				// 	email: values.email,
