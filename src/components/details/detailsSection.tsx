@@ -2,15 +2,31 @@ import React from 'react'
 import Wrapper from '../ui/wrapper'
 import classes from './detailsSection.module.scss'
 import LinkButton from '../ui/linkButton'
-import Image from 'next/image'
 import SectionHeading from '../ui/sectionHeading'
 import { AnnouncementWithTestimonialsAndTrainer } from '@/types/databaseTypes'
+import fetchAccount from '@/util/fetchAccount'
 
 const DetailsSection: React.FC<{
 	trainerName: string
 	trainerData: AnnouncementWithTestimonialsAndTrainer
 	id: string
-}> = ({ trainerName, trainerData, id }) => {
+}> = async ({ trainerName, trainerData, id }) => {
+	const userAccount = await fetchAccount()
+	let content
+	if (userAccount && userAccount.isTrainer) {
+		content = <p className={classes.emptySection}>Only regular users are allowed to add testimonials.</p>
+	} else if (userAccount && !userAccount.isTrainer) {
+		content = (
+			<LinkButton
+				style={{ fontSize: 'clamp(1.4rem, 1.2041rem + 0.9796vw, 2rem)', width: 'fit-content' }}
+				filled
+				linked={`/details/${id}/add-testimonial`}>
+				Add testimonial
+			</LinkButton>
+		)
+	} else {
+		content = <p className={classes.emptySection}>Please sign in to add an testimonial.</p>
+	}
 	return (
 		<main className={classes.main}>
 			<section className={classes.heroInfo}>
@@ -48,13 +64,16 @@ const DetailsSection: React.FC<{
 					</section>
 					<section className={classes.testimonials}>
 						<SectionHeading>Photos</SectionHeading>
-						<p>There will be photos in the future...</p>
+						<p className={classes.emptySection}>There will be photos in the future...</p>
 					</section>
 					<section className={classes.testimonials}>
 						<SectionHeading>Testimonials</SectionHeading>
-						{trainerData.testimonials.map(testimonial => (
-							<p key={testimonial.id}>{testimonial.name}</p>
-						))}
+						{trainerData.testimonials.length > 0 ? (
+							trainerData.testimonials.map(testimonial => <p key={testimonial.id}>{testimonial.name}</p>)
+						) : (
+							<p className={classes.emptySection}>This trainer currently has no active testimonials.</p>
+						)}
+						<div className={classes.testimonialsInfoContainer}>{content}</div>
 					</section>
 					<div className={classes.attribution}>
 						<p className={classes.attributionText}>Am I your perfect trainer?</p>{' '}

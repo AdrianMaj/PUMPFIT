@@ -21,6 +21,19 @@
 	font-size: $headingSize;
 	font-weight: 600;
 }
+.emptySection {
+	font-size: $subtextSize;
+	color: $subtext;
+	text-align: center;
+	margin-bottom: 1em;
+}
+.testimonialsInfoContainer {
+	margin-top: 5em;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+}
 .categories {
 	display: flex;
 	flex-wrap: wrap;

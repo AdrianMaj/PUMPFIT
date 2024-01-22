@@ -1,7 +1,7 @@
 'use client'
 import { motion } from 'framer-motion'
 import { useMediaQuery } from 'react-responsive'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import MenuButton from './menuButton'
 import classes from './menu.module.scss'
 import Link from 'next/link'
@@ -17,11 +17,13 @@ const Menu: React.FC<{ session: Session | null }> = ({ session }) => {
 			return newState
 		})
 	}
-	if (isOpen) {
-		document.body.classList.add('overflow')
-	} else {
-		document.body.classList.remove('overflow')
-	}
+	useEffect(() => {
+		if (isOpen) {
+			document.body.classList.add('overflow')
+		} else {
+			document.body.classList.remove('overflow')
+		}
+	}, [isOpen])
 	const container = {
 		closed: { opacity: 0 },
 		opened: {

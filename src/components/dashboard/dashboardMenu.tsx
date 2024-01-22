@@ -16,10 +16,12 @@ const DashboardMenu: React.FC<{ name: string; isTrainer: boolean }> = ({ name, i
 	}
 
 	useEffect(() => {
-		window.addEventListener('resize', updateScreenSize)
-		updateScreenSize()
-		return () => {
-			window.removeEventListener('resize', updateScreenSize)
+		if (typeof window !== 'undefined') {
+			window.addEventListener('resize', updateScreenSize)
+			updateScreenSize()
+			return () => {
+				window.removeEventListener('resize', updateScreenSize)
+			}
 		}
 	}, [])
 	const toggleMenu = () => {
@@ -28,11 +30,13 @@ const DashboardMenu: React.FC<{ name: string; isTrainer: boolean }> = ({ name, i
 			return newState
 		})
 	}
-	if (isOpen && screenWidth && screenWidth < 992) {
-		document.body.classList.add('overflow')
-	} else {
-		document.body.classList.remove('overflow')
-	}
+	useEffect(() => {
+		if (typeof window !== 'undefined' && isOpen && screenWidth) {
+			document.body.classList.add('overflow')
+		} else {
+			document.body.classList.remove('overflow')
+		}
+	}, [isOpen, screenWidth])
 	const navVariants = {
 		opened: {
 			width: screenWidth + 'px',
