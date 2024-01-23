@@ -1,10 +1,11 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import Wrapper from '../ui/wrapper'
 import classes from './detailsSection.module.scss'
 import LinkButton from '../ui/linkButton'
 import SectionHeading from '../ui/sectionHeading'
 import { AnnouncementWithTestimonialsAndTrainer } from '@/types/databaseTypes'
 import fetchAccount from '@/util/fetchAccount'
+import TestimonialCard from './testimonialCard'
 
 const DetailsSection: React.FC<{
 	trainerName: string
@@ -15,13 +16,19 @@ const DetailsSection: React.FC<{
 	let content
 	if (userAccount && userAccount.isTrainer) {
 		content = <p className={classes.emptySection}>Only regular users are allowed to add testimonials.</p>
-	} else if (userAccount && !userAccount.isTrainer) {
+	} else if (userAccount && userAccount.user && !userAccount.isTrainer) {
+		let text: string
+		if (userAccount.user.testimonials.some(testimonial => testimonial.announcementId === trainerData.id)) {
+			text = 'Edit your testimonial'
+		} else {
+			text = 'Add testimonial'
+		}
 		content = (
 			<LinkButton
 				style={{ fontSize: 'clamp(1.4rem, 1.2041rem + 0.9796vw, 2rem)', width: 'fit-content' }}
 				filled
 				linked={`/details/${id}/add-testimonial`}>
-				Add testimonial
+				{text}
 			</LinkButton>
 		)
 	} else {
@@ -69,7 +76,9 @@ const DetailsSection: React.FC<{
 					<section className={classes.testimonials}>
 						<SectionHeading>Testimonials</SectionHeading>
 						{trainerData.testimonials.length > 0 ? (
-							trainerData.testimonials.map(testimonial => <p key={testimonial.id}>{testimonial.name}</p>)
+							trainerData.testimonials.map(testimonial => (
+								<TestimonialCard key={testimonial.id} testimonial={testimonial} />
+							))
 						) : (
 							<p className={classes.emptySection}>This trainer currently has no active testimonials.</p>
 						)}

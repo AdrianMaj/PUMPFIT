@@ -65,9 +65,26 @@ export type Testimonial = {
 	announcement: Announcement
 }
 
+export type TestimonialWithUserAndAccount = Prisma.TestimonialGetPayload<{
+	include: {
+		user: {
+			include: {
+				account: true
+			}
+		}
+	}
+}>
 export type AnnouncementWithTestimonialsAndTrainer = Prisma.AnnouncementGetPayload<{
 	include: {
 		trainer: true
-		testimonials: true
+		testimonials: {
+			include: {
+				user: {
+					include: {
+						account: true
+					}
+				}
+			}
+		}
 	}
 }>

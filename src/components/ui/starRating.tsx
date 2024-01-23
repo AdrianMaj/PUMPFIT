@@ -1,12 +1,20 @@
+'use client'
 import React from 'react'
 import classes from './starRating.module.scss'
 
-const StarRating = ({ value, setValue }: { value: number; setValue: (value: number) => void }) => {
+const StarRating = ({ value, setValue }: { value: number; setValue?: (value: number) => void }) => {
 	return (
 		<div className={classes.starContainer}>
 			<svg
 				className={classes.starIcon}
-				onClick={() => setValue(1)}
+				onClick={() => {
+					if (setValue) {
+						setValue(1)
+					}
+				}}
+				style={{
+					cursor: setValue ? 'pointer' : 'default',
+				}}
 				width="36"
 				height="36"
 				viewBox="0 0 24 24"
@@ -29,7 +37,14 @@ const StarRating = ({ value, setValue }: { value: number; setValue: (value: numb
 			</svg>
 			<svg
 				className={classes.starIcon}
-				onClick={() => setValue(2)}
+				onClick={() => {
+					if (setValue) {
+						setValue(2)
+					}
+				}}
+				style={{
+					cursor: setValue ? 'pointer' : 'default',
+				}}
 				width="36"
 				height="36"
 				viewBox="0 0 24 24"
@@ -52,7 +67,14 @@ const StarRating = ({ value, setValue }: { value: number; setValue: (value: numb
 			</svg>
 			<svg
 				className={classes.starIcon}
-				onClick={() => setValue(3)}
+				onClick={() => {
+					if (setValue) {
+						setValue(3)
+					}
+				}}
+				style={{
+					cursor: setValue ? 'pointer' : 'default',
+				}}
 				width="36"
 				height="36"
 				viewBox="0 0 24 24"
@@ -75,7 +97,14 @@ const StarRating = ({ value, setValue }: { value: number; setValue: (value: numb
 			</svg>
 			<svg
 				className={classes.starIcon}
-				onClick={() => setValue(4)}
+				onClick={() => {
+					if (setValue) {
+						setValue(4)
+					}
+				}}
+				style={{
+					cursor: setValue ? 'pointer' : 'default',
+				}}
 				width="36"
 				height="36"
 				viewBox="0 0 24 24"
@@ -98,7 +127,14 @@ const StarRating = ({ value, setValue }: { value: number; setValue: (value: numb
 			</svg>
 			<svg
 				className={classes.starIcon}
-				onClick={() => setValue(5)}
+				onClick={() => {
+					if (setValue) {
+						setValue(5)
+					}
+				}}
+				style={{
+					cursor: setValue ? 'pointer' : 'default',
+				}}
 				width="36"
 				height="36"
 				viewBox="0 0 24 24"

@@ -3,16 +3,12 @@ import prisma from '../../lib/prisma'
 
 export const addTestimonial = async ({
 	rating,
-	name,
-	photo,
 	text,
 	title,
 	announcementId,
 	userId,
 }: {
 	rating: number
-	name: string
-	photo: string
 	text: string
 	title: string
 	announcementId: string
@@ -32,8 +28,6 @@ export const addTestimonial = async ({
 				rating,
 			},
 			create: {
-				name,
-				photo,
 				text,
 				title,
 				rating,

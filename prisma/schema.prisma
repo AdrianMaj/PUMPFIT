@@ -33,7 +33,7 @@ model ActivateToken {
   createdAt   DateTime  @default(now()) @map("created_at")
   updatedAt   DateTime  @updatedAt @map("updated_at")
   accountId   String
-  account     Account   @relation(fields: [accountId], references: [id])
+  account     Account   @relation(fields: [accountId], references: [id], onDelete: Cascade)
 }
 
 model PasswordResetToken {
@@ -42,10 +42,11 @@ model PasswordResetToken {
   createdAt DateTime  @default(now()) @map("created_at")
   resetAt   DateTime?
   accountId String
-  account   Account   @relation(fields: [accountId], references: [id])
+  account   Account   @relation(fields: [accountId], references: [id], onDelete: Cascade)
 }
 
 model User {
+  id        String    @id @default(cuid())      
   accountId String  @unique
   account   Account @relation(fields: [accountId], references: [id], onDelete: Cascade)
   testimonials Testimonial[]
@@ -83,10 +84,8 @@ model Announcement {
 
 model Testimonial {
   id             String       @id @default(cuid())
-  name           String
   userId         String
-  user           User         @relation(fields: [userId], references: [accountId], onDelete: Cascade)
-  photo          String
+  user           User         @relation(fields: [userId], references: [id], onDelete: Cascade)
   text           String
   title          String
   rating         Int

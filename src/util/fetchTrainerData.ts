@@ -10,7 +10,11 @@ const fetchTrainerData = async (trainerId: string) => {
 				include: {
 					announcement: {
 						include: {
-							testimonials: true,
+							testimonials: {
+								include: {
+									user: { include: { account: true } },
+								},
+							},
 						},
 					},
 					account: true,
@@ -19,5 +23,5 @@ const fetchTrainerData = async (trainerId: string) => {
 		},
 	})
 	return trainers
-} 
+}
 export default fetchTrainerData

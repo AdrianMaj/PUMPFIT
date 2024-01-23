@@ -22,15 +22,11 @@ const TestimonialForm = ({
 	trainerId,
 	announcementId,
 	trainerName,
-	userName,
-	userPhoto,
 	userId,
 }: {
 	trainerId: string
 	announcementId: string
 	trainerName: string
-	userName: string
-	userPhoto: string
 	userId: string
 }) => {
 	const [isLoading, setIsLoading] = useState(false)
@@ -49,8 +45,6 @@ const TestimonialForm = ({
 			setIsLoading(true)
 			await addTestimonial({
 				rating: starValue,
-				name: userName,
-				photo: userPhoto,
 				text: values.message,
 				title: values.title,
 				announcementId,

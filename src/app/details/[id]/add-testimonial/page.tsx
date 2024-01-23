@@ -9,7 +9,14 @@ import React from 'react'
 const Page = async ({ params }: { params: { id: string } }) => {
 	const userAccount = await fetchAccount()
 	const trainerAccount = await fetchTrainerData(params.id)
-	if (userAccount && !userAccount.isTrainer && trainerAccount && trainerAccount.trainer?.announcement) {
+	if (
+		userAccount &&
+		!userAccount.isTrainer &&
+		userAccount.user &&
+		trainerAccount &&
+		trainerAccount.trainer &&
+		trainerAccount.trainer.announcement
+	) {
 		return (
 			<ForgotPasswordWrapper>
 				<SectionHeading
@@ -21,12 +28,8 @@ const Page = async ({ params }: { params: { id: string } }) => {
 				<TestimonialForm
 					trainerId={params.id}
 					trainerName={trainerAccount.name}
-					userPhoto={
-						userAccount.photo || 'https://i.pinimg.com/originals/b9/f2/19/b9f2193028967077ad84b60a2cced514.jpg'
-					}
-					userName={userAccount.name}
-					userId={userAccount.id}
-					announcementId={trainerAccount.trainer?.announcement?.id}
+					userId={userAccount.user.id}
+					announcementId={trainerAccount.trainer.announcement?.id}
 				/>
 			</ForgotPasswordWrapper>
 		)

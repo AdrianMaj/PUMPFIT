@@ -11,7 +11,12 @@ const fetchAccount = async () => {
 				id: userId,
 			},
 			include: {
-				user: true,
+				user: {
+					include: {
+						testimonials: true,
+						account: true,
+					},
+				},
 				trainer: {
 					include: {
 						announcement: {
