@@ -25,6 +25,7 @@ const Page = async ({ params }: { params: { id: string } }) => {
 						userAccount.photo || 'https://i.pinimg.com/originals/b9/f2/19/b9f2193028967077ad84b60a2cced514.jpg'
 					}
 					userName={userAccount.name}
+					userId={userAccount.id}
 					announcementId={trainerAccount.trainer?.announcement?.id}
 				/>
 			</ForgotPasswordWrapper>

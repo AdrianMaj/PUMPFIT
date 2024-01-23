@@ -8,6 +8,7 @@ export const addTestimonial = async ({
 	text,
 	title,
 	announcementId,
+	userId,
 }: {
 	rating: number
 	name: string
@@ -15,30 +16,29 @@ export const addTestimonial = async ({
 	text: string
 	title: string
 	announcementId: string
+	userId: string
 }) => {
 	try {
-		// const testimonial = await prisma.testimonial.upsert({
-		// 	where: {
-		// 		announcementId: announcementId,
-		// 	},
-		// 	update: {},
-		// 	create: {
-		// 		name,
-		// 		photo,
-		// 		text,
-		// 		title,
-		// 		rating,
-		// 		announcementId,
-		// 	},
-		// })
-		const testimonial = await prisma.testimonial.create({
-			data: {
+		const testimonial = await prisma.testimonial.upsert({
+			where: {
+				userId_announcementId: {
+					userId: userId,
+					announcementId: announcementId,
+				},
+			},
+			update: {
+				text,
+				title,
+				rating,
+			},
+			create: {
 				name,
 				photo,
 				text,
 				title,
 				rating,
 				announcementId,
+				userId,
 			},
 		})
 		if (testimonial) {

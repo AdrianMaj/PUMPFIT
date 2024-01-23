@@ -48,6 +48,7 @@ model PasswordResetToken {
 model User {
   accountId String  @unique
   account   Account @relation(fields: [accountId], references: [id], onDelete: Cascade)
+  testimonials Testimonial[]
 
   @@map("users")
 }
@@ -83,6 +84,8 @@ model Announcement {
 model Testimonial {
   id             String       @id @default(cuid())
   name           String
+  userId         String
+  user           User         @relation(fields: [userId], references: [accountId], onDelete: Cascade)
   photo          String
   text           String
   title          String
@@ -91,6 +94,7 @@ model Testimonial {
   createdAt      DateTime     @default(now()) @map("created_at")
   updatedAt      DateTime     @updatedAt @map("updated_at")
   announcement   Announcement @relation(fields: [announcementId], references: [id], onDelete: Cascade)
-
+  
+  @@unique([userId, announcementId], name: "userId_announcementId")
   @@map("testimonials")
 }

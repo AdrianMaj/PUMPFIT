@@ -11,7 +11,7 @@ import Spinner from '../ui/spinner'
 import Button from '../ui/button'
 import StarRating from '../ui/starRating'
 import { addTestimonial } from '@/util/addTestimonial'
-import { redirect } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 
 const FormSchema = z.object({
 	title: z.string().min(1, 'Title is required'),
@@ -24,15 +24,18 @@ const TestimonialForm = ({
 	trainerName,
 	userName,
 	userPhoto,
+	userId,
 }: {
 	trainerId: string
 	announcementId: string
 	trainerName: string
 	userName: string
 	userPhoto: string
+	userId: string
 }) => {
 	const [isLoading, setIsLoading] = useState(false)
 	const [starValue, setStarValue] = useState(0)
+	const router = useRouter()
 	const form = useForm<z.infer<typeof FormSchema>>({
 		resolver: zodResolver(FormSchema),
 		defaultValues: {
@@ -51,8 +54,9 @@ const TestimonialForm = ({
 				text: values.message,
 				title: values.title,
 				announcementId,
+				userId,
 			})
-			redirect(`/details/${trainerId}`)
+			router.push(`/details/${trainerId}`)
 		} catch (error) {
 			setIsLoading(false)
 		}
