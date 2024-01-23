@@ -1,0 +1,44 @@
+@use '../variables' as *;
+.form {
+	display: flex;
+	flex-direction: column;
+	gap: 2em;
+}
+.arrow {
+	margin-left: auto;
+}
+.rating {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: 1em;
+	margin: 4em 0;
+}
+.ratingText {
+	font-size: $subtextSize;
+	color: $subtext;
+}
+.info {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.infoText {
+	font-size: $headingSize;
+	font-weight: normal;
+}
+.arrowReversed {
+	rotate: 180deg;
+	margin-right: 1em;
+}
+.link {
+	display: flex;
+	align-items: center;
+	margin-top: 1.5em;
+	text-decoration: none;
+	color: $subtext;
+	font-size: clamp(1.4rem, 1.2041rem + 0.9796vw, 2rem);
+	line-height: 1.5em;
+	text-wrap: nowrap;
+}
