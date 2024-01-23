@@ -1,9 +1,7 @@
 'use server'
-import { NextResponse } from 'next/server'
 import prisma from '../../lib/prisma'
-import fetchAccount from './fetchAccount'
 
-export const updateAnnoucement = async ({
+export const updateAnnouncement = async ({
 	photourl,
 	experience,
 	experienceType,

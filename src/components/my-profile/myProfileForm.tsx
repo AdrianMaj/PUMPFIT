@@ -9,7 +9,7 @@ import LinkButton from '@/components/ui/linkButton'
 import Button from '@/components/ui/button'
 import { useEffect, useState } from 'react'
 import MultiSelect from '@/components/ui/multiSelect'
-import { handlePublish, handleUnpublish, updateAnnoucement } from '@/util/updateAnnoucement'
+import { handlePublish, handleUnpublish, updateAnnouncement } from '@/util/updateAnnouncement'
 import { Announcement, Testimonial, Trainer } from '@prisma/client'
 
 type AnnouncementWithTestimonials =
@@ -91,7 +91,7 @@ const MyProfileForm: React.FC<{ trainerData: TrainerWithAnnouncement }> = ({ tra
 		}
 		const parsedData = JSON.parse(JSON.stringify(data))
 		console.log(parsedData)
-		const response = await updateAnnoucement(parsedData)
+		const response = await updateAnnouncement(parsedData)
 		if (!response?.announcement?.success) {
 			setIsUpdating(false)
 			console.log(response)

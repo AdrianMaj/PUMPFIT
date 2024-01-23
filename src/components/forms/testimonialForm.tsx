@@ -10,6 +10,8 @@ import classes from './testimonialForm.module.scss'
 import Spinner from '../ui/spinner'
 import Button from '../ui/button'
 import StarRating from '../ui/starRating'
+import { addTestimonial } from '@/util/addTestimonial'
+import { redirect } from 'next/navigation'
 
 const FormSchema = z.object({
 	title: z.string().min(1, 'Title is required'),
@@ -17,15 +19,17 @@ const FormSchema = z.object({
 })
 
 const TestimonialForm = ({
-	id,
-	trainerPhoto,
+	trainerId,
+	announcementId,
 	trainerName,
 	userName,
+	userPhoto,
 }: {
-	id: string
-	trainerPhoto: string
+	trainerId: string
+	announcementId: string
 	trainerName: string
 	userName: string
+	userPhoto: string
 }) => {
 	const [isLoading, setIsLoading] = useState(false)
 	const [starValue, setStarValue] = useState(0)
@@ -38,7 +42,20 @@ const TestimonialForm = ({
 	})
 
 	const onSubmit = async (values: z.infer<typeof FormSchema>) => {
-		const data = { ...values, starValue }
+		try {
+			setIsLoading(true)
+			await addTestimonial({
+				rating: starValue,
+				name: userName,
+				photo: userPhoto,
+				text: values.message,
+				title: values.title,
+				announcementId,
+			})
+			redirect(`/details/${trainerId}`)
+		} catch (error) {
+			setIsLoading(false)
+		}
 	}
 	const MotionLink = motion(Link)
 	return (
@@ -65,7 +82,7 @@ const TestimonialForm = ({
 					</>
 				)}
 			</FormProvider>
-			<MotionLink whileHover={{ color: '#fff' }} href={`/details/${id}`} className={classes.link}>
+			<MotionLink whileHover={{ color: '#fff' }} href={`/details/${trainerId}`} className={classes.link}>
 				<img src="/arrow-login.svg" alt="Arrow Icon" className={classes.arrowReversed} />
 				Return to details page
 			</MotionLink>
