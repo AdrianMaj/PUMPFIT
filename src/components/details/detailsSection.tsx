@@ -76,9 +76,11 @@ const DetailsSection: React.FC<{
 					<section className={classes.testimonials}>
 						<SectionHeading>Testimonials</SectionHeading>
 						{trainerData.testimonials.length > 0 ? (
-							trainerData.testimonials.map(testimonial => (
-								<TestimonialCard key={testimonial.id} testimonial={testimonial} />
-							))
+							<div className={classes.testimonialList}>
+								{trainerData.testimonials.map(testimonial => (
+									<TestimonialCard key={testimonial.id} testimonial={testimonial} />
+								))}
+							</div>
 						) : (
 							<p className={classes.emptySection}>This trainer currently has no active testimonials.</p>
 						)}

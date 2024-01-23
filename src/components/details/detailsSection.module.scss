@@ -27,6 +27,11 @@
 	text-align: center;
 	margin-bottom: 1em;
 }
+.testimonialList {
+	display: flex;
+	flex-direction: column;
+	gap: 3em;
+}
 .testimonialsInfoContainer {
 	margin-top: 5em;
 	display: flex;
@@ -77,6 +82,9 @@
 	}
 }
 @media (min-width: 992px) {
+	.testimonialList {
+		flex-direction: row;
+	}
 	.trainerInfo {
 		position: absolute;
 		width: 60%;
