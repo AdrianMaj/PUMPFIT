@@ -5,6 +5,7 @@ import { AnnouncementWithTestimonialsAndTrainer } from '@/types/databaseTypes'
 import fetchTrainerData from '@/util/fetchTrainerData'
 import React from 'react'
 
+
 const Page = async ({ params }: { params: { id: string } }) => {
 	const account = await fetchTrainerData(params.id)
 	if (account && account.trainer && account.trainer.announcement) {

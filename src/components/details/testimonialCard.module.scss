@@ -2,13 +2,15 @@
 .card {
 	padding: 2em;
 	display: flex;
+	margin: 0 1em;
 	flex-direction: column;
+	height: 100%;
 	background-color: $secondaryBg;
 }
 .cardHeading {
 	position: relative;
 	display: flex;
-	height: 100%;
+	height: 20%;
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
@@ -26,6 +28,7 @@
 	}
 }
 .cardContent {
+	height: 100%;
 	margin-bottom: auto;
 }
 .cardImage {
@@ -44,9 +47,11 @@
 	color: $subtext;
 }
 .cardTitle {
+	height: 100%;
 	font-size: $headingSize;
 }
 .cardText {
+	height: 100%;
 	margin: 1em 0;
 	font-size: $subtextSize;
 	color: $subtext;
@@ -66,10 +71,5 @@
 		margin-bottom: 0;
 		margin-right: 3em;
 		width: 20%;
-	}
-}
-@media (min-width: 992px) {
-	.card {
-		width: 50%;
 	}
 }

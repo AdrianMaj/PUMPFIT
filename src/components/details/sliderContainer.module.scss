@@ -1,0 +1,12 @@
+@use '../variables' as *;
+.emptySection {
+	font-size: $subtextSize;
+	color: $subtext;
+	text-align: center;
+	margin-bottom: 1em;
+}
+.testimonialList {
+	display: flex;
+	flex-direction: column;
+	gap: 3em;
+}

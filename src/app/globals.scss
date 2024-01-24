@@ -13,26 +13,10 @@ body {
 .overflow {
 	overflow-y: hidden;
 }
-.rmsc {
-	--rmsc-main: #a50000 !important;
-	--rmsc-hover: #090909 !important;
-	--rmsc-selected: #090909 !important;
-	--rmsc-border: transparent !important;
-	--rmsc-gray: #b3b3b3 !important;
-	--rmsc-bg: #0f0f0f !important;
-	--rmsc-p: 16.5px !important; /* Spacing */
-	--rmsc-radius: 0px !important; /* Radius */
-	--rmsc-h: 61px !important; /* Height */
-	.dropdown-container:focus-within {
-		border: 1px solid #a50000 !important;
-		box-shadow: none !important;
-	}
-	.dropdown-heading {
-		span {
-			font-size: clamp(1.6rem, 1.4041rem + 0.9796vw, 2.2rem) !important;
-		}
-	}
-	.dropdown-content {
-		font-size: 2rem;
-	}
+.slick-track {
+	display: flex !important;
+}
+
+.slick-slide {
+	height: inherit !important;
 }
