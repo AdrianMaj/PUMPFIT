@@ -10,3 +10,35 @@
 	flex-direction: column;
 	gap: 3em;
 }
+.container {
+	position: relative;
+}
+.sliderButton {
+	position: absolute;
+	display: flex;
+	align-items: center;
+	background: none;
+	border: none;
+	cursor: pointer;
+	padding: 1.5em;
+	height: 100%;
+	z-index: 10;
+	top: 0;
+}
+@media (min-width: 992px) {
+	.sliderButton {
+		backdrop-filter: blur(6px);
+	}
+	.sliderRight {
+		right: 0;
+		padding-left: 12.5%;
+		background: linear-gradient(-90deg, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 100%);
+		mask: linear-gradient(90deg, transparent, black 50%);
+	}
+	.sliderLeft {
+		left: 0;
+		padding-right: 12.5%;
+		background: linear-gradient(90deg, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 100%);
+		mask: linear-gradient(-90deg, transparent, black 50%);
+	}
+}

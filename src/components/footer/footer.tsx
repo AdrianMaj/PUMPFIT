@@ -1,10 +1,13 @@
+'use client'
 import React from 'react'
 import classes from './footer.module.scss'
 import Link from 'next/link'
 import Wrapper from '../ui/wrapper'
 import Image from 'next/image'
+import { motion } from 'framer-motion'
 
 const Footer = () => {
+	const MotionLink = motion(Link)
 	const date = new Date()
 	const year = date.getFullYear()
 	return (
@@ -28,10 +31,22 @@ const Footer = () => {
 							<p className={classes.footerTitle}>Company</p>
 							<ul className={classes.footerList}>
 								<li className={classes.footerListElement}>
-									<Link href="/privacy-policy">Privacy policy</Link>
+									<MotionLink
+										whileHover={{
+											color: '#fff',
+										}}
+										href="/privacy-policy">
+										Privacy policy
+									</MotionLink>
 								</li>
 								<li className={classes.footerListElement}>
-									<Link href="/terms-and-conditions">Terms & conditions</Link>
+									<MotionLink
+										whileHover={{
+											color: '#fff',
+										}}
+										href="/terms-and-conditions">
+										Terms & conditions
+									</MotionLink>
 								</li>
 							</ul>
 						</div>
@@ -39,10 +54,22 @@ const Footer = () => {
 							<p className={classes.footerTitle}>Links</p>
 							<ul className={classes.footerList}>
 								<li className={classes.footerListElement}>
-									<Link href="/dashboard">Control Panel</Link>
+									<MotionLink
+										whileHover={{
+											color: '#fff',
+										}}
+										href="/dashboard">
+										Control Panel
+									</MotionLink>
 								</li>
 								<li className={classes.footerListElement}>
-									<Link href="/trainers">Our Trainers</Link>
+									<MotionLink
+										whileHover={{
+											color: '#fff',
+										}}
+										href="/trainers">
+										Our Trainers
+									</MotionLink>
 								</li>
 							</ul>
 						</div>
@@ -50,10 +77,22 @@ const Footer = () => {
 							<p className={classes.footerTitle}>Socials</p>
 							<ul className={classes.footerList}>
 								<li className={classes.footerListElement}>
-									<Link href="https://www.facebook.com/">Facebook</Link>
+									<MotionLink
+										whileHover={{
+											color: '#fff',
+										}}
+										href="https://www.facebook.com/">
+										Facebook
+									</MotionLink>
 								</li>
 								<li className={classes.footerListElement}>
-									<Link href="https://twitter.com/">Twitter / X</Link>
+									<MotionLink
+										whileHover={{
+											color: '#fff',
+										}}
+										href="https://twitter.com/">
+										Twitter / X
+									</MotionLink>
 								</li>
 							</ul>
 						</div>

@@ -22,8 +22,9 @@ const FaqElement: React.FC<{ question: string; children: React.ReactNode }> = ({
 					style={{ width: 'auto', height: 'auto' }}
 					alt="Red arrow"
 					animate={{
-						rotate: isOpen ? 180 : 0,
+						rotate: !isOpen ? [180, 0] : [0, 180],
 					}}
+					initial={false}
 				/>
 			</div>
 			<AnimatePresence initial={false} mode="wait">
