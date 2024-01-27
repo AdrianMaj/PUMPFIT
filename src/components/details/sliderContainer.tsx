@@ -12,6 +12,7 @@ import Image from 'next/image'
 
 const SliderContainer = ({ trainerData }: { trainerData: AnnouncementWithTestimonialsAndTrainer }) => {
 	const isMobile = useMediaQuery({ query: '(max-width: 991px)' })
+	const isSmallMobile = useMediaQuery({ query: '(max-width: 376px)' })
 	const sliderRef = useRef<Slider>(null)
 	const slickSettings = {
 		dots: false,
@@ -20,7 +21,7 @@ const SliderContainer = ({ trainerData }: { trainerData: AnnouncementWithTestimo
 		speed: 500,
 		slidesToShow: 1,
 		centerMode: true,
-		centerPadding: isMobile ? '5%' : '12.5%',
+		centerPadding: isMobile ? (isSmallMobile ? '0' : '5%') : '12.5%',
 		slidesToScroll: 1,
 		autoplaySpeed: 5000,
 		autoplay: true,
