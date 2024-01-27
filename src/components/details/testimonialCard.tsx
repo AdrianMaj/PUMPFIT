@@ -9,7 +9,7 @@ const TestimonialCard = ({ testimonial }: { testimonial: TestimonialWithUserAndA
 			? '0' + (testimonial.updatedAt.getMonth() + 1)
 			: testimonial.updatedAt.getMonth() + 1
 	return (
-		<div className={classes.card}>
+		<>
 			<div className={classes.cardHeading}>
 				<img
 					// width={0}
@@ -34,7 +34,7 @@ const TestimonialCard = ({ testimonial }: { testimonial: TestimonialWithUserAndA
 				<h3 className={classes.cardTitle}>{testimonial.title}</h3>
 				<p className={classes.cardText}>{testimonial.text}</p>
 			</div>
-		</div>
+		</>
 	)
 }
 

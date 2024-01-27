@@ -1,7 +1,7 @@
 'use client'
 import * as z from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
 import { motion } from 'framer-motion'
 import Input from '../ui/input'
@@ -12,10 +12,11 @@ import Button from '../ui/button'
 import StarRating from '../ui/starRating'
 import { addTestimonial } from '@/util/addTestimonial'
 import { useRouter } from 'next/navigation'
+import fetchTestimonialData from '@/util/fetchTestimonialData'
 
 const FormSchema = z.object({
 	title: z.string().min(1, 'Title is required'),
-	message: z.string().min(1, 'Title is required'),
+	message: z.string().min(1, 'Title is required').max(350, 'Your testimonial can not be longer than 350 characters.'),
 })
 
 const TestimonialForm = ({
@@ -23,20 +24,39 @@ const TestimonialForm = ({
 	announcementId,
 	trainerName,
 	userId,
+	rating,
+	title,
+	message,
 }: {
 	trainerId: string
 	announcementId: string
 	trainerName: string
 	userId: string
+	rating: number | undefined
+	title: string | undefined
+	message: string | undefined
 }) => {
 	const [isLoading, setIsLoading] = useState(false)
 	const [starValue, setStarValue] = useState(0)
+	const [titleValue, setTitleValue] = useState('')
+	const [messageValue, setMessageValue] = useState('')
 	const router = useRouter()
+	useEffect(() => {
+		if (rating) {
+			setStarValue(rating)
+		}
+		if (title) {
+			setTitleValue(title)
+		}
+		if (message) {
+			setMessageValue(message)
+		}
+	}, [])
 	const form = useForm<z.infer<typeof FormSchema>>({
 		resolver: zodResolver(FormSchema),
 		defaultValues: {
-			title: '',
-			message: '',
+			title: titleValue,
+			message: messageValue,
 		},
 	})
 
@@ -71,8 +91,14 @@ const TestimonialForm = ({
 							<StarRating value={starValue} setValue={setStarValue} />
 						</div>
 						<form onSubmit={form.handleSubmit(onSubmit)} className={classes.form}>
-							<Input type="text" label="Title" id="title" error={form.formState.errors.title} />
-							<Input isTextArea label="Message" id="message" error={form.formState.errors.message} />
+							<Input type="text" label="Title" id="title" value={titleValue} error={form.formState.errors.title} />
+							<Input
+								isTextArea
+								label="Message"
+								id="message"
+								value={messageValue}
+								error={form.formState.errors.message}
+							/>
 							<Button filled type="submit">
 								Publish testimonial
 							</Button>

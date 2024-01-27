@@ -1,3 +1,4 @@
+@use '../components/variables' as *;
 * {
 	margin: 0;
 	padding: 0;
@@ -16,7 +17,15 @@ body {
 .slick-track {
 	display: flex !important;
 }
-
-.slick-slide {
-	height: inherit !important;
+.slick-track .slick-slide {
+	display: flex;
+	height: auto;
+}
+.slick-slide > div {
+	padding: 2em;
+	display: flex;
+	margin: 0 1em;
+	flex-direction: column;
+	height: 100%;
+	background-color: $secondaryBg;
 }
