@@ -46,7 +46,7 @@ const MyProfileForm: React.FC<{ trainerData: TrainerWithAnnouncement }> = ({ tra
 	const [isPublishing, setIsPublishing] = useState(false)
 	const [isUnPublishing, setIsUnPublishing] = useState(false)
 	const [isUpdating, setIsUpdating] = useState(false)
-	const splittedExperience = trainerData?.announcement?.experience.split('') || ''
+	const splittedExperience = trainerData?.announcement?.experience.split(' ') || ''
 	const form = useForm<z.infer<typeof FormSchema>>({
 		resolver: zodResolver(FormSchema),
 		defaultValues: {
