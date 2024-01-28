@@ -6,10 +6,16 @@ import LogoutButton from '../ui/logoutButton'
 import { motion } from 'framer-motion'
 import MenuButton from '../navbar/menuButton'
 import DashboardListElement from '../ui/dashboardListElement'
+import { usePathname } from 'next/navigation'
 
 const DashboardMenu: React.FC<{ name: string; isTrainer: boolean }> = ({ name, isTrainer }) => {
 	const [isOpen, setIsOpen] = useState(false)
 	const [screenWidth, setScreenWidth] = useState<number | null>(null)
+	const pathname = usePathname()
+
+	useEffect(() => {
+		setIsOpen(false)
+	}, [pathname])
 
 	const updateScreenSize = () => {
 		setScreenWidth(window.innerWidth)
