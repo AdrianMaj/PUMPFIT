@@ -54,7 +54,7 @@ const TrainerCard: React.FC<{
 						<Button fontSize="clamp(1.4rem, 1.2041rem + 0.9796vw, 2rem)" linked={`/details/${id}`}>
 							See more
 						</Button>
-						<Button fontSize="clamp(1.4rem, 1.2041rem + 0.9796vw, 2rem)" filled linked={`/contact/${id}`}>
+						<Button fontSize="clamp(1.4rem, 1.2041rem + 0.9796vw, 2rem)" filled linked={`/dashboard/messages/${id}`}>
 							Get in touch
 						</Button>
 					</div>

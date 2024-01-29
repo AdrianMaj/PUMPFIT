@@ -62,7 +62,7 @@ const DetailsSection: React.FC<{
 						<LinkButton
 							style={{ fontSize: 'clamp(1.4rem, 1.2041rem + 0.9796vw, 2rem)', width: 'fit-content' }}
 							filled
-							linked={`/contact/${id}`}>
+							linked={`/dashboard/messages/${id}`}>
 							Message me now!
 						</LinkButton>
 					</div>
@@ -86,7 +86,7 @@ const DetailsSection: React.FC<{
 							<LinkButton
 								style={{ fontSize: 'clamp(1.4rem, 1.2041rem + 0.9796vw, 2rem)' }}
 								filled
-								linked={`/contact/${id}`}>
+								linked={`/dashboard/messages/${id}`}>
 								Message me now!
 							</LinkButton>
 						</div>
