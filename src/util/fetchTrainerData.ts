@@ -1,7 +1,7 @@
 import prisma from '../../lib/prisma'
 
 const fetchTrainerData = async (trainerId: string) => {
-	const trainers = await prisma.account.findUnique({
+	const trainer = await prisma.account.findUnique({
 		where: {
 			id: trainerId,
 		},
@@ -22,6 +22,6 @@ const fetchTrainerData = async (trainerId: string) => {
 			},
 		},
 	})
-	return trainers
+	return trainer
 }
 export default fetchTrainerData

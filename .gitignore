@@ -13,6 +13,9 @@
 /.next/
 /out/
 
+#server
+server.js
+
 # production
 /build
 

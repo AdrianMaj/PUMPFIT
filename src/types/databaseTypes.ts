@@ -13,7 +13,7 @@ export type Account = {
 	trainer?: Trainer | null
 	user?: User | null
 }
-export type AccountWithTrainer = Prisma.AnnouncementGetPayload<{
+export type AccountWithTrainer = Prisma.AccountGetPayload<{
 	include: {
 		trainer: {
 			include: {
