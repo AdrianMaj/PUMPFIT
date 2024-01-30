@@ -1,17 +1,19 @@
 import SendMessageForm from '@/components/forms/sendMessageForm'
+import ChatSection from '@/components/messages/chatSection'
 import SectionHeading from '@/components/ui/sectionHeading'
 import fetchAccount from '@/util/fetchAccount'
-import fetchTrainerData from '@/util/fetchTrainerData'
+import fetchAccountById from '@/util/fetchAccountById'
 import React from 'react'
 
 const Page = async ({ params }: { params: { id: string } }) => {
-	const userAccount = await fetchAccount()
-	const trainerAccount = await fetchTrainerData(params.id)
-	if (userAccount && trainerAccount) {
+	const loggedAccount = await fetchAccount()
+	const recieverAccount = await fetchAccountById(params.id)
+	if (loggedAccount && recieverAccount) {
 		return (
 			<>
-				<SectionHeading>{trainerAccount.name}</SectionHeading>
-				<SendMessageForm />
+				<SectionHeading>{recieverAccount.name}</SectionHeading>
+				<ChatSection />
+				<SendMessageForm loggedId={loggedAccount.id} />
 			</>
 		)
 	}
