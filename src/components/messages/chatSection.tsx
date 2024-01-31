@@ -1,15 +1,18 @@
 'use client'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { io } from 'socket.io-client'
 import SendMessageForm from '../forms/sendMessageForm'
 import classes from './chatSection.module.scss'
+import fetchInitialMessages from '@/util/fetchInitialMessages'
+import { Message } from '@prisma/client'
 
 const socket = io('https://adrianmaj.smallhost.pl:3006', {
 	withCredentials: true,
 })
 
 const ChatSection = ({ loggedId, recieverId }: { loggedId: string; recieverId: string }) => {
-	const [chatMessages, setChatMessages] = useState<{ message: string; from: string }[]>([])
+	const [chatMessages, setChatMessages] = useState<Message[]>([])
+	const messagesSection = useRef<HTMLUListElement>(null)
 	socket.emit('logged_id', loggedId)
 	socket.emit('reciever_id', recieverId)
 	socket.on('connect', () => {
@@ -24,12 +27,25 @@ const ChatSection = ({ loggedId, recieverId }: { loggedId: string; recieverId: s
 		console.error('Connection error:', error)
 	})
 	useEffect(() => {
-		socket.on('chat_message', (msg: { message: string; from: string }) => {
+		if (messagesSection.current) {
+			messagesSection.current.scrollTop = messagesSection.current.scrollHeight
+		}
+	}, [messagesSection])
+
+	useEffect(() => {
+		const fetchInitial = async () => {
+			const messages = await fetchInitialMessages(loggedId, recieverId)
+			setChatMessages(messages)
+		}
+		fetchInitial()
+	}, [])
+	useEffect(() => {
+		socket.on('chat_message', (msg: Message) => {
 			console.log(msg)
 			setChatMessages(prevMessages => [...prevMessages, msg])
 		})
 		return () => {
-			socket.off('chat_message', (msg: { message: string; from: string }) => {
+			socket.off('chat_message', (msg: Message) => {
 				setChatMessages(prevMessages => [...prevMessages, msg])
 			})
 		}
@@ -40,18 +56,18 @@ const ChatSection = ({ loggedId, recieverId }: { loggedId: string; recieverId: s
 				<p>Photo</p>
 				<p>Name Surname</p>
 			</div>
-			<ul className={classes.messageList}>
+			<ul ref={messagesSection} className={classes.messageList}>
 				<li className={`${classes.message} ${classes.sent}`}>Test</li>
 				<li className={`${classes.message} ${classes.recieved}`}>Recieved</li>
 				{chatMessages.map(message => (
 					<li
 						className={`${classes.message} ${message.from === loggedId ? classes.sent : classes.recieved}`}
-						key={message.message}>
+						key={message.id}>
 						{message.message}
 					</li>
 				))}
 			</ul>
-			<SendMessageForm className={classes.bar} socket={socket} loggedId={loggedId} />
+			<SendMessageForm className={classes.bar} socket={socket} loggedId={loggedId} recieverId={recieverId} />
 		</section>
 	)
 }
