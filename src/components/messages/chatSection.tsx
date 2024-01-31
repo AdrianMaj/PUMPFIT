@@ -10,17 +10,8 @@ const socket = io('https://adrianmaj.smallhost.pl:3006', {
 	withCredentials: true,
 })
 
-type LiveMessageType = {
-	text: string
-	type: string
-	from: string
-	to: string
-	id: string
-}
-
 const ChatSection = ({ loggedId, recieverId }: { loggedId: string; recieverId: string }) => {
 	const [chatMessages, setChatMessages] = useState<Message[]>([])
-	const [liveChatMessages, setLiveChatMessages] = useState<LiveMessageType[]>([])
 	const messagesSection = useRef<HTMLUListElement>(null)
 	socket.emit('logged_id', loggedId)
 	socket.emit('reciever_id', recieverId)
@@ -49,13 +40,13 @@ const ChatSection = ({ loggedId, recieverId }: { loggedId: string; recieverId: s
 		fetchInitial()
 	}, [])
 	useEffect(() => {
-		socket.on('chat_message', (msg: LiveMessageType) => {
+		socket.on('chat_message', (msg: Message) => {
 			console.log(msg)
-			setLiveChatMessages(prevMessages => [...prevMessages, msg])
+			setChatMessages(prevMessages => [...prevMessages, msg])
 		})
 		return () => {
-			socket.off('chat_message', (msg: LiveMessageType) => {
-				setLiveChatMessages(prevMessages => [...prevMessages, msg])
+			socket.off('chat_message', (msg: Message) => {
+				setChatMessages(prevMessages => [...prevMessages, msg])
 			})
 		}
 	}, [socket, setChatMessages])
@@ -71,13 +62,6 @@ const ChatSection = ({ loggedId, recieverId }: { loggedId: string; recieverId: s
 				{chatMessages.map(message => (
 					<li
 						className={`${classes.message} ${message.fromAccountId === loggedId ? classes.sent : classes.recieved}`}
-						key={message.id}>
-						{message.text}
-					</li>
-				))}
-				{liveChatMessages.map(message => (
-					<li
-						className={`${classes.message} ${message.from === loggedId ? classes.sent : classes.recieved}`}
 						key={message.id}>
 						{message.text}
 					</li>
