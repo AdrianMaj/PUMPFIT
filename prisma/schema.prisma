@@ -22,6 +22,8 @@ model Account {
   PasswordResetToken PasswordResetToken[]
   trainer            Trainer?
   user               User?
+  messagesFrom Message[] @relation("FromAccount")
+  messagesTo   Message[] @relation("ToAccount")
 
   @@map("accounts")
 }
@@ -96,4 +98,13 @@ model Testimonial {
   
   @@unique([userId, announcementId], name: "userId_announcementId")
   @@map("testimonials")
+}
+
+model Message {
+  id          String          @id @default(cuid())
+  text        String
+  from          Account  @relation("FromAccount", fields: [fromAccountId], references: [id], onDelete: Cascade)
+  fromAccountId String   @unique
+  to            Account  @relation("ToAccount", fields: [toAccountId], references: [id], onDelete: Cascade)
+  toAccountId   String   @unique
 }

@@ -1,16 +1,12 @@
 'use client'
 import React from 'react'
 import classes from './messageCard.module.scss'
-import { io } from 'socket.io-client'
 import { AccountWithTrainer } from '@/types/databaseTypes'
 import { useRouter } from 'next/navigation'
 
-const MessageCard = ({ trainerData, accountId }: { trainerData: AccountWithTrainer; accountId: string }) => {
+const MessageCard = ({ trainerData }: { trainerData: AccountWithTrainer }) => {
 	const router = useRouter()
-	const socket = io('http://localhost:3001')
 	const handleMessageTest = () => {
-		socket.emit('user_id', accountId)
-		socket.emit('trainer_id', trainerData.id)
 		router.push(`/dashboard/messages/${trainerData.id}`)
 	}
 	return (

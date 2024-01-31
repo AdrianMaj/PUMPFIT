@@ -1,0 +1,38 @@
+@use '../variables' as *;
+.chatSection {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	width: 100%;
+	height: calc(100dvh - 8em);
+}
+.messageList {
+	flex: 1;
+	overflow-y: auto;
+	list-style-type: none;
+	display: flex;
+	gap: 1em;
+	flex-direction: column;
+	width: 100%;
+}
+.bar {
+	margin-top: 2em;
+	display: flex;
+	align-items: flex-start;
+	width: 100%;
+}
+.message {
+	width: fit-content;
+	display: flex;
+	padding: 1em 1.5em;
+	font-size: $subtextSize;
+}
+.sent {
+	margin-left: auto;
+	justify-content: flex-end;
+	background-color: $mainColor;
+}
+.recieved {
+	justify-content: flex-start;
+	background-color: $secondaryBg;
+}

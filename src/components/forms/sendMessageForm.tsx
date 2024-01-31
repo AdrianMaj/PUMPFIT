@@ -5,34 +5,34 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { FormProvider, useForm } from 'react-hook-form'
 import Input from '../ui/input'
 import Button from '../ui/button'
-import { io } from 'socket.io-client'
-import classes from './sendMessageForm.module.scss'
+import { Socket, io } from 'socket.io-client'
 
 const FormSchema = z.object({
-	message: z.string().min(1, 'Message can not be empty'),
+	message: z.string().min(1),
 })
-
-const SendMessageForm = ({ loggedId }: { loggedId: string }) => {
-	const socket = io('http://localhost:3001')
+const SendMessageForm = ({ loggedId, socket, ...props }: { loggedId: string; socket: Socket; [x: string]: any }) => {
 	const form = useForm<z.infer<typeof FormSchema>>({
 		resolver: zodResolver(FormSchema),
 		defaultValues: {
 			message: '',
 		},
 	})
+	const messageType = 'text'
 
 	const onSubmit = (values: z.infer<typeof FormSchema>) => {
 		const messageData = {
 			message: values.message,
 			from: loggedId,
+			type: messageType,
 		}
-		socket.emit('chatmessage', messageData)
+		socket.emit('chat_message', messageData)
+		form.resetField('message')
 	}
 
 	return (
 		<FormProvider {...form}>
-			<form className={classes.form} onSubmit={form.handleSubmit(onSubmit)}>
-				<Input width="100%" id="message" label="Send your message" error={form.formState.errors.message} />
+			<form {...props} onSubmit={form.handleSubmit(onSubmit)}>
+				<Input width="100%" id="message" label="Message" />
 				<Button type="submit">Send</Button>
 			</form>
 		</FormProvider>

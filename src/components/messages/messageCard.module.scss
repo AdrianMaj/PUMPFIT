@@ -11,6 +11,7 @@
 	object-fit: cover;
 	max-width: 150px;
 	max-height: 150px;
+	filter: grayscale(100%) brightness(55%);
 }
 .cardText {
 	display: flex;
