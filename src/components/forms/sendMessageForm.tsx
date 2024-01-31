@@ -31,14 +31,18 @@ const SendMessageForm = ({
 	const messageType = 'text'
 
 	const onSubmit = async (values: z.infer<typeof FormSchema>) => {
-		const message = await sendMessage({
-			text: values.message,
-			type: messageType,
-			fromAccountId: loggedId,
-			toAccountId: recieverId,
-		})
-		socket.emit('chat_message', message)
-		form.resetField('message')
+		try {
+			const message = await sendMessage({
+				text: values.message,
+				type: messageType,
+				fromAccountId: loggedId,
+				toAccountId: recieverId,
+			})
+			socket.emit('chat_message', message)
+			form.resetField('message')
+		} catch (error) {
+			console.log('There was an error while sending message: ', error)
+		}
 	}
 
 	return (
