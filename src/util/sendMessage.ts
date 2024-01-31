@@ -13,7 +13,7 @@ export const sendMessage = async ({
 	type: string
 }) => {
 	try {
-		const message = await prisma.message.create({
+		await prisma.message.create({
 			data: {
 				text,
 				fromAccountId,
@@ -21,7 +21,7 @@ export const sendMessage = async ({
 				type,
 			},
 		})
-		return message
+		return { success: true }
 	} catch (error: any) {
 		return { message: 'Something went wrong!', error }
 	}

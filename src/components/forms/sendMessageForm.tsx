@@ -7,6 +7,7 @@ import Input from '../ui/input'
 import Button from '../ui/button'
 import { Socket, io } from 'socket.io-client'
 import { sendMessage } from '@/util/sendMessage'
+import { v4 as uuidv4 } from 'uuid'
 
 const FormSchema = z.object({
 	message: z.string().min(1),
@@ -32,13 +33,20 @@ const SendMessageForm = ({
 
 	const onSubmit = async (values: z.infer<typeof FormSchema>) => {
 		try {
-			const message = await sendMessage({
+			await sendMessage({
 				text: values.message,
 				type: messageType,
 				fromAccountId: loggedId,
 				toAccountId: recieverId,
 			})
-			socket.emit('chat_message', message)
+			const liveMessage = {
+				text: values.message,
+				type: messageType,
+				from: loggedId,
+				to: recieverId,
+				id: uuidv4(),
+			}
+			socket.emit('chat_message', liveMessage)
 			form.resetField('message')
 		} catch (error) {
 			console.log('There was an error while sending message: ', error)
