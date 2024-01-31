@@ -4,7 +4,7 @@ import { io } from 'socket.io-client'
 import SendMessageForm from '../forms/sendMessageForm'
 import classes from './chatSection.module.scss'
 
-const socket = io('http://adrianmaj.smallhost.pl:3006', {
+const socket = io('https://adrianmaj.smallhost.pl:3006', {
 	withCredentials: true,
 })
 
