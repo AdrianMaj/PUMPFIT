@@ -21,12 +21,8 @@ export const sendMessage = async ({
 				type,
 			},
 		})
-		if (message) {
-			return message
-		} else {
-			return { message: 'Something went wrong!' }
-		}
+		return message
 	} catch (error) {
-		return { message: 'Something went wrong!' }
+		return { message: 'Something went wrong!', error }
 	}
 }
