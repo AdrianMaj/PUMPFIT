@@ -61,9 +61,9 @@ const ChatSection = ({ loggedId, recieverId }: { loggedId: string; recieverId: s
 				<li className={`${classes.message} ${classes.recieved}`}>Recieved</li>
 				{chatMessages.map(message => (
 					<li
-						className={`${classes.message} ${message.from === loggedId ? classes.sent : classes.recieved}`}
+						className={`${classes.message} ${message.fromAccountId === loggedId ? classes.sent : classes.recieved}`}
 						key={message.id}>
-						{message.message}
+						{message.text}
 					</li>
 				))}
 			</ul>
