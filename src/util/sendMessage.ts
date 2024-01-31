@@ -22,7 +22,7 @@ export const sendMessage = async ({
 			},
 		})
 		return message
-	} catch (error) {
+	} catch (error: any) {
 		return { message: 'Something went wrong!', error }
 	}
 }
