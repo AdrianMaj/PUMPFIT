@@ -1,0 +1,31 @@
+@use '../variables' as *;
+.bar {
+	display: flex;
+	align-items: center;
+	height: 11em;
+	width: calc(100% + 4em);
+	margin: -4em -2em;
+	padding: 4em 2em;
+	background-color: $secondaryBg;
+	z-index: -1;
+	margin-bottom: auto;
+}
+.arrow {
+	rotate: 180deg;
+}
+.link {
+	display: flex;
+	text-decoration: none;
+	gap: 1em;
+	color: $subtext;
+}
+.barText {
+	font-size: $subtextSize;
+}
+@media (min-width: 992px) {
+	.bar {
+		margin: -4em;
+		width: calc(100% + 8em);
+		padding: 4em;
+	}
+}

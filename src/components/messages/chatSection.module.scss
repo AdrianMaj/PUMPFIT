@@ -1,10 +1,11 @@
 @use '../variables' as *;
 .chatSection {
+	margin-top: auto;
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
 	width: 100%;
-	height: calc(100dvh - 8em);
+	height: calc(100dvh - 19em);
 }
 .messageList {
 	flex: 1;

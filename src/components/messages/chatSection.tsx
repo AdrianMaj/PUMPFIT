@@ -7,6 +7,7 @@ import fetchInitialMessages from '@/util/fetchInitialMessages'
 import { Message } from '@prisma/client'
 import { Account } from '@prisma/client'
 import { AccountWithMessages } from '@/types/databaseTypes'
+import ChatTopBar from './chatTopBar'
 
 const socket = io('https://adrianmaj.smallhost.pl:3006', {
 	withCredentials: true,
@@ -35,13 +36,10 @@ const ChatSection = ({
 		console.error('Connection error:', error)
 	})
 	useEffect(() => {
-		console.log(messagesSection)
-		console.log(messagesSection.current!.scrollTop)
-		console.log(messagesSection.current!.scrollHeight)
 		if (messagesSection.current) {
 			messagesSection.current.scrollTop = messagesSection.current.scrollHeight
 		}
-	}, [messagesSection])
+	}, [chatMessages, messagesSection])
 
 	useEffect(() => {
 		const fetchInitial = async () => {
@@ -74,67 +72,70 @@ const ChatSection = ({
 	})
 	const allMessages = [...messagesFrom, ...messagesTo]
 	return (
-		<section className={classes.chatSection}>
-			<ul ref={messagesSection} className={classes.messageList}>
-				{chatMessages.length === allMessages.length && (
-					<div className={classes.recieverInfo}>
-						<img
-							className={classes.recieverImage}
-							src={
-								recieverAccount.photo ||
-								'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png'
-							}
-							alt={recieverAccount.name}
-						/>
-						<p className={classes.recieverName}>{recieverAccount.name}</p>
-					</div>
-				)}
-				{chatMessages.map((message, index) => {
-					let isDoubled: boolean
-					if (index > 0 && chatMessages[index - 1].fromAccountId === message.fromAccountId) {
-						isDoubled = true
-					} else {
-						isDoubled = false
-					}
-					return (
-						<li
-							key={message.id}
-							className={
-								message.fromAccountId === loggedAccount.id
-									? `${classes.messageListElement} ${classes.messageSender}`
-									: classes.messageListElement
-							}>
-							{!isDoubled ? (
-								<img
-									className={`${classes.messageImg} ${
-										message.fromAccountId === loggedAccount.id && classes.senderMessageImg
-									}`}
-									alt={message.fromAccountId === loggedAccount.id ? loggedAccount.name : recieverAccount.name}
-									src={
-										(message.fromAccountId === loggedAccount.id ? loggedAccount.photo : recieverAccount.photo) ||
-										'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png'
-									}
-								/>
-							) : (
-								<div className={classes.doubledBox}></div>
-							)}
-							<p
-								className={`${classes.message} ${
-									message.fromAccountId === loggedAccount.id ? classes.sent : classes.recieved
-								}`}>
-								{message.text}
-							</p>
-						</li>
-					)
-				})}
-			</ul>
-			<SendMessageForm
-				className={classes.bar}
-				socket={socket}
-				loggedId={loggedAccount.id}
-				recieverId={recieverAccount.id}
-			/>
-		</section>
+		<>
+			<ChatTopBar />
+			<section className={classes.chatSection}>
+				<ul ref={messagesSection} className={classes.messageList}>
+					{chatMessages.length === allMessages.length && (
+						<div className={classes.recieverInfo}>
+							<img
+								className={classes.recieverImage}
+								src={
+									recieverAccount.photo ||
+									'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png'
+								}
+								alt={recieverAccount.name}
+							/>
+							<p className={classes.recieverName}>{recieverAccount.name}</p>
+						</div>
+					)}
+					{chatMessages.map((message, index) => {
+						let isDoubled: boolean
+						if (index > 0 && chatMessages[index - 1].fromAccountId === message.fromAccountId) {
+							isDoubled = true
+						} else {
+							isDoubled = false
+						}
+						return (
+							<li
+								key={message.id}
+								className={
+									message.fromAccountId === loggedAccount.id
+										? `${classes.messageListElement} ${classes.messageSender}`
+										: classes.messageListElement
+								}>
+								{!isDoubled ? (
+									<img
+										className={`${classes.messageImg} ${
+											message.fromAccountId === loggedAccount.id && classes.senderMessageImg
+										}`}
+										alt={message.fromAccountId === loggedAccount.id ? loggedAccount.name : recieverAccount.name}
+										src={
+											(message.fromAccountId === loggedAccount.id ? loggedAccount.photo : recieverAccount.photo) ||
+											'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png'
+										}
+									/>
+								) : (
+									<div className={classes.doubledBox}></div>
+								)}
+								<p
+									className={`${classes.message} ${
+										message.fromAccountId === loggedAccount.id ? classes.sent : classes.recieved
+									}`}>
+									{message.text}
+								</p>
+							</li>
+						)
+					})}
+				</ul>
+				<SendMessageForm
+					className={classes.bar}
+					socket={socket}
+					loggedId={loggedAccount.id}
+					recieverId={recieverAccount.id}
+				/>
+			</section>
+		</>
 	)
 }
 

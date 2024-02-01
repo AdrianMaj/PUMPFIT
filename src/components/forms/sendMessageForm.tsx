@@ -49,7 +49,9 @@ const SendMessageForm = ({
 		<FormProvider {...form}>
 			<form {...props} onSubmit={form.handleSubmit(onSubmit)}>
 				<Input width="100%" id="message" label="Message" />
-				<Button type="submit">Send</Button>
+				<Button filled type="submit">
+					Send
+				</Button>
 			</form>
 		</FormProvider>
 	)
