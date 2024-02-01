@@ -9,6 +9,9 @@ const fetchInitialMessages = async (fromId: string, toId: string) => {
 				{ OR: [{ toAccountId: toId }, { toAccountId: fromId }] },
 			],
 		},
+		orderBy: {
+			createdAt: 'desc',
+		},
 		take: 10,
 	})
 	return initialMessages

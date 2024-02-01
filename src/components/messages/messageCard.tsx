@@ -38,7 +38,7 @@ const MessageCard = ({ trainerData, accountId }: { trainerData: AccountWithTrain
 				<p className={classes.cardTitle}>{trainerData.name}</p>
 				{lastMessage ? (
 					<p className={classes.cardMessage}>
-						{lastMessage.fromAccountId === accountId ? 'You: ' : ''}
+						{lastMessage.fromAccountId === accountId ? 'You: ' : trainerData.name + ': '}
 						{lastMessage.text}
 					</p>
 				) : (
