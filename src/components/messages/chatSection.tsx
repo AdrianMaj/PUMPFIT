@@ -86,32 +86,40 @@ const ChatSection = ({
 						<p className={classes.recieverName}>{recieverAccount.name}</p>
 					</div>
 				)}
-				{chatMessages.map((message, index) => (
-					<li
-						key={message.id}
-						className={
-							message.fromAccountId === loggedAccount.id
-								? `${classes.messageListElement} ${classes.messageSender}`
-								: classes.messageListElement
-						}>
-						{!(chatMessages[index - 1].fromAccountId === message.fromAccountId) && (
-							<img
-								className={classes.messageImg}
-								alt={message.fromAccountId === loggedAccount.id ? loggedAccount.name : recieverAccount.name}
-								src={
-									(message.fromAccountId === loggedAccount.id ? loggedAccount.photo : recieverAccount.photo) ||
-									'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png'
-								}
-							/>
-						)}
-						<p
-							className={`${classes.message} ${
-								message.fromAccountId === loggedAccount.id ? classes.sent : classes.recieved
-							}`}>
-							{message.text}
-						</p>
-					</li>
-				))}
+				{chatMessages.map((message, index) => {
+					let isDoubled: boolean
+					if (index > 0 && chatMessages[index - 1].fromAccountId === message.fromAccountId) {
+						isDoubled = true
+					} else {
+						isDoubled = false
+					}
+					return (
+						<li
+							key={message.id}
+							className={
+								message.fromAccountId === loggedAccount.id
+									? `${classes.messageListElement} ${classes.messageSender}`
+									: classes.messageListElement
+							}>
+							{!isDoubled && (
+								<img
+									className={classes.messageImg}
+									alt={message.fromAccountId === loggedAccount.id ? loggedAccount.name : recieverAccount.name}
+									src={
+										(message.fromAccountId === loggedAccount.id ? loggedAccount.photo : recieverAccount.photo) ||
+										'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png'
+									}
+								/>
+							)}
+							<p
+								className={`${classes.message} ${
+									message.fromAccountId === loggedAccount.id ? classes.sent : classes.recieved
+								}`}>
+								{message.text}
+							</p>
+						</li>
+					)
+				})}
 			</ul>
 			<SendMessageForm
 				className={classes.bar}
