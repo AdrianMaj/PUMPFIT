@@ -36,6 +36,7 @@
 .recieverImage {
 	filter: grayscale(100%) brightness(55%);
 	width: 10%;
+	min-width: 9em;
 	aspect-ratio: 1/1;
 	object-fit: cover;
 	object-position: center;
