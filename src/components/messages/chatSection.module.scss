@@ -18,10 +18,11 @@
 .messageListElement {
 	display: flex;
 	align-items: flex-start;
-	gap: 1.5em;
+	gap: 1em;
+	flex-direction: column;
 }
 .messageListElement.messageSender {
-	flex-direction: row-reverse;
+	flex-direction: column;
 }
 .recieverInfo {
 	display: flex;
@@ -41,12 +42,21 @@
 .recieverName {
 	font-size: $headingSize;
 }
+.doubledBox {
+	display: none;
+	width: clamp(6rem, 5.3469rem + 3.2653vw, 8rem);
+	height: 1px;
+}
 .messageImg {
+	margin-top: 3em;
 	filter: grayscale(100%) brightness(55%);
 	width: clamp(6rem, 5.3469rem + 3.2653vw, 8rem);
 	height: clamp(6rem, 5.3469rem + 3.2653vw, 8rem);
 	object-fit: cover;
 	object-position: center;
+}
+.senderMessageImg {
+	align-self: flex-end;
 }
 .bar {
 	margin-top: 2em;
@@ -55,7 +65,6 @@
 	width: 100%;
 }
 .message {
-	align-self: flex-end;
 	width: fit-content;
 	display: flex;
 	padding: 1em 1.5em;
@@ -69,4 +78,18 @@
 .recieved {
 	justify-content: flex-start;
 	background-color: $secondaryBg;
+}
+@media (min-width: 576px) {
+	.messageListElement {
+		flex-direction: row;
+	}
+	.messageListElement.messageSender {
+		flex-direction: row-reverse;
+	}
+	.message {
+		align-self: flex-end;
+	}
+	.doubledBox {
+		display: block;
+	}
 }

@@ -35,6 +35,9 @@ const ChatSection = ({
 		console.error('Connection error:', error)
 	})
 	useEffect(() => {
+		console.log(messagesSection)
+		console.log(messagesSection.current!.scrollTop)
+		console.log(messagesSection.current!.scrollHeight)
 		if (messagesSection.current) {
 			messagesSection.current.scrollTop = messagesSection.current.scrollHeight
 		}
@@ -101,15 +104,19 @@ const ChatSection = ({
 									? `${classes.messageListElement} ${classes.messageSender}`
 									: classes.messageListElement
 							}>
-							{!isDoubled && (
+							{!isDoubled ? (
 								<img
-									className={classes.messageImg}
+									className={`${classes.messageImg} ${
+										message.fromAccountId === loggedAccount.id && classes.senderMessageImg
+									}`}
 									alt={message.fromAccountId === loggedAccount.id ? loggedAccount.name : recieverAccount.name}
 									src={
 										(message.fromAccountId === loggedAccount.id ? loggedAccount.photo : recieverAccount.photo) ||
 										'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png'
 									}
 								/>
+							) : (
+								<div className={classes.doubledBox}></div>
 							)}
 							<p
 								className={`${classes.message} ${
