@@ -23,7 +23,11 @@ const DashboardListElement: React.FC<{
 	const [active, setActive] = useState(false)
 	const pathName = usePathname()
 	useEffect(() => {
-		if (pathName === `/dashboard/${link}` || pathName === `/dashboard${link}`) {
+		if (
+			pathName === `/dashboard/${link}` ||
+			pathName === `/dashboard${link}` ||
+			pathName.includes(`/dashboard/${link}`)
+		) {
 			setActive(true)
 		} else {
 			setActive(false)

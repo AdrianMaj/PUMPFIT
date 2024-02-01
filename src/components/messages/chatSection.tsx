@@ -6,12 +6,19 @@ import classes from './chatSection.module.scss'
 import fetchInitialMessages from '@/util/fetchInitialMessages'
 import { Message } from '@prisma/client'
 import { Account } from '@prisma/client'
+import { AccountWithMessages } from '@/types/databaseTypes'
 
 const socket = io('https://adrianmaj.smallhost.pl:3006', {
 	withCredentials: true,
 })
 
-const ChatSection = ({ loggedAccount, recieverAccount }: { loggedAccount: Account; recieverAccount: Account }) => {
+const ChatSection = ({
+	loggedAccount,
+	recieverAccount,
+}: {
+	loggedAccount: AccountWithMessages
+	recieverAccount: Account
+}) => {
 	const [chatMessages, setChatMessages] = useState<Message[]>([])
 	const messagesSection = useRef<HTMLUListElement>(null)
 	socket.emit('logged_id', loggedAccount.id)
@@ -51,20 +58,33 @@ const ChatSection = ({ loggedAccount, recieverAccount }: { loggedAccount: Accoun
 			})
 		}
 	}, [socket, setChatMessages])
+	const messagesFrom = loggedAccount.messagesFrom.filter(message => {
+		if (message.toAccountId === recieverAccount.id) {
+			return message
+		}
+	})
+	const messagesTo = loggedAccount.messagesTo.filter(message => {
+		if (message.fromAccountId === recieverAccount.id) {
+			return message
+		}
+	})
+	const allMessages = [...messagesFrom, ...messagesTo]
 	return (
 		<section className={classes.chatSection}>
-			<div className={classes.recieverInfo}>
-				<img
-					className={classes.recieverImage}
-					src={
-						recieverAccount.photo ||
-						'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png'
-					}
-					alt={recieverAccount.name}
-				/>
-				<p className={classes.recieverName}>{recieverAccount.name}</p>
-			</div>
 			<ul ref={messagesSection} className={classes.messageList}>
+				{chatMessages.length === allMessages.length && (
+					<div className={classes.recieverInfo}>
+						<img
+							className={classes.recieverImage}
+							src={
+								recieverAccount.photo ||
+								'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png'
+							}
+							alt={recieverAccount.name}
+						/>
+						<p className={classes.recieverName}>{recieverAccount.name}</p>
+					</div>
+				)}
 				{chatMessages.map(message => (
 					<li
 						key={message.id}

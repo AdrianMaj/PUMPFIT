@@ -34,6 +34,9 @@
 .recieverImage {
 	filter: grayscale(100%) brightness(55%);
 	width: 10%;
+	aspect-ratio: 1/1;
+	object-fit: cover;
+	object-position: center;
 }
 .recieverName {
 	font-size: $headingSize;
