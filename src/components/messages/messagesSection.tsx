@@ -7,7 +7,7 @@ const MessagesSection = async ({ accountId }: { accountId: string }) => {
 	return (
 		<section className={classes.section}>
 			{trainers.map(trainer => (
-				<MessageCard key={trainer.id} trainerData={trainer} />
+				<MessageCard key={trainer.id} trainerData={trainer} accountId={accountId} />
 			))}
 		</section>
 	)

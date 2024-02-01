@@ -1,11 +1,22 @@
 'use client'
-import React from 'react'
+import React, { useEffect } from 'react'
 import classes from './messageCard.module.scss'
 import { AccountWithTrainer } from '@/types/databaseTypes'
 import { useRouter } from 'next/navigation'
+import fetchLastMessage from '@/util/fetchLastMessage'
+import { Message } from '@prisma/client'
 
-const MessageCard = ({ trainerData }: { trainerData: AccountWithTrainer }) => {
+const MessageCard = ({ trainerData, accountId }: { trainerData: AccountWithTrainer; accountId: string }) => {
 	const router = useRouter()
+	const [lastMessage, setLastMessage] = React.useState<Message | null>(null)
+	useEffect(() => {
+		const getLastMessage = async () => {
+			const message = await fetchLastMessage(trainerData.id, accountId)
+			setLastMessage(message)
+		}
+		getLastMessage()
+	}, [])
+
 	const handleMessageTest = () => {
 		router.push(`/dashboard/messages/${trainerData.id}`)
 	}
@@ -25,7 +36,14 @@ const MessageCard = ({ trainerData }: { trainerData: AccountWithTrainer }) => {
 			/>
 			<div className={classes.cardText}>
 				<p className={classes.cardTitle}>{trainerData.name}</p>
-				<p className={classes.cardMessage}>You: How much is 1 hour?</p>
+				{lastMessage ? (
+					<p className={classes.cardMessage}>
+						{lastMessage.fromAccountId === accountId ? 'You: ' : ''}
+						{lastMessage.text}
+					</p>
+				) : (
+					''
+				)}
 				<p className={classes.cardTime}>20min</p>
 			</div>
 		</div>

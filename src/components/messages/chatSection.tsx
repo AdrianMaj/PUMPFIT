@@ -5,16 +5,17 @@ import SendMessageForm from '../forms/sendMessageForm'
 import classes from './chatSection.module.scss'
 import fetchInitialMessages from '@/util/fetchInitialMessages'
 import { Message } from '@prisma/client'
+import { Account } from '@prisma/client'
 
 const socket = io('https://adrianmaj.smallhost.pl:3006', {
 	withCredentials: true,
 })
 
-const ChatSection = ({ loggedId, recieverId }: { loggedId: string; recieverId: string }) => {
+const ChatSection = ({ loggedAccount, recieverAccount }: { loggedAccount: Account; recieverAccount: Account }) => {
 	const [chatMessages, setChatMessages] = useState<Message[]>([])
 	const messagesSection = useRef<HTMLUListElement>(null)
-	socket.emit('logged_id', loggedId)
-	socket.emit('reciever_id', recieverId)
+	socket.emit('logged_id', loggedAccount.id)
+	socket.emit('reciever_id', recieverAccount.id)
 	socket.on('connect', () => {
 		console.log('Connected to server')
 	})
@@ -34,7 +35,7 @@ const ChatSection = ({ loggedId, recieverId }: { loggedId: string; recieverId: s
 
 	useEffect(() => {
 		const fetchInitial = async () => {
-			const messages = await fetchInitialMessages(loggedId, recieverId)
+			const messages = await fetchInitialMessages(loggedAccount.id, recieverAccount.id)
 			setChatMessages(messages)
 		}
 		fetchInitial()
@@ -52,22 +53,49 @@ const ChatSection = ({ loggedId, recieverId }: { loggedId: string; recieverId: s
 	}, [socket, setChatMessages])
 	return (
 		<section className={classes.chatSection}>
-			<div>
-				<p>Photo</p>
-				<p>Name Surname</p>
+			<div className={classes.recieverInfo}>
+				<img
+					className={classes.recieverImage}
+					src={
+						recieverAccount.photo ||
+						'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png'
+					}
+					alt={recieverAccount.name}
+				/>
+				<p className={classes.recieverName}>{recieverAccount.name}</p>
 			</div>
 			<ul ref={messagesSection} className={classes.messageList}>
-				<li className={`${classes.message} ${classes.sent}`}>Test</li>
-				<li className={`${classes.message} ${classes.recieved}`}>Recieved</li>
 				{chatMessages.map(message => (
 					<li
-						className={`${classes.message} ${message.fromAccountId === loggedId ? classes.sent : classes.recieved}`}
-						key={message.id}>
-						{message.text}
+						key={message.id}
+						className={
+							message.fromAccountId === loggedAccount.id
+								? `${classes.messageListElement} ${classes.messageSender}`
+								: classes.messageListElement
+						}>
+						<img
+							className={classes.messageImg}
+							alt={message.fromAccountId === loggedAccount.id ? loggedAccount.name : recieverAccount.name}
+							src={
+								(message.fromAccountId === loggedAccount.id ? loggedAccount.photo : recieverAccount.photo) ||
+								'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png'
+							}
+						/>
+						<p
+							className={`${classes.message} ${
+								message.fromAccountId === loggedAccount.id ? classes.sent : classes.recieved
+							}`}>
+							{message.text}
+						</p>
 					</li>
 				))}
 			</ul>
-			<SendMessageForm className={classes.bar} socket={socket} loggedId={loggedId} recieverId={recieverId} />
+			<SendMessageForm
+				className={classes.bar}
+				socket={socket}
+				loggedId={loggedAccount.id}
+				recieverId={recieverAccount.id}
+			/>
 		</section>
 	)
 }

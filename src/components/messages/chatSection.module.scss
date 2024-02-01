@@ -15,6 +15,36 @@
 	flex-direction: column;
 	width: 100%;
 }
+.messageListElement {
+	display: flex;
+	align-items: flex-start;
+	gap: 1.5em;
+}
+.messageListElement.messageSender {
+	flex-direction: row-reverse;
+}
+.recieverInfo {
+	display: flex;
+	width: 100%;
+	justify-content: center;
+	align-items: center;
+	gap: 2em;
+	flex-direction: column;
+}
+.recieverImage {
+	filter: grayscale(100%) brightness(55%);
+	width: 10%;
+}
+.recieverName {
+	font-size: $headingSize;
+}
+.messageImg {
+	filter: grayscale(100%) brightness(55%);
+	width: clamp(6rem, 5.3469rem + 3.2653vw, 8rem);
+	height: clamp(6rem, 5.3469rem + 3.2653vw, 8rem);
+	object-fit: cover;
+	object-position: center;
+}
 .bar {
 	margin-top: 2em;
 	display: flex;
@@ -22,6 +52,7 @@
 	width: 100%;
 }
 .message {
+	align-self: flex-end;
 	width: fit-content;
 	display: flex;
 	padding: 1em 1.5em;
