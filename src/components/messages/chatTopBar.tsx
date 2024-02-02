@@ -6,16 +6,21 @@ import { motion } from 'framer-motion'
 
 const ChatTopBar = () => {
 	const MotionLink = motion(Link)
+	const variants = {
+		initial: {
+			color: '#b3b3b3',
+		},
+		animate: {
+			color: '#fff',
+		},
+	}
 	return (
 		<div className={classes.bar}>
-			<MotionLink
-				whileHover={{
-					color: 'white',
-				}}
-				href="/dashboard/messages"
-				className={classes.link}>
+			<MotionLink initial="initial" whileHover="animate" href="/dashboard/messages" className={classes.link}>
 				<img src="/arrow-login.svg" className={classes.arrow} />
-				<p className={classes.barText}>Go back</p>
+				<motion.p variants={variants} className={classes.barText}>
+					Go back
+				</motion.p>
 			</MotionLink>
 		</div>
 	)

@@ -22,6 +22,26 @@ export type AccountWithTrainer = Prisma.AccountGetPayload<{
 		}
 	}
 }>
+export type AccountWithTrainerAndUser = Prisma.AccountGetPayload<{
+	include: {
+		user: {
+			include: {
+				testimonials: true
+				account: true
+			}
+		}
+		trainer: {
+			include: {
+				announcement: {
+					include: {
+						testimonials: true
+					}
+				}
+				account: true
+			}
+		}
+	}
+}>
 export type AccountWithMessages = Prisma.AccountGetPayload<{
 	include: {
 		messagesFrom: true

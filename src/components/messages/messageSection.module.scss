@@ -1,6 +1,11 @@
+@use '../variables' as *;
 .section {
 	width: 100%;
 	display: flex;
 	flex-direction: column;
 	gap: 2em;
+}
+.chatHeading {
+	font-size: $subtextSize;
+	font-weight: 500;
 }
