@@ -34,7 +34,7 @@
 	flex-direction: column;
 }
 .recieverImage {
-	filter: grayscale(100%) brightness(55%);
+	filter: brightness(65%);
 	width: 10%;
 	min-width: 9em;
 	aspect-ratio: 1/1;
@@ -51,7 +51,7 @@
 }
 .messageImg {
 	margin-top: 3em;
-	filter: grayscale(100%) brightness(55%);
+	filter: brightness(65%);
 	width: clamp(6rem, 5.3469rem + 3.2653vw, 8rem);
 	height: clamp(6rem, 5.3469rem + 3.2653vw, 8rem);
 	object-fit: cover;

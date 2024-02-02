@@ -16,7 +16,7 @@ const Page = async () => {
 				<MessagesSection
 					messagedAccounts={messagedAccounts}
 					unmessagedAccounts={unmessagedAccounts}
-					accountId={userAccount.id}
+					loggedAccount={userAccount}
 				/>
 			</>
 		)

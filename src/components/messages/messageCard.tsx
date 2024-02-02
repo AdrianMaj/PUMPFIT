@@ -43,14 +43,16 @@ const MessageCard = ({
 			<div className={classes.cardText}>
 				<p className={classes.cardTitle}>{messagedAccount.name}</p>
 				{lastMessage ? (
-					<p className={classes.cardMessage}>
-						{lastMessage.fromAccountId === accountId ? 'You: ' : messagedAccount.name + ': '}
-						{lastMessage.text}
-					</p>
+					<>
+						<p className={classes.cardMessage}>
+							{lastMessage.fromAccountId === accountId ? 'You: ' : messagedAccount.name + ': '}
+							{lastMessage.text}
+						</p>
+						<p className={classes.cardTime}>{lastMessage.createdAt.toDateString()}</p>
+					</>
 				) : (
 					''
 				)}
-				<p className={classes.cardTime}>20min</p>
 			</div>
 		</div>
 	)
