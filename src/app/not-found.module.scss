@@ -1,0 +1,39 @@
+@use '../components/variables' as *;
+.main {
+	margin-top: 8em;
+	padding: 12em 2.5em;
+	height: 100%;
+}
+@media (min-width: 992px) {
+	.main {
+		padding: 12em 3.5em;
+	}
+}
+
+.headingNumber {
+	font-size: clamp(7rem, 5.3673rem + 8.1633vw, 12rem);
+	font-weight: bold;
+	.zero {
+		font-weight: bold;
+		font-size: clamp(7rem, 5.3673rem + 8.1633vw, 12rem);
+		color: $mainColor;
+	}
+}
+.heading {
+	text-align: center;
+	text-transform: uppercase;
+	font-weight: 400;
+	font-size: clamp(2rem, 1.3469rem + 3.2653vw, 4rem);
+}
+.container {
+	min-height: 100svh;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+.text {
+	font-size: $subtextSize;
+	color: $subtext;
+	text-align: center;
+	margin-top: 2em;
+}
