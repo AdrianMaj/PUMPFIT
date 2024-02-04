@@ -1,5 +1,5 @@
 'use client'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import classes from './messageCard.module.scss'
 import { AccountWithTrainerAndUser } from '@/types/databaseTypes'
 import { useRouter } from 'next/navigation'
@@ -14,6 +14,7 @@ const MessageCard = ({
 	accountId: string
 }) => {
 	const router = useRouter()
+	const [time, setTime] = useState('')
 	const [lastMessage, setLastMessage] = React.useState<Message | null>(null)
 	useEffect(() => {
 		const getLastMessage = async () => {
@@ -22,23 +23,22 @@ const MessageCard = ({
 		}
 		getLastMessage()
 	}, [])
-	let time: string = ''
 	if (lastMessage?.createdAt) {
 		const currentDate = new Date()
 		const differenceInMilliseconds = currentDate.getTime() - lastMessage.createdAt.getTime()
 		const differenceInSeconds = Math.floor(differenceInMilliseconds / 1000)
 
 		if (differenceInSeconds < 60) {
-			time = `${differenceInSeconds}s`
+			setTime(`${differenceInSeconds}s`)
 		} else if (differenceInSeconds < 3600) {
 			const minutes = Math.floor(differenceInSeconds / 60)
-			time = `${minutes}min`
+			setTime(`${minutes}min`)
 		} else if (differenceInSeconds < 86400) {
 			const hours = Math.floor(differenceInSeconds / 3600)
-			time = `${hours}h`
+			setTime(`${hours}h`)
 		} else {
 			const days = Math.floor(differenceInSeconds / 86400)
-			time = `${days}d`
+			setTime(`${days}d`)
 		}
 	}
 
