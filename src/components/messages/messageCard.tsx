@@ -23,24 +23,26 @@ const MessageCard = ({
 		}
 		getLastMessage()
 	}, [])
-	if (lastMessage?.createdAt) {
-		const currentDate = new Date()
-		const differenceInMilliseconds = currentDate.getTime() - lastMessage.createdAt.getTime()
-		const differenceInSeconds = Math.floor(differenceInMilliseconds / 1000)
+	useEffect(() => {
+		if (lastMessage?.createdAt) {
+			const currentDate = new Date()
+			const differenceInMilliseconds = currentDate.getTime() - lastMessage.createdAt.getTime()
+			const differenceInSeconds = Math.floor(differenceInMilliseconds / 1000)
 
-		if (differenceInSeconds < 60) {
-			setTime(`${differenceInSeconds}s`)
-		} else if (differenceInSeconds < 3600) {
-			const minutes = Math.floor(differenceInSeconds / 60)
-			setTime(`${minutes}min`)
-		} else if (differenceInSeconds < 86400) {
-			const hours = Math.floor(differenceInSeconds / 3600)
-			setTime(`${hours}h`)
-		} else {
-			const days = Math.floor(differenceInSeconds / 86400)
-			setTime(`${days}d`)
+			if (differenceInSeconds < 60) {
+				setTime('Just now')
+			} else if (differenceInSeconds < 3600) {
+				const minutes = Math.floor(differenceInSeconds / 60)
+				setTime(`${minutes}min`)
+			} else if (differenceInSeconds < 86400) {
+				const hours = Math.floor(differenceInSeconds / 3600)
+				setTime(`${hours}h`)
+			} else {
+				const days = Math.floor(differenceInSeconds / 86400)
+				setTime(`${days}d`)
+			}
 		}
-	}
+	}, [lastMessage?.createdAt])
 
 	const handleMessageTest = () => {
 		router.push(`/dashboard/messages/${messagedAccount.id}`)
