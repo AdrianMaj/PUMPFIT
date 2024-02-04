@@ -29,7 +29,7 @@ const SliderContainer = ({ trainerData }: { trainerData: AnnouncementWithTestimo
 	const MotionImage = motion(Image)
 	return (
 		<div className={classes.container}>
-			{!isMobile && (
+			{!isMobile && trainerData.testimonials.length > 0 && (
 				<>
 					<button
 						className={`${classes.sliderButton} ${classes.sliderLeft}`}

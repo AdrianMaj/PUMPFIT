@@ -1,8 +1,8 @@
 'use client'
 import React from 'react'
 import classes from './trainerCard.module.scss'
-import Button from '../ui/linkButton'
 import Image from 'next/image'
+import LinkButton from '../ui/linkButton'
 
 const TrainerCard: React.FC<{
 	name: string
@@ -12,7 +12,8 @@ const TrainerCard: React.FC<{
 	price: number
 	photo: string
 	id: string
-}> = ({ name, categories, experience, description, price, photo, id }) => {
+	isTrainerLogged: boolean | undefined
+}> = ({ name, categories, experience, description, price, photo, id, isTrainerLogged }) => {
 	return (
 		<div className={classes.card}>
 			<img
@@ -51,12 +52,17 @@ const TrainerCard: React.FC<{
 				<div className={classes.bottomContainer}>
 					<p className={classes.price}>From ${price} / hour</p>
 					<div className={classes.buttons}>
-						<Button fontSize="clamp(1.4rem, 1.2041rem + 0.9796vw, 2rem)" linked={`/details/${id}`}>
+						<LinkButton fontSize="clamp(1.4rem, 1.2041rem + 0.9796vw, 2rem)" linked={`/details/${id}`}>
 							See more
-						</Button>
-						<Button fontSize="clamp(1.4rem, 1.2041rem + 0.9796vw, 2rem)" filled linked={`/dashboard/messages/${id}`}>
-							Get in touch
-						</Button>
+						</LinkButton>
+						{!isTrainerLogged && (
+							<LinkButton
+								fontSize="clamp(1.4rem, 1.2041rem + 0.9796vw, 2rem)"
+								filled
+								linked={`/dashboard/messages/${id}`}>
+								Get in touch
+							</LinkButton>
+						)}
 					</div>
 				</div>
 			</div>

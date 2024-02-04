@@ -6,6 +6,7 @@ import SectionHeading from '../ui/sectionHeading'
 import { AnnouncementWithTestimonialsAndTrainer } from '@/types/databaseTypes'
 import fetchAccount from '@/util/fetchAccount'
 import SliderContainer from './sliderContainer'
+import Button from '../ui/button'
 
 // import Slider from 'react-slick'
 
@@ -59,12 +60,15 @@ const DetailsSection: React.FC<{
 							))}
 						</ul>
 						<p className={classes.price}>From ${trainerData.price} / hour</p>
-						<LinkButton
-							style={{ fontSize: 'clamp(1.4rem, 1.2041rem + 0.9796vw, 2rem)', width: 'fit-content' }}
-							filled
-							linked={`/dashboard/messages/${id}`}>
-							Message me now!
-						</LinkButton>
+						{!userAccount?.isTrainer && (
+							<LinkButton
+								style={{ fontSize: 'clamp(1.4rem, 1.2041rem + 0.9796vw, 2rem)', width: 'fit-content' }}
+								filled
+								linked={`/dashboard/messages/${id}`}>
+								Message me now!
+							</LinkButton>
+						)}
+						{userAccount?.isTrainer && <p className={classes.category}>Only regular users can message trainers.</p>}
 					</div>
 				</section>
 				<Wrapper>
@@ -81,15 +85,17 @@ const DetailsSection: React.FC<{
 							<SliderContainer trainerData={trainerData} />
 							<div className={classes.testimonialsInfoContainer}>{content}</div>
 						</section>
-						<div className={classes.attribution}>
-							<p className={classes.attributionText}>Am I your perfect trainer?</p>{' '}
-							<LinkButton
-								style={{ fontSize: 'clamp(1.4rem, 1.2041rem + 0.9796vw, 2rem)' }}
-								filled
-								linked={`/dashboard/messages/${id}`}>
-								Message me now!
-							</LinkButton>
-						</div>
+						{!userAccount?.isTrainer && (
+							<div className={classes.attribution}>
+								<p className={classes.attributionText}>Am I your perfect trainer?</p>{' '}
+								<LinkButton
+									style={{ fontSize: 'clamp(1.4rem, 1.2041rem + 0.9796vw, 2rem)' }}
+									filled
+									linked={`/dashboard/messages/${id}`}>
+									Message me now!
+								</LinkButton>
+							</div>
+						)}
 					</div>
 				</Wrapper>
 			</main>

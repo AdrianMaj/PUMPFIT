@@ -3,9 +3,11 @@ import TrainerCard from './trainerCard'
 import Wrapper from '../ui/wrapper'
 import fetchTrainers, { fetchTrainersWithFilters } from '@/util/fetchTrainers'
 import classes from './cardSection.module.scss'
+import fetchAccount from '@/util/fetchAccount'
 
 const CardSection: React.FC<{ params: { [key: string]: string | undefined } }> = async ({ params }) => {
 	let accounts = await fetchTrainers()
+	let loggedAccount = await fetchAccount()
 	if (params && Object.keys(params).length > 0) {
 		const selectedCategories = params.categories?.split(',')
 		const data = {
@@ -29,6 +31,7 @@ const CardSection: React.FC<{ params: { [key: string]: string | undefined } }> =
 								experience={account.trainer.announcement.experience}
 								description={account.trainer.announcement.description}
 								price={account.trainer.announcement.price}
+								isTrainerLogged={loggedAccount?.isTrainer}
 								photo={
 									account.trainer.announcement.photo ||
 									'https://i.pinimg.com/originals/b9/f2/19/b9f2193028967077ad84b60a2cced514.jpg'
