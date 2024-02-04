@@ -42,7 +42,11 @@ const MessagesSection = ({
 		<section className={classes.section}>
 			<AccountSearchBar handleSearch={handleSearch} />
 			<h3 className={classes.chatHeading}>{loggedAccount.isTrainer ? 'Your proteges' : 'Messaged trainers'}</h3>
-			{filteredMessagedAccounts.length <= 0 && <p>You don't have any active contacts.</p>}
+			{filteredMessagedAccounts.length <= 0 && (
+				<p className={classes.infoText}>
+					Here you will see messages from users. You don't have any active contacts right now.
+				</p>
+			)}
 			{filteredMessagedAccounts.map(account => (
 				<MessageCard key={account.id} messagedAccount={account} accountId={loggedAccount.id} />
 			))}

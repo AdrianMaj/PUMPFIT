@@ -17,11 +17,12 @@ const Page = async ({ params }: { params: { id: string } }) => {
 					price={announcement.price}
 					photo={announcement.photo || 'https://i.pinimg.com/originals/b9/f2/19/b9f2193028967077ad84b60a2cced514.jpg'}
 					id={account.id}
+					isTrainerLogged={true}
 				/>
 			</Wrapper>
 		)
 	} else {
-		return <p>error</p>
+		return <p>An error has occured</p>
 	}
 }
 

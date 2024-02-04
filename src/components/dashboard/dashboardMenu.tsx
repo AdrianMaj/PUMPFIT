@@ -78,11 +78,6 @@ const DashboardMenu: React.FC<{ name: string; isTrainer: boolean }> = ({ name, i
 			link: '',
 		},
 		{
-			text: 'My proteges',
-			icon: '/proteges.svg',
-			link: 'proteges',
-		},
-		{
 			text: 'Messages',
 			icon: '/messages.svg',
 			link: 'messages',
