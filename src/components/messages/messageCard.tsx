@@ -35,8 +35,10 @@ const MessageCard = ({
 				// sizes="100vw"
 				// style={{ width: 'auto', height: 'auto' }}
 				src={
-					messagedAccount.trainer?.announcement?.photo ||
-					'https://i.pinimg.com/originals/b9/f2/19/b9f2193028967077ad84b60a2cced514.jpg'
+					messagedAccount.isTrainer
+						? messagedAccount.trainer?.announcement?.photo ||
+						  'https://i.pinimg.com/originals/b9/f2/19/b9f2193028967077ad84b60a2cced514.jpg'
+						: messagedAccount.photo || 'https://i.pinimg.com/originals/b9/f2/19/b9f2193028967077ad84b60a2cced514.jpg'
 				}
 				alt={messagedAccount.name}
 			/>

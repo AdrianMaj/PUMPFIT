@@ -129,7 +129,7 @@ const FaqSection = () => {
 				<AnimatePresence>
 					{questions === true ? (
 						<div className={classes.container}>
-							{userQuestions.map(question => (
+							{trainerQuestions.map(question => (
 								<FaqElement key={question.question} question={question.question}>
 									{question.answer}
 								</FaqElement>
@@ -137,7 +137,7 @@ const FaqSection = () => {
 						</div>
 					) : (
 						<div className={classes.container}>
-							{trainerQuestions.map(question => (
+							{userQuestions.map(question => (
 								<FaqElement key={question.question} question={question.question}>
 									{question.answer}
 								</FaqElement>

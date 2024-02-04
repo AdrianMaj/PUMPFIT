@@ -44,7 +44,9 @@ const MessagesSection = ({
 			<h3 className={classes.chatHeading}>{loggedAccount.isTrainer ? 'Your proteges' : 'Messaged trainers'}</h3>
 			{filteredMessagedAccounts.length <= 0 && (
 				<p className={classes.infoText}>
-					Here you will see messages from users. You don't have any active contacts right now.
+					{loggedAccount.isTrainer
+						? "Here you will see messages from users. You don't have any active contacts right now."
+						: "You don't have any active contacts right now."}
 				</p>
 			)}
 			{filteredMessagedAccounts.map(account => (
