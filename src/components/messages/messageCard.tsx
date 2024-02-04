@@ -22,6 +22,25 @@ const MessageCard = ({
 		}
 		getLastMessage()
 	}, [])
+	let time: string = ''
+	if (lastMessage?.createdAt) {
+		const currentDate = new Date()
+		const differenceInMilliseconds = currentDate.getTime() - lastMessage.createdAt.getTime()
+		const differenceInSeconds = Math.floor(differenceInMilliseconds / 1000)
+
+		if (differenceInSeconds < 60) {
+			time = `${differenceInSeconds}s`
+		} else if (differenceInSeconds < 3600) {
+			const minutes = Math.floor(differenceInSeconds / 60)
+			time = `${minutes}min`
+		} else if (differenceInSeconds < 86400) {
+			const hours = Math.floor(differenceInSeconds / 3600)
+			time = `${hours}h`
+		} else {
+			const days = Math.floor(differenceInSeconds / 86400)
+			time = `${days}d`
+		}
+	}
 
 	const handleMessageTest = () => {
 		router.push(`/dashboard/messages/${messagedAccount.id}`)
@@ -50,7 +69,7 @@ const MessageCard = ({
 							{lastMessage.fromAccountId === accountId ? 'You: ' : messagedAccount.name + ': '}
 							{lastMessage.text}
 						</p>
-						<p className={classes.cardTime}>{lastMessage.createdAt.toDateString()}</p>
+						<p className={classes.cardTime}>{time}</p>
 					</>
 				) : (
 					''
