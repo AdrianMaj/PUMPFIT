@@ -29,3 +29,22 @@ body {
 	height: 100%;
 	background-color: $secondaryBg;
 }
+
+// EMOJI
+
+.EmojiPickerReact .epr-category-nav {
+	justify-content: center;
+	gap: 0.5em;
+	flex-wrap: wrap;
+}
+.EmojiPickerReact.epr-dark-theme {
+	--epr-emoji-size: 25px;
+	--epr-category-navigation-button-size: 25px;
+}
+
+@media (min-width: 992px) {
+	.EmojiPickerReact.epr-dark-theme {
+		--epr-emoji-size: 35px;
+		--epr-category-navigation-button-size: 35px;
+	}
+}

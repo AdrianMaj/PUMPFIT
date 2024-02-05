@@ -1,5 +1,5 @@
 'use client'
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import * as z from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { FormProvider, useForm } from 'react-hook-form'
@@ -33,6 +33,18 @@ const SendMessageForm = ({
 			message: '',
 		},
 	})
+	const closeEmojiPicker = (event: MouseEvent) => {
+		const emojiPickerElement = document.querySelector('.EmojiPickerReact')
+		if (emojiPickerElement && !emojiPickerElement.contains(event.target as Node)) {
+			setEmojiIsOpened(false)
+		}
+	}
+	useEffect(() => {
+		document.addEventListener('click', closeEmojiPicker)
+		return () => {
+			document.removeEventListener('click', closeEmojiPicker)
+		}
+	}, [])
 	const messageType = 'text'
 	const handleOpenEmojiPicker = () => {
 		setEmojiIsOpened(prevState => {
@@ -43,6 +55,7 @@ const SendMessageForm = ({
 	const handleAddEmoji = (emoji: EmojiClickData) => {
 		if (inputRef.current) {
 			inputRef.current.value += emoji.emoji
+			setEmojiIsOpened(false)
 		}
 	}
 
@@ -140,7 +153,11 @@ const SendMessageForm = ({
 							</motion.svg>
 						</motion.button>
 						<EmojiPicker
-							width="30em"
+							lazyLoadEmojis={true}
+							width="40em"
+							style={{
+								maxWidth: '110%',
+							}}
 							theme={Theme.DARK}
 							className={classes.emojiPicker}
 							open={emojiIsOpened}
