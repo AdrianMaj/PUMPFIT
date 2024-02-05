@@ -1,53 +1,223 @@
-![PUMPFIT App Logo](/public/logo.svg)
+<a name="readme-top"></a>
 
-# PUMPFIT - An app for personal trainers, and for those who are looking for their trainer.
+[![Contributors][contributors-shield]][contributors-url]
+[![Forks][forks-shield]][forks-url]
+[![Stargazers][stars-shield]][stars-url]
+[![Issues][issues-shield]][issues-url]
+[![MIT License][license-shield]][license-url]
+[![LinkedIn][linkedin-shield]][linkedin-url]
 
-PUMPFIT allows you to create a trainer or user account. A trainer account can publish advertisements that can be answered by those looking for trainers. The application also allows communication between users and editing of account data. Users can publish testimonials about trainers, which will be visible to all visitors.
+<!-- PROJECT LOGO -->
+<br />
+<div align="center">
+  <a href="https://github.com/AdrianMaj/PUMPFIT">
+    <img src="/public/logo.svg" alt="PUMPFIT App Logo" width="80" height="80">
+  </a>
 
-### 💻 Live Site: [Live Site URL](https://pumpfit.vercel.app/)
+<h3 align="center">PUMPFIT</h3>
 
-### Table of Contents
+  <p align="center">
+     An app for personal trainers, and for those who are looking for their trainer.
+    <br />
+    <a href="https://github.com/AdrianMaj/PUMPFIT"><strong>Explore the docs »</strong></a>
+    <br />
+    <br />
+    <a href="https://pumpfit.vercel.app/">View Demo</a>
+    ·
+    <a href="https://github.com/AdrianMaj/PUMPFIT/issues">Report Bug</a>
+    ·
+    <a href="https://github.com/AdrianMaj/PUMPFIT/issues">Request Feature</a>
+  </p>
+</div>
 
-- [Sekcja 1](#sekcja-1)
-  - [Podsekcja 1.1](#podsekcja-11)
-  - [Podsekcja 1.2](#podsekcja-12)
-- [Sekcja 2](#sekcja-2)
-  - [Podsekcja 2.1](#podsekcja-21)
-  - [Podsekcja 2.2](#podsekcja-22)
+<!-- TABLE OF CONTENTS -->
+<details>
+  <summary>Table of Contents</summary>
+  <ol>
+    <li>
+      <a href="#about-the-project">About The Project</a>
+      <ul>
+        <li><a href="#built-with">Built With</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#getting-started">Getting Started</a>
+      <ul>
+        <li><a href="#prerequisites">Prerequisites</a></li>
+        <li><a href="#installation">Installation</a></li>
+      </ul>
+    </li>
+    <li><a href="#usage">Usage</a></li>
+    <li><a href="#roadmap">Roadmap</a></li>
+    <li><a href="#contributing">Contributing</a></li>
+    <li><a href="#license">License</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="#acknowledgments">Acknowledgments</a></li>
+  </ol>
+</details>
 
-## Technologies
+<!-- ABOUT THE PROJECT -->
 
-![My Skills](https://skillicons.dev/icons?i=next,typescript,react,prisma,sass,vercel)<svg width='48px' height='48px' fill='white' role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Socket.io</title><path d="M11.9362.0137a12.1694 12.1694 0 00-2.9748.378C4.2816 1.5547.5678 5.7944.0918 10.6012c-.59 4.5488 1.7079 9.2856 5.6437 11.6345 3.8608 2.4179 9.0926 2.3199 12.8734-.223 3.3969-2.206 5.5118-6.2277 5.3858-10.2845-.058-4.0159-2.31-7.9167-5.7588-9.9796C16.354.5876 14.1431.0047 11.9362.0137zm-.063 1.696c4.9448-.007 9.7886 3.8137 10.2815 8.9245.945 5.6597-3.7528 11.4125-9.4875 11.5795-5.4538.544-10.7245-4.0798-10.8795-9.5566-.407-4.4338 2.5159-8.8346 6.6977-10.2995a9.1126 9.1126 0 013.3878-.647zm5.0908 3.2248c-2.6869 2.0849-5.2598 4.3078-7.8886 6.4567 1.2029.017 2.4118.016 3.6208.01 1.41-2.165 2.8589-4.3008 4.2678-6.4667zm-5.6647 7.6536c-1.41 2.166-2.86 4.3088-4.2699 6.4737 2.693-2.0799 5.2548-4.3198 7.9017-6.4557a255.4132 255.4132 0 00-3.6318-.018z"/></svg>
+## About The Project
 
-First, run the development server:
+[![PUMPFIT Main page screenshot][product-screenshot]](https://pumpfit.vercel.app/)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+PUMPFIT allows you to create a trainer or user account. A trainer account can publish advertisements that can be answered by those looking for trainers. The application also allows real-time communication between users and editing of account data. Users can publish testimonials about trainers, which will be visible to all page visitors.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Built With
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+- [![Next][Next.js]][Next-url]
+- [![React][React.js]][React-url]
+- [![Typescript][Typescript]][Typescript-url]
+- [![Socket.io][Socket.io]][Socket.io-url]
+- [![Prisma][Prisma]][Prisma-url]
+- [![Postgres][Postgres]][Postgres-url]
+- [![Vercel][Vercel]][Vercel-url]
+- [![Sass][Sass]][Sass-url]
 
-## Learn More
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-To learn more about Next.js, take a look at the following resources:
+<!-- GETTING STARTED -->
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Getting Started
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+This is an example of how you may give instructions on setting up your project locally.
+To get a local copy up and running follow these simple example steps.
 
-## Deploy on Vercel
+### Prerequisites
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+This is an example of how to list things you need to use the software and how to install them.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- npm
+  ```sh
+  npm install npm@latest -g
+  ```
+
+### Installation
+
+1. Get a free API Key at [https://example.com](https://example.com)
+2. Clone the repo
+   ```sh
+   git clone https://github.com/AdrianMaj/PUMPFIT.git
+   ```
+3. Install NPM packages
+   ```sh
+   npm install
+   ```
+4. Enter your API in `config.js`
+   ```js
+   const API_KEY = 'ENTER YOUR API'
+   ```
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- USAGE EXAMPLES -->
+
+## Usage
+
+Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- ROADMAP -->
+
+## Roadmap
+
+- [x] Main page and UI
+  - [x] Promoted dynamic section
+- [x] Create account functionality
+  - [x] Email verification
+- [x] Login functionality
+  - [x] Reset password feature
+  - [x] Logout feature
+  - [x] Credentials authorization
+- [x] Dashboard
+  - [x] Change account settings and info
+  - [x] Publish an announcement
+    - [x] Unpublish an announcement
+  - [x] Real-time messages
+    - [x] Filtering users
+    - [x] Last message info
+    - [x] Saving chat history
+    - [x] Emoji picker
+    - [ ] Image upload
+- [x] Announcement list
+  - [x] Filtering announcements
+  - [x] Announcement details
+  - [x] Adding testimonials
+  - [x] Messaging trainer from announcement
+
+See the [open issues](https://github.com/AdrianMaj/PUMPFIT/issues) for a full list of proposed features (and known issues).
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- CONTRIBUTING -->
+
+## Contributing
+
+Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+
+If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement".
+Don't forget to give the project a star! Thanks again!
+
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the Branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- LICENSE -->
+
+## License
+
+Distributed under the MIT License. See `LICENSE.txt` for more information.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- CONTACT -->
+
+## Contact
+
+Your Name - [@adrianmaj1122](https://twitter.com/adrianmaj1122) - adrianmaj1122@gmail.com
+
+Project Link: [https://github.com/AdrianMaj/PUMPFIT](https://github.com/AdrianMaj/PUMPFIT)
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- MARKDOWN LINKS & IMAGES -->
+<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
+
+[contributors-shield]: https://img.shields.io/github/contributors/AdrianMaj/PUMPFIT.svg?style=for-the-badge
+[contributors-url]: https://github.com/AdrianMaj/PUMPFIT/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/AdrianMaj/PUMPFIT.svg?style=for-the-badge
+[forks-url]: https://github.com/AdrianMaj/PUMPFIT/network/members
+[stars-shield]: https://img.shields.io/github/stars/AdrianMaj/PUMPFIT.svg?style=for-the-badge
+[stars-url]: https://github.com/AdrianMaj/PUMPFIT/stargazers
+[issues-shield]: https://img.shields.io/github/issues/AdrianMaj/PUMPFIT.svg?style=for-the-badge
+[issues-url]: https://github.com/AdrianMaj/PUMPFIT/issues
+[license-shield]: https://img.shields.io/github/license/AdrianMaj/PUMPFIT.svg?style=for-the-badge
+[license-url]: https://github.com/AdrianMaj/PUMPFIT/blob/master/LICENSE.txt
+[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
+[linkedin-url]: https://linkedin.com/in/adrianmaj
+[product-screenshot]: images/screenshot.png
+[Next.js]: https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white
+[Next-url]: https://nextjs.org/
+[Next.js]: https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white
+[Typescript]: https://shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=TypeScript&logoColor=FFF
+[Typescript-url]: https://www.typescriptlang.org/
+[React.js]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
+[React-url]: https://reactjs.org/
+[Prisma]: https://img.shields.io/badge/Prisma-3982CE?style=for-the-badge&logo=Prisma&logoColor=white
+[Prisma-url]: https://www.prisma.io/
+[Socket.io]: https://img.shields.io/badge/Socket.io-black?style=for-the-badge&logo=socket.io&badgeColor=010101
+[Socket.io-url]: https://socket.io/
+[Vercel]: https://img.shields.io/badge/vercel-%23000000.svg?style=for-the-badge&logo=vercel&logoColor=white
+[Vercel-url]: https://vercel.com/
+[Postgres]: https://img.shields.io/badge/postgres-%23316192.svg?style=for-the-badge&logo=postgresql&logoColor=white
+[Postgres-url]: https://www.postgresql.org.pl/
+[Sass]: https://img.shields.io/badge/SASS-hotpink.svg?style=for-the-badge&logo=SASS&logoColor=white
+[Sass-url]: https://sass-lang.com/
