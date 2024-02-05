@@ -1,0 +1,105 @@
+@use '../variables' as *;
+.form {
+	position: relative;
+}
+.imageInput {
+	display: none;
+}
+.imageInputLabel {
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+	padding: 0 2em;
+	margin: 0 -2em;
+	margin-right: -1em;
+	&.imageButton {
+		position: relative;
+		background: none;
+		border: none;
+	}
+	svg {
+		width: 2.5em;
+		height: 2.5em;
+	}
+}
+.emojiPicker {
+	position: absolute !important;
+	bottom: 120% !important;
+	z-index: 10000 !important;
+	left: 0 !important;
+}
+.container {
+	display: flex;
+	flex-direction: column-reverse;
+	gap: 1em;
+	position: relative;
+	width: 100%;
+}
+.messageIcons {
+	display: flex;
+	justify-content: center;
+	flex-direction: row-reverse;
+	gap: 2em;
+	margin-top: 1em;
+}
+.messageContainer {
+	display: flex;
+	position: relative;
+	width: 100%;
+}
+.label {
+	position: absolute;
+	top: 0%;
+	left: 0.4em;
+	padding: 0 0.15em;
+	transform: translateY(-50%);
+	color: $subtext;
+	font-size: clamp(1.6rem, 1.4041rem + 0.9796vw, 2.2rem);
+	pointer-events: none;
+	z-index: 5;
+	&::before {
+		content: '';
+		position: absolute;
+		bottom: 0;
+		left: 50%;
+		transform: translateX(-50%);
+		width: 105%;
+		height: 51%;
+		background-color: #0f0f0f;
+		z-index: -1;
+	}
+}
+.input {
+	font-size: clamp(1.6rem, 1.4041rem + 0.9796vw, 2.2rem);
+	padding: 0.75em;
+	background-color: #0f0f0f;
+	outline: none;
+	color: #fff;
+	border: 1px solid transparent;
+	width: 100%;
+	&:disabled {
+		color: #494949;
+	}
+}
+.inputError {
+	margin-top: 0.5em;
+	font-size: clamp(1.2rem, 1.0041rem + 0.9796vw, 1.8rem);
+	color: $mainColor;
+}
+
+@media (min-width: 992px) {
+	.container {
+		flex-direction: row;
+	}
+	.imageInputLabel {
+		svg {
+			width: 3em;
+			height: 3em;
+		}
+	}
+	.messageIcons {
+		flex-direction: row;
+		justify-content: flex-start;
+	}
+}

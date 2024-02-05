@@ -7,7 +7,7 @@
 	margin: -4em -2em;
 	padding: 4em 2em;
 	background-color: $secondaryBg;
-	margin-bottom: auto;
+	margin-bottom: 1em;
 }
 .arrow {
 	rotate: 180deg;
@@ -26,5 +26,6 @@
 		margin: -4em;
 		width: calc(100% + 8em);
 		padding: 4em;
+		margin-bottom: 2em;
 	}
 }

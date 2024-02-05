@@ -11,8 +11,9 @@ const Input: React.FC<{
 	error?: FieldError | undefined
 	isTextArea?: boolean
 	width?: string
+	children?: React.ReactNode
 	[x: string]: any
-}> = ({ type, id, label, error, isTextArea, width, ...props }) => {
+}> = ({ type, id, label, error, isTextArea, width, children, ...props }) => {
 	const { register } = useFormContext()
 	const { onChange, onBlur, name, ref } = register(id)
 
@@ -50,6 +51,7 @@ const Input: React.FC<{
 				/>
 			)}
 			{error && <p className={classes.inputError}>{error.message}</p>}
+			{children}
 		</div>
 	)
 }

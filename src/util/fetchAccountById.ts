@@ -1,6 +1,6 @@
 import prisma from '../../lib/prisma'
 
-const fetchAccount = async (userId: string) => {
+const fetchAccountById = async (userId: string) => {
 	const userAccount = await prisma.account.findUnique({
 		where: {
 			id: userId,
@@ -27,4 +27,4 @@ const fetchAccount = async (userId: string) => {
 	return userAccount
 }
 
-export default fetchAccount
+export default fetchAccountById

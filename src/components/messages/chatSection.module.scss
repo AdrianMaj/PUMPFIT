@@ -5,7 +5,7 @@
 	flex-direction: column;
 	justify-content: space-between;
 	width: 100%;
-	height: calc(100dvh - 19em);
+	height: calc(100dvh - 16em);
 }
 .messageList {
 	flex: 1;
@@ -34,7 +34,6 @@
 	flex-direction: column;
 }
 .recieverImage {
-	filter: brightness(65%);
 	width: 10%;
 	min-width: 9em;
 	aspect-ratio: 1/1;
@@ -60,7 +59,8 @@
 	align-self: flex-end;
 }
 .bar {
-	margin-top: 2em;
+	position: relative;
+	margin-top: 1em;
 	display: flex;
 	align-items: flex-start;
 	width: 100%;
@@ -81,6 +81,9 @@
 	background-color: $secondaryBg;
 }
 @media (min-width: 576px) {
+	.bar {
+		margin-top: 2em;
+	}
 	.messageListElement {
 		flex-direction: row;
 	}
@@ -92,5 +95,10 @@
 	}
 	.doubledBox {
 		display: block;
+	}
+}
+@media (min-width: 992px) {
+	.chatSection {
+		height: calc(100dvh - 17em);
 	}
 }
