@@ -11,7 +11,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/AdrianMaj/PUMPFIT">
-    <img src="/public/logo.svg" alt="PUMPFIT App Logo" width="80" height="80">
+    <img src="/public/logo.svg" alt="PUMPFIT App Logo" width="160" height="160">
   </a>
 
 <h3 align="center">PUMPFIT</h3>
