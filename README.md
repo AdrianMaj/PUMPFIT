@@ -60,7 +60,7 @@
 
 ## About The Project
 
-[![PUMPFIT Main page screenshot][product-screenshot]](https://pumpfit.vercel.app/)
+[![PUMPFIT Main page screenshot][product-screenshot]](/images/screenshot.png)
 
 PUMPFIT allows you to create a trainer or user account. A trainer account can publish advertisements that can be answered by those looking for trainers. The application also allows real-time communication between users and editing of account data. Users can publish testimonials about trainers, which will be visible to all page visitors.
 
@@ -127,16 +127,19 @@ Use this space to show useful examples of how a project can be used. Additional 
 
 - [x] Main page and UI
   - [x] Promoted dynamic section
+  - [x] FAQ dynamic section
 - [x] Create account functionality
   - [x] Email verification
 - [x] Login functionality
   - [x] Reset password feature
   - [x] Logout feature
   - [x] Credentials authorization
+  - [x] Account session
 - [x] Dashboard
   - [x] Change account settings and info
   - [x] Publish an announcement
     - [x] Unpublish an announcement
+    - [x] Change announcement data
   - [x] Real-time messages
     - [x] Filtering users
     - [x] Last message info
@@ -146,7 +149,8 @@ Use this space to show useful examples of how a project can be used. Additional 
 - [x] Announcement list
   - [x] Filtering announcements
   - [x] Announcement details
-  - [x] Adding testimonials
+    - [x] Adding testimonials
+    - [x] Testimonial Slider
   - [x] Messaging trainer from announcement
 
 See the [open issues](https://github.com/AdrianMaj/PUMPFIT/issues) for a full list of proposed features (and known issues).
