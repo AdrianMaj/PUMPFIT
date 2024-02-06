@@ -11,7 +11,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/AdrianMaj/PUMPFIT">
-    <img src="/public/logo.svg" alt="PUMPFIT App Logo" width="160" height="160">
+    <img src="/public/logo.svg" alt="PUMPFIT App Logo" width="180" height="100">
   </a>
 
 <h3 align="center">PUMPFIT</h3>
@@ -22,7 +22,7 @@
     <a href="https://github.com/AdrianMaj/PUMPFIT"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://pumpfit.vercel.app/">View Demo</a>
+    <a href="https://pumpfit.vercel.app/">View Live Site</a>
     ·
     <a href="https://github.com/AdrianMaj/PUMPFIT/issues">Report Bug</a>
     ·
@@ -117,7 +117,14 @@ This is an example of how to list things you need to use the software and how to
 
 ## Usage
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
+To unlock the main part of the application - the dashboard, you need to create your own account or log in to any of the following:
+
+| E-mail              | Password | Account Type |
+| ------------------- | -------- | ------------ |
+| user@example.com    | zaq1@WSX | User         |
+| trainer@example.com | zaq1@WSX | Trainer      |
+
+After logging in, you should see a dashboard with information about your account, and a side menu on the left with dashboard functionalities.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
