@@ -16,6 +16,8 @@ import uploadFiles from '@/util/uploadFiles'
 
 const FormSchema = z.object({
 	message: z.string().min(1),
+	files: z.array(z.string()),
+	photos: z.array(z.string()),
 })
 const SendMessageForm = ({
 	loggedId,
@@ -48,6 +50,8 @@ const SendMessageForm = ({
 		resolver: zodResolver(FormSchema),
 		defaultValues: {
 			message: '',
+			files: [],
+			photos: [],
 		},
 	})
 	const handleFileUpload = (e: ChangeEvent<HTMLInputElement>) => {
@@ -196,7 +200,6 @@ const SendMessageForm = ({
 						</Button>
 					</div>
 				</div>
-				<button type="submit">test</button>
 			</form>
 		</FormProvider>
 	)
