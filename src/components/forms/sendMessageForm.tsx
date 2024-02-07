@@ -123,8 +123,8 @@ const SendMessageForm = ({
 				fromAccountId: loggedId,
 				toAccountId: recieverId,
 			})
-			const filesList = currentFilesList.map(file => file.file)
-			await uploadFiles(filesList)
+			// const filesList = currentFilesList.map(file => file.file)
+			// await uploadFiles(filesList)
 		} catch (error) {
 			console.log('There was an error while saving message: ', error)
 		}
@@ -197,6 +197,7 @@ const SendMessageForm = ({
 							/>
 						</div>
 						<Button filled type="submit">
+							{' '}
 							<svg
 								className={classes.sendIcon}
 								width="30"
