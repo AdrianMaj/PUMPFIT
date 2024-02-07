@@ -123,8 +123,8 @@ const SendMessageForm = ({
 				fromAccountId: loggedId,
 				toAccountId: recieverId,
 			})
-			// const filesList = currentFilesList.map(file => file.file)
-			// await uploadFiles(filesList)
+			const filesList = currentFilesList.map(file => file.file)
+			await uploadFiles(filesList)
 		} catch (error) {
 			console.log('There was an error while saving message: ', error)
 		}
@@ -133,28 +133,15 @@ const SendMessageForm = ({
 		<FormProvider {...form}>
 			<form {...props} onSubmit={form.handleSubmit(onSubmit)} onDragOver={handleDragOver} onDrop={handleDrop}>
 				<div className={classes.container}>
-					<MessageIcons
+					{/* <MessageIcons
 						emojiIsOpened={emojiIsOpened}
 						handleOpenEmojiPicker={handleOpenEmojiPicker}
 						handleAddEmoji={handleAddEmoji}
 						handleFileChange={handleFileUpload}
-					/>
+					/> */}
 					<div className={classes.messageContainer}>
 						<div className={classes.inputContainer}>
 							<div className={classes.filesContainer}>
-								{/* {filesList.map(file => (
-									<MotionImage
-										className={classes.inputImage}
-										onClick={() => {
-											handleDeleteFile(file)
-										}}
-										key={file}
-										width={100}
-										height={100}
-										src={file}
-										alt={file}
-									/>
-								))} */}
 								{currentFilesList.map(file => {
 									if (file.file.type.startsWith('image/')) {
 										return (
@@ -197,7 +184,6 @@ const SendMessageForm = ({
 							/>
 						</div>
 						<Button filled type="submit">
-							{' '}
 							<svg
 								className={classes.sendIcon}
 								width="30"
