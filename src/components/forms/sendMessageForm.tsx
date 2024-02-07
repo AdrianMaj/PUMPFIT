@@ -12,6 +12,7 @@ import classes from './sendMessageForm.module.scss'
 import { motion } from 'framer-motion'
 import Image from 'next/image'
 import MessageIcons from './messageIcons'
+import uploadFiles from '@/util/uploadFiles'
 
 const FormSchema = z.object({
 	message: z.string().min(1),
@@ -29,7 +30,7 @@ const SendMessageForm = ({
 	[x: string]: any
 }) => {
 	const [emojiIsOpened, setEmojiIsOpened] = useState(false)
-	const [filesList, setFilesList] = useState<
+	const [currentFilesList, setCurrentFilesList] = useState<
 		{
 			file: File
 			previewUrl: string
@@ -48,7 +49,7 @@ const SendMessageForm = ({
 		resolver: zodResolver(FormSchema),
 		defaultValues: {
 			message: '',
-			files: filesList,
+			files: currentFilesList,
 		},
 	})
 	const handleFileUpload = (e: ChangeEvent<HTMLInputElement>) => {
@@ -67,7 +68,7 @@ const SendMessageForm = ({
 	}
 	const handleFileChange = (files: FileList) => {
 		const filesArray = Array.from(files)
-		setFilesList(prevArray => {
+		setCurrentFilesList(prevArray => {
 			const newArray = [
 				...prevArray,
 				...filesArray.map(file => ({
@@ -80,7 +81,7 @@ const SendMessageForm = ({
 		})
 	}
 	const handleDeleteFile = (fileId: string) => {
-		setFilesList(prevArray => {
+		setCurrentFilesList(prevArray => {
 			const newArray = prevArray
 			const filteredArray = newArray.filter(file => file.id !== fileId)
 			return filteredArray
@@ -105,11 +106,6 @@ const SendMessageForm = ({
 			setEmojiIsOpened(false)
 		}
 	}
-	const buttonVariants = {
-		hover: {
-			backgroundColor: '#a50000',
-		},
-	}
 	const onSubmit = async (values: z.infer<typeof FormSchema>) => {
 		try {
 			const tempMessage = {
@@ -129,6 +125,8 @@ const SendMessageForm = ({
 				fromAccountId: loggedId,
 				toAccountId: recieverId,
 			})
+			const filesList = currentFilesList.map(file => file.file)
+			await uploadFiles(filesList)
 		} catch (error) {
 			console.log('There was an error while saving message: ', error)
 		}
@@ -146,7 +144,20 @@ const SendMessageForm = ({
 					<div className={classes.messageContainer}>
 						<div className={classes.inputContainer}>
 							<div className={classes.filesContainer}>
-								{filesList.map(file => {
+								{/* {filesList.map(file => (
+									<MotionImage
+										className={classes.inputImage}
+										onClick={() => {
+											handleDeleteFile(file)
+										}}
+										key={file}
+										width={100}
+										height={100}
+										src={file}
+										alt={file}
+									/>
+								))} */}
+								{currentFilesList.map(file => {
 									if (file.file.type.startsWith('image/')) {
 										return (
 											<MotionImage
