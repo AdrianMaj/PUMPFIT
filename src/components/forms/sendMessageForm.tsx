@@ -133,12 +133,12 @@ const SendMessageForm = ({
 		<FormProvider {...form}>
 			<form {...props} onSubmit={form.handleSubmit(onSubmit)} onDragOver={handleDragOver} onDrop={handleDrop}>
 				<div className={classes.container}>
-					{/* <MessageIcons
+					<MessageIcons
 						emojiIsOpened={emojiIsOpened}
 						handleOpenEmojiPicker={handleOpenEmojiPicker}
 						handleAddEmoji={handleAddEmoji}
 						handleFileChange={handleFileUpload}
-					/> */}
+					/>
 					<div className={classes.messageContainer}>
 						<div className={classes.inputContainer}>
 							<div className={classes.filesContainer}>
@@ -196,6 +196,7 @@ const SendMessageForm = ({
 						</Button>
 					</div>
 				</div>
+				<button type="submit">test</button>
 			</form>
 		</FormProvider>
 	)
