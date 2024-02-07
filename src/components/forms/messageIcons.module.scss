@@ -1,0 +1,51 @@
+.messageIcons {
+	display: flex;
+	justify-content: center;
+	flex-direction: row-reverse;
+	gap: 1em;
+	font-size: clamp(1.6rem, 1.4041rem + 0.9796vw, 2.2rem);
+	margin: 0.75em 0;
+}
+.imageInput {
+	display: none;
+}
+.emojiPicker {
+	position: absolute !important;
+	bottom: 5em !important;
+	z-index: 10000 !important;
+	left: -2em !important;
+}
+.imageInputLabel {
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+	padding: 0 2em;
+	margin: 0 -2em;
+	margin-right: -1em;
+	&.imageButton {
+		position: relative;
+		background: none;
+		border: none;
+	}
+	svg {
+		width: 2.5em;
+		height: 2.5em;
+	}
+}
+@media (min-width: 992px) {
+	.container {
+		flex-direction: row;
+	}
+	.imageInputLabel {
+		svg {
+			width: 3em;
+			height: 3em;
+		}
+	}
+	.messageIcons {
+		flex-direction: row;
+		justify-content: flex-start;
+		align-items: flex-end;
+	}
+}

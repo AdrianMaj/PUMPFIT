@@ -2,33 +2,6 @@
 .form {
 	position: relative;
 }
-.imageInput {
-	display: none;
-}
-.imageInputLabel {
-	cursor: pointer;
-	display: flex;
-	align-items: center;
-	justify-content: flex-start;
-	padding: 0 2em;
-	margin: 0 -2em;
-	margin-right: -1em;
-	&.imageButton {
-		position: relative;
-		background: none;
-		border: none;
-	}
-	svg {
-		width: 2.5em;
-		height: 2.5em;
-	}
-}
-.emojiPicker {
-	position: absolute !important;
-	bottom: 5em !important;
-	z-index: 10000 !important;
-	left: -2em !important;
-}
 .container {
 	display: flex;
 	flex-direction: column-reverse;
@@ -36,17 +9,49 @@
 	position: relative;
 	width: 100%;
 }
-.messageIcons {
-	display: flex;
-	justify-content: center;
-	flex-direction: row-reverse;
-	gap: 2em;
-	margin-top: 1em;
-}
 .messageContainer {
 	display: flex;
+	align-items: flex-end;
 	position: relative;
 	width: 100%;
+}
+.inputContainer {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	background-color: $secondaryBg;
+}
+.filesContainer {
+	display: flex;
+	align-items: center;
+	overflow-x: auto;
+	:last-child {
+		margin-right: 0.75em;
+	}
+}
+.inputImage {
+	font-size: clamp(1.6rem, 1.4041rem + 0.9796vw, 2.2rem);
+	object-fit: cover;
+	margin: 0.75em;
+	margin-right: 0;
+	cursor: pointer;
+}
+.inputFile {
+	font-size: clamp(1.6rem, 1.4041rem + 0.9796vw, 2.2rem);
+	margin: 0.75em;
+	margin-right: 0;
+	cursor: pointer;
+}
+.inputFileContainer {
+	display: flex;
+	align-items: center;
+	gap: 0.5em;
+	padding: 1em;
+	background-color: $mainBg;
+	font-size: $smallSize;
+}
+.inputFileText {
+	font-size: $smallSize;
 }
 .label {
 	position: absolute;
@@ -87,19 +92,21 @@
 	font-size: clamp(1.2rem, 1.0041rem + 0.9796vw, 1.8rem);
 	color: $mainColor;
 }
+.sendIcon {
+	rotate: -90deg;
+}
+.sendButton {
+	color: #fff;
+	font-size: clamp(1.6rem, 1.4041rem + 0.9796vw, 2.2rem);
+	text-align: center;
+	background-color: transparent;
+	padding: 0.75em 1em;
+	border: 1px solid $mainColor;
+	cursor: pointer;
+}
 
 @media (min-width: 992px) {
 	.container {
 		flex-direction: row;
-	}
-	.imageInputLabel {
-		svg {
-			width: 3em;
-			height: 3em;
-		}
-	}
-	.messageIcons {
-		flex-direction: row;
-		justify-content: flex-start;
 	}
 }
