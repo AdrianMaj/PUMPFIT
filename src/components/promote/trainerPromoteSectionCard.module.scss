@@ -15,6 +15,14 @@
 	color: $subtext;
 	margin-bottom: 1em;
 }
+.link {
+	font-size: $subtextSize;
+	color: $subtext;
+	transition: color 0.3s;
+	&:hover {
+		color: #fff;
+	}
+}
 .btnContainer {
 	width: 100%;
 	display: flex;
