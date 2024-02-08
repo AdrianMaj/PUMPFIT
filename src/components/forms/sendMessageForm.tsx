@@ -13,6 +13,7 @@ import { motion } from 'framer-motion'
 import Image from 'next/image'
 import MessageIcons from './messageIcons'
 import Input from '../ui/input'
+import uploadFiles from '@/util/uploadFiles'
 
 const FormSchema = z.object({
 	message: z.string().min(1),
@@ -37,7 +38,6 @@ const SendMessageForm = ({
 		}[]
 	>([])
 	const MotionImage = motion(Image)
-	// const inputRef = useRef<HTMLInputElement>(null)
 	useEffect(() => {
 		document.addEventListener('click', closeEmojiPicker)
 		return () => {
@@ -99,10 +99,8 @@ const SendMessageForm = ({
 		})
 	}
 	const handleAddEmoji = (emoji: EmojiClickData) => {
-		// if (inputRef.current) {
-		// 	inputRef.current.value += emoji.emoji
-		// 	setEmojiIsOpened(false)
-		// }
+		const values = form.getValues()
+		form.setValue('message', `${values.message}${emoji}`)
 	}
 	const onSubmit = async (values: z.infer<typeof FormSchema>) => {
 		try {
@@ -121,8 +119,9 @@ const SendMessageForm = ({
 				fromAccountId: loggedId,
 				toAccountId: recieverId,
 			})
-			// const filesList = currentFilesList.map(file => file.file)
-			// await uploadFiles(filesList)
+			const filesList = currentFilesList.map(file => file.file)
+			await uploadFiles(filesList)
+			console.log('check cloudinary')
 		} catch (error) {
 			console.log('There was an error while saving message: ', error)
 		}
@@ -140,19 +139,6 @@ const SendMessageForm = ({
 					<div className={classes.messageContainer}>
 						<div className={classes.inputContainer}>
 							<div className={classes.filesContainer}>
-								{/* {filesList.map(file => (
-									<MotionImage
-										className={classes.inputImage}
-										onClick={() => {
-											handleDeleteFile(file)
-										}}
-										key={file}
-										width={100}
-										height={100}
-										src={file}
-										alt={file}
-									/>
-								))} */}
 								{currentFilesList.map(file => {
 									if (file.file.type.startsWith('image/')) {
 										return (
