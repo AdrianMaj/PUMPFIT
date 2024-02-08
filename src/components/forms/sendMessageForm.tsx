@@ -8,7 +8,6 @@ import Button from '../ui/button'
 import { Socket } from 'socket.io-client'
 import { sendMessage } from '@/util/sendMessage'
 import { v4 as uuidv4 } from 'uuid'
-import { v2 as cloudinary } from 'cloudinary'
 import classes from './sendMessageForm.module.scss'
 import { motion } from 'framer-motion'
 import Image from 'next/image'
@@ -131,8 +130,6 @@ const SendMessageForm = ({
 						body: formData,
 					})
 					const res = await response.json()
-					const result = await cloudinary.uploader.upload(res.secure_url)
-					console.log(result)
 					console.log(res.secure_url)
 				} catch (error) {
 					console.error(error)
