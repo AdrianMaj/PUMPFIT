@@ -5,12 +5,10 @@ export const sendMessage = async ({
 	text,
 	fromAccountId,
 	toAccountId,
-	type,
 }: {
 	text: string
 	fromAccountId: string
 	toAccountId: string
-	type: string
 }) => {
 	try {
 		const message = await prisma.message.create({
@@ -18,7 +16,6 @@ export const sendMessage = async ({
 				text,
 				fromAccountId,
 				toAccountId,
-				type,
 			},
 		})
 		if (message) {

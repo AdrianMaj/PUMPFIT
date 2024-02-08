@@ -103,7 +103,6 @@ model Testimonial {
 model Message {
   id          String          @id @default(cuid())
   text        String
-  type        String
   from          Account  @relation("FromAccount", fields: [fromAccountId], references: [id], onDelete: Cascade)
   fromAccountId String   
   to            Account  @relation("ToAccount", fields: [toAccountId], references: [id], onDelete: Cascade)
