@@ -8,12 +8,14 @@ import Button from '../ui/button'
 import { Socket } from 'socket.io-client'
 import { sendMessage } from '@/util/sendMessage'
 import { v4 as uuidv4 } from 'uuid'
+import { v2 as cloudinary } from 'cloudinary'
 import classes from './sendMessageForm.module.scss'
 import { motion } from 'framer-motion'
 import Image from 'next/image'
 import MessageIcons from './messageIcons'
 import Input from '../ui/input'
 import uploadFiles from '@/util/uploadFiles'
+import axios from 'axios'
 
 const FormSchema = z.object({
 	message: z.string().min(1),
@@ -29,6 +31,7 @@ const SendMessageForm = ({
 	socket: Socket
 	[x: string]: any
 }) => {
+	const cloudName = process.env.CLOUDINARY_CLOUD_NAME
 	const [emojiIsOpened, setEmojiIsOpened] = useState(false)
 	const [currentFilesList, setCurrentFilesList] = useState<
 		{
@@ -102,13 +105,8 @@ const SendMessageForm = ({
 		const values = form.getValues()
 		form.setValue('message', `${values.message}${emoji}`)
 	}
-	const createFileURL = async () => {
-		'use server'
-		const filesList = currentFilesList.map(file => file.file)
-		const fileUrls = await uploadFiles(filesList)
-		return fileUrls
-	}
 	const onSubmit = async (values: z.infer<typeof FormSchema>) => {
+		const filesList = currentFilesList.map(file => file.file)
 		try {
 			const tempMessage = {
 				id: uuidv4(),
@@ -126,8 +124,18 @@ const SendMessageForm = ({
 				toAccountId: recieverId,
 			})
 			console.log('tu działa')
-			const fileURLs = await createFileURL()
-			console.log(fileURLs)
+			filesList.forEach(async file => {
+				const formData = new FormData()
+				formData.append('file', file)
+				formData.append('upload_preset', 'pumpfit')
+				try {
+					const response = await axios.post(`https://api.cloudinary.com/v1_1/${cloudName}/image/upload`, formData)
+					const result = await cloudinary.uploader.upload(response.data.secure_url)
+					console.log(result.secure_url)
+				} catch (error) {
+					console.error(error)
+				}
+			})
 			console.log('tu niżej działa')
 		} catch (error) {
 			console.log('There was an error while saving message: ', error)
