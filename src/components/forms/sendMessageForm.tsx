@@ -28,6 +28,7 @@ const SendMessageForm = ({
 	[x: string]: any
 }) => {
 	const cloudName = process.env.CLOUDINARY_CLOUD_NAME
+	const apiKey = process.env.CLOUDINARY_API_KEY
 	const [emojiIsOpened, setEmojiIsOpened] = useState(false)
 	const [currentFilesList, setCurrentFilesList] = useState<
 		{
@@ -124,6 +125,9 @@ const SendMessageForm = ({
 				const formData = new FormData()
 				formData.append('file', file)
 				formData.append('upload_preset', 'pumpfit')
+				if (apiKey) {
+					formData.append('api_key', apiKey)
+				}
 				try {
 					const response = await fetch(`https://api.cloudinary.com/v1_1/${cloudName}/image/upload`, {
 						method: 'POST',
