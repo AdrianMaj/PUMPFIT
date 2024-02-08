@@ -102,6 +102,12 @@ const SendMessageForm = ({
 		const values = form.getValues()
 		form.setValue('message', `${values.message}${emoji}`)
 	}
+	const createFileURL = async () => {
+		'use server'
+		const filesList = currentFilesList.map(file => file.file)
+		const fileUrls = await uploadFiles(filesList)
+		return fileUrls
+	}
 	const onSubmit = async (values: z.infer<typeof FormSchema>) => {
 		try {
 			const tempMessage = {
@@ -119,9 +125,10 @@ const SendMessageForm = ({
 				fromAccountId: loggedId,
 				toAccountId: recieverId,
 			})
-			const filesList = currentFilesList.map(file => file.file)
-			await uploadFiles(filesList)
-			console.log('check cloudinary')
+			console.log('tu działa')
+			const fileURLs = await createFileURL()
+			console.log(fileURLs)
+			console.log('tu niżej działa')
 		} catch (error) {
 			console.log('There was an error while saving message: ', error)
 		}
