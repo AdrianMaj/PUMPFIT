@@ -19,6 +19,52 @@
 	flex-direction: column;
 	gap: 3em;
 }
+.fileInput {
+	display: none;
+}
+.fileLabel {
+	cursor: pointer;
+	display: flex;
+	flex-direction: column;
+	width: fit-content;
+}
+.fileLabelText {
+	font-size: $subtextSize;
+	color: $subtext;
+	margin-bottom: 1em;
+}
+.announcementImage {
+	width: 14em;
+	height: 14em;
+	object-fit: cover;
+	object-position: center;
+}
+.fileLabelImagePreview {
+	position: relative;
+	width: 14em;
+	height: 14em;
+	background-color: $secondaryBg;
+	&::after {
+		content: '';
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		height: 25%;
+		width: 2px;
+		background-color: #fff;
+	}
+	&::before {
+		content: '';
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		height: 2px;
+		width: 25%;
+		background-color: #fff;
+	}
+}
 .container {
 	display: flex;
 	align-items: center;

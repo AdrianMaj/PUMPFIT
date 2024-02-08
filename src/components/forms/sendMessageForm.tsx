@@ -102,6 +102,11 @@ const SendMessageForm = ({
 	}
 	const onSubmit = async (values: z.infer<typeof FormSchema>) => {
 		const filesList = currentFilesList.map(file => file.file)
+		const fileURLList: {
+			Id: string
+			ImageURL: string
+			fileType: string
+		}[] = []
 		try {
 			const tempMessage = {
 				id: uuidv4(),
@@ -113,12 +118,12 @@ const SendMessageForm = ({
 			}
 			socket.emit('chat_message', tempMessage)
 			form.resetField('message')
+			setCurrentFilesList([])
 			await sendMessage({
 				text: values.message,
 				fromAccountId: loggedId,
 				toAccountId: recieverId,
 			})
-			console.log('tu działa')
 			for (const file of filesList) {
 				const formData = new FormData()
 				formData.append('file', file)
@@ -130,11 +135,12 @@ const SendMessageForm = ({
 					})
 					const res = await response.json()
 					console.log(res.secure_url)
+					console.log(res.asset_id)
+					console.log(res.resource_type)
 				} catch (error) {
 					console.error(error)
 				}
 			}
-			console.log('tu niżej działa')
 		} catch (error) {
 			console.log('There was an error while saving message: ', error)
 		}

@@ -7,10 +7,11 @@ import classes from './myProfileForm.module.scss'
 import Link from 'next/link'
 import LinkButton from '@/components/ui/linkButton'
 import Button from '@/components/ui/button'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, ChangeEvent } from 'react'
 import MultiSelect from '@/components/ui/multiSelect'
 import { handlePublish, handleUnpublish, updateAnnouncement } from '@/util/updateAnnouncement'
 import { Announcement, Testimonial, Trainer } from '@prisma/client'
+import Image from 'next/image'
 
 type AnnouncementWithTestimonials =
 	| (Announcement & {
@@ -22,7 +23,7 @@ type TrainerWithAnnouncement = Trainer & {
 }
 
 const FormSchema = z.object({
-	photourl: z.string(),
+	photourl: z.any(),
 	experience: z.string(),
 	experienceType: z.string(),
 	price: z.string(),
@@ -46,11 +47,11 @@ const MyProfileForm: React.FC<{ trainerData: TrainerWithAnnouncement }> = ({ tra
 	const [isPublishing, setIsPublishing] = useState(false)
 	const [isUnPublishing, setIsUnPublishing] = useState(false)
 	const [isUpdating, setIsUpdating] = useState(false)
+	const [photoUrl, setPhotoUrl] = useState<string>('')
 	const splittedExperience = trainerData?.announcement?.experience.split(' ') || ''
 	const form = useForm<z.infer<typeof FormSchema>>({
 		resolver: zodResolver(FormSchema),
 		defaultValues: {
-			photourl: trainerData?.announcement?.photo || '',
 			experience: splittedExperience[0],
 			experienceType: splittedExperience[1],
 			price: trainerData?.announcement?.price.toString(),
@@ -59,6 +60,7 @@ const MyProfileForm: React.FC<{ trainerData: TrainerWithAnnouncement }> = ({ tra
 	})
 	useEffect(() => {
 		setSelectedCategories(trainerData?.announcement?.categories || [])
+		setPhotoUrl(trainerData?.announcement?.photo || '')
 	}, [trainerData])
 
 	const handleAddCategory = (e: React.MouseEvent<HTMLLIElement>) => {
@@ -84,20 +86,34 @@ const MyProfileForm: React.FC<{ trainerData: TrainerWithAnnouncement }> = ({ tra
 	}
 	const handleUpdateAnnoucement = async (values: z.infer<typeof FormSchema>) => {
 		setIsUpdating(true)
-		const data = {
-			...values,
-			trainerId: trainerData.id,
-			selectedCategories,
-		}
-		const parsedData = JSON.parse(JSON.stringify(data))
-		console.log(parsedData)
-		const response = await updateAnnouncement(parsedData)
-		if (!response?.announcement?.success) {
-			setIsUpdating(false)
-			console.log(response)
-		} else {
-			setIsUpdating(false)
-			console.log('Created / Updated an announcement')
+		try {
+			const formData = new FormData()
+			formData.append('file', values.photourl)
+			formData.append('upload_preset', 'pumpfitannouncements')
+			const response = await fetch(`https://api.cloudinary.com/v1_1/dcl15uhh0/image/upload`, {
+				method: 'POST',
+				body: formData,
+			})
+			const res = await response.json()
+			const data = {
+				photourl: res.secure_url,
+				experience: values.experience,
+				experienceType: values.experienceType,
+				price: values.price,
+				description: values.description,
+				trainerId: trainerData.id,
+				selectedCategories,
+			}
+			const announcementResponse = await updateAnnouncement(data)
+			if (!announcementResponse?.announcement?.success) {
+				setIsUpdating(false)
+				console.log(announcementResponse)
+			} else {
+				setIsUpdating(false)
+				console.log('Created / Updated an announcement')
+			}
+		} catch (error) {
+			console.error(error)
 		}
 	}
 	const handlePublishing = async () => {
@@ -116,15 +132,37 @@ const MyProfileForm: React.FC<{ trainerData: TrainerWithAnnouncement }> = ({ tra
 			console.log('Unpublished an announcement')
 		}
 	}
+	const handlePhotoChange = (e: ChangeEvent<HTMLInputElement>) => {
+		const file = e.target.files
+		if (file && file[0]) {
+			const url = URL.createObjectURL(file[0])
+			setPhotoUrl(url)
+		}
+	}
 
 	return (
 		<FormProvider {...form}>
 			<form onSubmit={form.handleSubmit(handleUpdateAnnoucement)} className={classes.form}>
 				<div className={classes.input}>
-					<Input type="text" label="Photo URL" id="photourl" error={form.formState.errors.photourl} />
+					<label htmlFor="photourl" className={classes.fileLabel}>
+						<p className={classes.fileLabelText}>Announcement Photo</p>
+						{photoUrl ? (
+							<img src={photoUrl} alt="Your profile photo" className={classes.announcementImage} />
+						) : (
+							<div className={classes.fileLabelImagePreview}></div>
+						)}
+					</label>
+					<input
+						type="file"
+						accept="image/*"
+						id="photourl"
+						onChange={handlePhotoChange}
+						className={classes.fileInput}
+					/>
+					{/* <Input type="text" label="Photo URL" id="photourl" error={form.formState.errors.photourl} />
 					<p className={classes.inputNote}>
 						Note: Upload your photo to <Link href="https://imgur.com/">Imgur</Link> and then paste the URL here
-					</p>
+					</p> */}
 				</div>
 				<div className={classes.priceExperienceContainer}>
 					<div className={classes.container}>

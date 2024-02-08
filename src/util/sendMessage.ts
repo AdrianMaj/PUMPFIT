@@ -19,7 +19,7 @@ export const sendMessage = async ({
 			},
 		})
 		if (message) {
-			return JSON.stringify(message)
+			return message
 		}
 	} catch (error: any) {
 		return { message: 'Something went wrong!', error }
