@@ -27,8 +27,6 @@ const SendMessageForm = ({
 	socket: Socket
 	[x: string]: any
 }) => {
-	const cloudName = process.env.CLOUDINARY_CLOUD_NAME
-	const apiKey = process.env.CLOUDINARY_API_KEY
 	const [emojiIsOpened, setEmojiIsOpened] = useState(false)
 	const [currentFilesList, setCurrentFilesList] = useState<
 		{
@@ -125,13 +123,8 @@ const SendMessageForm = ({
 				const formData = new FormData()
 				formData.append('file', file)
 				formData.append('upload_preset', 'pumpfit')
-				if (apiKey) {
-					formData.append('api_key', apiKey)
-				}
-				console.log(cloudName)
-				console.log(apiKey)
 				try {
-					const response = await fetch(`https://api.cloudinary.com/v1_1/${cloudName}/image/upload`, {
+					const response = await fetch(`https://api.cloudinary.com/v1_1/dcl15uhh0/image/upload`, {
 						method: 'POST',
 						body: formData,
 					})
