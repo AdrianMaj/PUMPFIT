@@ -2,10 +2,12 @@
 import { motion } from 'framer-motion'
 import React from 'react'
 import classes from './button.module.scss'
+import { useFormContext } from 'react-hook-form'
 
 const Button: React.FC<{
 	filled?: boolean
 	children: React.ReactNode
+	nested?: boolean
 	[x: string]: any
 }> = ({ filled, children, ...props }) => {
 	return (
