@@ -14,9 +14,6 @@ import { motion } from 'framer-motion'
 import Image from 'next/image'
 import MessageIcons from './messageIcons'
 import Input from '../ui/input'
-import uploadFiles from '@/util/uploadFiles'
-import axios from 'axios'
-
 const FormSchema = z.object({
 	message: z.string().min(1),
 })
@@ -124,18 +121,23 @@ const SendMessageForm = ({
 				toAccountId: recieverId,
 			})
 			console.log('tu działa')
-			filesList.forEach(async file => {
+			for (const file of filesList) {
 				const formData = new FormData()
 				formData.append('file', file)
 				formData.append('upload_preset', 'pumpfit')
 				try {
-					const response = await axios.post(`https://api.cloudinary.com/v1_1/${cloudName}/image/upload`, formData)
-					const result = await cloudinary.uploader.upload(response.data.secure_url)
-					console.log(result.secure_url)
+					const response = await fetch(`https://api.cloudinary.com/v1_1/${cloudName}/image/upload`, {
+						method: 'POST',
+						body: formData,
+					})
+					const res = await response.json()
+					const result = await cloudinary.uploader.upload(res.secure_url)
+					console.log(result)
+					console.log(res.secure_url)
 				} catch (error) {
 					console.error(error)
 				}
-			})
+			}
 			console.log('tu niżej działa')
 		} catch (error) {
 			console.log('There was an error while saving message: ', error)
