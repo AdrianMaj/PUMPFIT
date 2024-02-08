@@ -57,32 +57,30 @@ const SendMessageForm = ({
 	return (
 		<FormProvider {...form}>
 			<form {...props} onSubmit={form.handleSubmit(onSubmit)}>
-				<div className={classes.container}>
-					<div className={classes.messageContainer}>
-						<div className={classes.inputContainer}>
-							<div className={classes.filesContainer}>
-								<motion.input
-									placeholder="Message..."
-									whileFocus={{
-										border: '1px solid #a50000',
-									}}
-									className={classes.input}
-									id="message"
-								/>
-							</div>
+				<div className={classes.messageContainer}>
+					<div className={classes.inputContainer}>
+						<div className={classes.filesContainer}>
+							<motion.input
+								placeholder="Message..."
+								whileFocus={{
+									border: '1px solid #a50000',
+								}}
+								className={classes.input}
+								id="message"
+							/>
 						</div>
-						<Button filled type="submit">
-							<svg
-								className={classes.sendIcon}
-								width="30"
-								height="18"
-								viewBox="0 0 30 18"
-								fill="white"
-								xmlns="http://www.w3.org/2000/svg">
-								<path fill="white" d="M15 18L0 0H6.36986L15 10.3562L23.6301 0H30L15 18Z" />
-							</svg>
-						</Button>
 					</div>
+					<Button filled type="submit">
+						<svg
+							className={classes.sendIcon}
+							width="30"
+							height="18"
+							viewBox="0 0 30 18"
+							fill="white"
+							xmlns="http://www.w3.org/2000/svg">
+							<path fill="white" d="M15 18L0 0H6.36986L15 10.3562L23.6301 0H30L15 18Z" />
+						</svg>
+					</Button>
 				</div>
 			</form>
 		</FormProvider>
