@@ -128,6 +128,8 @@ const SendMessageForm = ({
 				if (apiKey) {
 					formData.append('api_key', apiKey)
 				}
+				console.log(cloudName)
+				console.log(apiKey)
 				try {
 					const response = await fetch(`https://api.cloudinary.com/v1_1/${cloudName}/image/upload`, {
 						method: 'POST',
