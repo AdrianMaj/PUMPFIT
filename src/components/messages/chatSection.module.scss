@@ -71,6 +71,15 @@
 	padding: 1em 1.5em;
 	font-size: $subtextSize;
 }
+.messageImage {
+	width: 14em;
+	height: 14em;
+	object-fit: cover;
+	object-position: center;
+}
+.messageSent {
+	margin-left: auto;
+}
 .sent {
 	margin-left: auto;
 	justify-content: flex-end;

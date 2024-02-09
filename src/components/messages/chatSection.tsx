@@ -130,11 +130,11 @@ const ChatSection = ({
 									message.attachments.map(attachment => {
 										if (attachment.fileType.startsWith('image/')) {
 											return (
-												<Image
-													className={classes.inputImage}
+												<img
+													className={`${classes.messageImage} ${
+														message.fromAccountId === loggedAccount.id ? classes.imageSent : classes.imageRecieved
+													}`}
 													key={attachment.id}
-													width={100}
-													height={100}
 													src={attachment.fileURL}
 													alt={attachment.fileURL}
 												/>

@@ -115,29 +115,7 @@ const SendMessageForm = ({
 			createdAt: Date
 			updatedAt: Date
 		}[] = []
-		filesList.forEach(file =>
-			tempFiles.push({
-				id: uuidv4(),
-				fileURL: URL.createObjectURL(file),
-				fileType: file.type,
-				messageId,
-				createdAt: new Date(),
-				updatedAt: new Date(),
-			})
-		)
 		try {
-			const tempMessage = {
-				id: messageId,
-				text: values.message,
-				fromAccountId: loggedId,
-				toAccountId: recieverId,
-				createdAt: new Date(),
-				updatedAt: new Date(),
-				attachments: tempFiles,
-			}
-			socket.emit('chat_message', tempMessage)
-			form.resetField('message')
-			setCurrentFilesList([])
 			for (const file of filesList) {
 				const formData = new FormData()
 				formData.append('file', file)
@@ -153,7 +131,28 @@ const SendMessageForm = ({
 					console.error(error)
 				}
 			}
-			console.log(fileURLList)
+			fileURLList.forEach(file =>
+				tempFiles.push({
+					id: uuidv4(),
+					fileURL: file.fileURL,
+					fileType: file.fileType,
+					messageId,
+					createdAt: new Date(),
+					updatedAt: new Date(),
+				})
+			)
+			const tempMessage = {
+				id: messageId,
+				text: values.message,
+				fromAccountId: loggedId,
+				toAccountId: recieverId,
+				createdAt: new Date(),
+				updatedAt: new Date(),
+				attachments: tempFiles,
+			}
+			socket.emit('chat_message', tempMessage)
+			form.resetField('message')
+			setCurrentFilesList([])
 			await sendMessage({
 				text: values.message,
 				fromAccountId: loggedId,
