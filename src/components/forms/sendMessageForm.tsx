@@ -102,28 +102,42 @@ const SendMessageForm = ({
 	}
 	const onSubmit = async (values: z.infer<typeof FormSchema>) => {
 		const filesList = currentFilesList.map(file => file.file)
+		const messageId = uuidv4()
 		const fileURLList: {
-			Id: string
-			ImageURL: string
+			fileURL: string
 			fileType: string
 		}[] = []
+		const tempFiles: {
+			id: string
+			fileURL: string
+			fileType: string
+			messageId: string
+			createdAt: Date
+			updatedAt: Date
+		}[] = []
+		filesList.forEach(file =>
+			tempFiles.push({
+				id: uuidv4(),
+				fileURL: URL.createObjectURL(file),
+				fileType: file.type,
+				messageId,
+				createdAt: new Date(),
+				updatedAt: new Date(),
+			})
+		)
 		try {
 			const tempMessage = {
-				id: uuidv4(),
+				id: messageId,
 				text: values.message,
 				fromAccountId: loggedId,
 				toAccountId: recieverId,
 				createdAt: new Date(),
 				updatedAt: new Date(),
+				attachments: tempFiles,
 			}
 			socket.emit('chat_message', tempMessage)
 			form.resetField('message')
 			setCurrentFilesList([])
-			await sendMessage({
-				text: values.message,
-				fromAccountId: loggedId,
-				toAccountId: recieverId,
-			})
 			for (const file of filesList) {
 				const formData = new FormData()
 				formData.append('file', file)
@@ -134,13 +148,18 @@ const SendMessageForm = ({
 						body: formData,
 					})
 					const res = await response.json()
-					console.log(res.secure_url)
-					console.log(res.asset_id)
-					console.log(res.resource_type)
+					fileURLList.push({ fileURL: res.secure_url, fileType: res.resource_type })
 				} catch (error) {
 					console.error(error)
 				}
 			}
+			console.log(fileURLList)
+			await sendMessage({
+				text: values.message,
+				fromAccountId: loggedId,
+				toAccountId: recieverId,
+				attachments: fileURLList,
+			})
 		} catch (error) {
 			console.log('There was an error while saving message: ', error)
 		}

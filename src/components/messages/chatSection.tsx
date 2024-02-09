@@ -6,8 +6,9 @@ import classes from './chatSection.module.scss'
 import fetchInitialMessages from '@/util/fetchInitialMessages'
 import { Message } from '@prisma/client'
 import { Account } from '@prisma/client'
-import { AccountWithMessages } from '@/types/databaseTypes'
+import { AccountWithMessages, MessageWithAttachments } from '@/types/databaseTypes'
 import ChatTopBar from './chatTopBar'
+import Image from 'next/image'
 
 const socket = io('https://adrianmaj.smallhost.pl:3006', {
 	withCredentials: true,
@@ -20,7 +21,7 @@ const ChatSection = ({
 	loggedAccount: AccountWithMessages
 	recieverAccount: Account
 }) => {
-	const [chatMessages, setChatMessages] = useState<Message[]>([])
+	const [chatMessages, setChatMessages] = useState<MessageWithAttachments[]>([])
 	const messagesSection = useRef<HTMLUListElement>(null)
 	socket.emit('logged_id', loggedAccount.id)
 	socket.emit('reciever_id', recieverAccount.id)
@@ -50,12 +51,12 @@ const ChatSection = ({
 		fetchInitial()
 	}, [])
 	useEffect(() => {
-		socket.on('chat_message', (msg: Message) => {
+		socket.on('chat_message', (msg: MessageWithAttachments) => {
 			console.log(msg)
 			setChatMessages(prevMessages => [...prevMessages, msg])
 		})
 		return () => {
-			socket.off('chat_message', (msg: Message) => {
+			socket.off('chat_message', (msg: MessageWithAttachments) => {
 				setChatMessages(prevMessages => [...prevMessages, msg])
 			})
 		}
@@ -124,6 +125,22 @@ const ChatSection = ({
 									}`}>
 									{message.text}
 								</p>
+
+								{message.attachments.length > 0 &&
+									message.attachments.map(attachment => {
+										if (attachment.fileType.startsWith('image/')) {
+											return (
+												<Image
+													className={classes.inputImage}
+													key={attachment.id}
+													width={100}
+													height={100}
+													src={attachment.fileURL}
+													alt={attachment.fileURL}
+												/>
+											)
+										}
+									})}
 							</li>
 						)
 					})}

@@ -22,8 +22,8 @@ model Account {
   PasswordResetToken PasswordResetToken[]
   trainer            Trainer?
   user               User?
-  messagesFrom Message[] @relation("FromAccount")
-  messagesTo   Message[] @relation("ToAccount")
+  messagesFrom       Message[]            @relation("FromAccount")
+  messagesTo         Message[]            @relation("ToAccount")
 
   @@map("accounts")
 }
@@ -48,9 +48,9 @@ model PasswordResetToken {
 }
 
 model User {
-  id        String    @id @default(cuid())      
-  accountId String  @unique
-  account   Account @relation(fields: [accountId], references: [id], onDelete: Cascade)
+  id           String        @id @default(cuid())
+  accountId    String        @unique
+  account      Account       @relation(fields: [accountId], references: [id], onDelete: Cascade)
   testimonials Testimonial[]
 
   @@map("users")
@@ -95,18 +95,29 @@ model Testimonial {
   createdAt      DateTime     @default(now()) @map("created_at")
   updatedAt      DateTime     @updatedAt @map("updated_at")
   announcement   Announcement @relation(fields: [announcementId], references: [id], onDelete: Cascade)
-  
+
   @@unique([userId, announcementId], name: "userId_announcementId")
   @@map("testimonials")
 }
 
 model Message {
-  id          String          @id @default(cuid())
-  text        String
-  from          Account  @relation("FromAccount", fields: [fromAccountId], references: [id], onDelete: Cascade)
-  fromAccountId String   
-  to            Account  @relation("ToAccount", fields: [toAccountId], references: [id], onDelete: Cascade)
-  toAccountId   String   
-  createdAt      DateTime     @default(now()) @map("created_at")
-  updatedAt      DateTime     @updatedAt @map("updated_at")
+  id            String              @id @default(cuid())
+  text          String
+  from          Account             @relation("FromAccount", fields: [fromAccountId], references: [id], onDelete: Cascade)
+  fromAccountId String
+  to            Account             @relation("ToAccount", fields: [toAccountId], references: [id], onDelete: Cascade)
+  toAccountId   String
+  attachments   MessageAttachment[] @relation("Attachments")
+  createdAt     DateTime            @default(now()) @map("created_at")
+  updatedAt     DateTime            @updatedAt @map("updated_at")
+}
+
+model MessageAttachment {
+  id        String   @id @default(cuid())
+  fileURL   String
+  fileType  String
+  messageId String
+  message   Message  @relation("Attachments", fields: [messageId], references: [id])
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
 }

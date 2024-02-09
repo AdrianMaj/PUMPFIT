@@ -9,6 +9,9 @@ const fetchInitialMessages = async (fromId: string, toId: string) => {
 				{ OR: [{ toAccountId: toId }, { toAccountId: fromId }] },
 			],
 		},
+		include: {
+			attachments: true,
+		},
 		orderBy: {
 			createdAt: 'desc',
 		},

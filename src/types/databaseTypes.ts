@@ -116,6 +116,13 @@ export type TestimonialWithUserAndAccount = Prisma.TestimonialGetPayload<{
 		}
 	}
 }>
+
+export type MessageWithAttachments = Prisma.MessageGetPayload<{
+	include: {
+		attachments: true
+	}
+}>
+
 export type AnnouncementWithTestimonialsAndTrainer = Prisma.AnnouncementGetPayload<{
 	include: {
 		trainer: true
