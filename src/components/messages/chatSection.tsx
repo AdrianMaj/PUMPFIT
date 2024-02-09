@@ -4,11 +4,9 @@ import { io } from 'socket.io-client'
 import SendMessageForm from '../forms/sendMessageForm'
 import classes from './chatSection.module.scss'
 import fetchInitialMessages from '@/util/fetchInitialMessages'
-import { Message } from '@prisma/client'
 import { Account } from '@prisma/client'
 import { AccountWithMessages, MessageWithAttachments } from '@/types/databaseTypes'
 import ChatTopBar from './chatTopBar'
-import Image from 'next/image'
 
 const socket = io('https://adrianmaj.smallhost.pl:3006', {
 	withCredentials: true,
@@ -128,7 +126,7 @@ const ChatSection = ({
 
 								{message.attachments.length > 0 &&
 									message.attachments.map(attachment => {
-										if (attachment.fileType.startsWith('image/')) {
+										if (attachment.fileType === 'image') {
 											return (
 												<img
 													className={`${classes.messageImage} ${
