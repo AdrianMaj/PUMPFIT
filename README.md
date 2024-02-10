@@ -152,7 +152,7 @@ After logging in, you should see a dashboard with information about your account
     - [x] Last message info
     - [x] Saving chat history
     - [x] Emoji picker
-    - [ ] Image upload
+    - [x] Image upload
 - [x] Announcement list
   - [x] Filtering announcements
   - [x] Announcement details
