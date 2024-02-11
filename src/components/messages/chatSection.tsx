@@ -75,6 +75,9 @@ const ChatSection = ({
 	const handleDownloadFile = (URL: string) => {
 		location.assign(URL)
 	}
+	const handlePhotoModal = (photoUrl: string) => {
+		console.log(photoUrl) // TO DO MODAL WINDOW
+	}
 	const allMessages = [...messagesFrom, ...messagesTo]
 	return (
 		<>
@@ -140,6 +143,7 @@ const ChatSection = ({
 												if (attachment.fileType === 'image') {
 													return (
 														<img
+															onClick={() => handlePhotoModal(attachment.fileURL)}
 															className={`${classes.messageImage} ${
 																message.fromAccountId === loggedAccount.id ? classes.imageSent : classes.imageRecieved
 															}`}

@@ -14,6 +14,7 @@ import Image from 'next/image'
 import MessageIcons from './messageIcons'
 import Input from '../ui/input'
 import FileAttachment from '../ui/fileAttachment'
+import Spinner from '../ui/spinner'
 const FormSchema = z.object({
 	message: z.string().min(1),
 })
@@ -29,6 +30,7 @@ const SendMessageForm = ({
 	[x: string]: any
 }) => {
 	const [emojiIsOpened, setEmojiIsOpened] = useState(false)
+	const [isSending, setisSending] = useState(false)
 	const [currentFilesList, setCurrentFilesList] = useState<
 		{
 			file: File
@@ -102,6 +104,7 @@ const SendMessageForm = ({
 		form.setValue('message', `${values.message}${emoji}`)
 	}
 	const onSubmit = async (values: z.infer<typeof FormSchema>) => {
+		setisSending(true)
 		const filesList = currentFilesList.map(file => file.file)
 		const messageId = uuidv4()
 		const fileURLList: {
@@ -184,6 +187,7 @@ const SendMessageForm = ({
 			socket.emit('chat_message', tempMessage)
 			form.resetField('message')
 			setCurrentFilesList([])
+			setisSending(false)
 			await sendMessage({
 				text: values.message,
 				fromAccountId: loggedId,
@@ -236,17 +240,30 @@ const SendMessageForm = ({
 							</div>
 							<Input width="100%" id="message" label="Message" />
 						</div>
-						<Button filled type="submit">
-							<svg
-								className={classes.sendIcon}
-								width="30"
-								height="18"
-								viewBox="0 0 30 18"
-								fill="white"
-								xmlns="http://www.w3.org/2000/svg">
-								<path fill="white" d="M15 18L0 0H6.36986L15 10.3562L23.6301 0H30L15 18Z" />
-							</svg>
-						</Button>
+						{isSending ? (
+							<div className={classes.spinnerContainer}>
+								<motion.div
+									transition={{
+										repeat: Infinity,
+										ease: 'linear',
+										duration: 1,
+									}}
+									animate={{ rotate: 360 }}
+									className={classes.spinner}></motion.div>
+							</div>
+						) : (
+							<Button
+								style={{
+									width: '10%',
+									maxWidth: '8rem',
+								}}
+								filled
+								type="submit">
+								<svg className={classes.sendIcon} viewBox="0 0 30 18" fill="white" xmlns="http://www.w3.org/2000/svg">
+									<path fill="white" d="M15 18L0 0H6.36986L15 10.3562L23.6301 0H30L15 18Z" />
+								</svg>
+							</Button>
+						)}
 					</div>
 				</div>
 			</form>

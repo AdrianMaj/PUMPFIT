@@ -94,19 +94,37 @@
 }
 .sendIcon {
 	rotate: -90deg;
+	margin: auto;
+	width: clamp(1.6rem, 1.4041rem + 0.9796vw, 2.2rem);
+	scale: 1.3;
 }
-.sendButton {
-	color: #fff;
-	font-size: clamp(1.6rem, 1.4041rem + 0.9796vw, 2.2rem);
-	text-align: center;
-	background-color: transparent;
-	padding: 0.75em 1em;
-	border: 1px solid $mainColor;
-	cursor: pointer;
+.spinnerContainer {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100%;
+	padding: 0.75em;
+	max-width: 8em;
+	width: 10%;
+	background-color: $mainColor;
+	cursor: not-allowed;
+}
+.spinner {
+	width: clamp(1.6rem, 1.4041rem + 0.9796vw, 2.2rem);
+	min-width: 20px;
+	min-height: 20px;
+	height: clamp(1.6rem, 1.4041rem + 0.9796vw, 2.2rem);
+	scale: 2;
+	border-radius: 50%;
+	border: 0.5rem solid $subtext;
+	border-top: 0.5rem solid $mainBg;
 }
 
 @media (min-width: 992px) {
 	.container {
 		flex-direction: row;
+	}
+	.spinnerContainer {
+		height: calc(100% - 2px);
 	}
 }

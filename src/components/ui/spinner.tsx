@@ -3,10 +3,10 @@ import React from 'react'
 import classes from './spinner.module.scss'
 import { motion } from 'framer-motion'
 
-const Spinner: React.FC<{ text: string }> = ({ text }) => {
+const Spinner: React.FC<{ text?: string }> = ({ text }) => {
 	return (
 		<div className={classes.loadingContainer}>
-			<p className={classes.loadingText}>{text}</p>
+			{text && <p className={classes.loadingText}>{text}</p>}
 			<motion.div
 				transition={{
 					repeat: Infinity,
