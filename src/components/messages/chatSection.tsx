@@ -159,6 +159,7 @@ const ChatSection = ({
 												if (attachment.fileType !== 'image') {
 													return (
 														<FileAttachment
+															sent
 															fileName={attachment.fileName + '.' + attachment.filePublicId.split('.').pop()}
 															onClick={() => handleDownloadFile(attachment.fileURL)}
 														/>

@@ -83,7 +83,6 @@
 	max-width: 14em;
 	max-height: 14em;
 	flex: 1 0 calc(33.33% - 10px);
-	margin-bottom: 10px;
 	object-fit: cover;
 	object-position: center;
 }
@@ -94,13 +93,13 @@
 	display: flex;
 	flex-direction: row-reverse;
 }
-.imageRecieved,
-.documentRecieved {
-	margin-right: auto;
+.imageSent,
+.documentSent {
+	justify-content: flex-end;
 }
 .imageContainer,
 .documentContainer {
-	max-width: 80%;
+	max-width: 100%;
 	display: flex;
 	flex-wrap: wrap-reverse;
 	gap: 1em;

@@ -14,6 +14,14 @@
   font-size: clamp(1.2rem, 1.0041rem + 0.9796vw, 1.8rem);
 }
 
+.inputFile.containerSent {
+  margin: 0;
+}
+
+.inputFileContainer.sent {
+  background-color: #0f0f0f;
+}
+
 .inputFileText {
   font-size: clamp(1.2rem, 1.0041rem + 0.9796vw, 1.8rem);
 }/*# sourceMappingURL=fileAttachment.module.css.map */
