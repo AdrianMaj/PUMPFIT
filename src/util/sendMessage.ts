@@ -13,6 +13,8 @@ export const sendMessage = async ({
 	attachments?: {
 		fileURL: string
 		fileType: string
+		fileName: string
+		fileFormat: string
 	}[]
 }) => {
 	try {
@@ -27,6 +29,8 @@ export const sendMessage = async ({
 							attachments?.map(attachment => ({
 								fileURL: attachment.fileURL,
 								fileType: attachment.fileType,
+								fileName: attachment.fileName,
+								fileFormat: attachment.fileFormat,
 							})) || [],
 					},
 				},

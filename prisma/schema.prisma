@@ -114,10 +114,12 @@ model Message {
 
 model MessageAttachment {
   id        String   @id @default(cuid())
+  fileName  String
+  fileFormat String
   fileURL   String
   fileType  String
   messageId String
-  message   Message  @relation("Attachments", fields: [messageId], references: [id])
+  message   Message  @relation("Attachments", fields: [messageId], references: [id], onDelete: Cascade)
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
 }

@@ -7,6 +7,8 @@ import fetchInitialMessages from '@/util/fetchInitialMessages'
 import { Account } from '@prisma/client'
 import { AccountWithMessages, MessageWithAttachments } from '@/types/databaseTypes'
 import ChatTopBar from './chatTopBar'
+import FileAttachment from '../ui/fileAttachment'
+import { useRouter } from 'next/navigation'
 
 const socket = io('https://adrianmaj.smallhost.pl:3006', {
 	withCredentials: true,
@@ -21,6 +23,7 @@ const ChatSection = ({
 }) => {
 	const [chatMessages, setChatMessages] = useState<MessageWithAttachments[]>([])
 	const messagesSection = useRef<HTMLUListElement>(null)
+	const router = useRouter()
 	socket.emit('logged_id', loggedAccount.id)
 	socket.emit('reciever_id', recieverAccount.id)
 	socket.on('connect', () => {
@@ -69,6 +72,9 @@ const ChatSection = ({
 			return message
 		}
 	})
+	const handleDownloadFile = (URL: string) => {
+		location.assign(URL)
+	}
 	const allMessages = [...messagesFrom, ...messagesTo]
 	return (
 		<>
@@ -96,49 +102,76 @@ const ChatSection = ({
 							isDoubled = false
 						}
 						return (
-							<li
-								key={message.id}
-								className={
-									message.fromAccountId === loggedAccount.id
-										? `${classes.messageListElement} ${classes.messageSender}`
-										: classes.messageListElement
-								}>
-								{!isDoubled ? (
-									<img
-										className={`${classes.messageImg} ${
-											message.fromAccountId === loggedAccount.id && classes.senderMessageImg
-										}`}
-										alt={message.fromAccountId === loggedAccount.id ? loggedAccount.name : recieverAccount.name}
-										src={
-											(message.fromAccountId === loggedAccount.id ? loggedAccount.photo : recieverAccount.photo) ||
-											'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png'
-										}
-									/>
-								) : (
-									<div className={classes.doubledBox}></div>
+							<li key={message.id} className={classes.messageContainer}>
+								<div
+									className={
+										message.fromAccountId === loggedAccount.id
+											? `${classes.messageListElement} ${classes.messageSender}`
+											: classes.messageListElement
+									}>
+									{!isDoubled ? (
+										<img
+											className={`${classes.messageImg} ${
+												message.fromAccountId === loggedAccount.id && classes.senderMessageImg
+											}`}
+											alt={message.fromAccountId === loggedAccount.id ? loggedAccount.name : recieverAccount.name}
+											src={
+												(message.fromAccountId === loggedAccount.id ? loggedAccount.photo : recieverAccount.photo) ||
+												'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png'
+											}
+										/>
+									) : (
+										<div className={classes.doubledBox}></div>
+									)}
+									<p
+										className={`${classes.message} ${
+											message.fromAccountId === loggedAccount.id ? classes.sent : classes.recieved
+										}`}>
+										{message.text}
+									</p>
+								</div>
+								{message.attachments.length > 0 && (
+									<>
+										<div
+											className={`${classes.messageImageContainer} ${
+												message.fromAccountId === loggedAccount.id
+													? classes.messageImageSent
+													: classes.messageImageRecieved
+											}`}>
+											{message.attachments.map(attachment => {
+												if (attachment.fileType === 'image') {
+													return (
+														<img
+															className={`${classes.messageImage} ${
+																message.fromAccountId === loggedAccount.id ? classes.imageSent : classes.imageRecieved
+															}`}
+															key={attachment.id}
+															src={attachment.fileURL}
+															alt={attachment.fileURL}
+														/>
+													)
+												}
+											})}
+										</div>
+										<div
+											className={`${classes.documentImageContainer} ${
+												message.fromAccountId === loggedAccount.id
+													? classes.documentImageSent
+													: classes.documentImageRecieved
+											}`}>
+											{message.attachments.map(attachment => {
+												if (attachment.fileType !== 'image') {
+													return (
+														<FileAttachment
+															fileName={attachment.fileName + attachment.fileFormat}
+															onClick={() => handleDownloadFile(attachment.fileURL)}
+														/>
+													)
+												}
+											})}
+										</div>
+									</>
 								)}
-								<p
-									className={`${classes.message} ${
-										message.fromAccountId === loggedAccount.id ? classes.sent : classes.recieved
-									}`}>
-									{message.text}
-								</p>
-
-								{message.attachments.length > 0 &&
-									message.attachments.map(attachment => {
-										if (attachment.fileType === 'image') {
-											return (
-												<img
-													className={`${classes.messageImage} ${
-														message.fromAccountId === loggedAccount.id ? classes.imageSent : classes.imageRecieved
-													}`}
-													key={attachment.id}
-													src={attachment.fileURL}
-													alt={attachment.fileURL}
-												/>
-											)
-										}
-									})}
 							</li>
 						)
 					})}

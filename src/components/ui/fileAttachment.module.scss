@@ -1,0 +1,18 @@
+@use '../variables' as *;
+.inputFile {
+	font-size: clamp(1.6rem, 1.4041rem + 0.9796vw, 2.2rem);
+	margin: 0.75em;
+	margin-right: 0;
+	cursor: pointer;
+}
+.inputFileContainer {
+	display: flex;
+	align-items: center;
+	gap: 0.5em;
+	padding: 1em;
+	background-color: $mainBg;
+	font-size: $smallSize;
+}
+.inputFileText {
+	font-size: $smallSize;
+}

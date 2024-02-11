@@ -8,6 +8,7 @@
 	height: calc(100dvh - 16em);
 }
 .messageList {
+	padding: 1em;
 	flex: 1;
 	overflow-y: auto;
 	list-style-type: none;
@@ -71,14 +72,36 @@
 	padding: 1em 1.5em;
 	font-size: $subtextSize;
 }
+.messageContainer {
+	display: flex;
+	flex-direction: column;
+	gap: 1em;
+}
 .messageImage {
-	width: 14em;
-	height: 14em;
+	cursor: pointer;
+	width: 100%;
+	max-width: 14em;
+	max-height: 14em;
+	flex: 1 0 calc(33.33% - 10px);
+	margin-bottom: 10px;
 	object-fit: cover;
 	object-position: center;
 }
-.messageSent {
+.messageImageSent {
 	margin-left: auto;
+}
+.textContainer {
+	display: flex;
+	flex-direction: row-reverse;
+}
+.messageImageRecieved {
+	margin-right: auto;
+}
+.messageImageContainer {
+	max-width: 80%;
+	display: flex;
+	flex-wrap: wrap-reverse;
+	gap: 1em;
 }
 .sent {
 	margin-left: auto;
@@ -95,6 +118,9 @@
 	}
 	.messageListElement {
 		flex-direction: row;
+	}
+	.messageImageContainer {
+		margin-right: calc(clamp(6rem, 5.3469rem + 3.2653vw, 8rem) + 1em);
 	}
 	.messageListElement.messageSender {
 		flex-direction: row-reverse;

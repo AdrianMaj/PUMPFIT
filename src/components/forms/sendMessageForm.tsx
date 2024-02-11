@@ -13,6 +13,7 @@ import { motion } from 'framer-motion'
 import Image from 'next/image'
 import MessageIcons from './messageIcons'
 import Input from '../ui/input'
+import FileAttachment from '../ui/fileAttachment'
 const FormSchema = z.object({
 	message: z.string().min(1),
 })
@@ -105,11 +106,15 @@ const SendMessageForm = ({
 		const messageId = uuidv4()
 		const fileURLList: {
 			fileURL: string
+			fileName: string
+			fileFormat: string
 			fileType: string
 		}[] = []
 		const tempFiles: {
 			id: string
 			fileURL: string
+			fileName: string
+			fileFormat: string
 			fileType: string
 			messageId: string
 			createdAt: Date
@@ -126,7 +131,12 @@ const SendMessageForm = ({
 						body: formData,
 					})
 					const res = await response.json()
-					fileURLList.push({ fileURL: res.secure_url, fileType: res.resource_type })
+					fileURLList.push({
+						fileURL: res.secure_url,
+						fileType: res.resource_type,
+						fileName: res.original_filename,
+						fileFormat: res.format,
+					})
 				} catch (error) {
 					console.error(error)
 				}
@@ -135,6 +145,8 @@ const SendMessageForm = ({
 				tempFiles.push({
 					id: uuidv4(),
 					fileURL: file.fileURL,
+					fileName: file.fileName,
+					fileFormat: file.fileFormat,
 					fileType: file.fileType,
 					messageId,
 					createdAt: new Date(),
@@ -193,16 +205,12 @@ const SendMessageForm = ({
 										)
 									} else {
 										return (
-											<div
-												className={classes.inputFile}
+											<FileAttachment
+												fileName={file.file.name}
 												onClick={() => {
 													handleDeleteFile(file.id)
-												}}>
-												<div className={classes.inputFileContainer}>
-													<Image width={40} height={40} src="/file-filled.svg" alt="File icon" />
-													<p className={classes.inputFileText}>{file.file.name}</p>
-												</div>
-											</div>
+												}}
+											/>
 										)
 									}
 								})}
