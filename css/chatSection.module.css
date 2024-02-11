@@ -116,11 +116,13 @@
   flex-direction: row-reverse;
 }
 
-.messageImageRecieved {
+.imageRecieved,
+.documentRecieved {
   margin-right: auto;
 }
 
-.messageImageContainer {
+.imageContainer,
+.documentContainer {
   max-width: 80%;
   display: flex;
   flex-wrap: wrap-reverse;
