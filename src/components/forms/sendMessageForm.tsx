@@ -125,20 +125,38 @@ const SendMessageForm = ({
 				const formData = new FormData()
 				formData.append('file', file)
 				formData.append('upload_preset', 'pumpfit')
-				try {
-					const response = await fetch(`https://api.cloudinary.com/v1_1/dcl15uhh0/auto/upload`, {
-						method: 'POST',
-						body: formData,
-					})
-					const res = await response.json()
-					fileURLList.push({
-						fileURL: res.secure_url,
-						fileType: res.resource_type,
-						fileName: res.original_filename,
-						fileFormat: res.format,
-					})
-				} catch (error) {
-					console.error(error)
+				if (file.type.startsWith('image')) {
+					try {
+						const response = await fetch(`https://api.cloudinary.com/v1_1/dcl15uhh0/image/upload`, {
+							method: 'POST',
+							body: formData,
+						})
+						const res = await response.json()
+						fileURLList.push({
+							fileURL: res.secure_url,
+							fileType: res.resource_type,
+							fileName: res.original_filename,
+							fileFormat: res.format,
+						})
+					} catch (error) {
+						console.error(error)
+					}
+				} else {
+					try {
+						const response = await fetch(`https://api.cloudinary.com/v1_1/dcl15uhh0/raw/upload`, {
+							method: 'POST',
+							body: formData,
+						})
+						const res = await response.json()
+						fileURLList.push({
+							fileURL: res.secure_url,
+							fileType: res.resource_type,
+							fileName: res.original_filename,
+							fileFormat: res.format,
+						})
+					} catch (error) {
+						console.error(error)
+					}
 				}
 			}
 			fileURLList.forEach(file =>
