@@ -126,7 +126,7 @@ const SendMessageForm = ({
 				formData.append('file', file)
 				formData.append('upload_preset', 'pumpfit')
 				try {
-					const response = await fetch(`https://api.cloudinary.com/v1_1/dcl15uhh0/image/upload`, {
+					const response = await fetch(`https://api.cloudinary.com/v1_1/dcl15uhh0/auto/upload`, {
 						method: 'POST',
 						body: formData,
 					})
