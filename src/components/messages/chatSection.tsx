@@ -133,10 +133,8 @@ const ChatSection = ({
 								{message.attachments.length > 0 && (
 									<>
 										<div
-											className={`${classes.messageImageContainer} ${
-												message.fromAccountId === loggedAccount.id
-													? classes.messageImageSent
-													: classes.messageImageRecieved
+											className={`${classes.imageContainer} ${
+												message.fromAccountId === loggedAccount.id ? classes.imageSent : classes.imageRecieved
 											}`}>
 											{message.attachments.map(attachment => {
 												if (attachment.fileType === 'image') {
@@ -154,16 +152,14 @@ const ChatSection = ({
 											})}
 										</div>
 										<div
-											className={`${classes.documentImageContainer} ${
-												message.fromAccountId === loggedAccount.id
-													? classes.documentImageSent
-													: classes.documentImageRecieved
+											className={`${classes.documentContainer} ${
+												message.fromAccountId === loggedAccount.id ? classes.documentSent : classes.documentRecieved
 											}`}>
 											{message.attachments.map(attachment => {
 												if (attachment.fileType !== 'image') {
 													return (
 														<FileAttachment
-															fileName={attachment.fileName + attachment.fileFormat}
+															fileName={attachment.fileName + '.' + attachment.fileFormat}
 															onClick={() => handleDownloadFile(attachment.fileURL)}
 														/>
 													)

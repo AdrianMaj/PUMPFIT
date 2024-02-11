@@ -119,8 +119,17 @@
 	.messageListElement {
 		flex-direction: row;
 	}
-	.messageImageContainer {
+	.imageContainer.imageSent {
 		margin-right: calc(clamp(6rem, 5.3469rem + 3.2653vw, 8rem) + 1em);
+	}
+	.imageContainer.imageRecieved {
+		margin-left: calc(clamp(6rem, 5.3469rem + 3.2653vw, 8rem) + 1em);
+	}
+	.documentContainer.documentSent {
+		margin-right: calc(clamp(6rem, 5.3469rem + 3.2653vw, 8rem) + 1em);
+	}
+	.documentContainer.documentRecieved {
+		margin-left: calc(clamp(6rem, 5.3469rem + 3.2653vw, 8rem) + 1em);
 	}
 	.messageListElement.messageSender {
 		flex-direction: row-reverse;

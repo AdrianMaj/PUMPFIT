@@ -132,11 +132,12 @@ const SendMessageForm = ({
 							body: formData,
 						})
 						const res = await response.json()
+						const fileFormat = res.public_id.split('.').pop()
 						fileURLList.push({
 							fileURL: res.secure_url,
 							fileType: res.resource_type,
 							fileName: res.original_filename,
-							fileFormat: res.format,
+							fileFormat: fileFormat,
 						})
 					} catch (error) {
 						console.error(error)
@@ -148,11 +149,12 @@ const SendMessageForm = ({
 							body: formData,
 						})
 						const res = await response.json()
+						const fileFormat = res.public_id.split('.').pop()
 						fileURLList.push({
 							fileURL: res.secure_url,
 							fileType: res.resource_type,
 							fileName: res.original_filename,
-							fileFormat: res.format,
+							fileFormat: fileFormat,
 						})
 					} catch (error) {
 						console.error(error)
