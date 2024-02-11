@@ -1,0 +1,1 @@
+{"version":3,"sources":["../src/components/messages/messageSection.module.scss","messageSection.module.css","../src/components/_variables.scss"],"names":[],"mappings":"AACA;EACC,WAAA;EACA,aAAA;EACA,sBAAA;EACA,QAAA;ACAD;;ADEA;EACC,oDEDa;EFEb,gBAAA;ACCD;;ADCA;EACC,oDELa;EFMb,cERS;ADUV","file":"messageSection.module.css"}

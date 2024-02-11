@@ -1,0 +1,143 @@
+.form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 3em;
+}
+
+.inputNote {
+  color: #b3b3b3;
+  margin-top: 0.5em;
+  font-size: clamp(1.2rem, 1.0694rem + 0.6531vw, 1.6rem);
+}
+.inputNote a {
+  font-size: clamp(1.2rem, 1.0694rem + 0.6531vw, 1.6rem);
+  color: #b3b3b3;
+}
+
+.priceExperienceContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 3em;
+}
+
+.fileInput {
+  display: none;
+}
+
+.fileLabel {
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+
+.fileLabelText {
+  font-size: clamp(1.4rem, 1.2041rem + 0.9796vw, 2rem);
+  color: #b3b3b3;
+  margin-bottom: 1em;
+}
+
+.announcementImage {
+  width: 14em;
+  height: 14em;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: center;
+     object-position: center;
+}
+
+.fileLabelImagePreview {
+  position: relative;
+  width: 14em;
+  height: 14em;
+  background-color: #0f0f0f;
+}
+.fileLabelImagePreview::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 25%;
+  width: 2px;
+  background-color: #fff;
+}
+.fileLabelImagePreview::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 2px;
+  width: 25%;
+  background-color: #fff;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: -moz-fit-content;
+  width: fit-content;
+  background-color: #0f0f0f;
+}
+
+.inputSide {
+  width: -moz-fit-content;
+  width: fit-content;
+  padding: 0 1em;
+  margin-left: 0.25em;
+}
+.inputSide :focus {
+  border: 1px solid white;
+}
+
+.priceTag {
+  color: #b3b3b3;
+  font-size: clamp(1.4rem, 1.2041rem + 0.9796vw, 2rem);
+  background-color: #0f0f0f;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  width: -moz-fit-content;
+  width: fit-content;
+  text-align: center;
+  padding: 0 1em;
+  text-wrap: nowrap;
+}
+
+.experienceInput {
+  text-align: right;
+  height: 100%;
+  background-color: #0f0f0f;
+  color: #b3b3b3;
+  font-size: clamp(1.4rem, 1.2041rem + 0.9796vw, 2rem);
+  border: none;
+}
+
+.buttons {
+  margin-top: auto;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1em;
+}
+
+.multiSelect {
+  border-width: 1px;
+}
+.multiSelect :focus {
+  border-width: 1px;
+}
+
+@media (min-width: 992px) {
+  .priceExperienceContainer {
+    flex-direction: row;
+  }
+  .buttons {
+    justify-content: flex-end;
+  }
+}/*# sourceMappingURL=myProfileForm.module.css.map */

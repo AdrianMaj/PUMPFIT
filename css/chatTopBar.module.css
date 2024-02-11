@@ -1,0 +1,34 @@
+.bar {
+  display: flex;
+  align-items: center;
+  height: 11em;
+  width: calc(100% + 4em);
+  margin: -4em -2em;
+  padding: 4em 2em;
+  background-color: #0f0f0f;
+  margin-bottom: 1em;
+}
+
+.arrow {
+  rotate: 180deg;
+}
+
+.link {
+  display: flex;
+  text-decoration: none;
+  gap: 1em;
+  color: #b3b3b3;
+}
+
+.barText {
+  font-size: clamp(1.4rem, 1.2041rem + 0.9796vw, 2rem);
+}
+
+@media (min-width: 992px) {
+  .bar {
+    margin: -4em;
+    width: calc(100% + 8em);
+    padding: 4em;
+    margin-bottom: 2em;
+  }
+}/*# sourceMappingURL=chatTopBar.module.css.map */

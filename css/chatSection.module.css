@@ -1,0 +1,174 @@
+.chatSection {
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  height: calc(100dvh - 16em);
+}
+
+.messageList {
+  padding: 1em;
+  flex: 1;
+  overflow-y: auto;
+  list-style-type: none;
+  display: flex;
+  gap: 1em;
+  flex-direction: column;
+  width: 100%;
+}
+
+.messageListElement {
+  display: flex;
+  align-items: flex-start;
+  gap: 1em;
+  flex-direction: column;
+}
+
+.messageListElement.messageSender {
+  flex-direction: column;
+}
+
+.recieverInfo {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  gap: 2em;
+  flex-direction: column;
+}
+
+.recieverImage {
+  width: 10%;
+  min-width: 9em;
+  aspect-ratio: 1/1;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: center;
+     object-position: center;
+}
+
+.recieverName {
+  font-size: clamp(1.6rem, 1.3388rem + 1.3061vw, 2.4rem);
+}
+
+.doubledBox {
+  display: none;
+  width: clamp(6rem, 5.3469rem + 3.2653vw, 8rem);
+  height: 1px;
+}
+
+.messageImg {
+  margin-top: 3em;
+  width: clamp(6rem, 5.3469rem + 3.2653vw, 8rem);
+  height: clamp(6rem, 5.3469rem + 3.2653vw, 8rem);
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: center;
+     object-position: center;
+}
+
+.senderMessageImg {
+  align-self: flex-end;
+}
+
+.bar {
+  position: relative;
+  margin-top: 1em;
+  display: flex;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.message {
+  width: -moz-fit-content;
+  width: fit-content;
+  display: flex;
+  padding: 1em 1.5em;
+  font-size: clamp(1.4rem, 1.2041rem + 0.9796vw, 2rem);
+}
+
+.messageContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+
+.messageImage {
+  cursor: pointer;
+  width: 100%;
+  max-width: 14em;
+  max-height: 14em;
+  flex: 1 0 calc(33.33% - 10px);
+  margin-bottom: 10px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: center;
+     object-position: center;
+}
+
+.messageImageSent {
+  margin-left: auto;
+}
+
+.textContainer {
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+.messageImageRecieved {
+  margin-right: auto;
+}
+
+.messageImageContainer {
+  max-width: 80%;
+  display: flex;
+  flex-wrap: wrap-reverse;
+  gap: 1em;
+}
+
+.sent {
+  margin-left: auto;
+  justify-content: flex-end;
+  background-color: #a50000;
+}
+
+.recieved {
+  justify-content: flex-start;
+  background-color: #0f0f0f;
+}
+
+@media (min-width: 576px) {
+  .bar {
+    margin-top: 2em;
+  }
+  .messageListElement {
+    flex-direction: row;
+  }
+  .imageContainer.imageSent {
+    margin-right: calc(clamp(6rem, 5.3469rem + 3.2653vw, 8rem) + 1em);
+  }
+  .imageContainer.imageRecieved {
+    margin-left: calc(clamp(6rem, 5.3469rem + 3.2653vw, 8rem) + 1em);
+  }
+  .documentContainer.documentSent {
+    margin-right: calc(clamp(6rem, 5.3469rem + 3.2653vw, 8rem) + 1em);
+  }
+  .documentContainer.documentRecieved {
+    margin-left: calc(clamp(6rem, 5.3469rem + 3.2653vw, 8rem) + 1em);
+  }
+  .messageListElement.messageSender {
+    flex-direction: row-reverse;
+  }
+  .message {
+    align-self: flex-end;
+  }
+  .doubledBox {
+    display: block;
+  }
+}
+@media (min-width: 992px) {
+  .chatSection {
+    height: calc(100dvh - 17em);
+  }
+}/*# sourceMappingURL=chatSection.module.css.map */

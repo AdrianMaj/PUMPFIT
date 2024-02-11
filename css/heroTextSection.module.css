@@ -1,0 +1,20 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  max-width: 650px;
+}
+
+.heading {
+  text-transform: uppercase;
+  font-size: clamp(3rem, 2.3469rem + 3.2653vw, 5rem);
+  margin-bottom: 0.5em;
+  letter-spacing: 3px;
+}
+
+.subtext {
+  color: #b3b3b3;
+  font-size: clamp(1.4rem, 1.2041rem + 0.9796vw, 2rem);
+  width: 80%;
+  margin-bottom: 2.5em;
+}/*# sourceMappingURL=heroTextSection.module.css.map */

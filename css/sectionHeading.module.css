@@ -1,0 +1,8 @@
+.heading {
+  font-size: clamp(1.8rem, 1.5714rem + 1.1429vw, 2.5rem);
+  text-transform: uppercase;
+  font-weight: normal;
+  text-align: center;
+  margin-bottom: 8rem;
+  text-wrap: nowrap;
+}/*# sourceMappingURL=sectionHeading.module.css.map */

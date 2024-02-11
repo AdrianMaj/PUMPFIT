@@ -1,0 +1,39 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
+}
+
+.button {
+  display: flex;
+  align-items: center;
+  background-color: #a50000;
+  padding: 0.75em 1em;
+  font-size: clamp(1.6rem, 1.4041rem + 0.9796vw, 2.2rem);
+  border: 1.5px solid transparent;
+  color: white;
+  width: 100%;
+  text-align: left;
+  margin-bottom: 2em;
+  cursor: pointer;
+}
+
+.errorMsg {
+  font-size: clamp(1.4rem, 1.2041rem + 0.9796vw, 2rem);
+  color: #a50000;
+}
+
+.arrow {
+  margin-left: auto;
+}
+
+.text,
+.link {
+  color: #b3b3b3;
+  font-size: clamp(1.4rem, 1.2041rem + 0.9796vw, 2rem);
+  line-height: 1.5em;
+}
+
+.link {
+  text-wrap: nowrap;
+}/*# sourceMappingURL=loginForm.module.css.map */

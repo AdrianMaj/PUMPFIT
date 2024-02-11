@@ -1,0 +1,50 @@
+.emptySection {
+  font-size: clamp(1.4rem, 1.2041rem + 0.9796vw, 2rem);
+  color: #b3b3b3;
+  text-align: center;
+  margin-bottom: 1em;
+}
+
+.testimonialList {
+  display: flex;
+  flex-direction: column;
+  gap: 3em;
+}
+
+.container {
+  position: relative;
+}
+
+.sliderButton {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 1.5em;
+  height: 100%;
+  z-index: 10;
+  top: 0;
+}
+
+@media (min-width: 992px) {
+  .sliderButton {
+    -webkit-backdrop-filter: blur(6px);
+            backdrop-filter: blur(6px);
+  }
+  .sliderRight {
+    right: 0;
+    padding-left: 12.5%;
+    background: linear-gradient(-90deg, rgb(0, 0, 0) 0%, rgba(0, 0, 0, 0) 100%);
+    -webkit-mask: linear-gradient(90deg, transparent, black 50%);
+            mask: linear-gradient(90deg, transparent, black 50%);
+  }
+  .sliderLeft {
+    left: 0;
+    padding-right: 12.5%;
+    background: linear-gradient(90deg, rgb(0, 0, 0) 0%, rgba(0, 0, 0, 0) 100%);
+    -webkit-mask: linear-gradient(-90deg, transparent, black 50%);
+            mask: linear-gradient(-90deg, transparent, black 50%);
+  }
+}/*# sourceMappingURL=sliderContainer.module.css.map */

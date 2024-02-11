@@ -1,0 +1,32 @@
+.listItem {
+  position: relative;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  width: 100%;
+  height: 3.8rem;
+}
+.listItem p {
+  font-size: clamp(1.4rem, 1.2041rem + 0.9796vw, 2rem);
+  margin-left: 0.5em;
+}
+
+.link {
+  width: 100%;
+  display: flex;
+  text-decoration: none;
+}
+
+.activeIndicator {
+  position: absolute;
+  height: 3.8em;
+  width: 6px;
+  left: 0rem;
+  top: 0;
+  z-index: 10000;
+}
+
+.text {
+  color: #b3b3b3;
+  font-size: clamp(1.2rem, 1.0041rem + 0.9796vw, 1.8rem);
+}/*# sourceMappingURL=dashboardListElement.module.css.map */

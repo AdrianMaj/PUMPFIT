@@ -107,14 +107,14 @@ const SendMessageForm = ({
 		const fileURLList: {
 			fileURL: string
 			fileName: string
-			fileFormat: string
+			filePublicId: string
 			fileType: string
 		}[] = []
 		const tempFiles: {
 			id: string
 			fileURL: string
 			fileName: string
-			fileFormat: string
+			filePublicId: string
 			fileType: string
 			messageId: string
 			createdAt: Date
@@ -132,12 +132,11 @@ const SendMessageForm = ({
 							body: formData,
 						})
 						const res = await response.json()
-						const fileFormat = res.public_id.split('.').pop()
 						fileURLList.push({
 							fileURL: res.secure_url,
 							fileType: res.resource_type,
 							fileName: res.original_filename,
-							fileFormat: fileFormat,
+							filePublicId: res.public_id,
 						})
 					} catch (error) {
 						console.error(error)
@@ -149,12 +148,12 @@ const SendMessageForm = ({
 							body: formData,
 						})
 						const res = await response.json()
-						const fileFormat = res.public_id.split('.').pop()
+						console.log(res)
 						fileURLList.push({
 							fileURL: res.secure_url,
 							fileType: res.resource_type,
 							fileName: res.original_filename,
-							fileFormat: fileFormat,
+							filePublicId: res.public_id,
 						})
 					} catch (error) {
 						console.error(error)
@@ -166,7 +165,7 @@ const SendMessageForm = ({
 					id: uuidv4(),
 					fileURL: file.fileURL,
 					fileName: file.fileName,
-					fileFormat: file.fileFormat,
+					filePublicId: file.filePublicId,
 					fileType: file.fileType,
 					messageId,
 					createdAt: new Date(),

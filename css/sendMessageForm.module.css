@@ -1,0 +1,125 @@
+.form {
+  position: relative;
+}
+
+.container {
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 1em;
+  position: relative;
+  width: 100%;
+}
+
+.messageContainer {
+  display: flex;
+  align-items: flex-end;
+  position: relative;
+  width: 100%;
+}
+
+.inputContainer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  background-color: #0f0f0f;
+}
+
+.filesContainer {
+  display: flex;
+  align-items: center;
+  overflow-x: auto;
+}
+.filesContainer :last-child {
+  margin-right: 0.75em;
+}
+
+.inputImage {
+  font-size: clamp(1.6rem, 1.4041rem + 0.9796vw, 2.2rem);
+  -o-object-fit: cover;
+     object-fit: cover;
+  margin: 0.75em;
+  margin-right: 0;
+  cursor: pointer;
+}
+
+.inputFile {
+  font-size: clamp(1.6rem, 1.4041rem + 0.9796vw, 2.2rem);
+  margin: 0.75em;
+  margin-right: 0;
+  cursor: pointer;
+}
+
+.inputFileContainer {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  padding: 1em;
+  background-color: #090909;
+  font-size: clamp(1.2rem, 1.0041rem + 0.9796vw, 1.8rem);
+}
+
+.inputFileText {
+  font-size: clamp(1.2rem, 1.0041rem + 0.9796vw, 1.8rem);
+}
+
+.label {
+  position: absolute;
+  top: 0%;
+  left: 0.4em;
+  padding: 0 0.15em;
+  transform: translateY(-50%);
+  color: #b3b3b3;
+  font-size: clamp(1.6rem, 1.4041rem + 0.9796vw, 2.2rem);
+  pointer-events: none;
+  z-index: 5;
+}
+.label::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 105%;
+  height: 51%;
+  background-color: #0f0f0f;
+  z-index: -1;
+}
+
+.input {
+  font-size: clamp(1.6rem, 1.4041rem + 0.9796vw, 2.2rem);
+  padding: 0.75em;
+  background-color: #0f0f0f;
+  outline: none;
+  color: #fff;
+  border: 1px solid transparent;
+  width: 100%;
+}
+.input:disabled {
+  color: #494949;
+}
+
+.inputError {
+  margin-top: 0.5em;
+  font-size: clamp(1.2rem, 1.0041rem + 0.9796vw, 1.8rem);
+  color: #a50000;
+}
+
+.sendIcon {
+  rotate: -90deg;
+}
+
+.sendButton {
+  color: #fff;
+  font-size: clamp(1.6rem, 1.4041rem + 0.9796vw, 2.2rem);
+  text-align: center;
+  background-color: transparent;
+  padding: 0.75em 1em;
+  border: 1px solid #a50000;
+  cursor: pointer;
+}
+
+@media (min-width: 992px) {
+  .container {
+    flex-direction: row;
+  }
+}/*# sourceMappingURL=sendMessageForm.module.css.map */

@@ -1,0 +1,47 @@
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
+  width: 100%;
+  height: 100%;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2em;
+  text-decoration: none;
+  background-color: #0f0f0f;
+}
+.card h3 {
+  font-size: clamp(3rem, 2.6735rem + 1.6327vw, 4rem);
+  margin-bottom: 0.5em;
+  color: #fff;
+}
+.card p {
+  text-wrap: nowrap;
+  font-size: clamp(1.4rem, 1.2041rem + 0.9796vw, 2rem);
+  color: #fff;
+}
+
+@media (min-width: 992px) {
+  .section {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+  }
+  .rowspan {
+    grid-row: 1/3;
+    grid-column: 3/4;
+  }
+  .rowspan2 {
+    grid-row: 2/4;
+    grid-column: 1/2;
+  }
+  .colspan {
+    grid-row: 3/4;
+    grid-column: 2/4;
+  }
+}/*# sourceMappingURL=dashboardSection.module.css.map */

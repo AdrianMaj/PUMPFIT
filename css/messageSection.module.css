@@ -1,0 +1,16 @@
+.section {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
+}
+
+.chatHeading {
+  font-size: clamp(1.4rem, 1.2041rem + 0.9796vw, 2rem);
+  font-weight: 500;
+}
+
+.infoText {
+  font-size: clamp(1.4rem, 1.2041rem + 0.9796vw, 2rem);
+  color: #b3b3b3;
+}/*# sourceMappingURL=messageSection.module.css.map */

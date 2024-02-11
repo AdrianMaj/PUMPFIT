@@ -1,0 +1,75 @@
+.form {
+  margin-top: 8em;
+  display: flex;
+  flex-direction: column;
+  gap: 3em;
+}
+
+.searchRow {
+  display: flex;
+  justify-content: space-between;
+  gap: 2em;
+  width: 100%;
+}
+
+.filterRow {
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
+}
+
+.filterPriceTags {
+  display: flex;
+  gap: 2em;
+}
+
+.filterText {
+  font-size: clamp(1.4rem, 1.2041rem + 0.9796vw, 2rem);
+}
+
+.checkboxContainer {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 1em;
+}
+
+.checkboxInput {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  background-color: #0f0f0f;
+  margin: 0;
+  width: 3em;
+  height: 3em;
+  border-radius: 2px;
+  cursor: pointer;
+}
+.checkboxInput::before {
+  content: "";
+  width: 2.6em;
+  height: 2.6em;
+  background-image: url("/checkmark.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+  scale: 0;
+  transition: scale 0.3s;
+}
+.checkboxInput.checked::before {
+  scale: 1;
+}
+
+.checkboxLabel {
+  font-size: clamp(1.4rem, 1.2041rem + 0.9796vw, 2rem);
+  color: #b3b3b3;
+}
+
+@media (min-width: 992px) {
+  .filterRow {
+    flex-direction: row;
+  }
+}/*# sourceMappingURL=filterBar.module.css.map */

@@ -1,0 +1,1 @@
+{"version":3,"sources":["../src/components/forgot-password/successPage.module.scss","successPage.module.css","../src/components/_variables.scss"],"names":[],"mappings":"AACA;EACC,cAAA;EACA,iBAAA;ACAD;;ADEA;EACC,aAAA;EACA,mBAAA;EACA,qBAAA;EACA,cEJS;EFKT,oDAAA;EACA,kBAAA;EACA,iBAAA;ACCD;;ADCA;EACC,oDAAA;EACA,cEXS;EFYT,mBAAA;ACED","file":"successPage.module.css"}

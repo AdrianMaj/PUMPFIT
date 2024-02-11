@@ -1,0 +1,46 @@
+.card {
+  background-color: #0f0f0f;
+  width: 100%;
+  display: flex;
+  cursor: pointer;
+}
+
+.image {
+  width: 30%;
+  aspect-ratio: 1/1;
+  -o-object-fit: cover;
+     object-fit: cover;
+  max-width: 150px;
+  max-height: 150px;
+}
+
+.cardText {
+  display: flex;
+  padding: 1em;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.cardMessage {
+  margin: auto 0;
+  font-size: clamp(1.2rem, 1.0041rem + 0.9796vw, 1.8rem);
+  color: #b3b3b3;
+}
+
+.cardTitle {
+  font-size: clamp(1.4rem, 1.2041rem + 0.9796vw, 2rem);
+  font-weight: 600;
+}
+
+.cardTime {
+  margin-top: auto;
+  font-size: clamp(1rem, 0.8041rem + 0.9796vw, 1.6rem);
+  align-self: flex-end;
+}
+
+@media (min-width: 576px) {
+  .cardText {
+    padding: 2em;
+  }
+}/*# sourceMappingURL=messageCard.module.css.map */

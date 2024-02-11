@@ -1,0 +1,28 @@
+.main {
+  width: 100%;
+  padding: 2em 2.5em;
+  position: relative;
+  height: 100svh;
+  display: flex;
+  align-items: center;
+}
+
+.heroImg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("/bgimg.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position-x: center;
+  background-position-y: top;
+  z-index: -1;
+}
+
+@media (min-width: 992px) {
+  .main {
+    padding: 2em 3.5em;
+  }
+}/*# sourceMappingURL=heroSection.module.css.map */

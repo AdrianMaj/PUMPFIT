@@ -115,7 +115,7 @@ model Message {
 model MessageAttachment {
   id        String   @id @default(cuid())
   fileName  String
-  fileFormat String
+  filePublicId String
   fileURL   String
   fileType  String
   messageId String

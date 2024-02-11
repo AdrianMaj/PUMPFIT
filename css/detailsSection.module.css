@@ -1,0 +1,120 @@
+.image {
+  width: 100%;
+  aspect-ratio: 4/3;
+  filter: grayscale(100%) brightness(55%);
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: center;
+     object-position: center;
+}
+
+.main {
+  padding: 10em 0;
+}
+
+.trainerInfo {
+  display: flex;
+  flex-direction: column;
+  padding: 3em;
+  margin: 0 2.5em;
+  background-color: #0f0f0f;
+  transform: translateY(-7em);
+}
+
+.name {
+  font-size: clamp(1.6rem, 1.3388rem + 1.3061vw, 2.4rem);
+  font-weight: 600;
+}
+
+.emptySection {
+  font-size: clamp(1.4rem, 1.2041rem + 0.9796vw, 2rem);
+  color: #b3b3b3;
+  text-align: center;
+  margin-bottom: 1em;
+}
+
+.testimonialsInfoContainer {
+  margin-top: 5em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.categories {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  margin: 1.5em 0;
+  gap: 1.5em;
+  list-style-type: none;
+}
+
+.category {
+  font-size: 1.4rem;
+  color: #b3b3b3;
+}
+
+.price {
+  font-size: clamp(1.6rem, 1.3388rem + 1.3061vw, 2.4rem);
+  text-wrap: nowrap;
+  margin-bottom: 1em;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 8em;
+  padding: 0 2.5em;
+}
+
+.descriptionContainer {
+  padding: 1.5em;
+  background-color: #0f0f0f;
+}
+
+.descriptionText {
+  font-size: clamp(1.4rem, 1.2041rem + 0.9796vw, 2rem);
+  color: #b3b3b3;
+}
+
+.attribution {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2em;
+}
+.attribution .attributionText {
+  color: #b3b3b3;
+  font-size: clamp(1.4rem, 1.2041rem + 0.9796vw, 2rem);
+}
+
+@media (min-width: 992px) {
+  .testimonialList {
+    flex-direction: row;
+  }
+  .trainerInfo {
+    position: absolute;
+    width: 60%;
+    margin: 0;
+    right: 0;
+    bottom: 0;
+  }
+  .descriptionContainer {
+    margin-top: 8em;
+  }
+  .heroInfo {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .image {
+    width: 55%;
+    aspect-ratio: 20/17;
+  }
+  .attribution {
+    flex-direction: row;
+  }
+}/*# sourceMappingURL=detailsSection.module.css.map */

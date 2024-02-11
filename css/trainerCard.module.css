@@ -1,0 +1,117 @@
+.card {
+  background-color: #0f0f0f;
+  display: flex;
+  flex-direction: column;
+  margin-top: 5em;
+  margin-bottom: 5em;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+}
+
+.categories {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+  margin: 1.5em 0;
+  gap: 1.5em;
+  list-style-type: none;
+}
+
+.category {
+  font-size: 1.4rem;
+  color: #b3b3b3;
+}
+
+.photo {
+  width: 100%;
+  aspect-ratio: 42/37;
+  -o-object-fit: cover;
+     object-fit: cover;
+  filter: brightness(65%);
+}
+
+.textContainer {
+  display: flex;
+  flex-direction: column;
+  padding: 2.5em;
+  width: 100%;
+}
+
+.name {
+  font-size: clamp(1.6rem, 1.3388rem + 1.3061vw, 2.4rem);
+  font-weight: 500;
+  margin-bottom: 0.5em;
+}
+
+.description {
+  font-size: clamp(1.4rem, 1.2041rem + 0.9796vw, 2rem);
+  color: #b3b3b3;
+  margin-bottom: 1em;
+}
+
+.titleContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.experience {
+  font-size: 1.6em;
+  display: flex;
+  align-items: center;
+}
+.experience img {
+  margin-right: 1em;
+}
+
+.price {
+  font-size: clamp(1.6rem, 1.3388rem + 1.3061vw, 2.4rem);
+  text-wrap: nowrap;
+}
+
+.bottomContainer {
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
+  align-items: flex-start;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-between;
+  gap: 2em;
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .card {
+    flex-direction: row;
+  }
+  .textContainer {
+    width: 70%;
+  }
+  .name {
+    margin-bottom: 0;
+  }
+  .photo {
+    width: 30%;
+  }
+  .categories {
+    justify-content: flex-start;
+  }
+  .titleContainer {
+    justify-content: space-between;
+    flex-direction: row;
+  }
+  .bottomContainer {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  .buttons {
+    justify-content: flex-end;
+  }
+}/*# sourceMappingURL=trainerCard.module.css.map */

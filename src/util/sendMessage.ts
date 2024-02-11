@@ -14,7 +14,7 @@ export const sendMessage = async ({
 		fileURL: string
 		fileType: string
 		fileName: string
-		fileFormat: string
+		filePublicId: string
 	}[]
 }) => {
 	try {
@@ -30,7 +30,7 @@ export const sendMessage = async ({
 								fileURL: attachment.fileURL,
 								fileType: attachment.fileType,
 								fileName: attachment.fileName,
-								fileFormat: attachment.fileFormat,
+								filePublicId: attachment.filePublicId,
 							})) || [],
 					},
 				},

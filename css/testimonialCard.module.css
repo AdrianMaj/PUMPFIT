@@ -1,0 +1,81 @@
+.card {
+  padding: 2em;
+  display: flex;
+  margin: 0 1em;
+  flex-direction: column;
+  height: 100%;
+  background-color: #0f0f0f;
+}
+
+.cardHeading {
+  position: relative;
+  display: flex;
+  height: 20%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: -moz-fit-content;
+  height: fit-content;
+  margin-bottom: 2.5em;
+}
+
+.cardHeadingText {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 1.5em;
+}
+.cardHeadingText p {
+  font-size: clamp(1.6rem, 1.3388rem + 1.3061vw, 2.4rem);
+}
+
+.cardContent {
+  height: 100%;
+  margin-bottom: auto;
+}
+
+.cardImage {
+  width: 25%;
+  aspect-ratio: 1/1;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: center;
+     object-position: center;
+  border-radius: 50%;
+  margin-bottom: 2em;
+}
+
+.cardDate {
+  position: absolute;
+  right: 0;
+  top: 0;
+  font-size: clamp(1.2rem, 1.0041rem + 0.9796vw, 1.8rem);
+  color: #b3b3b3;
+}
+
+.cardTitle {
+  font-size: clamp(1.6rem, 1.3388rem + 1.3061vw, 2.4rem);
+}
+
+.cardText {
+  margin: 1em 0;
+  font-size: clamp(1.4rem, 1.2041rem + 0.9796vw, 2rem);
+  color: #b3b3b3;
+}
+
+@media (min-width: 576px) {
+  .cardHeading {
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+  }
+  .cardHeadingText {
+    align-items: flex-start;
+  }
+  .cardImage {
+    margin-bottom: 0;
+    margin-right: 3em;
+    width: 20%;
+  }
+}/*# sourceMappingURL=testimonialCard.module.css.map */

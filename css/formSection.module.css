@@ -1,0 +1,61 @@
+.contentContainer {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 2.5em;
+  width: 85%;
+  height: 90%;
+  background-color: #090909;
+}
+
+.heading {
+  text-transform: uppercase;
+  font-size: clamp(3rem, 2.3469rem + 3.2653vw, 5rem);
+}
+
+.header {
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 5em;
+}
+
+.main {
+  width: 100%;
+}
+
+.imgContainer {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  background-image: url("/login-img.png");
+  background-size: cover;
+  background-position: center;
+  z-index: -2;
+}
+
+@media (min-width: 1200px) {
+  .contentContainer {
+    position: static;
+    transform: translate(0);
+    width: 50%;
+    height: 100svh;
+    padding: 2em;
+    padding-right: 8em;
+  }
+  .imgContainer {
+    position: absolute;
+    width: 100svh;
+    height: 100svh;
+    left: 50%;
+  }
+  .desktopContainer {
+    display: flex;
+    position: relative;
+  }
+}/*# sourceMappingURL=formSection.module.css.map */

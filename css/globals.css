@@ -1,0 +1,53 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-size: 10px;
+}
+
+body {
+  background-color: #090909;
+  color: #fff;
+  font-size: 1.6rem;
+  overflow-x: hidden;
+}
+
+.overflow {
+  overflow-y: hidden;
+}
+
+.slick-track {
+  display: flex !important;
+}
+
+.slick-track .slick-slide {
+  display: flex;
+  height: auto;
+}
+
+.slick-slide > div {
+  padding: 2em;
+  display: flex;
+  margin: 0 1em;
+  flex-direction: column;
+  height: 100%;
+  background-color: #0f0f0f;
+}
+
+.EmojiPickerReact .epr-category-nav {
+  justify-content: center;
+  gap: 0.5em;
+  flex-wrap: wrap;
+}
+
+.EmojiPickerReact.epr-dark-theme {
+  --epr-emoji-size: 25px;
+  --epr-category-navigation-button-size: 25px;
+}
+
+@media (min-width: 992px) {
+  .EmojiPickerReact.epr-dark-theme {
+    --epr-emoji-size: 35px;
+    --epr-category-navigation-button-size: 35px;
+  }
+}/*# sourceMappingURL=globals.css.map */
