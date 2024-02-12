@@ -143,6 +143,7 @@ After logging in, you should see a dashboard with information about your account
   - [x] Credentials authorization
   - [x] Account session
 - [x] Dashboard
+  - [ ] Show stats and info on main dashboard
   - [x] Change account settings and info
   - [x] Publish an announcement
     - [x] Unpublish an announcement
@@ -153,6 +154,8 @@ After logging in, you should see a dashboard with information about your account
     - [x] Saving chat history
     - [x] Emoji picker
     - [x] Image upload
+    - [x] Message image modal
+    - [ ] User activity time
 - [x] Announcement list
   - [x] Filtering announcements
   - [x] Announcement details
