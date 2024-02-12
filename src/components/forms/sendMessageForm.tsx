@@ -14,10 +14,6 @@ import Image from 'next/image'
 import MessageIcons from './messageIcons'
 import Input from '../ui/input'
 import FileAttachment from '../ui/fileAttachment'
-import Spinner from '../ui/spinner'
-const FormSchema = z.object({
-	message: z.string().min(1),
-})
 const SendMessageForm = ({
 	loggedId,
 	recieverId,
@@ -38,6 +34,16 @@ const SendMessageForm = ({
 			id: string
 		}[]
 	>([])
+	const FormSchema = z
+		.object({
+			message: z.string(),
+		})
+		.refine(data => {
+			if (data.message.length >= 0 && currentFilesList.length > 0) {
+				return true
+			}
+			return data.message.length >= 1
+		})
 	const MotionImage = motion(Image)
 	useEffect(() => {
 		document.addEventListener('click', closeEmojiPicker)

@@ -48,31 +48,6 @@ const AccountSettingsForm: React.FC<{ accountData: Account }> = ({ accountData }
 		}
 	}
 
-	// const mutation = useMutation(
-	// 	(values: z.infer<typeof FormSchema>) => {
-	// 		const data = {
-	// 			name: values.name,
-	// 			email: values.email,
-	// 			photourl: values.photourl,
-	// 			accountId: accountData.id,
-	// 		}
-	// 		return updateAccount(data)
-	// 	},
-	// 	{
-	// 		onSuccess: () => {
-	// 			queryClient.invalidateQueries(['account', accountData.id])
-	// 		},
-	// 	}
-	// )
-
-	// const handleUpdateProfile = async (values: z.infer<typeof FormSchema>) => {
-	// 	try {
-	// 		await mutation.mutateAsync(values)
-	// 	} catch (error) {
-	// 		console.error('Updating profile failed.', error)
-	// 	}
-	// }
-
 	const handleShowDeleteModal = () => {
 		if (deleteAccountModal.current) {
 			deleteAccountModal.current.openModal()

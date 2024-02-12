@@ -1,5 +1,5 @@
 'use client'
-import React, { forwardRef, useImperativeHandle, useRef, useState } from 'react'
+import React, { forwardRef, useEffect, useImperativeHandle, useRef, useState } from 'react'
 import Input from '../ui/input'
 import { FormProvider, useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -49,6 +49,31 @@ const DeleteAccountModal = forwardRef<DeleteAccountModalMethods, DeleteAccountMo
 			}
 		},
 	}))
+	useEffect(() => {
+		const dialogElement = modal.current
+		const handleKeyDown = (e: KeyboardEvent) => {
+			if (e.key === 'Escape') {
+				if (modal.current) {
+					setIsOpen(false)
+					modal.current.close()
+				}
+			}
+		}
+		const handleClickOutside = (e: MouseEvent) => {
+			if (dialogElement && !dialogElement.contains(e.target as Node)) {
+				setIsOpen(false)
+				dialogElement.close()
+			}
+		}
+
+		document.addEventListener('mousedown', handleClickOutside)
+		document.addEventListener('keydown', handleKeyDown)
+
+		return () => {
+			document.removeEventListener('mousedown', handleClickOutside)
+			document.removeEventListener('keydown', handleKeyDown)
+		}
+	}, [])
 	const onSubmit = async () => {
 		const response = await deleteAccount({ accountId: props.id })
 		if (!response.account?.success) {
@@ -88,7 +113,7 @@ const DeleteAccountModal = forwardRef<DeleteAccountModalMethods, DeleteAccountMo
 					</FormProvider>
 				</div>
 			</dialog>
-			{isOpen && <div onClick={closeModal} className={classes.backdrop}></div>}
+			{isOpen && <div className={classes.backdrop}></div>}
 		</>
 	)
 })

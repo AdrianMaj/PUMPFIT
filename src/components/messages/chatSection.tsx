@@ -8,8 +8,7 @@ import { Account } from '@prisma/client'
 import { AccountWithMessages, MessageWithAttachments } from '@/types/databaseTypes'
 import ChatTopBar from './chatTopBar'
 import FileAttachment from '../ui/fileAttachment'
-import { useRouter } from 'next/navigation'
-
+import ImageModal, { ImageModalMethods } from './imageModal'
 const socket = io('https://adrianmaj.smallhost.pl:3006', {
 	withCredentials: true,
 })
@@ -22,8 +21,9 @@ const ChatSection = ({
 	recieverAccount: Account
 }) => {
 	const [chatMessages, setChatMessages] = useState<MessageWithAttachments[]>([])
+	const [currentPhotoUrl, setCurrentPhotoUrl] = useState<string>('')
 	const messagesSection = useRef<HTMLUListElement>(null)
-	const router = useRouter()
+	const imgModal = useRef<ImageModalMethods>(null)
 	socket.emit('logged_id', loggedAccount.id)
 	socket.emit('reciever_id', recieverAccount.id)
 	socket.on('connect', () => {
@@ -76,11 +76,15 @@ const ChatSection = ({
 		location.assign(URL)
 	}
 	const handlePhotoModal = (photoUrl: string) => {
-		console.log(photoUrl) // TO DO MODAL WINDOW
+		setCurrentPhotoUrl(photoUrl)
+		if (imgModal.current) {
+			imgModal.current.openModal()
+		}
 	}
 	const allMessages = [...messagesFrom, ...messagesTo]
 	return (
 		<>
+			<ImageModal ref={imgModal} photoUrl={currentPhotoUrl} />
 			<ChatTopBar />
 			<section className={classes.chatSection}>
 				<ul ref={messagesSection} className={classes.messageList}>

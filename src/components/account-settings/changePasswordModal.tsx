@@ -1,5 +1,5 @@
 'use client'
-import React, { forwardRef, useImperativeHandle, useRef, useState } from 'react'
+import React, { forwardRef, useEffect, useImperativeHandle, useRef, useState } from 'react'
 import Input from '../ui/input'
 import { FormProvider, useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -42,6 +42,7 @@ const ChangePasswordModal = forwardRef<ChangePasswordModalMethods, ChangePasswor
 				return true
 			}
 		})
+	const [isBackdrop, setIsBackdrop] = useState(false)
 	const [isLoading, setIsLoading] = useState(false)
 	const modal = useRef<HTMLDialogElement>(null)
 	const form = useForm<z.infer<typeof FormSchema>>({
@@ -52,18 +53,48 @@ const ChangePasswordModal = forwardRef<ChangePasswordModalMethods, ChangePasswor
 			confirmNewPassword: '',
 		},
 	})
+
 	useImperativeHandle(ref, () => ({
 		openModal: () => {
 			if (modal.current) {
+				setIsBackdrop(true)
 				modal.current.showModal()
 			}
 		},
 		closeModal: () => {
 			if (modal.current) {
+				setIsBackdrop(false)
 				modal.current.close()
 			}
 		},
 	}))
+
+	useEffect(() => {
+		const dialogElement = modal.current
+		const handleKeyDown = (e: KeyboardEvent) => {
+			if (e.key === 'Escape') {
+				if (modal.current) {
+					setIsBackdrop(false)
+					modal.current.close()
+				}
+			}
+		}
+		const handleClickOutside = (e: MouseEvent) => {
+			if (dialogElement && !dialogElement.contains(e.target as Node)) {
+				setIsBackdrop(false)
+				dialogElement.close()
+			}
+		}
+
+		document.addEventListener('mousedown', handleClickOutside)
+		document.addEventListener('keydown', handleKeyDown)
+
+		return () => {
+			document.removeEventListener('mousedown', handleClickOutside)
+			document.removeEventListener('keydown', handleKeyDown)
+		}
+	}, [])
+
 	const onSubmit = async (values: z.infer<typeof FormSchema>) => {
 		setIsLoading(true)
 		const response = await changePassword({ password: values.newPassword, accountId: props.id })
@@ -77,26 +108,29 @@ const ChangePasswordModal = forwardRef<ChangePasswordModalMethods, ChangePasswor
 	}
 
 	return (
-		<dialog ref={modal} className={classes.modal}>
-			<div className={classes.modalContent}>
-				<p className={classes.modalTitle}>Change password</p>
-				<FormProvider {...form}>
-					<form className={classes.modalForm} onSubmit={form.handleSubmit(onSubmit)}>
-						<Input label="Old password" type="password" id="oldPassword" error={form.formState.errors.oldPassword} />
-						<Input label="New password" type="password" id="newPassword" error={form.formState.errors.newPassword} />
-						<Input
-							label="Confirm new password"
-							type="password"
-							id="confirmNewPassword"
-							error={form.formState.errors.confirmNewPassword}
-						/>
-						<Button style={{ fontSize: 'clamp(1.4rem, 1.2041rem + 0.9796vw, 2rem)' }} type="submit">
-							{isLoading ? 'Please wait...' : 'Change password'}
-						</Button>
-					</form>
-				</FormProvider>
-			</div>
-		</dialog>
+		<>
+			<dialog ref={modal} className={classes.modal}>
+				<div className={classes.modalContent}>
+					<p className={classes.modalTitle}>Change password</p>
+					<FormProvider {...form}>
+						<form className={classes.modalForm} onSubmit={form.handleSubmit(onSubmit)}>
+							<Input label="Old password" type="password" id="oldPassword" error={form.formState.errors.oldPassword} />
+							<Input label="New password" type="password" id="newPassword" error={form.formState.errors.newPassword} />
+							<Input
+								label="Confirm new password"
+								type="password"
+								id="confirmNewPassword"
+								error={form.formState.errors.confirmNewPassword}
+							/>
+							<Button style={{ fontSize: 'clamp(1.4rem, 1.2041rem + 0.9796vw, 2rem)' }} type="submit">
+								{isLoading ? 'Please wait...' : 'Change password'}
+							</Button>
+						</form>
+					</FormProvider>
+				</div>
+			</dialog>
+			{isBackdrop && <div className={classes.backdrop}></div>}
+		</>
 	)
 })
 
