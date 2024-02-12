@@ -11,7 +11,6 @@ import { useEffect, useState, ChangeEvent } from 'react'
 import MultiSelect from '@/components/ui/multiSelect'
 import { handlePublish, handleUnpublish, updateAnnouncement } from '@/util/updateAnnouncement'
 import { Announcement, Testimonial, Trainer } from '@prisma/client'
-import Image from 'next/image'
 
 type AnnouncementWithTestimonials =
 	| (Announcement & {
@@ -47,6 +46,7 @@ const MyProfileForm: React.FC<{ trainerData: TrainerWithAnnouncement }> = ({ tra
 	const [isPublishing, setIsPublishing] = useState(false)
 	const [isUnPublishing, setIsUnPublishing] = useState(false)
 	const [isUpdating, setIsUpdating] = useState(false)
+	const [activeFile, setActiveFile] = useState<File>()
 	const [photoUrl, setPhotoUrl] = useState<string>('')
 	const splittedExperience = trainerData?.announcement?.experience.split(' ') || ''
 	const form = useForm<z.infer<typeof FormSchema>>({
@@ -85,35 +85,36 @@ const MyProfileForm: React.FC<{ trainerData: TrainerWithAnnouncement }> = ({ tra
 		})
 	}
 	const handleUpdateAnnoucement = async (values: z.infer<typeof FormSchema>) => {
-		setIsUpdating(true)
-		try {
+		if (activeFile && activeFile.type.startsWith('image')) {
+			setIsUpdating(true)
 			const formData = new FormData()
-			formData.append('file', values.photourl)
+			formData.append('file', activeFile)
 			formData.append('upload_preset', 'pumpfitannouncements')
-			const response = await fetch(`https://api.cloudinary.com/v1_1/dcl15uhh0/image/upload`, {
-				method: 'POST',
-				body: formData,
-			})
-			const res = await response.json()
-			const data = {
-				photourl: res.secure_url,
-				experience: values.experience,
-				experienceType: values.experienceType,
-				price: values.price,
-				description: values.description,
-				trainerId: trainerData.id,
-				selectedCategories,
+			try {
+				const response = await fetch(`https://api.cloudinary.com/v1_1/dcl15uhh0/image/upload`, {
+					method: 'POST',
+					body: formData,
+				})
+				const res = await response.json()
+				const data = {
+					photourl: res.secure_url,
+					experience: values.experience,
+					experienceType: values.experienceType,
+					price: values.price,
+					description: values.description,
+					trainerId: trainerData.id,
+					selectedCategories,
+				}
+				const announcementResponse = await updateAnnouncement(data)
+				if (!announcementResponse?.announcement?.success) {
+					setIsUpdating(false)
+					console.log(announcementResponse)
+				} else {
+					setIsUpdating(false)
+				}
+			} catch (error) {
+				console.error(error)
 			}
-			const announcementResponse = await updateAnnouncement(data)
-			if (!announcementResponse?.announcement?.success) {
-				setIsUpdating(false)
-				console.log(announcementResponse)
-			} else {
-				setIsUpdating(false)
-				console.log('Created / Updated an announcement')
-			}
-		} catch (error) {
-			console.error(error)
 		}
 	}
 	const handlePublishing = async () => {
@@ -135,6 +136,7 @@ const MyProfileForm: React.FC<{ trainerData: TrainerWithAnnouncement }> = ({ tra
 	const handlePhotoChange = (e: ChangeEvent<HTMLInputElement>) => {
 		const file = e.target.files
 		if (file && file[0]) {
+			setActiveFile(file[0])
 			const url = URL.createObjectURL(file[0])
 			setPhotoUrl(url)
 		}
@@ -159,10 +161,6 @@ const MyProfileForm: React.FC<{ trainerData: TrainerWithAnnouncement }> = ({ tra
 						onChange={handlePhotoChange}
 						className={classes.fileInput}
 					/>
-					{/* <Input type="text" label="Photo URL" id="photourl" error={form.formState.errors.photourl} />
-					<p className={classes.inputNote}>
-						Note: Upload your photo to <Link href="https://imgur.com/">Imgur</Link> and then paste the URL here
-					</p> */}
 				</div>
 				<div className={classes.priceExperienceContainer}>
 					<div className={classes.container}>
