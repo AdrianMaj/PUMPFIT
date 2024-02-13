@@ -1,6 +1,8 @@
 import type { Metadata } from 'next'
 import { Montserrat } from 'next/font/google'
 import './globals.scss'
+import fetchAccount from '@/util/fetchAccount'
+import SocketProvider from '@/components/socket/socketProvider'
 
 const montserrat = Montserrat({ subsets: ['latin'] })
 
@@ -10,10 +12,13 @@ export const metadata: Metadata = {
 	icons: { icon: './favicon.ico' },
 }
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+	const userAccount = await fetchAccount()
 	return (
 		<html lang="en">
-			<body className={montserrat.className}>{children}</body>
+			<body className={montserrat.className}>
+				<SocketProvider userAccount={userAccount}>{children}</SocketProvider>
+			</body>
 		</html>
 	)
 }

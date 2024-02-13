@@ -107,7 +107,7 @@ const SendMessageForm = ({
 	}
 	const handleAddEmoji = (emoji: EmojiClickData) => {
 		const values = form.getValues()
-		form.setValue('message', `${values.message}${emoji}`)
+		form.setValue('message', `${values.message}${emoji.emoji}`)
 	}
 	const onSubmit = async (values: z.infer<typeof FormSchema>) => {
 		setisSending(true)

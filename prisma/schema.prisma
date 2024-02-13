@@ -18,6 +18,8 @@ model Account {
   createdAt          DateTime             @default(now()) @map("created_at")
   updatedAt          DateTime             @updatedAt @map("updated_at")
   active             Boolean              @default(false)
+  currentlyActive    Boolean             @default(false)
+  lastActive         DateTime?
   ActivateToken      ActivateToken[]
   PasswordResetToken PasswordResetToken[]
   trainer            Trainer?

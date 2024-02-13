@@ -24,19 +24,13 @@ const ChatSection = ({
 	const [currentPhotoUrl, setCurrentPhotoUrl] = useState<string>('')
 	const messagesSection = useRef<HTMLUListElement>(null)
 	const imgModal = useRef<ImageModalMethods>(null)
-	socket.emit('logged_id', loggedAccount.id)
-	socket.emit('reciever_id', recieverAccount.id)
-	socket.on('connect', () => {
-		console.log('Connected to server')
-	})
+	useEffect(() => {
+		socket.emit('reciever_id', recieverAccount.id)
+		socket.on('connect_error', error => {
+			console.error('Connection error:', error)
+		})
+	}, [recieverAccount])
 
-	socket.on('disconnect', () => {
-		console.log('Disconnected from server')
-	})
-
-	socket.on('connect_error', error => {
-		console.error('Connection error:', error)
-	})
 	useEffect(() => {
 		if (messagesSection.current) {
 			messagesSection.current.scrollTop = messagesSection.current.scrollHeight

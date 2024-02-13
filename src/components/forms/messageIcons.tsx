@@ -90,7 +90,7 @@ const MessageIcons = ({
 				theme={Theme.DARK}
 				className={classes.emojiPicker}
 				open={emojiIsOpened}
-				onEmojiClick={handleAddEmoji}
+				onEmojiClick={emoji => handleAddEmoji(emoji)}
 			/>
 			<input
 				accept="image/*,video/*,audio/*"
