@@ -5,6 +5,10 @@ import { Account } from '@prisma/client'
 import React, { useEffect } from 'react'
 import { io } from 'socket.io-client'
 
+export const socket = io('https://adrianmaj.smallhost.pl:3006', {
+	withCredentials: true,
+})
+
 const SocketProvider = ({
 	userAccount,
 	children,
@@ -14,9 +18,6 @@ const SocketProvider = ({
 }) => {
 	if (userAccount && userAccount.id) {
 		useEffect(() => {
-			const socket = io('https://adrianmaj.smallhost.pl:3006', {
-				withCredentials: true,
-			})
 			socket.emit('logged_id', userAccount.id)
 			socket.on('connect', async () => {
 				await setUserActive(userAccount.id)

@@ -9,9 +9,7 @@ import { AccountWithMessages, MessageWithAttachments } from '@/types/databaseTyp
 import ChatTopBar from './chatTopBar'
 import FileAttachment from '../ui/fileAttachment'
 import ImageModal, { ImageModalMethods } from './imageModal'
-const socket = io('https://adrianmaj.smallhost.pl:3006', {
-	withCredentials: true,
-})
+import { socket } from '../socket/socketProvider'
 
 const ChatSection = ({
 	loggedAccount,
