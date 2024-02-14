@@ -31,7 +31,7 @@ const SocketProvider = ({
 			window.removeEventListener('beforeunload', handleUnload)
 			window.removeEventListener('unload', handleUnload)
 		}
-	}, [userAccount])
+	}, [userAccount, socket])
 
 	useEffect(() => {
 		let intervalId: NodeJS.Timeout | null = null
@@ -41,7 +41,7 @@ const SocketProvider = ({
 				intervalId = setInterval(async () => {
 					await setUserInactive(userAccount.id)
 					socket.disconnect()
-				}, 600000) // 10 min
+				}, 300000) // 5 min
 			} else {
 				clearInterval(intervalId as NodeJS.Timeout)
 				if (userAccount && userAccount.id) {
@@ -57,7 +57,7 @@ const SocketProvider = ({
 			document.removeEventListener('visibilitychange', handleVisibilityChange)
 			clearInterval(intervalId as NodeJS.Timeout)
 		}
-	}, [userAccount])
+	}, [userAccount, socket])
 
 	useEffect(() => {
 		if (userAccount && userAccount.id) {
@@ -70,7 +70,7 @@ const SocketProvider = ({
 				socket.disconnect()
 			}
 		}
-	}, [userAccount])
+	}, [userAccount, socket])
 
 	return children
 }

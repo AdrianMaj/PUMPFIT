@@ -23,6 +23,60 @@
   cursor: pointer;
 }
 
+.fileInput {
+  display: none;
+}
+
+.fileLabel {
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+
+.fileLabelText {
+  font-size: clamp(1.4rem, 1.2041rem + 0.9796vw, 2rem);
+  color: #b3b3b3;
+  margin-bottom: 1em;
+}
+
+.announcementImage {
+  width: 14em;
+  height: 14em;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: center;
+     object-position: center;
+}
+
+.fileLabelImagePreview {
+  position: relative;
+  width: 14em;
+  height: 14em;
+  background-color: #0f0f0f;
+}
+.fileLabelImagePreview::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 25%;
+  width: 2px;
+  background-color: #fff;
+}
+.fileLabelImagePreview::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 2px;
+  width: 25%;
+  background-color: #fff;
+}
+
 .buttons {
   margin-top: auto;
   width: 100%;
