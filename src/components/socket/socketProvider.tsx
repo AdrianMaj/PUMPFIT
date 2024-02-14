@@ -16,20 +16,61 @@ const SocketProvider = ({
 	userAccount: Account | undefined | null
 	children: React.ReactNode
 }) => {
-	if (userAccount && userAccount.id) {
-		useEffect(() => {
+	useEffect(() => {
+		const handleUnload = async () => {
+			if (userAccount && userAccount.id) {
+				await setUserInactive(userAccount.id)
+				socket.disconnect()
+			}
+		}
+
+		window.addEventListener('beforeunload', handleUnload)
+		window.addEventListener('unload', handleUnload)
+
+		return () => {
+			window.removeEventListener('beforeunload', handleUnload)
+			window.removeEventListener('unload', handleUnload)
+		}
+	}, [userAccount])
+
+	useEffect(() => {
+		let intervalId: NodeJS.Timeout | null = null
+
+		const handleVisibilityChange = async () => {
+			if (document.visibilityState === 'hidden' && userAccount && userAccount.id) {
+				intervalId = setInterval(async () => {
+					await setUserInactive(userAccount.id)
+					socket.disconnect()
+				}, 600000) // 10 min
+			} else {
+				clearInterval(intervalId as NodeJS.Timeout)
+				if (userAccount && userAccount.id) {
+					await setUserActive(userAccount.id)
+					socket.connect()
+				}
+			}
+		}
+
+		document.addEventListener('visibilitychange', handleVisibilityChange)
+
+		return () => {
+			document.removeEventListener('visibilitychange', handleVisibilityChange)
+			clearInterval(intervalId as NodeJS.Timeout)
+		}
+	}, [userAccount])
+
+	useEffect(() => {
+		if (userAccount && userAccount.id) {
 			socket.emit('logged_id', userAccount.id)
 			socket.on('connect', async () => {
 				await setUserActive(userAccount.id)
 			})
-			socket.on('disconnect', async () => {
-				await setUserInactive(userAccount.id)
-			})
+
 			return () => {
 				socket.disconnect()
 			}
-		}, [userAccount])
-	}
+		}
+	}, [userAccount])
 
 	return children
 }
