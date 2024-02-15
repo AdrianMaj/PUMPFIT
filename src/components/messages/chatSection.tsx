@@ -77,7 +77,15 @@ const ChatSection = ({
 	return (
 		<>
 			<ImageModal ref={imgModal} photoUrl={currentPhotoUrl} />
-			<ChatTopBar />
+			<ChatTopBar
+				currentlyActive={recieverAccount.currentlyActive}
+				lastActive={recieverAccount.lastActive}
+				userName={recieverAccount.name}
+				photoUrl={
+					recieverAccount.photo ||
+					'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png'
+				}
+			/>
 			<section className={classes.chatSection}>
 				<ul ref={messagesSection} className={classes.messageList}>
 					{chatMessages.length === allMessages.length && (
@@ -109,11 +117,12 @@ const ChatSection = ({
 											: classes.messageListElement
 									}>
 									{!isDoubled ? (
-										<div className={classes.messageImgContainer}>
+										<div
+											className={`${classes.messageImgContainer}  ${
+												message.fromAccountId === loggedAccount.id && classes.senderMessageImg
+											}`}>
 											<img
-												className={`${classes.messageImg} ${
-													message.fromAccountId === loggedAccount.id && classes.senderMessageImg
-												}`}
+												className={classes.messageImg}
 												alt={message.fromAccountId === loggedAccount.id ? loggedAccount.name : recieverAccount.name}
 												src={
 													(message.fromAccountId === loggedAccount.id ? loggedAccount.photo : recieverAccount.photo) ||

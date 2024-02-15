@@ -244,7 +244,7 @@ const SendMessageForm = ({
 									}
 								})}
 							</div>
-							<Input width="100%" id="message" label="Message" />
+							<Input noLabel width="100%" id="message" label="Message" />
 						</div>
 						{isSending ? (
 							<div className={classes.spinnerContainer}>

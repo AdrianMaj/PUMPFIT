@@ -11,17 +11,20 @@ const Input: React.FC<{
 	error?: FieldError | undefined
 	isTextArea?: boolean
 	width?: string
+	noLabel?: boolean
 	children?: React.ReactNode
 	[x: string]: any
-}> = ({ type, id, label, error, isTextArea, width, children, ...props }) => {
+}> = ({ type, id, label, error, isTextArea, width, children, noLabel, ...props }) => {
 	const { register } = useFormContext()
 	const { onChange, onBlur, name, ref } = register(id)
 
 	return (
 		<div style={{ width: width || 'auto' }} className={classes.container}>
-			<label className={classes.label} htmlFor={id}>
-				{label}
-			</label>
+			{!noLabel && (
+				<label className={classes.label} htmlFor={id}>
+					{label}
+				</label>
+			)}
 			{isTextArea ? (
 				<motion.textarea
 					whileFocus={{
@@ -40,6 +43,7 @@ const Input: React.FC<{
 					whileFocus={{
 						border: '1px solid #a50000',
 					}}
+					placeholder={noLabel ? label : ''}
 					onChange={onChange}
 					onBlur={onBlur}
 					name={name}

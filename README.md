@@ -50,7 +50,7 @@
     <li><a href="#usage">Usage</a></li>
     <li><a href="#roadmap">Roadmap</a></li>
     <li><a href="#contributing">Contributing</a></li>
-    <li><a href="#license">License</a></li>
+    <!-- <li><a href="#license">License</a></li> -->
     <li><a href="#contact">Contact</a></li>
     <li><a href="#acknowledgments">Acknowledgments</a></li>
   </ol>
@@ -62,7 +62,9 @@
 
 [![PUMPFIT Main page screenshot][product-screenshot]](/images/screenshot.png)
 
-PUMPFIT allows you to create a trainer or user account. A trainer account can publish advertisements that can be answered by those looking for trainers. The application also allows real-time communication between users and editing of account data. Users can publish testimonials about trainers, which will be visible to all page visitors.
+PUMPFIT allows you to create a trainer or user account. A trainer account can publish advertisements that can be answered by those looking for trainers. Users can publish testimonials about trainers, which will be visible to all page visitors. The application also allows real-time communication between users, editing account details such as email, password, etc., password recovery, ad filtering and several other features.
+
+See <a href="#usage"><b>Usage</b></a> for more information about the application
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -126,6 +128,10 @@ To unlock the main part of the application - the dashboard, you need to create y
 
 After logging in, you should see a dashboard with information about your account, and a side menu on the left with dashboard functionalities.
 
+<h4>Dashboard allows you:<h4>
+
+<ul></ul>
+
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- ROADMAP -->
@@ -155,7 +161,8 @@ After logging in, you should see a dashboard with information about your account
     - [x] Emoji picker
     - [x] Image upload
     - [x] Message image modal
-    - [ ] User activity time
+    - [x] User activity time
+    - [x] User activity handling
 - [x] Announcement list
   - [x] Filtering announcements
   - [x] Announcement details
@@ -186,11 +193,11 @@ Don't forget to give the project a star! Thanks again!
 
 <!-- LICENSE -->
 
-## License
+<!-- ## License
 
 Distributed under the MIT License. See `LICENSE.txt` for more information.
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+<p align="right">(<a href="#readme-top">back to top</a>)</p> -->
 
 <!-- CONTACT -->
 

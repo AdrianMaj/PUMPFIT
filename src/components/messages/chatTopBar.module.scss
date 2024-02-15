@@ -1,5 +1,6 @@
 @use '../variables' as *;
 .bar {
+	position: relative;
 	display: flex;
 	align-items: center;
 	height: 11em;
@@ -13,13 +14,34 @@
 	rotate: 180deg;
 }
 .link {
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
 	display: flex;
+	justify-content: center;
 	text-decoration: none;
 	gap: 1em;
 	color: $subtext;
 }
 .barText {
 	font-size: $subtextSize;
+}
+.userInfo {
+	display: flex;
+	align-items: center;
+	gap: 1em;
+	margin: 0 auto;
+}
+.userInfoName {
+	font-size: $headingSize;
+	margin-bottom: 0.2em;
+}
+.userInfoIndicator {
+	font-size: $smallSize;
+	color: $subtext;
+}
+.image {
+	width: 6em;
 }
 @media (min-width: 992px) {
 	.bar {
