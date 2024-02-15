@@ -4,7 +4,7 @@ import './globals.scss'
 import fetchAccount from '@/util/fetchAccount'
 import SocketProvider from '@/components/socket/socketProvider'
 
-const montserrat = Montserrat({ subsets: ['latin'] })
+const montserrat = Montserrat({ subsets: ['latin'], display: 'swap' })
 
 export const metadata: Metadata = {
 	title: 'PUMPFIT | Personal trainer renting',

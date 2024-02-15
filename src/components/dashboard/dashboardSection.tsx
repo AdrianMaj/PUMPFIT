@@ -9,6 +9,7 @@ import resetProfileViews from '@/util/resetProfileViews'
 const DashboardSection = ({ userAccount }: { userAccount: AccountWithMessages }) => {
 	const [newMessages, setNewMessages] = useState<Message[]>([])
 	const [contactedPeople, setContactedPeople] = useState<string[]>([])
+	const [profileViews, setProfileViews] = useState<number>(0)
 	useEffect(() => {
 		const filteredMessages = userAccount.messagesTo.filter(message => {
 			return userAccount.lastActive && message.createdAt >= userAccount.lastActive
@@ -25,11 +26,13 @@ const DashboardSection = ({ userAccount }: { userAccount: AccountWithMessages })
 		})
 
 		setContactedPeople(uniqueFromAccountIds)
+		setProfileViews(userAccount.trainer?.announcement?.announcementViews || 0)
 	}, [userAccount])
 
 	const handleResetProfileViews = async () => {
 		if (userAccount.trainer) {
 			await resetProfileViews(userAccount.trainer.id)
+			setProfileViews(userAccount.trainer.announcement?.announcementViews || 0)
 		}
 	}
 
@@ -46,7 +49,7 @@ const DashboardSection = ({ userAccount }: { userAccount: AccountWithMessages })
 						<p>People messaged you when you were offline</p>
 					</Link>
 					<div onClick={handleResetProfileViews} className={`${classes.card} ${classes.clickable}`}>
-						<h3>{userAccount.trainer.announcement?.announcementViews}</h3>
+						<h3>{profileViews}</h3>
 						<p>Profile views</p>
 						<p className={classes.infoText}>(Click to reset)</p>
 					</div>
