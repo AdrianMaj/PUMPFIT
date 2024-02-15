@@ -15,6 +15,7 @@ const MessageCard = ({
 }) => {
 	const router = useRouter()
 	const [time, setTime] = useState('')
+	const [activeTime, setActiveTime] = useState('')
 	const [lastMessage, setLastMessage] = React.useState<Message | null>(null)
 	useEffect(() => {
 		const getLastMessage = async () => {
@@ -43,6 +44,26 @@ const MessageCard = ({
 			}
 		}
 	}, [lastMessage?.createdAt])
+	useEffect(() => {
+		if (messagedAccount.lastActive) {
+			const currentDate = new Date()
+			const differenceInMilliseconds = currentDate.getTime() - messagedAccount.lastActive.getTime()
+			const differenceInSeconds = Math.floor(differenceInMilliseconds / 1000)
+
+			if (differenceInSeconds < 60) {
+				setActiveTime('1 min')
+			} else if (differenceInSeconds < 3600) {
+				const minutes = Math.floor(differenceInSeconds / 60)
+				setActiveTime(`${minutes}min`)
+			} else if (differenceInSeconds < 86400) {
+				const hours = Math.floor(differenceInSeconds / 3600)
+				setActiveTime(`${hours}h`)
+			} else {
+				const days = Math.floor(differenceInSeconds / 86400)
+				setActiveTime(`${days}d`)
+			}
+		}
+	}, [messagedAccount.lastActive])
 
 	const handleMessageTest = () => {
 		router.push(`/dashboard/messages/${messagedAccount.id}`)
@@ -64,6 +85,15 @@ const MessageCard = ({
 				alt={messagedAccount.name}
 			/>
 			<div className={classes.cardText}>
+				<div className={classes.activeContainer}>
+					<p className={classes.activeTime}>
+						{messagedAccount.currentlyActive ? 'Active now' : `Active ${activeTime} ago.`}
+					</p>
+					<div
+						className={`${classes.activeIndicator} ${
+							!messagedAccount.currentlyActive && classes.unactiveIndicator
+						}`}></div>
+				</div>
 				<p className={classes.cardTitle}>{messagedAccount.name}</p>
 				{lastMessage ? (
 					<>

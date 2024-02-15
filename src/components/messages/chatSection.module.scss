@@ -50,11 +50,14 @@
 	height: 1px;
 }
 .messageImg {
-	margin-top: 3em;
 	width: clamp(6rem, 5.3469rem + 3.2653vw, 8rem);
 	height: clamp(6rem, 5.3469rem + 3.2653vw, 8rem);
 	object-fit: cover;
 	object-position: center;
+}
+.messageImgContainer {
+	margin-top: 3em;
+	position: relative;
 }
 .senderMessageImg {
 	align-self: flex-end;
@@ -112,6 +115,18 @@
 .recieved {
 	justify-content: flex-start;
 	background-color: $secondaryBg;
+}
+.activeIndicator {
+	position: absolute;
+	right: 0.5em;
+	bottom: calc(0.5em + 3px);
+	width: 1.5rem;
+	height: 1.5rem;
+	background-color: rgb(17, 117, 17);
+	border-radius: 50%;
+}
+.activeIndicator.unactiveIndicator {
+	background-color: $mainColor;
 }
 @media (min-width: 576px) {
 	.bar {
