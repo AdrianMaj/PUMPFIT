@@ -67,38 +67,31 @@
 }
 .container {
 	display: flex;
-	align-items: center;
+	align-items: flex-end;
 	justify-content: flex-start;
 	width: fit-content;
-	background-color: $secondaryBg;
 }
 .inputSide {
 	width: fit-content;
-	padding: 0 1em;
-	margin-left: 0.25em;
-	:focus {
-		border: 1px solid white;
-	}
+	padding: 0.75em;
 }
 .priceTag {
 	color: $subtext;
-	font-size: $subtextSize;
+	font-size: clamp(1.6rem, 1.4041rem + 0.9796vw, 2.2rem);
 	background-color: $secondaryBg;
-	height: 100%;
 	display: flex;
 	align-items: center;
 	width: fit-content;
 	text-align: center;
-	padding: 0 1em;
+	padding: 0.75em;
 	text-wrap: nowrap;
 }
 .experienceInput {
 	text-align: right;
-	height: 100%;
 	background-color: $secondaryBg;
 	color: $subtext;
-	font-size: $subtextSize;
-	border: none;
+	border: 1px solid transparent;
+	font-size: clamp(1.6rem, 1.4041rem + 0.9796vw, 2.2rem);
 }
 .buttons {
 	margin-top: auto;

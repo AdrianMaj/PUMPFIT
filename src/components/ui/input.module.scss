@@ -5,26 +5,27 @@
 	position: relative;
 }
 .label {
-	position: absolute;
-	top: 0%;
-	left: 0.4em;
-	padding: 0 0.15em;
-	transform: translateY(-50%);
+	// position: absolute;
+	// top: 0%;
+	// left: 0.4em;
+	// padding: 0 0.15em;
+	// transform: translateY(-50%);
 	color: $subtext;
 	font-size: clamp(1.6rem, 1.4041rem + 0.9796vw, 2.2rem);
-	pointer-events: none;
-	z-index: 5;
-	&::before {
-		content: '';
-		position: absolute;
-		bottom: 0;
-		left: 50%;
-		transform: translateX(-50%);
-		width: 105%;
-		height: 51%;
-		background-color: #0f0f0f;
-		z-index: -1;
-	}
+	margin-bottom: 0.5em;
+	// pointer-events: none;
+	// z-index: 5;
+	// &::before {
+	// 	content: '';
+	// 	position: absolute;
+	// 	bottom: 0;
+	// 	left: 50%;
+	// 	transform: translateX(-50%);
+	// 	width: 105%;
+	// 	height: 51%;
+	// 	background-color: #0f0f0f;
+	// 	z-index: -1;
+	// }
 }
 .input {
 	font-size: clamp(1.6rem, 1.4041rem + 0.9796vw, 2.2rem);

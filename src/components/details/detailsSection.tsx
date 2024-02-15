@@ -6,9 +6,7 @@ import SectionHeading from '../ui/sectionHeading'
 import { AnnouncementWithTestimonialsAndTrainer } from '@/types/databaseTypes'
 import fetchAccount from '@/util/fetchAccount'
 import SliderContainer from './sliderContainer'
-import Button from '../ui/button'
 
-// import Slider from 'react-slick'
 
 const DetailsSection: React.FC<{
 	trainerName: string

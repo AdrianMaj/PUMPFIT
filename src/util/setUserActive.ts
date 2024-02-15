@@ -9,7 +9,6 @@ const setUserActive = async (accountId: string) => {
 			},
 			data: {
 				currentlyActive: true,
-				lastActive: new Date(),
 			},
 		})
 		if (account) {

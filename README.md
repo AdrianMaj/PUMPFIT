@@ -210,7 +210,6 @@ Project Link: [https://github.com/AdrianMaj/PUMPFIT](https://github.com/AdrianMa
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- MARKDOWN LINKS & IMAGES -->
-<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 
 [contributors-shield]: https://img.shields.io/github/contributors/AdrianMaj/PUMPFIT.svg?style=for-the-badge
 [contributors-url]: https://github.com/AdrianMaj/PUMPFIT/graphs/contributors
@@ -234,7 +233,8 @@ Project Link: [https://github.com/AdrianMaj/PUMPFIT](https://github.com/AdrianMa
 [React-url]: https://reactjs.org/
 [Prisma]: https://img.shields.io/badge/Prisma-3982CE?style=for-the-badge&logo=Prisma&logoColor=white
 [Prisma-url]: https://www.prisma.io/
-[Socket.io]: https://img.shields.io/badge/Socket.io-black?style=for-the-badge&logo=socket.io&badgeColor=010101
+[Socket.io]: https://img.shields.io/badge/wika
+Socket.io-black?style=for-the-badge&logo=socket.io&badgeColor=010101
 [Socket.io-url]: https://socket.io/
 [Vercel]: https://img.shields.io/badge/vercel-%23000000.svg?style=for-the-badge&logo=vercel&logoColor=white
 [Vercel-url]: https://vercel.com/

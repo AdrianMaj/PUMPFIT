@@ -1,15 +1,15 @@
 import React from 'react'
-import fetchAccount from '@/util/fetchAccount'
+import { fetchAccountWithMessages } from '@/util/fetchAccount'
 import SectionHeading from '@/components/ui/sectionHeading'
 import DashboardSection from '@/components/dashboard/dashboardSection'
 
 const Page = async () => {
-	const userAccount = await fetchAccount()
+	const userAccount = await fetchAccountWithMessages()
 	if (userAccount) {
 		return (
 			<>
 				<SectionHeading>Dashboard</SectionHeading>
-				<DashboardSection />
+				<DashboardSection userAccount={userAccount} />
 			</>
 		)
 	}

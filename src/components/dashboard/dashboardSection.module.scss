@@ -15,17 +15,36 @@
 	text-decoration: none;
 	background-color: $secondaryBg;
 	h3 {
-		font-size: clamp(3rem, 2.6735rem + 1.6327vw, 4rem);
+		text-align: center;
+		font-size: clamp(2.5rem, 2.0102rem + 2.449vw, 4rem);
 		margin-bottom: 0.5em;
 		color: #fff;
 	}
 	p {
-		text-wrap: nowrap;
+		text-align: center;
 		font-size: $subtextSize;
 		color: #fff;
 	}
+	.infoText {
+		margin-top: 0.5em;
+		font-size: $smallSize;
+		color: $subtext;
+	}
 }
-
+.clickable {
+	cursor: pointer;
+}
+.categoryList {
+	margin-top: 2em;
+	display: flex;
+	text-decoration: none;
+	color: $subtext;
+	list-style-type: none;
+	gap: 1em;
+	li {
+		font-size: $smallSize;
+	}
+}
 @media (min-width: 992px) {
 	.section {
 		display: grid;
