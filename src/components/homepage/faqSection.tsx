@@ -54,14 +54,11 @@ const FaqSection = () => {
 			),
 		},
 		{
-			question: 'Are there any trainers from my city?',
+			question: 'Can I message all registered trainers?',
 			answer: (
 				<p>
-					To check if there are registered trainers in your area, go to{' '}
-					<Link className={classes.link} href="/trainers">
-						Our Trainers
-					</Link>{' '}
-					and select your location.
+					You can message only to coaches who have published announcements, the others are invisible to users until they
+					publish their announcement.
 				</p>
 			),
 		},

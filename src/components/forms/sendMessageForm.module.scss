@@ -4,7 +4,9 @@
 }
 .container {
 	display: flex;
-	flex-direction: column-reverse;
+	flex-direction: row-reverse;
+	justify-content: center;
+	flex-wrap: wrap-reverse;
 	gap: 1em;
 	position: relative;
 	width: 100%;
@@ -105,7 +107,7 @@
 	height: 100%;
 	padding: 0.75em;
 	max-width: 8em;
-	width: 10%;
+	width: 100%;
 	background-color: $mainColor;
 	cursor: not-allowed;
 }

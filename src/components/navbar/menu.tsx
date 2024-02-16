@@ -7,9 +7,11 @@ import classes from './menu.module.scss'
 import Link from 'next/link'
 import { Session } from 'next-auth'
 import LogoutButton from '../ui/logoutButton'
+import { Account } from '@prisma/client'
 
-const Menu: React.FC<{ session: Session | null }> = ({ session }) => {
+const Menu: React.FC<{ account: Account | undefined | null }> = ({ account }) => {
 	const [isOpen, setIsOpen] = useState(false)
+	const [isLogged, setIsLogged] = useState(false)
 	const isMobile = useMediaQuery({ query: '(max-width: 991px)' })
 	const toggleMenu = () => {
 		setIsOpen(prevState => {
@@ -17,6 +19,13 @@ const Menu: React.FC<{ session: Session | null }> = ({ session }) => {
 			return newState
 		})
 	}
+	useEffect(() => {
+		if (account) {
+			setIsLogged(true)
+		} else {
+			setIsLogged(false)
+		}
+	}, [])
 	useEffect(() => {
 		if (isOpen) {
 			document.body.classList.add('overflow')
@@ -76,7 +85,7 @@ const Menu: React.FC<{ session: Session | null }> = ({ session }) => {
 							Control Panel
 						</Link>
 					</motion.li>
-					{session?.user ? (
+					{isLogged ? (
 						<motion.li
 							initial={false}
 							className={`${classes.listElementButton} ${classes.margin}`}

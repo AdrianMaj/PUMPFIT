@@ -12,7 +12,6 @@ import Button from '../ui/button'
 import StarRating from '../ui/starRating'
 import { addTestimonial } from '@/util/addTestimonial'
 import { useRouter } from 'next/navigation'
-import fetchTestimonialData from '@/util/fetchTestimonialData'
 
 const FormSchema = z.object({
 	title: z.string().min(1, 'Title is required'),

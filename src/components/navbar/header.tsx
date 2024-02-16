@@ -3,10 +3,9 @@ import Menu from './menu'
 import Wrapper from '../ui/wrapper'
 import HeaderBackground from './headerBackground'
 import Logo from '../ui/Logo'
-import { getServerSession } from 'next-auth'
-import { authOptions } from '../../../lib/auth'
+import fetchAccount from '@/util/fetchAccount'
 const Header = async () => {
-	const session = await getServerSession(authOptions)
+	const account = await fetchAccount()
 	return (
 		<>
 			<div className={classes.header}>
@@ -16,7 +15,7 @@ const Header = async () => {
 						<header>
 							<Logo width="70%" />
 						</header>
-						<Menu session={session} />
+						<Menu account={account} />
 					</div>
 				</Wrapper>
 			</div>

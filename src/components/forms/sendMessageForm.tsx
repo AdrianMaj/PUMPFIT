@@ -260,6 +260,8 @@ const SendMessageForm = ({
 						) : (
 							<Button
 								style={{
+									height: '100%',
+									width: '100%',
 									maxWidth: '8rem',
 								}}
 								filled

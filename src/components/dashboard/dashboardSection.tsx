@@ -46,7 +46,7 @@ const DashboardSection = ({ userAccount }: { userAccount: AccountWithMessages })
 						<h3>{newMessages.length}</h3>
 						<p>New messages</p>
 					</Link>
-					<Link href="/dashboard/proteges" className={`${classes.card}`}>
+					<Link href="/dashboard/messages" className={`${classes.card}`}>
 						<h3>{contactedPeople.length}</h3>
 						<p>People messaged you when you were offline</p>
 					</Link>
@@ -94,11 +94,11 @@ const DashboardSection = ({ userAccount }: { userAccount: AccountWithMessages })
 				</>
 			) : (
 				<>
-					<Link href="/dashboard/messages" className={`${classes.card}`}>
+					<Link href="/dashboard/messages" className={`${classes.card} ${classes.cardUser}`}>
 						<h3>{newMessages.length}</h3>
 						<p>New messages</p>
 					</Link>
-					<Link href="/dashboard/proteges" className={`${classes.card}`}>
+					<Link href="/dashboard/messages" className={`${classes.card} ${classes.cardUser}`}>
 						<h3>{contactedPeople.length}</h3>
 						<p>People messaged you when you were offline</p>
 					</Link>
@@ -106,7 +106,7 @@ const DashboardSection = ({ userAccount }: { userAccount: AccountWithMessages })
 						<h3>{userAccount.name}</h3>
 						<p>User</p>
 					</Link>
-					<div className={`${classes.card} ${classes.colspan} ${classes.buttonContainer}`}>
+					<div className={`${classes.card} ${classes.buttonContainer} ${classes.buttonContainerUser}`}>
 						<LogoutButton
 							whileHover={{
 								backgroundColor: '#a50000',
