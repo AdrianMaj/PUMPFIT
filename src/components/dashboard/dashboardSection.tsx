@@ -93,7 +93,43 @@ const DashboardSection = ({ userAccount }: { userAccount: AccountWithMessages })
 					</div>
 				</>
 			) : (
-				''
+				<>
+					<Link href="/dashboard/messages" className={`${classes.card}`}>
+						<h3>{newMessages.length}</h3>
+						<p>New messages</p>
+					</Link>
+					<Link href="/dashboard/proteges" className={`${classes.card}`}>
+						<h3>{contactedPeople.length}</h3>
+						<p>People messaged you when you were offline</p>
+					</Link>
+					<Link href="/dashboard/account-settings" className={`${classes.card} ${classes.rowspan}`}>
+						<h3>{userAccount.name}</h3>
+						<p>User</p>
+					</Link>
+					<div className={`${classes.card} ${classes.colspan} ${classes.buttonContainer}`}>
+						<LogoutButton
+							whileHover={{
+								backgroundColor: '#a50000',
+							}}
+							className={classes.button}>
+							Logout
+						</LogoutButton>
+						<LinkButton
+							style={{
+								fontSize: 'clamp(1.6rem, 1.3388rem + 1.3061vw, 2.4rem)',
+							}}
+							linked="/">
+							Home
+						</LinkButton>
+						<LinkButton
+							style={{
+								fontSize: 'clamp(1.6rem, 1.3388rem + 1.3061vw, 2.4rem)',
+							}}
+							linked="/trainers">
+							Trainers list
+						</LinkButton>
+					</div>
+				</>
 			)}
 		</section>
 	)

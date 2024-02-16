@@ -41,6 +41,11 @@
 	object-fit: cover;
 	object-position: center;
 }
+.loadMoreMessagesContainer {
+	display: flex;
+	justify-content: center;
+	width: 100%;
+}
 .recieverName {
 	font-size: $headingSize;
 }

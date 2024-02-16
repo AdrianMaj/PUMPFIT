@@ -10,6 +10,9 @@ import ChatTopBar from './chatTopBar'
 import FileAttachment from '../ui/fileAttachment'
 import ImageModal, { ImageModalMethods } from './imageModal'
 import { socket } from '../socket/socketProvider'
+import Button from '../ui/button'
+import fetchMessages from '@/util/fetchMessages'
+import Spinner from '../ui/spinner'
 
 const ChatSection = ({
 	loggedAccount,
@@ -20,6 +23,8 @@ const ChatSection = ({
 }) => {
 	const [chatMessages, setChatMessages] = useState<MessageWithAttachments[]>([])
 	const [currentPhotoUrl, setCurrentPhotoUrl] = useState<string>('')
+	const [loadMoreMessages, setLoadMoreMessages] = useState(false)
+	const [isLoadingMoreMessages, setIsLoadingMoreMessages] = useState(false)
 	const messagesSection = useRef<HTMLUListElement>(null)
 	const imgModal = useRef<ImageModalMethods>(null)
 	useEffect(() => {
@@ -30,23 +35,22 @@ const ChatSection = ({
 	}, [recieverAccount])
 
 	useEffect(() => {
-		if (messagesSection.current) {
-			messagesSection.current.scrollTop = messagesSection.current.scrollHeight
-		}
-	}, [chatMessages, messagesSection])
-
-	useEffect(() => {
 		const fetchInitial = async () => {
 			const messages = await fetchInitialMessages(loggedAccount.id, recieverAccount.id)
 			const reversedMessages = messages.reverse()
+			if (reversedMessages.length === 15) {
+				setLoadMoreMessages(true)
+			}
 			setChatMessages(reversedMessages)
 		}
 		fetchInitial()
 	}, [])
 	useEffect(() => {
 		socket.on('chat_message', (msg: MessageWithAttachments) => {
-			console.log(msg)
 			setChatMessages(prevMessages => [...prevMessages, msg])
+			if (messagesSection.current) {
+				messagesSection.current.scrollTop = messagesSection.current.scrollHeight
+			}
 		})
 		return () => {
 			socket.off('chat_message', (msg: MessageWithAttachments) => {
@@ -54,6 +58,24 @@ const ChatSection = ({
 			})
 		}
 	}, [socket, setChatMessages])
+	const handleLoadMoreMessages = async () => {
+		setIsLoadingMoreMessages(true)
+		const newMessages = await fetchMessages(loggedAccount.id, recieverAccount.id, chatMessages.length)
+		const reversedMessages = newMessages.reverse()
+		if (newMessages.length > 0) {
+			setChatMessages(prevMessages => {
+				const updatedMessages = [...reversedMessages, ...prevMessages]
+				return updatedMessages
+			})
+		}
+		if (newMessages.length === 15) {
+			setIsLoadingMoreMessages(false)
+			setLoadMoreMessages(true)
+		} else {
+			setIsLoadingMoreMessages(false)
+			setLoadMoreMessages(false)
+		}
+	}
 	const messagesFrom = loggedAccount.messagesFrom.filter(message => {
 		if (message.toAccountId === recieverAccount.id) {
 			return message
@@ -101,6 +123,16 @@ const ChatSection = ({
 							<p className={classes.recieverName}>{recieverAccount.name}</p>
 						</div>
 					)}
+					{loadMoreMessages &&
+						(isLoadingMoreMessages ? (
+							<div className={classes.loadMoreMessagesContainer}>
+								<Spinner text="Loading..." />
+							</div>
+						) : (
+							<div className={classes.loadMoreMessagesContainer}>
+								<Button onClick={handleLoadMoreMessages}>Load more messages</Button>
+							</div>
+						))}
 					{chatMessages.map((message, index) => {
 						let isDoubled: boolean
 						if (index > 0 && chatMessages[index - 1].fromAccountId === message.fromAccountId) {

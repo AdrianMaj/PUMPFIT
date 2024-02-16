@@ -75,6 +75,7 @@ See <a href="#usage"><b>Usage</b></a> for more information about the application
 - [![Typescript][Typescript]][Typescript-url]
 - [![Socket.io][Socket.io]][Socket.io-url]
 - [![Prisma][Prisma]][Prisma-url]
+- [![Cloudinary][Cloudinary]][Cloudinary-url]
 - [![Postgres][Postgres]][Postgres-url]
 - [![Vercel][Vercel]][Vercel-url]
 - [![Sass][Sass]][Sass-url]
@@ -122,7 +123,7 @@ This is an example of how to list things you need to use the software and how to
 To unlock the main part of the application - the dashboard, you need to create your own account or log in to any of the following:
 
 | E-mail              | Password       | Account Type |
-| ------------------- | --------       | ------------ |
+| ------------------- | -------------- | ------------ |
 | user@example.com    | pUmPf1TUs3r!   | User         |
 | trainer@example.com | pUmPf1Ttr@1n3r | Trainer      |
 
@@ -233,9 +234,10 @@ Project Link: [https://github.com/AdrianMaj/PUMPFIT](https://github.com/AdrianMa
 [React-url]: https://reactjs.org/
 [Prisma]: https://img.shields.io/badge/Prisma-3982CE?style=for-the-badge&logo=Prisma&logoColor=white
 [Prisma-url]: https://www.prisma.io/
-[Socket.io]: https://img.shields.io/badge/wika
-Socket.io-black?style=for-the-badge&logo=socket.io&badgeColor=010101
+[Socket.io]: https://img.shields.io/badge/Socket.io-black?style=for-the-badge&logo=socket.io&badgeColor=010101
 [Socket.io-url]: https://socket.io/
+[Cloudinary]: https://img.shields.io/badge/Cloudinary-3448c5?style=for-the-badge&logo=cloudinary&badgeColor=3448c5
+[Cloudinary-url]: https://cloudinary.com/
 [Vercel]: https://img.shields.io/badge/vercel-%23000000.svg?style=for-the-badge&logo=vercel&logoColor=white
 [Vercel-url]: https://vercel.com/
 [Postgres]: https://img.shields.io/badge/postgres-%23316192.svg?style=for-the-badge&logo=postgresql&logoColor=white

@@ -110,7 +110,7 @@ const FilterBar = () => {
 						filled
 						style={{
 							width: 'fit-content',
-							fontSize: 'clamp(1.4rem, 1.2041rem + 0.9796vw, 2rem)',
+							fontSize: 'clamp(1.6rem, 1.4041rem + 0.9796vw, 2.2rem)',
 						}}
 						type="submit">
 						Search

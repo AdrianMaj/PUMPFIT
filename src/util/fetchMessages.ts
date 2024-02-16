@@ -1,8 +1,8 @@
 'use server'
 import prisma from '../../lib/prisma'
 
-const fetchInitialMessages = async (fromId: string, toId: string) => {
-	const initialMessages = await prisma.message.findMany({
+const fetchMessages = async (fromId: string, toId: string, skip: number) => {
+	const messages = await prisma.message.findMany({
 		where: {
 			AND: [
 				{ OR: [{ fromAccountId: fromId }, { fromAccountId: toId }] },
@@ -15,9 +15,10 @@ const fetchInitialMessages = async (fromId: string, toId: string) => {
 		orderBy: {
 			createdAt: 'desc',
 		},
+		skip: skip,
 		take: 15,
 	})
-	return initialMessages
+	return messages
 }
 
-export default fetchInitialMessages
+export default fetchMessages
