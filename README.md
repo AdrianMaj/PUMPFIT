@@ -129,6 +129,8 @@ To unlock the main part of the application - the dashboard, you need to create y
 
 ### Creating Account
 
+### Logging in
+
 ### Dashboard
 
 After logging in, you should see a dashboard with information about your account, and a side menu on the left with dashboard functionalities:
@@ -211,7 +213,11 @@ The form looks as follows:
 
 ![Testimonial add form](/images/testimonialForm.png)
 
-<ul></ul>
+After submiting the form, you'll be redirected to the details page, and your testimonial will be added.
+
+![Testimonial added](/images/testimonialAdded.png)
+
+As you can see, "Add testimonial" button was replaced with "Edit your testimonial". From now on you can edit your testimonial using the same form as adding a testimonial.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
