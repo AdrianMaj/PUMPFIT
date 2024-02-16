@@ -127,9 +127,87 @@ To unlock the main part of the application - the dashboard, you need to create y
 | user@example.com    | pUmPf1TUs3r!   | User         |
 | trainer@example.com | pUmPf1Ttr@1n3r | Trainer      |
 
-After logging in, you should see a dashboard with information about your account, and a side menu on the left with dashboard functionalities.
+### Dashboard
 
-<h4>Dashboard allows you:<h4>
+After logging in, you should see a dashboard with information about your account, and a side menu on the left with dashboard functionalities:
+
+![PUMPFIT Dashboard screenshot](/images/dashboard.png)
+
+The menu contains different options depending on the type of account.
+
+<h3>Trainer:</h3>
+
+![Trainer menu options](/images/trainerMenu.png)
+
+- <b>Dashboard</b>
+  - Shows your account information and statistics.
+  - Includes some page shortcuts, and logout button.
+- <b>Messages</b>
+  - Allows you to chat with users who have contacted you.
+  - Chat allows users to view its history, send messages, photos, files and emoji in real time.
+  - It does not allow you to communicate with other trainers, or users who have not contacted you before.
+  - Allows filtering of users.
+- <b>My profile</b>
+  - Allows you to add, edit and delete announcements from the homepage.
+  - Allows you to add a photo that will appear in the announcement, and other information such as description, categories, experience and price.
+  - Allows you to preview your announcement before publishing.
+  - If your announcement is not published, users won't be able to message you!
+- <b>Promote</b>
+  - Shows options for purchasing the promoting, and allows you to contact the administrator by email to purchase the promoting.
+- <b>Account settings</b>
+  - Allows you to upload profile picture, which will be seen in messages.
+  - Allows you to change your name, email and password.
+  - You can delete your account from here.
+
+<h3>User:</h3>
+
+![User menu options](/images/userMenu.png)
+
+- <b>Dashboard</b>
+  - Shows your account information and statistics.
+  - Includes some page shortcuts, and logout button.
+- <b>Messages</b>
+  - Allows you to chat with all trainers over the page, who has published their announcement.
+  - Chat allows users to view its history, send messages, photos, files and emoji in real time.
+  - Allows filtering of trainers.
+- <b>Account settings</b>
+  - Allows you to upload profile picture, which will be seen in messages.
+  - Allows you to change your name, email and password.
+  - You can delete your account from here.
+
+### Our trainers
+
+The "Our trainers" subpage is where all the announcements of trainers who have published them are displayed.
+
+![Our trainers subpage](/images/ourTrainers.png)
+
+On the page, in addition to the list of trainers itself, we also have a bar that allows us to filter trainers' announcements.
+
+Each ad includes a photo, name, description and categories of the trainer. It also includes 2 buttons, one takes you to the trainer's "details" sub-page and the other allows you to contact the trainer.
+
+### Details
+
+The "Details" subpage shows more information about the trainer, and testimonials about him.
+
+![Details subpage](/images/details.png)
+
+Depending on whether you are logged in, and what type of account you have, the site enables different functionalities.
+
+- <b>Not logged-in user</b>
+  - As a not logged-in user, you have the ability to view the announcement, and reviews of the trainer. After pressing the "Message me now" button, you will be asked to log in.
+- <b>Trainer</b>
+  - As a trainer, you have the ability to view the announcement, and reviews of the trainer. The "Message me now" button is invisible to you, as trainers cannot contact other trainers.
+- <b>User</b>
+  - In addition to viewing the announcement, users can add their opinions about the trainer, which will then be visible to everyone in the form of a slider.
+
+To add a testimonial as a user, press the "Add testimonial" button, which will take us to the page responsible for inserting testimonials.
+
+![Testimonials slider](/images/testimonials.png)
+
+On the site there is a form for adding testimonials. We can choose the number of stars, the title and the content of the testimonial.
+The form looks as follows:
+
+![Testimonial add form](/images/testimonialForm.png)
 
 <ul></ul>
 
