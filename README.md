@@ -127,6 +127,8 @@ To unlock the main part of the application - the dashboard, you need to create y
 | user@example.com    | pUmPf1TUs3r!   | User         |
 | trainer@example.com | pUmPf1Ttr@1n3r | Trainer      |
 
+### Creating Account
+
 ### Dashboard
 
 After logging in, you should see a dashboard with information about your account, and a side menu on the left with dashboard functionalities:

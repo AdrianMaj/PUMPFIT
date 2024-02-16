@@ -38,25 +38,17 @@ const TestimonialForm = ({
 }) => {
 	const [isLoading, setIsLoading] = useState(false)
 	const [starValue, setStarValue] = useState(0)
-	const [titleValue, setTitleValue] = useState('')
-	const [messageValue, setMessageValue] = useState('')
 	const router = useRouter()
 	useEffect(() => {
 		if (rating) {
 			setStarValue(rating)
 		}
-		if (title) {
-			setTitleValue(title)
-		}
-		if (message) {
-			setMessageValue(message)
-		}
 	}, [])
 	const form = useForm<z.infer<typeof FormSchema>>({
 		resolver: zodResolver(FormSchema),
 		defaultValues: {
-			title: titleValue,
-			message: messageValue,
+			title: title || '',
+			message: message || '',
 		},
 	})
 
@@ -91,14 +83,8 @@ const TestimonialForm = ({
 							<StarRating value={starValue} setValue={setStarValue} />
 						</div>
 						<form onSubmit={form.handleSubmit(onSubmit)} className={classes.form}>
-							<Input type="text" label="Title" id="title" value={titleValue} error={form.formState.errors.title} />
-							<Input
-								isTextArea
-								label="Message"
-								id="message"
-								value={messageValue}
-								error={form.formState.errors.message}
-							/>
+							<Input type="text" label="Title" id="title" error={form.formState.errors.title} />
+							<Input isTextArea label="Message" id="message" error={form.formState.errors.message} />
 							<Button filled type="submit">
 								Publish testimonial
 							</Button>
