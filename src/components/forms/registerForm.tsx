@@ -98,7 +98,7 @@ const RegisterForm = () => {
 							style={{
 								display: 'flex',
 								flexDirection: 'column',
-								gap: '3em',
+								gap: '1.5em',
 							}}
 							onSubmit={form.handleSubmit(onSubmit)}>
 							<Input type="text" label="Full Name" id="name" error={form.formState.errors.name} />

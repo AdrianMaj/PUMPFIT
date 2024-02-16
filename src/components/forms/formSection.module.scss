@@ -3,13 +3,15 @@
 	position: absolute;
 	top: 50%;
 	left: 50%;
-	transform: translate(-50%, -50%);
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
+	align-items: center;
+	transform: translate(-50%, -50%);
 	padding: 2.5em;
-	width: 85%;
-	height: 90%;
+	width: 85svw;
+	height: 90dvh;
+	overflow-y: auto;
 	background-color: #090909;
 }
 .heading {
@@ -18,8 +20,9 @@
 }
 .header {
 	display: flex;
-	justify-content: flex-start;
-	margin-bottom: 5em;
+	text-align: center;
+	justify-content: center;
+	margin-bottom: 3em;
 }
 .main {
 	width: 100%;
@@ -35,6 +38,17 @@
 	background-position: center;
 	z-index: -2;
 }
+.container {
+	width: 100%;
+	max-height: 85dvh;
+}
+
+@media (min-width: 992px) {
+	.header {
+		text-align: left;
+		justify-content: flex-start;
+	}
+}
 
 @media (min-width: 1200px) {
 	.contentContainer {
@@ -47,7 +61,7 @@
 	}
 	.imgContainer {
 		position: absolute;
-		width: 100svh;
+		width: 100%;
 		height: 100svh;
 		left: 50%;
 	}

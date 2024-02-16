@@ -5,6 +5,8 @@ import Link from 'next/link'
 import { AccountWithMessages } from '@/types/databaseTypes'
 import { Message } from '@prisma/client'
 import resetProfileViews from '@/util/resetProfileViews'
+import LogoutButton from '../ui/logoutButton'
+import LinkButton from '../ui/linkButton'
 
 const DashboardSection = ({ userAccount }: { userAccount: AccountWithMessages }) => {
 	const [newMessages, setNewMessages] = useState<Message[]>([])
@@ -66,9 +68,28 @@ const DashboardSection = ({ userAccount }: { userAccount: AccountWithMessages })
 						<h3>{userAccount.trainer.promoted ? 'Promoted' : 'Not yet promoted'}</h3>
 						<p>Promoted trainers receive 10x more messages than usual!</p>
 					</Link>
-					<div className={`${classes.card} ${classes.colspan}`}>
-						<h3>Shortcuts</h3>
-						<p>logout, main page, trainers</p>
+					<div className={`${classes.card} ${classes.colspan} ${classes.buttonContainer}`}>
+						<LogoutButton
+							whileHover={{
+								backgroundColor: '#a50000',
+							}}
+							className={classes.button}>
+							Logout
+						</LogoutButton>
+						<LinkButton
+							style={{
+								fontSize: 'clamp(1.6rem, 1.3388rem + 1.3061vw, 2.4rem)',
+							}}
+							linked="/">
+							Home
+						</LinkButton>
+						<LinkButton
+							style={{
+								fontSize: 'clamp(1.6rem, 1.3388rem + 1.3061vw, 2.4rem)',
+							}}
+							linked="/trainers">
+							Trainers list
+						</LinkButton>
 					</div>
 				</>
 			) : (

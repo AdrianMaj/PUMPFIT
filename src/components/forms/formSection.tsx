@@ -5,10 +5,12 @@ const FormSection: React.FC<{ children: ReactNode; heading: string }> = ({ child
 	return (
 		<div className={classes.desktopContainer}>
 			<div className={classes.contentContainer}>
-				<header className={classes.header}>
-					<h1 className={classes.heading}>{heading}</h1>
-				</header>
-				<main className={classes.main}>{children}</main>
+				<div className={classes.container}>
+					<header className={classes.header}>
+						<h1 className={classes.heading}>{heading}</h1>
+					</header>
+					<main className={classes.main}>{children}</main>
+				</div>
 			</div>
 			<div className={classes.imgContainer}></div>
 		</div>

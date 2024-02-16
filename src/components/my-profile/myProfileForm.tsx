@@ -85,8 +85,9 @@ const MyProfileForm: React.FC<{ trainerData: TrainerWithAnnouncement }> = ({ tra
 		})
 	}
 	const handleUpdateAnnoucement = async (values: z.infer<typeof FormSchema>) => {
+		setIsUpdating(true)
+		let imageURL: string | undefined
 		if (activeFile && activeFile.type.startsWith('image')) {
-			setIsUpdating(true)
 			const formData = new FormData()
 			formData.append('file', activeFile)
 			formData.append('upload_preset', 'pumpfitannouncements')
@@ -96,25 +97,30 @@ const MyProfileForm: React.FC<{ trainerData: TrainerWithAnnouncement }> = ({ tra
 					body: formData,
 				})
 				const res = await response.json()
-				const data = {
-					photourl: res.secure_url,
-					experience: values.experience,
-					experienceType: values.experienceType,
-					price: values.price,
-					description: values.description,
-					trainerId: trainerData.id,
-					selectedCategories,
-				}
-				const announcementResponse = await updateAnnouncement(data)
-				if (!announcementResponse?.announcement?.success) {
-					setIsUpdating(false)
-					console.log(announcementResponse)
-				} else {
-					setIsUpdating(false)
-				}
+				imageURL = res.secure_url
 			} catch (error) {
 				console.error(error)
 			}
+		}
+		const data = {
+			photourl: imageURL || '',
+			experience: values.experience,
+			experienceType: values.experienceType,
+			price: values.price,
+			description: values.description,
+			trainerId: trainerData.id,
+			selectedCategories,
+		}
+		try {
+			const announcementResponse = await updateAnnouncement(data)
+			if (!announcementResponse?.announcement?.success) {
+				setIsUpdating(false)
+				console.log(announcementResponse)
+			} else {
+				setIsUpdating(false)
+			}
+		} catch (error) {
+			console.error(error)
 		}
 	}
 	const handlePublishing = async () => {

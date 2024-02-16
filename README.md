@@ -121,10 +121,10 @@ This is an example of how to list things you need to use the software and how to
 
 To unlock the main part of the application - the dashboard, you need to create your own account or log in to any of the following:
 
-| E-mail              | Password | Account Type |
-| ------------------- | -------- | ------------ |
-| user@example.com    | zaq1@WSX | User         |
-| trainer@example.com | zaq1@WSX | Trainer      |
+| E-mail              | Password       | Account Type |
+| ------------------- | --------       | ------------ |
+| user@example.com    | pUmPf1TUs3r!   | User         |
+| trainer@example.com | pUmPf1Ttr@1n3r | Trainer      |
 
 After logging in, you should see a dashboard with information about your account, and a side menu on the left with dashboard functionalities.
 

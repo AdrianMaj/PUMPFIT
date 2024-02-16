@@ -35,8 +35,9 @@ const AccountSettingsForm: React.FC<{ accountData: Account }> = ({ accountData }
 		setPhotoUrl(accountData.photo || '')
 	}, [accountData])
 	const handleUpdateProfile = async (values: z.infer<typeof FormSchema>) => {
+		setisLoading(true)
+		let imageURL: string | undefined
 		if (activeFile && activeFile.type.startsWith('image')) {
-			setisLoading(true)
 			const formData = new FormData()
 			formData.append('file', activeFile)
 			formData.append('upload_preset', 'pumpfitavatars')
@@ -46,21 +47,26 @@ const AccountSettingsForm: React.FC<{ accountData: Account }> = ({ accountData }
 					body: formData,
 				})
 				const res = await response.json()
-				const data = {
-					name: values.name,
-					email: values.email,
-					photourl: res.secure_url as string,
-					accountId: accountData.id,
-				}
-				const updateResponse = await updateAccount(data)
-				if (!updateResponse.account?.success) {
-					setisLoading(false)
-				} else {
-					setisLoading(false)
-				}
+				imageURL = res.secure_url
 			} catch (error) {
 				console.error(error)
 			}
+		}
+		const data = {
+			name: values.name,
+			email: values.email,
+			photourl: imageURL || '',
+			accountId: accountData.id,
+		}
+		try {
+			const updateResponse = await updateAccount(data)
+			if (!updateResponse.account?.success) {
+				setisLoading(false)
+			} else {
+				setisLoading(false)
+			}
+		} catch (error) {
+			console.error(error)
 		}
 	}
 

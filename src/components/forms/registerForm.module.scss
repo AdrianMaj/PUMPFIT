@@ -9,6 +9,7 @@
 	border: 1.5px solid transparent;
 	color: white;
 	width: 100%;
+	margin-top: 0.5em;
 	text-align: left;
 	margin-bottom: 2em;
 	cursor: pointer;
@@ -16,5 +17,5 @@
 .form {
 	display: flex;
 	flex-direction: column;
-	gap: 3em;
+	gap: 1.5em;
 }

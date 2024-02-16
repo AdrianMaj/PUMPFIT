@@ -60,6 +60,22 @@ const DashboardMenu: React.FC<{ name: string; isTrainer: boolean }> = ({ name, i
 			opacity: '1',
 			width: '100%',
 			margin: '',
+			pointerEvents: 'auto',
+			transition: { duration: 0.3 },
+		},
+		closed: {
+			opacity: '0',
+			width: '0%',
+			margin: 0,
+			pointerEvents: 'none',
+			transition: { duration: 0.3 },
+		},
+	}
+	const displayVariantsWithoutPointers = {
+		opened: {
+			opacity: '1',
+			width: '100%',
+			margin: '',
 			transition: { duration: 0.3 },
 		},
 		closed: {
@@ -178,7 +194,11 @@ const DashboardMenu: React.FC<{ name: string; isTrainer: boolean }> = ({ name, i
 						/>
 					))}
 				</motion.ul>
-				<motion.p initial={false} variants={displayVariants} animate={animateCondition} className={classes.text}>
+				<motion.p
+					initial={false}
+					variants={displayVariantsWithoutPointers}
+					animate={animateCondition}
+					className={classes.text}>
 					You're logged as <span className={classes.bold}>{name}</span>
 				</motion.p>
 				<LogoutButton
