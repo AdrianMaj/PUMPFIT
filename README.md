@@ -250,7 +250,7 @@ As you can see, "Add testimonial" button was replaced with "Edit your testimonia
     - [x] Last message info
     - [x] Saving chat history
     - [x] Emoji picker
-    - [x] Image upload
+    - [ ] Image upload
     - [x] Message image modal
     - [x] User activity time
     - [x] User activity handling
