@@ -129,11 +129,11 @@ To unlock the main part of the application - the dashboard, you need to create y
 
 ### Creating Account
 
-To be filled.
+Not filled yet.
 
 ### Logging in
 
-To be filled.
+Not filled yet.
 
 ### Dashboard
 
