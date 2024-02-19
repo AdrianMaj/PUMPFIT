@@ -163,6 +163,10 @@ const DashboardMenu: React.FC<{ name: string; isTrainer: boolean }> = ({ name, i
 								margin: 0,
 							},
 						}}
+						initial={{
+							opacity: '0',
+							width: '0',
+						}}
 						animate={animateCondition}
 						width="70%"
 						className={classes.logo}
