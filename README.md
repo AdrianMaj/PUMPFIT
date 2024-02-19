@@ -85,6 +85,8 @@ See <a href="#usage"><b>Usage</b></a> for more information about the application
 
 ## Getting Started
 
+(not filled yet)
+
 This is an example of how you may give instructions on setting up your project locally.
 To get a local copy up and running follow these simple example steps.
 
@@ -128,11 +130,42 @@ To unlock the main part of the application - the dashboard, you need to create y
 
 ### Creating Account
 
-Not filled yet.
+To create your own acconut you have to get to register page, either from homepage, or login page. Then you need to fill out the registration form which looks like this.
+
+![PUMPFIT Register form screenshot](/images/registerForm.png)
+
+After submitting, you will be redirected to the success page, where you will be prompted to send an email confirming the creation of your account. To activate your account, click on the link sent to the email.
+
+![PUMPFIT Register successful screenshot](/images/registerSuccess.png)
+
+After activating your account, you need to log in using the login form, to which you will be automatically redirected after activating your account from your email.
 
 ### Logging in
 
-Not filled yet.
+You will find the login form on the navigation bar of the home page. The form looks similar to the registration form, but contains fewer inputs. To log in, you need to enter into the fields the e-mail and password you selected at registration.
+
+![PUMPFIT Login form screenshot](/images/loginForm.png)
+
+### Password reset
+
+In case you forget your login password, there is an option to reset it. To do this, click on the "Forgot your password?" link in the login form. You will then be redirected to the password recovery form which looks like this:
+
+![PUMPFIT Forgot password form screenshot](/images/forgotPassword.png)
+
+You must provide the email assigned to your account, to which a link will be sent that allows you to change your password.
+After submitting you will see confirmation like this:
+
+![PUMPFIT Reset password form screenshot](/images/resetPassword.png)
+
+Now click on the link sent to the email to create a new password, which would look like this:
+
+![PUMPFIT Reset password email message screenshot](/images/email.png)
+
+After clicking on the link, you will be redirected to a unique page that allows you to set a new password. Enter the new password and submit the form.
+
+![PUMPFIT Reset password form screenshot](/images/resetPasswordForm.png)
+
+After submit you'll be redirected to the homepage, now you can use your new assigned password to log in.
 
 ### Dashboard
 
