@@ -6,6 +6,7 @@
 	cursor: pointer;
 }
 .inputFileContainer {
+	position: relative;
 	display: flex;
 	align-items: center;
 	gap: 0.5em;
@@ -21,4 +22,21 @@
 }
 .inputFileText {
 	font-size: $smallSize;
+}
+.animationEffect {
+	pointer-events: none;
+	top: 0;
+	left: 0;
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.8);
+}
+.closeBtn {
+	pointer-events: none;
+	position: absolute;
+	right: 5px;
+	top: 5px;
+	width: auto;
+	height: 50%;
 }

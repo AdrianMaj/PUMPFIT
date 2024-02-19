@@ -220,26 +220,56 @@ const SendMessageForm = ({
 								{currentFilesList.map(file => {
 									if (file.file.type.startsWith('image/')) {
 										return (
-											<MotionImage
-												className={classes.inputImage}
-												onClick={() => {
-													handleDeleteFile(file.id)
-												}}
-												key={file.id}
-												width={100}
-												height={100}
-												src={file.previewUrl}
-												alt={file.file.name}
-											/>
+											<motion.div whileHover="animate" initial="default" className={classes.imageContainer}>
+												<motion.div
+													variants={{
+														default: {
+															opacity: 0,
+														},
+														animate: {
+															opacity: 1,
+														},
+													}}
+													className={classes.animationEffect}>
+													<svg
+														className={classes.closeBtn}
+														xmlns="http://www.w3.org/2000/svg"
+														width="24"
+														height="24"
+														viewBox="0 0 24 24"
+														stroke-width="1.5"
+														stroke="currentColor"
+														fill="none"
+														stroke-linecap="round"
+														stroke-linejoin="round">
+														<path stroke="none" d="M0 0h24v24H0z" fill="none" />
+														<path d="M18 6l-12 12" />
+														<path d="M6 6l12 12" />
+													</svg>
+												</motion.div>
+												<MotionImage
+													className={classes.inputImage}
+													onClick={() => {
+														handleDeleteFile(file.id)
+													}}
+													key={file.id}
+													width={100}
+													height={100}
+													src={file.previewUrl}
+													alt={file.file.name}
+												/>
+											</motion.div>
 										)
 									} else {
 										return (
-											<FileAttachment
-												fileName={file.file.name}
-												onClick={() => {
-													handleDeleteFile(file.id)
-												}}
-											/>
+											<motion.div whileHover="animate" initial="default" className={classes.fileContainer}>
+												<FileAttachment
+													fileName={file.file.name}
+													onClick={() => {
+														handleDeleteFile(file.id)
+													}}
+												/>
+											</motion.div>
 										)
 									}
 								})}
