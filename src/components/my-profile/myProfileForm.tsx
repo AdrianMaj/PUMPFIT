@@ -10,6 +10,7 @@ import { useEffect, useState, ChangeEvent } from 'react'
 import MultiSelect from '@/components/ui/multiSelect'
 import { handlePublish, handleUnpublish, updateAnnouncement } from '@/util/updateAnnouncement'
 import { Announcement, Testimonial, Trainer } from '@prisma/client'
+import { motion } from 'framer-motion'
 
 type AnnouncementWithTestimonials =
 	| (Announcement & {
@@ -87,7 +88,6 @@ const MyProfileForm: React.FC<{ trainerData: TrainerWithAnnouncement }> = ({ tra
 		setIsUpdating(true)
 		let imageURL: string | undefined
 		if (activeFile && activeFile.type.startsWith('image')) {
-			console.log(activeFile)
 			const formData = new FormData()
 			formData.append('file', activeFile)
 			formData.append('upload_preset', 'pumpfit')
@@ -152,14 +152,24 @@ const MyProfileForm: React.FC<{ trainerData: TrainerWithAnnouncement }> = ({ tra
 		<FormProvider {...form}>
 			<form onSubmit={form.handleSubmit(handleUpdateAnnoucement)} className={classes.form}>
 				<div className={classes.input}>
-					<label htmlFor="photourl" className={classes.fileLabel}>
+					<motion.label whileHover="animate" initial="default" htmlFor="photourl" className={classes.fileLabel}>
 						<p className={classes.fileLabelText}>Announcement Photo</p>
 						{photoUrl ? (
 							<img src={photoUrl} alt="Your profile photo" className={classes.announcementImage} />
 						) : (
 							<div className={classes.fileLabelImagePreview}></div>
 						)}
-					</label>
+						<motion.div
+							className={classes.labelAnimation}
+							variants={{
+								animate: {
+									opacity: 1,
+								},
+								default: {
+									opacity: 0,
+								},
+							}}></motion.div>
+					</motion.label>
 					<input
 						type="file"
 						accept="image/*"

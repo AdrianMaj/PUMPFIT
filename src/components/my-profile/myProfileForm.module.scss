@@ -107,6 +107,33 @@
 		border-width: 1px;
 	}
 }
+.labelAnimation {
+	position: absolute;
+	width: 14em;
+	height: 14em;
+	bottom: 0;
+	background-color: rgba(0, 0, 0, 0.8);
+	&::after {
+		content: '';
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		height: 25%;
+		width: 2px;
+		background-color: #fff;
+	}
+	&::before {
+		content: '';
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		height: 2px;
+		width: 25%;
+		background-color: #fff;
+	}
+}
 
 @media (min-width: 992px) {
 	.priceExperienceContainer {

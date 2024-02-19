@@ -10,6 +10,8 @@ import classes from './accountSettingsForm.module.scss'
 import { updateAccount } from '@/util/updateAccount'
 import DeleteAccountModal, { DeleteAccountModalMethods } from './deleteAccountModal'
 import ChangePasswordModal, { ChangePasswordModalMethods } from './changePasswordModal'
+import LogoutButton from '../ui/logoutButton'
+import { motion } from 'framer-motion'
 
 const FormSchema = z.object({
 	name: z.string().min(1, 'Name is required').max(100),
@@ -88,7 +90,6 @@ const AccountSettingsForm: React.FC<{ accountData: Account }> = ({ accountData }
 			setPhotoUrl(url)
 		}
 	}
-
 	return (
 		<>
 			<ChangePasswordModal id={accountData.id} userPassword={accountData.password} ref={changePasswordModal} />
@@ -96,14 +97,24 @@ const AccountSettingsForm: React.FC<{ accountData: Account }> = ({ accountData }
 			<FormProvider {...form}>
 				<form className={classes.form} onSubmit={form.handleSubmit(handleUpdateProfile)}>
 					<div className={classes.input}>
-						<label htmlFor="photourl" className={classes.fileLabel}>
+						<motion.label whileHover="animate" initial="default" htmlFor="photourl" className={classes.fileLabel}>
 							<p className={classes.fileLabelText}>Profile Photo</p>
 							{photoUrl ? (
 								<img src={photoUrl} alt="Your profile photo" className={classes.announcementImage} />
 							) : (
 								<div className={classes.fileLabelImagePreview}></div>
 							)}
-						</label>
+							<motion.div
+								className={classes.labelAnimation}
+								variants={{
+									animate: {
+										opacity: 1,
+									},
+									default: {
+										opacity: 0,
+									},
+								}}></motion.div>
+						</motion.label>
 						<input
 							type="file"
 							accept="image/*"
@@ -121,6 +132,9 @@ const AccountSettingsForm: React.FC<{ accountData: Account }> = ({ accountData }
 						</p>
 					</div>
 					<div className={classes.buttons}>
+						<LogoutButton whileHover={{ backgroundColor: '#a50000' }} className={classes.logoutBtn}>
+							Logout
+						</LogoutButton>
 						<Button
 							onClick={handleShowDeleteModal}
 							type="button"
