@@ -40,7 +40,7 @@ const AccountSettingsForm: React.FC<{ accountData: Account }> = ({ accountData }
 		if (activeFile && activeFile.type.startsWith('image')) {
 			const formData = new FormData()
 			formData.append('file', activeFile)
-			formData.append('upload_preset', 'pumpfitavatars')
+			formData.append('upload_preset', 'pumpfit')
 			try {
 				const response = await fetch(`https://api.cloudinary.com/v1_1/dcl15uhh0/image/upload`, {
 					method: 'POST',

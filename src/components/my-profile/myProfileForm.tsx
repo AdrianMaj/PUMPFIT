@@ -4,7 +4,6 @@ import { FormProvider, useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import * as z from 'zod'
 import classes from './myProfileForm.module.scss'
-import Link from 'next/link'
 import LinkButton from '@/components/ui/linkButton'
 import Button from '@/components/ui/button'
 import { useEffect, useState, ChangeEvent } from 'react'
@@ -88,9 +87,10 @@ const MyProfileForm: React.FC<{ trainerData: TrainerWithAnnouncement }> = ({ tra
 		setIsUpdating(true)
 		let imageURL: string | undefined
 		if (activeFile && activeFile.type.startsWith('image')) {
+			console.log(activeFile)
 			const formData = new FormData()
 			formData.append('file', activeFile)
-			formData.append('upload_preset', 'pumpfitannouncements')
+			formData.append('upload_preset', 'pumpfit')
 			try {
 				const response = await fetch(`https://api.cloudinary.com/v1_1/dcl15uhh0/image/upload`, {
 					method: 'POST',

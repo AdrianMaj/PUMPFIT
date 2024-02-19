@@ -60,7 +60,7 @@ const DashboardSection = ({ userAccount }: { userAccount: AccountWithMessages })
 						<p>Trainer</p>
 						<ul className={classes.categoryList}>
 							{userAccount.trainer.announcement?.categories.map(category => (
-								<li>{category}</li>
+								<li key={category}>{category}</li>
 							))}
 						</ul>
 					</Link>
