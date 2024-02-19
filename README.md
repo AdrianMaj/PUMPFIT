@@ -50,7 +50,6 @@
     <li><a href="#usage">Usage</a></li>
     <li><a href="#roadmap">Roadmap</a></li>
     <li><a href="#contributing">Contributing</a></li>
-    <!-- <li><a href="#license">License</a></li> -->
     <li><a href="#contact">Contact</a></li>
     <li><a href="#acknowledgments">Acknowledgments</a></li>
   </ol>
@@ -240,7 +239,7 @@ As you can see, "Add testimonial" button was replaced with "Edit your testimonia
   - [x] Credentials authorization
   - [x] Account session
 - [x] Dashboard
-  - [ ] Show stats and info on main dashboard
+  - [x] Show stats and info on main dashboard
   - [x] Change account settings and info
   - [x] Publish an announcement
     - [x] Unpublish an announcement
@@ -250,7 +249,7 @@ As you can see, "Add testimonial" button was replaced with "Edit your testimonia
     - [x] Last message info
     - [x] Saving chat history
     - [x] Emoji picker
-    - [ ] Image upload
+    - [x] Image upload
     - [x] Message image modal
     - [x] User activity time
     - [x] User activity handling

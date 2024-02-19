@@ -84,10 +84,15 @@ const AccountSettingsForm: React.FC<{ accountData: Account }> = ({ accountData }
 	}
 	const handlePhotoChange = (e: ChangeEvent<HTMLInputElement>) => {
 		const file = e.target.files
-		if (file && file[0]) {
+		if (file && file[0] && file[0].size < 10485760) {
 			setActiveFile(file[0])
 			const url = URL.createObjectURL(file[0])
 			setPhotoUrl(url)
+		} else if (file && file[0] && file[0].size > 10485760) {
+			// 10mb
+			alert('File is too big to be uploaded. (Max size is 10 MB)')
+		} else {
+			return
 		}
 	}
 	return (
@@ -122,6 +127,7 @@ const AccountSettingsForm: React.FC<{ accountData: Account }> = ({ accountData }
 							onChange={handlePhotoChange}
 							className={classes.fileInput}
 						/>
+						<p className={classes.inputNote}>Note: You can upload image files up to 10MB.</p>
 					</div>
 					<Input label="Name" id="name" type="text" error={form.formState.errors.name} />
 					<Input label="Email" id="email" type="email" error={form.formState.errors.email} />

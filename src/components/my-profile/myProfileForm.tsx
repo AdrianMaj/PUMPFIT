@@ -141,10 +141,16 @@ const MyProfileForm: React.FC<{ trainerData: TrainerWithAnnouncement }> = ({ tra
 	}
 	const handlePhotoChange = (e: ChangeEvent<HTMLInputElement>) => {
 		const file = e.target.files
-		if (file && file[0]) {
+		if (file && file[0] && file[0].size < 10485760) {
+			//10 MB
 			setActiveFile(file[0])
 			const url = URL.createObjectURL(file[0])
 			setPhotoUrl(url)
+		} else if (file && file[0] && file[0].size > 10485760) {
+			// 10mb
+			alert('File is too big to be uploaded. (Max size is 10 MB)')
+		} else {
+			return
 		}
 	}
 
@@ -177,6 +183,7 @@ const MyProfileForm: React.FC<{ trainerData: TrainerWithAnnouncement }> = ({ tra
 						onChange={handlePhotoChange}
 						className={classes.fileInput}
 					/>
+					<p className={classes.inputNote}>Note: You can upload image files up to 10MB.</p>
 				</div>
 				<div className={classes.priceExperienceContainer}>
 					<div className={classes.container}>

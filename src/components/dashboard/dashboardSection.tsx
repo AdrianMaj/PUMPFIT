@@ -12,6 +12,7 @@ const DashboardSection = ({ userAccount }: { userAccount: AccountWithMessages })
 	const [newMessages, setNewMessages] = useState<Message[]>([])
 	const [contactedPeople, setContactedPeople] = useState<string[]>([])
 	const [profileViews, setProfileViews] = useState<number>(0)
+	const [newTestimonials, setNewTestimonials] = useState<number>(0)
 	useEffect(() => {
 		const filteredMessages = userAccount.messagesTo.filter(message => {
 			return userAccount.lastActive && message.createdAt >= userAccount.lastActive
@@ -29,6 +30,16 @@ const DashboardSection = ({ userAccount }: { userAccount: AccountWithMessages })
 
 		setContactedPeople(uniqueFromAccountIds)
 		setProfileViews(userAccount.trainer?.announcement?.announcementViews || 0)
+
+		if (userAccount.trainer && userAccount.trainer.announcement && userAccount.trainer.announcement.testimonials) {
+			const allTestimonials = userAccount.trainer.announcement.testimonials
+			const newTestimonials = allTestimonials.map(testimonial => {
+				if (userAccount.lastActive) {
+					return testimonial.createdAt >= userAccount.lastActive
+				}
+			})
+			setNewTestimonials(newTestimonials.length)
+		}
 	}, [userAccount])
 
 	const handleResetProfileViews = async () => {
@@ -42,13 +53,13 @@ const DashboardSection = ({ userAccount }: { userAccount: AccountWithMessages })
 		<section className={classes.section}>
 			{userAccount.isTrainer && userAccount.trainer ? (
 				<>
-					<Link href="/dashboard/messages" className={`${classes.card}`}>
+					<Link href={`/details/${userAccount.id}`} className={`${classes.card}`}>
 						<h3>{newMessages.length}</h3>
 						<p>New messages</p>
 					</Link>
 					<Link href="/dashboard/messages" className={`${classes.card}`}>
-						<h3>{contactedPeople.length}</h3>
-						<p>People messaged you when you were offline</p>
+						<h3>{newTestimonials}</h3>
+						<p>New testimonials on your profile.</p>
 					</Link>
 					<div onClick={handleResetProfileViews} className={`${classes.card} ${classes.clickable}`}>
 						<h3>{profileViews}</h3>

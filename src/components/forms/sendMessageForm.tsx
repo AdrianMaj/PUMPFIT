@@ -134,7 +134,7 @@ const SendMessageForm = ({
 				const formData = new FormData()
 				formData.append('file', file)
 				formData.append('upload_preset', 'pumpfit')
-				if (file.type.startsWith('image')) {
+				if (file.type.startsWith('image') && file.size < 10485760) {
 					try {
 						const response = await fetch(`https://api.cloudinary.com/v1_1/dcl15uhh0/image/upload`, {
 							method: 'POST',
@@ -150,7 +150,7 @@ const SendMessageForm = ({
 					} catch (error) {
 						console.error(error)
 					}
-				} else {
+				} else if (!file.type.startsWith('image') && file.size < 10485760) {
 					try {
 						const response = await fetch(`https://api.cloudinary.com/v1_1/dcl15uhh0/raw/upload`, {
 							method: 'POST',
@@ -167,6 +167,8 @@ const SendMessageForm = ({
 					} catch (error) {
 						console.error(error)
 					}
+				} else {
+					alert('File is too big to be uploaded. (Max size is 10 MB)')
 				}
 			}
 			fileURLList.forEach(file =>
