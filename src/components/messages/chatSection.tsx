@@ -53,9 +53,7 @@ const ChatSection = ({
 			}
 		})
 		return () => {
-			socket.off('chat_message', (msg: MessageWithAttachments) => {
-				setChatMessages(prevMessages => [...prevMessages, msg])
-			})
+			socket.off('chat_message')
 		}
 	}, [socket, setChatMessages, chatMessages])
 	const handleLoadMoreMessages = async () => {
