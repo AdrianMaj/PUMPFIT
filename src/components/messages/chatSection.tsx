@@ -50,7 +50,7 @@ const ChatSection = ({
 			setChatMessages(prevMessages => [...prevMessages, msg])
 			if (messagesSection.current) {
 				const lastMessage = messagesSection.current.lastChild as HTMLElement
-				lastMessage.scrollIntoView({ behavior: 'smooth', block: 'end' })
+				lastMessage.scrollIntoView({ behavior: 'smooth', block: 'end', inline: 'end' })
 			}
 		})
 		return () => {
