@@ -177,8 +177,10 @@ const ChatSection = ({
 										{message.text}
 									</p>
 								</div>
-								{message.attachments.length > 0 && (
-									<>
+								{message.attachments.length > 0 &&
+									message.attachments.filter(message => {
+										return message.fileType === 'image'
+									}).length > 0 && (
 										<div
 											className={`${classes.imageContainer} ${
 												message.fromAccountId === loggedAccount.id ? classes.imageSent : classes.imageRecieved
@@ -199,6 +201,11 @@ const ChatSection = ({
 												}
 											})}
 										</div>
+									)}
+								{message.attachments.length > 0 &&
+									message.attachments.filter(message => {
+										return message.fileType !== 'image'
+									}).length > 0 && (
 										<div
 											className={`${classes.documentContainer} ${
 												message.fromAccountId === loggedAccount.id ? classes.documentSent : classes.documentRecieved
@@ -215,8 +222,7 @@ const ChatSection = ({
 												}
 											})}
 										</div>
-									</>
-								)}
+									)}
 							</li>
 						)
 					})}
