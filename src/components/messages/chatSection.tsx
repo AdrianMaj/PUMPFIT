@@ -49,7 +49,8 @@ const ChatSection = ({
 		socket.on('chat_message', (msg: MessageWithAttachments) => {
 			setChatMessages(prevMessages => [...prevMessages, msg])
 			if (messagesSection.current) {
-				messagesSection.current.scrollTop = messagesSection.current.scrollHeight
+				const lastMessage = messagesSection.current.lastChild as HTMLElement
+				lastMessage.scrollIntoView({ behavior: 'smooth', block: 'end' })
 			}
 		})
 		return () => {
