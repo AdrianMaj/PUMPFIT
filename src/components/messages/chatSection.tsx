@@ -57,7 +57,7 @@ const ChatSection = ({
 				setChatMessages(prevMessages => [...prevMessages, msg])
 			})
 		}
-	}, [socket, setChatMessages])
+	}, [socket, setChatMessages, chatMessages])
 	const handleLoadMoreMessages = async () => {
 		setIsLoadingMoreMessages(true)
 		const newMessages = await fetchMessages(loggedAccount.id, recieverAccount.id, chatMessages.length)

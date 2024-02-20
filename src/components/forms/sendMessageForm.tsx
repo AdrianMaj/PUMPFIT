@@ -130,59 +130,61 @@ const SendMessageForm = ({
 			updatedAt: Date
 		}[] = []
 		try {
-			for (const file of filesList) {
-				const formData = new FormData()
-				formData.append('file', file)
-				formData.append('upload_preset', 'pumpfit')
-				if (file.type.startsWith('image') && file.size < 10485760) {
-					try {
-						const response = await fetch(`https://api.cloudinary.com/v1_1/dcl15uhh0/image/upload`, {
-							method: 'POST',
-							body: formData,
-						})
-						const res = await response.json()
-						fileURLList.push({
-							fileURL: res.secure_url,
-							fileType: res.resource_type,
-							fileName: res.original_filename,
-							filePublicId: res.public_id,
-						})
-					} catch (error) {
-						console.error(error)
+			if (filesList.length > 0) {
+				for (const file of filesList) {
+					const formData = new FormData()
+					formData.append('file', file)
+					formData.append('upload_preset', 'pumpfit')
+					if (file.type.startsWith('image') && file.size < 10485760) {
+						try {
+							const response = await fetch(`https://api.cloudinary.com/v1_1/dcl15uhh0/image/upload`, {
+								method: 'POST',
+								body: formData,
+							})
+							const res = await response.json()
+							fileURLList.push({
+								fileURL: res.secure_url,
+								fileType: res.resource_type,
+								fileName: res.original_filename,
+								filePublicId: res.public_id,
+							})
+						} catch (error) {
+							console.error(error)
+						}
+					} else if (!file.type.startsWith('image') && file.size < 10485760) {
+						try {
+							const response = await fetch(`https://api.cloudinary.com/v1_1/dcl15uhh0/raw/upload`, {
+								method: 'POST',
+								body: formData,
+							})
+							const res = await response.json()
+							console.log(res)
+							fileURLList.push({
+								fileURL: res.secure_url,
+								fileType: res.resource_type,
+								fileName: res.original_filename,
+								filePublicId: res.public_id,
+							})
+						} catch (error) {
+							console.error(error)
+						}
+					} else {
+						alert('File is too big to be uploaded. (Max size is 10 MB)')
 					}
-				} else if (!file.type.startsWith('image') && file.size < 10485760) {
-					try {
-						const response = await fetch(`https://api.cloudinary.com/v1_1/dcl15uhh0/raw/upload`, {
-							method: 'POST',
-							body: formData,
-						})
-						const res = await response.json()
-						console.log(res)
-						fileURLList.push({
-							fileURL: res.secure_url,
-							fileType: res.resource_type,
-							fileName: res.original_filename,
-							filePublicId: res.public_id,
-						})
-					} catch (error) {
-						console.error(error)
-					}
-				} else {
-					alert('File is too big to be uploaded. (Max size is 10 MB)')
 				}
+				fileURLList.forEach(file =>
+					tempFiles.push({
+						id: uuidv4(),
+						fileURL: file.fileURL,
+						fileName: file.fileName,
+						filePublicId: file.filePublicId,
+						fileType: file.fileType,
+						messageId,
+						createdAt: new Date(),
+						updatedAt: new Date(),
+					})
+				)
 			}
-			fileURLList.forEach(file =>
-				tempFiles.push({
-					id: uuidv4(),
-					fileURL: file.fileURL,
-					fileName: file.fileName,
-					filePublicId: file.filePublicId,
-					fileType: file.fileType,
-					messageId,
-					createdAt: new Date(),
-					updatedAt: new Date(),
-				})
-			)
 			const tempMessage = {
 				id: messageId,
 				text: values.message,
