@@ -67,9 +67,9 @@ const SendMessageForm = ({
 	const handleDragOver = (e: React.DragEvent) => {
 		e.preventDefault()
 	}
-	const handleDrop = (event: React.DragEvent) => {
-		event.preventDefault()
-		const files = event.dataTransfer.files
+	const handleDrop = (e: React.DragEvent) => {
+		e.preventDefault()
+		const files = e.dataTransfer.files
 		handleFileChange(files)
 	}
 	const handleFileChange = (files: FileList) => {

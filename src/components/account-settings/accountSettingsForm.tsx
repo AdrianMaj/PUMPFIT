@@ -25,6 +25,7 @@ const AccountSettingsForm: React.FC<{ accountData: Account }> = ({ accountData }
 	const [isLoading, setisLoading] = useState(false)
 	const [activeFile, setActiveFile] = useState<File>()
 	const [photoUrl, setPhotoUrl] = useState<string>('')
+	const [isDragging, setIsDragging] = useState(false)
 	const form = useForm<z.infer<typeof FormSchema>>({
 		resolver: zodResolver(FormSchema),
 		defaultValues: {
@@ -83,18 +84,35 @@ const AccountSettingsForm: React.FC<{ accountData: Account }> = ({ accountData }
 		}
 	}
 	const handlePhotoChange = (e: ChangeEvent<HTMLInputElement>) => {
-		const file = e.target.files
-		if (file && file[0] && file[0].size < 10485760) {
-			setActiveFile(file[0])
-			const url = URL.createObjectURL(file[0])
+		const files = e.target.files
+		if (files) {
+			handleUpdatePhoto(files)
+		}
+	}
+	const handleUpdatePhoto = (files: FileList) => {
+		if (files && files[0] && files[0].type.startsWith('image') && files[0].size < 10485760) {
+			//10 MB
+			setActiveFile(files[0])
+			const url = URL.createObjectURL(files[0])
 			setPhotoUrl(url)
-		} else if (file && file[0] && file[0].size > 10485760) {
+		} else if (files && files[0] && files[0].type.startsWith('image') && files[0].size > 10485760) {
 			// 10mb
 			alert('File is too big to be uploaded. (Max size is 10 MB)')
 		} else {
 			return
 		}
 	}
+	const handleDrop = (e: React.DragEvent) => {
+		e.preventDefault()
+		setIsDragging(false)
+		const files = e.dataTransfer.files
+		handleUpdatePhoto(files)
+	}
+	const handleDragover = (e: React.DragEvent) => {
+		e.preventDefault()
+		setIsDragging(true)
+	}
+
 	return (
 		<>
 			<ChangePasswordModal id={accountData.id} userPassword={accountData.password} ref={changePasswordModal} />
@@ -102,7 +120,14 @@ const AccountSettingsForm: React.FC<{ accountData: Account }> = ({ accountData }
 			<FormProvider {...form}>
 				<form className={classes.form} onSubmit={form.handleSubmit(handleUpdateProfile)}>
 					<div className={classes.input}>
-						<motion.label whileHover="animate" initial="default" htmlFor="photourl" className={classes.fileLabel}>
+						<motion.label
+							animate={isDragging ? 'animate' : 'default'}
+							onDrop={handleDrop}
+							onDragOver={handleDragover}
+							whileHover="animate"
+							initial="default"
+							htmlFor="photourl"
+							className={classes.fileLabel}>
 							<p className={classes.fileLabelText}>Profile Photo</p>
 							{photoUrl ? (
 								<img src={photoUrl} alt="Your profile photo" className={classes.announcementImage} />

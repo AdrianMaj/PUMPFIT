@@ -48,6 +48,7 @@ const MyProfileForm: React.FC<{ trainerData: TrainerWithAnnouncement }> = ({ tra
 	const [isUpdating, setIsUpdating] = useState(false)
 	const [activeFile, setActiveFile] = useState<File>()
 	const [photoUrl, setPhotoUrl] = useState<string>('')
+	const [isDragging, setIsDragging] = useState(false)
 	const splittedExperience = trainerData?.announcement?.experience.split(' ') || ''
 	const form = useForm<z.infer<typeof FormSchema>>({
 		resolver: zodResolver(FormSchema),
@@ -139,14 +140,25 @@ const MyProfileForm: React.FC<{ trainerData: TrainerWithAnnouncement }> = ({ tra
 			console.log('Unpublished an announcement')
 		}
 	}
-	const handlePhotoChange = (e: ChangeEvent<HTMLInputElement>) => {
-		const file = e.target.files
-		if (file && file[0] && file[0].size < 10485760) {
+
+	const handleDrop = (e: React.DragEvent) => {
+		e.preventDefault()
+		setIsDragging(false)
+		const files = e.dataTransfer.files
+		handleUpdatePhoto(files)
+	}
+	const handleDragover = (e: React.DragEvent) => {
+		e.preventDefault()
+		setIsDragging(true)
+	}
+
+	const handleUpdatePhoto = (files: FileList) => {
+		if (files && files[0] && files[0].type.startsWith('image') && files[0].size < 10485760) {
 			//10 MB
-			setActiveFile(file[0])
-			const url = URL.createObjectURL(file[0])
+			setActiveFile(files[0])
+			const url = URL.createObjectURL(files[0])
 			setPhotoUrl(url)
-		} else if (file && file[0] && file[0].size > 10485760) {
+		} else if (files && files[0] && files[0].type.startsWith('image') && files[0].size > 10485760) {
 			// 10mb
 			alert('File is too big to be uploaded. (Max size is 10 MB)')
 		} else {
@@ -154,11 +166,25 @@ const MyProfileForm: React.FC<{ trainerData: TrainerWithAnnouncement }> = ({ tra
 		}
 	}
 
+	const handlePhotoChange = (e: ChangeEvent<HTMLInputElement>) => {
+		const files = e.target.files
+		if (files) {
+			handleUpdatePhoto(files)
+		}
+	}
+
 	return (
 		<FormProvider {...form}>
 			<form onSubmit={form.handleSubmit(handleUpdateAnnoucement)} className={classes.form}>
 				<div className={classes.input}>
-					<motion.label whileHover="animate" initial="default" htmlFor="photourl" className={classes.fileLabel}>
+					<motion.label
+						onDragOver={handleDragover}
+						onDrop={handleDrop}
+						whileHover="animate"
+						animate={isDragging ? 'animate' : 'default'}
+						initial="default"
+						htmlFor="photourl"
+						className={classes.fileLabel}>
 						<p className={classes.fileLabelText}>Announcement Photo</p>
 						{photoUrl ? (
 							<img src={photoUrl} alt="Your profile photo" className={classes.announcementImage} />
