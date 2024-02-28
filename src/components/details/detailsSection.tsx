@@ -7,7 +7,6 @@ import { AnnouncementWithTestimonialsAndTrainer } from '@/types/databaseTypes'
 import fetchAccount from '@/util/fetchAccount'
 import SliderContainer from './sliderContainer'
 
-
 const DetailsSection: React.FC<{
 	trainerName: string
 	trainerData: AnnouncementWithTestimonialsAndTrainer
@@ -41,10 +40,6 @@ const DetailsSection: React.FC<{
 				<section className={classes.heroInfo}>
 					<img
 						className={classes.image}
-						// width={0}
-						// height={0}
-						// sizes="100vw"
-						// style={{ width: 'auto', height: 'auto' }}
 						src={trainerData.photo || 'https://i.pinimg.com/originals/b9/f2/19/b9f2193028967077ad84b60a2cced514.jpg'}
 						alt={trainerName}
 					/>
@@ -73,10 +68,6 @@ const DetailsSection: React.FC<{
 					<div className={classes.container}>
 						<section className={classes.descriptionContainer}>
 							<p className={classes.descriptionText}>{trainerData.description}</p>
-						</section>
-						<section className={classes.testimonials}>
-							<SectionHeading>Photos</SectionHeading>
-							<p className={classes.emptySection}>There will be photos in the future...</p>
 						</section>
 						<section className={classes.testimonials}>
 							<SectionHeading>Testimonials</SectionHeading>
