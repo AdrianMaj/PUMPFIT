@@ -11,7 +11,7 @@ const Header = async () => {
 			<div className={classes.header}>
 				<HeaderBackground />
 				<Wrapper>
-					<div className={classes.content}>
+					<div className={classes.header__content}>
 						<header>
 							<Logo width="70%" />
 						</header>

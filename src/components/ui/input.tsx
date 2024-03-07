@@ -4,7 +4,17 @@ import classes from './input.module.scss'
 import { motion } from 'framer-motion'
 import { FieldError, useFormContext } from 'react-hook-form'
 
-const Input: React.FC<{
+const Input = ({
+	type,
+	id,
+	label,
+	error,
+	isTextArea,
+	width,
+	children,
+	noLabel,
+	...props
+}: {
 	type?: string
 	id: string
 	label: string
@@ -14,7 +24,7 @@ const Input: React.FC<{
 	noLabel?: boolean
 	children?: React.ReactNode
 	[x: string]: any
-}> = ({ type, id, label, error, isTextArea, width, children, noLabel, ...props }) => {
+}) => {
 	const { register } = useFormContext()
 	const { onChange, onBlur, name, ref } = register(id)
 

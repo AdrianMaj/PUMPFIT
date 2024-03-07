@@ -1,5 +1,4 @@
 'use client'
-import * as z from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import React from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
@@ -8,16 +7,8 @@ import Input from '../ui/input'
 import classes from './resetPasswordForm.module.scss'
 import Link from 'next/link'
 import { resetPassword } from '@/util/resetPassword'
-
-const FormSchema = z
-	.object({
-		password: z.string().min(1, 'Password is required').min(8, 'Password must have more than 8 characters!'),
-		confirmPassword: z.string().min(1, 'Confirm Password is required!'),
-	})
-	.refine(data => data.password === data.confirmPassword, {
-		path: ['confirmPassword'],
-		message: 'Password do not match',
-	})
+import * as z from 'zod'
+import { FormSchema } from './resetPasswordForm.data'
 
 const ResetPasswordForm = ({ token }: { token: string }) => {
 	const form = useForm<z.infer<typeof FormSchema>>({
@@ -46,9 +37,9 @@ const ResetPasswordForm = ({ token }: { token: string }) => {
 						whileHover={{
 							backgroundColor: '#750000',
 						}}
-						className={classes.button}
+						className={classes.form__button}
 						type="submit">
-						Change password <img src="/arrow-login.svg" alt="Arrow Icon" className={classes.arrow} />
+						Change password <img src="/arrow-login.svg" alt="Arrow Icon" className={classes.form__arrow} />
 					</motion.button>
 				</form>
 			</FormProvider>

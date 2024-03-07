@@ -11,6 +11,7 @@ import MultiSelect from '@/components/ui/multiSelect'
 import { handlePublish, handleUnpublish, updateAnnouncement } from '@/util/updateAnnouncement'
 import { Announcement, Testimonial, Trainer } from '@prisma/client'
 import { motion } from 'framer-motion'
+import { FormSchema } from './myProfileForm.data'
 
 type AnnouncementWithTestimonials =
 	| (Announcement & {
@@ -21,13 +22,6 @@ type TrainerWithAnnouncement = Trainer & {
 	announcement: AnnouncementWithTestimonials
 }
 
-const FormSchema = z.object({
-	photourl: z.any(),
-	experience: z.string(),
-	experienceType: z.string(),
-	price: z.string(),
-	description: z.string(),
-})
 export const CATEGORIES = [
 	'Calisthenics',
 	'Powerlifting',
@@ -47,7 +41,7 @@ const MyProfileForm: React.FC<{ trainerData: TrainerWithAnnouncement }> = ({ tra
 	const [isUnPublishing, setIsUnPublishing] = useState(false)
 	const [isUpdating, setIsUpdating] = useState(false)
 	const [activeFile, setActiveFile] = useState<File>()
-	const [photoUrl, setPhotoUrl] = useState<string>('')
+	const [photoUrl, setPhotoUrl] = useState('')
 	const [isDragging, setIsDragging] = useState(false)
 	const splittedExperience = trainerData?.announcement?.experience.split(' ') || ''
 	const form = useForm<z.infer<typeof FormSchema>>({

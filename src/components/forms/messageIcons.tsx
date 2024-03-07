@@ -24,7 +24,11 @@ const MessageIcons = ({
 	}
 	return (
 		<div className={classes.messageIcons}>
-			<motion.label initial="default" whileHover="hover" className={classes.imageInputLabel} htmlFor="photos">
+			<motion.label
+				initial="default"
+				whileHover="hover"
+				className={classes.messageIcons__imageInputLabel}
+				htmlFor="photos">
 				<motion.svg
 					xmlns="http://www.w3.org/2000/svg"
 					width="24"
@@ -42,7 +46,11 @@ const MessageIcons = ({
 					<path d="M14 14l1 -1c.928 -.893 2.072 -.893 3 0l3 3" />
 				</motion.svg>
 			</motion.label>
-			<motion.label initial="default" whileHover="hover" className={classes.imageInputLabel} htmlFor="files">
+			<motion.label
+				initial="default"
+				whileHover="hover"
+				className={classes.messageIcons__imageInputLabel}
+				htmlFor="files">
 				<motion.svg
 					xmlns="http://www.w3.org/2000/svg"
 					width="24"
@@ -63,7 +71,7 @@ const MessageIcons = ({
 				initial="default"
 				whileHover="hover"
 				animate={emojiIsOpened && 'hover'}
-				className={`${classes.imageInputLabel} ${classes.imageButton}`}>
+				className={classes.messageIcons__imageInputLabelButton}>
 				<motion.svg
 					xmlns="http://www.w3.org/2000/svg"
 					width="24"
@@ -88,13 +96,13 @@ const MessageIcons = ({
 					maxWidth: '110%',
 				}}
 				theme={Theme.DARK}
-				className={classes.emojiPicker}
+				className={classes.messageIcons__emojiPicker}
 				open={emojiIsOpened}
 				onEmojiClick={emoji => handleAddEmoji(emoji)}
 			/>
 			<input
 				accept="image/*,video/*,audio/*"
-				className={classes.imageInput}
+				className={classes.messageIcons__imageInput}
 				onChange={handleFileChange}
 				type="file"
 				id="photos"
@@ -102,7 +110,7 @@ const MessageIcons = ({
 			/>
 			<input
 				accept="text/*,application/*,font/*"
-				className={classes.imageInput}
+				className={classes.messageIcons__imageInput}
 				onChange={handleFileChange}
 				type="file"
 				id="files"

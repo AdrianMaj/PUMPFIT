@@ -10,10 +10,10 @@ const TrainersSection = async () => {
 	const promotedAccounts = await fetchPromoted()
 	return (
 		<section className={classes.section}>
-			<div className={classes.background}></div>
+			<div className={classes.section__background}></div>
 			<Wrapper>
 				<SectionHeading>meet our trainers</SectionHeading>
-				<div className={classes.cardContainer}>
+				<div className={classes.section__cardContainer}>
 					{promotedAccounts.map(account => (
 						<MainCard
 							key={account.id}
@@ -27,8 +27,8 @@ const TrainersSection = async () => {
 						/>
 					))}
 				</div>
-				<div className={classes.attribution}>
-					<p className={classes.attributionText}>Feel motivated? Find the best trainer for you.</p>
+				<div className={classes.section__attribution}>
+					<p className={classes.section__attributionText}>Feel motivated? Find the best trainer for you.</p>
 					<LinkButton linked="/trainers" filled style={{ fontSize: 'clamp(1.4rem, 1.2041rem + 0.9796vw, 2rem)' }}>
 						See all of our trainers
 					</LinkButton>

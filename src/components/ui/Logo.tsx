@@ -4,7 +4,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 
-const Logo: React.FC<{ width?: string; height?: string; [x: string]: any }> = ({ width, height, ...props }) => {
+const Logo = ({ width, height, ...props }: { width?: string; height?: string; [x: string]: any }) => {
 	const MotionImage = motion(Image)
 	return (
 		<Link href="/">

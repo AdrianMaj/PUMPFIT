@@ -4,7 +4,7 @@ import React, { useState } from 'react'
 import classes from './faqElement.module.scss'
 import Image from 'next/image'
 
-const FaqElement: React.FC<{ question: string; children: React.ReactNode }> = ({ question, children }) => {
+const FaqElement = ({ question, children }: { question: string; children: React.ReactNode }) => {
 	const [isOpen, setIsOpen] = useState(false)
 	const MotionImage = motion(Image)
 	const toggleElement = () => {
@@ -13,7 +13,7 @@ const FaqElement: React.FC<{ question: string; children: React.ReactNode }> = ({
 	return (
 		<motion.div>
 			<div className={classes.questionContainer} onClick={toggleElement}>
-				<p className={classes.text}>{question}</p>
+				<p className={classes.questionContainer__text}>{question}</p>
 				<MotionImage
 					src="/arrow.svg"
 					width={0}
@@ -47,7 +47,7 @@ const FaqElement: React.FC<{ question: string; children: React.ReactNode }> = ({
 							initial="hidden"
 							animate="visible"
 							exit="hidden"
-							className={classes.textContainer}>
+							className={classes.answerContainer__text}>
 							{children}
 						</motion.div>
 					</motion.div>

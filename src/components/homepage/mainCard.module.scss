@@ -2,42 +2,42 @@
 .card {
 	display: flex;
 	flex-direction: column;
-	background-color: #080808;
-}
-.image {
-	width: 100%;
-	aspect-ratio: 40/29;
-	filter: brightness(65%);
-	object-fit: cover;
-	object-position: center;
-}
-.textContainer {
-	display: flex;
-	flex-direction: column;
-	height: 100%;
-	padding: 3em;
-}
-.title {
-	font-size: clamp(1.6rem, 1.4041rem + 0.9796vw, 2.2rem);
-	margin-bottom: 1em;
-}
-.list {
-	list-style-type: none;
-	margin-bottom: 2em;
-}
-.listElement {
-	display: flex;
-	align-items: center;
-	margin-bottom: 1.5em;
-}
-.listImage {
-	width: 35px;
-}
-.listText {
-	font-size: clamp(1.4rem, 1.2694rem + 0.6531vw, 1.8rem);
-	width: 80%;
-	margin-left: 0.5em;
-	color: $subtext;
+	background-color: $mainBg;
+	&__image {
+		width: 100%;
+		aspect-ratio: 40/29;
+		filter: brightness(65%);
+		object-fit: cover;
+		object-position: center;
+	}
+	&__textContainer {
+		display: flex;
+		flex-direction: column;
+		height: 100%;
+		padding: 3em;
+	}
+	&__title {
+		font-size: clamp(1.6rem, 1.4041rem + 0.9796vw, 2.2rem);
+		margin-bottom: 1em;
+	}
+	&__list {
+		list-style-type: none;
+		margin-bottom: 2em;
+	}
+	&__listElement {
+		display: flex;
+		align-items: center;
+		margin-bottom: 1.5em;
+	}
+	&__listImage {
+		width: 35px;
+	}
+	&__listText {
+		font-size: clamp(1.4rem, 1.2694rem + 0.6531vw, 1.8rem);
+		width: 80%;
+		margin-left: 0.5em;
+		color: $subtext;
+	}
 }
 @media (min-width: 768px) {
 	.card {

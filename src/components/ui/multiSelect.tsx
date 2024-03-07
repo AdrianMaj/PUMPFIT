@@ -4,13 +4,19 @@ import classes from './multiSelect.module.scss'
 import Image from 'next/image'
 import { motion } from 'framer-motion'
 
-const MultiSelect: React.FC<{
+const MultiSelect = ({
+	addItem,
+	removeItem,
+	items,
+	selectedItems,
+	...props
+}: {
 	addItem: (e: React.MouseEvent<HTMLLIElement>) => void
 	removeItem: (e: React.MouseEvent<HTMLLIElement>) => void
 	items: string[]
 	selectedItems: string[]
 	[x: string]: any
-}> = ({ addItem, removeItem, items, selectedItems, ...props }) => {
+}) => {
 	const [isOpened, setIsOpened] = useState(false)
 	const toggleSelect = () => {
 		setIsOpened(prevState => {
@@ -25,10 +31,10 @@ const MultiSelect: React.FC<{
 				whileFocus={{
 					border: '1px solid #a50000',
 				}}
-				className={classes.selectHeading}
+				className={classes.select__selectHeading}
 				onClick={toggleSelect}>
 				{selectedItems.length >= 1 ? (
-					<ul className={classes.headingList}>
+					<ul className={classes.select__headingList}>
 						{selectedItems.map(item => (
 							<motion.li
 								whileHover={{
@@ -41,7 +47,7 @@ const MultiSelect: React.FC<{
 						))}
 					</ul>
 				) : (
-					<p className={classes.selectText}>Select...</p>
+					<p className={classes.select__selectText}>Select...</p>
 				)}
 				<MotionImage
 					src="/arrow.svg"
@@ -56,8 +62,8 @@ const MultiSelect: React.FC<{
 				/>
 			</motion.div>
 			{isOpened && (
-				<div className={classes.selectOptions}>
-					<ul className={classes.selectList}>
+				<div className={classes.select__selectOptions}>
+					<ul className={classes.select__selectList}>
 						{items.map(item => (
 							<motion.li
 								whileHover={{
@@ -65,7 +71,7 @@ const MultiSelect: React.FC<{
 								}}
 								key={item}
 								onClick={addItem}
-								className={classes.selectListElement}>
+								className={classes.select__selectListElement}>
 								{item}
 							</motion.li>
 						))}

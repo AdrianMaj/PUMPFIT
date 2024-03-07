@@ -1,6 +1,5 @@
 'use client'
 import React, { useEffect, useRef, useState } from 'react'
-import { io } from 'socket.io-client'
 import SendMessageForm from '../forms/sendMessageForm'
 import classes from './chatSection.module.scss'
 import fetchInitialMessages from '@/util/fetchInitialMessages'
@@ -22,7 +21,7 @@ const ChatSection = ({
 	recieverAccount: Account
 }) => {
 	const [chatMessages, setChatMessages] = useState<MessageWithAttachments[]>([])
-	const [currentPhotoUrl, setCurrentPhotoUrl] = useState<string>('')
+	const [currentPhotoUrl, setCurrentPhotoUrl] = useState('')
 	const [loadMoreMessages, setLoadMoreMessages] = useState(false)
 	const [isLoadingMoreMessages, setIsLoadingMoreMessages] = useState(false)
 	const messagesSection = useRef<HTMLUListElement>(null)
@@ -45,6 +44,7 @@ const ChatSection = ({
 		}
 		fetchInitial()
 	}, [])
+
 	useEffect(() => {
 		socket.on('chat_message', (msg: MessageWithAttachments) => {
 			setChatMessages(prevMessages => [...prevMessages, msg])
@@ -57,6 +57,7 @@ const ChatSection = ({
 			socket.off('chat_message')
 		}
 	}, [socket, setChatMessages, chatMessages])
+
 	const handleLoadMoreMessages = async () => {
 		setIsLoadingMoreMessages(true)
 		const newMessages = await fetchMessages(loggedAccount.id, recieverAccount.id, chatMessages.length)

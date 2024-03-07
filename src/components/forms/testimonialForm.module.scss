@@ -14,19 +14,19 @@
 	justify-content: center;
 	gap: 1em;
 	margin: 4em 0;
-}
-.ratingText {
-	font-size: $subtextSize;
-	color: $subtext;
+	&__ratingText {
+		font-size: $subtextSize;
+		color: $subtext;
+	}
 }
 .info {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-}
-.infoText {
-	font-size: $headingSize;
-	font-weight: normal;
+	&__infoText {
+		font-size: $headingSize;
+		font-weight: normal;
+	}
 }
 .arrowReversed {
 	rotate: 180deg;

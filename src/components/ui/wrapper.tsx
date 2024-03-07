@@ -1,7 +1,7 @@
 import React from 'react'
 import classes from './wrapper.module.scss'
 
-const Wrapper: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+const Wrapper = ({ children }: { children: React.ReactNode }) => {
 	return <div className={classes.wrapper}>{children}</div>
 }
 

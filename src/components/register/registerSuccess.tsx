@@ -1,7 +1,6 @@
 'use client'
 import React from 'react'
 import classes from './registerSuccess.module.scss'
-import SectionHeading from '../ui/sectionHeading'
 import { motion } from 'framer-motion'
 import Link from 'next/link'
 

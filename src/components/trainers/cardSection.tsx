@@ -5,7 +5,7 @@ import fetchTrainers, { fetchTrainersWithFilters } from '@/util/fetchTrainers'
 import classes from './cardSection.module.scss'
 import fetchAccount from '@/util/fetchAccount'
 
-const CardSection: React.FC<{ params: { [key: string]: string | undefined } }> = async ({ params }) => {
+const CardSection = async ({ params }: { params: { [key: string]: string | undefined } }) => {
 	let accounts = await fetchTrainers()
 	let loggedAccount = await fetchAccount()
 	if (params && Object.keys(params).length > 0) {

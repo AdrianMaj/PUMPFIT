@@ -35,15 +35,15 @@
 	margin-bottom: 1em;
 }
 .announcementImage {
-	width: 14em;
-	height: 14em;
+	width: 140px;
+	height: 140px;
 	object-fit: cover;
 	object-position: center;
 }
 .fileLabelImagePreview {
 	position: relative;
-	width: 14em;
-	height: 14em;
+	width: 140px;
+	height: 140px;
 	background-color: $secondaryBg;
 	&::after {
 		content: '';
@@ -53,7 +53,7 @@
 		transform: translate(-50%, -50%);
 		height: 25%;
 		width: 2px;
-		background-color: #fff;
+		background-color: $white;
 	}
 	&::before {
 		content: '';
@@ -63,7 +63,7 @@
 		transform: translate(-50%, -50%);
 		height: 2px;
 		width: 25%;
-		background-color: #fff;
+		background-color: $white;
 	}
 }
 .container {
@@ -113,7 +113,7 @@
 	width: 14em;
 	height: 14em;
 	bottom: 0;
-	background-color: rgba(0, 0, 0, 0.8);
+	background-color: $backdrop;
 	&::after {
 		content: '';
 		position: absolute;
@@ -122,7 +122,7 @@
 		transform: translate(-50%, -50%);
 		height: 25%;
 		width: 2px;
-		background-color: #fff;
+		background-color: $white;
 	}
 	&::before {
 		content: '';
@@ -132,7 +132,7 @@
 		transform: translate(-50%, -50%);
 		height: 2px;
 		width: 25%;
-		background-color: #fff;
+		background-color: $white;
 	}
 }
 

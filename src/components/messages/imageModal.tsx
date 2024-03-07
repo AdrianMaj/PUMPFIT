@@ -58,7 +58,7 @@ const ImageModal = forwardRef<ImageModalMethods, ImageModalProps>((props, ref) =
 	return (
 		<>
 			<dialog ref={modal} className={classes.imageModal}>
-				<img className={classes.image} src={props.photoUrl} alt={props.photoUrl} />
+				<img className={classes.imageModal__image} src={props.photoUrl} alt={props.photoUrl} />
 			</dialog>
 			{isOpen && <div className={classes.backdrop}></div>}
 		</>

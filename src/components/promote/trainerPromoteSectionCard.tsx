@@ -3,24 +3,29 @@ import classes from './trainerPromoteSectionCard.module.scss'
 import LinkButton from '../ui/linkButton'
 import Link from 'next/link'
 
-const TrainerPromoteSectionCard: React.FC<{
+const TrainerPromoteSectionCard = ({
+	title,
+	text,
+	buttonText,
+	email,
+}: {
 	title: string
 	text: string
 	buttonText: string
 	email: string
-}> = ({ title, text, buttonText, email }) => {
+}) => {
 	return (
 		<section className={classes.section}>
-			<h3 className={classes.heading}>{title}</h3>
-			<p className={classes.text}>{text}</p>
-			<p className={classes.text}>
+			<h3 className={classes.section__heading}>{title}</h3>
+			<p className={classes.section__text}>{text}</p>
+			<p className={classes.section__text}>
 				Contact us via{' '}
-				<Link className={classes.link} href={`mailto:${email}`}>
+				<Link className={classes.section__link} href={`mailto:${email}`}>
 					{email}
 				</Link>{' '}
 				to purchase.
 			</p>
-			<div className={classes.btnContainer}>
+			<div className={classes.section__btnContainer}>
 				<LinkButton
 					style={{
 						fontSize: '2rem',

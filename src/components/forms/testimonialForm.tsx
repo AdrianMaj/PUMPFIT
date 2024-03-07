@@ -12,11 +12,7 @@ import Button from '../ui/button'
 import StarRating from '../ui/starRating'
 import { addTestimonial } from '@/util/addTestimonial'
 import { useRouter } from 'next/navigation'
-
-const FormSchema = z.object({
-	title: z.string().min(1, 'Title is required'),
-	message: z.string().min(1, 'Title is required').max(350, 'Your testimonial can not be longer than 350 characters.'),
-})
+import { FormSchema } from './testimonialForm.data'
 
 const TestimonialForm = ({
 	trainerId,
@@ -75,10 +71,10 @@ const TestimonialForm = ({
 				) : (
 					<>
 						<div className={classes.info}>
-							<h3 className={classes.infoText}>{trainerName}</h3>
+							<h3 className={classes.info__infoText}>{trainerName}</h3>
 						</div>
 						<div className={classes.rating}>
-							<p className={classes.ratingText}>Rate this trainer</p>
+							<p className={classes.rating__ratingText}>Rate this trainer</p>
 							<StarRating value={starValue} setValue={setStarValue} />
 						</div>
 						<form onSubmit={form.handleSubmit(onSubmit)} className={classes.form}>

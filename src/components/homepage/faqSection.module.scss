@@ -1,11 +1,11 @@
 @use '../variables' as *;
 .section {
 	padding: 8em 2.5em;
-}
-.container {
-	display: flex;
-	flex-direction: column;
-	gap: 1.5em;
+	&__container {
+		display: flex;
+		flex-direction: column;
+		gap: 1.5em;
+	}
 }
 
 @media (min-width: 992px) {

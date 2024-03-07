@@ -9,20 +9,7 @@ import * as z from 'zod'
 import { useRouter } from 'next/navigation'
 import classes from './registerForm.module.scss'
 import Spinner from '../ui/spinner'
-import { signIn } from 'next-auth/react'
-
-const FormSchema = z
-	.object({
-		name: z.string().min(1, 'Name is required!').max(100),
-		email: z.string().min(1, 'Email is required!').email('Invalid email!'),
-		password: z.string().min(1, 'Password is required').min(8, 'Password must have more than 8 characters!'),
-		confirmPassword: z.string().min(1, 'Confirm Password is required!'),
-		isTrainer: z.boolean(),
-	})
-	.refine(data => data.password === data.confirmPassword, {
-		path: ['confirmPassword'],
-		message: 'Password do not match',
-	})
+import { FormSchema } from './registerForm.data'
 
 const RegisterForm = () => {
 	const router = useRouter()
@@ -48,42 +35,34 @@ const RegisterForm = () => {
 	const onSubmit = async (values: z.infer<typeof FormSchema>) => {
 		setIsLoading(true)
 		const isValid = await form.trigger()
-		if (isValid) {
-			const response = await fetch('/api/user', {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json',
-				},
-				body: JSON.stringify({
-					name: values.name,
-					email: values.email,
-					password: values.password,
-					isTrainer: isTrainer,
-				}),
-			})
 
-			if (response.ok) {
-				console.log('Successfully created an account!')
-				router.push('/register/success')
-				// const result = await signIn('credentials', {
-				// 	callbackUrl: '/',
-				// 	email: values.email,
-				// 	password: values.password,
-				// })
-				// if (!result?.ok) {
-				// 	console.error('Unable to log in after register.')
-				// 	setIsLoading(false)
-				// } else {
-				// 	console.log('Success!')
-				// }
-			} else {
-				console.error('Unable to create an account. Please try again later.')
-				setIsLoading(false)
-			}
-		} else {
+		if (!isValid) {
 			console.error('Form validation failed:', form.formState.errors)
 			setIsLoading(false)
+			return
 		}
+
+		const response = await fetch('/api/user', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({
+				name: values.name,
+				email: values.email,
+				password: values.password,
+				isTrainer: isTrainer,
+			}),
+		})
+
+		if (!response.ok) {
+			console.error('Unable to create an account. Please try again later.')
+			setIsLoading(false)
+			return
+		}
+
+		console.log('Successfully created an account!')
+		router.push('/register/success')
 	}
 
 	return (
@@ -94,13 +73,7 @@ const RegisterForm = () => {
 				<>
 					<Switch layoutId="register" state={isTrainer} stateChanger={trainerToggle}></Switch>
 					<FormProvider {...form}>
-						<form
-							style={{
-								display: 'flex',
-								flexDirection: 'column',
-								gap: '1.5em',
-							}}
-							onSubmit={form.handleSubmit(onSubmit)}>
+						<form className={classes.form} onSubmit={form.handleSubmit(onSubmit)}>
 							<Input type="text" label="Full Name" id="name" error={form.formState.errors.name} />
 							<Input type="email" label="Email Address" id="email" error={form.formState.errors.email} />
 							<Input type="password" label="Password" id="password" error={form.formState.errors.password} />
@@ -114,9 +87,9 @@ const RegisterForm = () => {
 								whileHover={{
 									backgroundColor: '#750000',
 								}}
-								className={classes.button}
+								className={classes.form__button}
 								type="submit">
-								Create your account <img src="/arrow-login.svg" alt="Arrow Icon" className={classes.arrow} />
+								Create your account <img src="/arrow-login.svg" alt="Arrow Icon" />
 							</motion.button>
 						</form>
 					</FormProvider>

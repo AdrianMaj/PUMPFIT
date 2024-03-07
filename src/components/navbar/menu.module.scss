@@ -1,4 +1,14 @@
 @use '../variables' as *;
+.shadow {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	min-height: 100svh;
+	height: 100%;
+	z-index: 1;
+	background-color: $backdrop;
+}
 .menu {
 	display: block;
 	position: absolute;
@@ -11,66 +21,56 @@
 	z-index: 2;
 	text-align: right;
 	overflow: hidden;
-	background-color: #0f0f0f;
-}
-.mobile {
-	rotate: 120deg;
-}
-.shadow {
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 100%;
-	min-height: 100svh;
-	height: 100%;
-	z-index: 1;
-	background-color: #0f0f0f50;
-}
-.listElement {
-	margin-bottom: 3em;
-}
-.listElementButton {
-	width: 100%;
-	a {
-		font-size: 1.8rem;
+	background-color: $secondaryBg;
+	&__mobile {
+		rotate: 120deg;
 	}
-}
-.margin {
-	margin-top: auto;
-}
-.button {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	padding: 0.8em;
-	width: 100%;
-	cursor: pointer;
-}
-.filledButton {
-	margin-top: auto;
-	background-color: $mainColor;
-	border: 1.5px solid transparent;
-}
-.textButton {
-	background-color: transparent;
-	border: 1.5px solid $mainColor;
-}
-.link {
-	text-decoration: none;
-	color: #fff;
-	font-size: 2rem;
-}
-.list {
-	height: 100%;
-	list-style-type: none;
-	display: flex;
-	flex-direction: column;
-	align-items: flex-end;
-	gap: 2em;
+	&__listElement {
+		margin-bottom: 3em;
+	}
+	&__listElementButton {
+		width: 100%;
+		a {
+			font-size: 1.8rem;
+		}
+	}
+	&__margin {
+		margin-top: auto;
+	}
+	&__button {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		padding: 0.8em;
+		width: 100%;
+		cursor: pointer;
+	}
+	&__filledButton {
+		margin-top: auto;
+		background-color: $mainColor;
+		border: 1.5px solid transparent;
+	}
+	&__textButton {
+		background-color: transparent;
+		border: 1.5px solid $mainColor;
+	}
+	&__link {
+		text-decoration: none;
+		color: $white;
+		font-size: 2rem;
+	}
+	&__list {
+		height: 100%;
+		list-style-type: none;
+		display: flex;
+		flex-direction: column;
+		align-items: flex-end;
+		gap: 2em;
+	}
 }
 
 @media (min-width: 992px) {
-	.menuBtn {
+	.shadow {
 		display: none;
 	}
 	.menu {
@@ -82,33 +82,33 @@
 		justify-content: flex-end;
 		background-color: transparent;
 		padding: 0;
-	}
-	.shadow {
-		display: none;
-	}
-	.list {
-		flex-direction: row;
-		align-items: center;
-		width: fit-content;
-		gap: 3em;
-		opacity: 1 !important;
-	}
-	.button {
-		width: auto;
-	}
-	.filledButton {
-		margin-top: 0;
-	}
-	.margin {
-		margin-top: 0;
-	}
-	.link {
-		text-wrap: nowrap;
-	}
-	.listElement {
-		margin-bottom: 0;
-	}
-	.button {
-		padding: 0.8em 1.2em;
+		&__menuBtn {
+			display: none;
+		}
+		&__list {
+			flex-direction: row;
+			align-items: center;
+			width: fit-content;
+			gap: 3em;
+			opacity: 1 !important;
+		}
+		&__button {
+			width: auto;
+		}
+		&__filledButton {
+			margin-top: 0;
+		}
+		&__margin {
+			margin-top: 0;
+		}
+		&__link {
+			text-wrap: nowrap;
+		}
+		&__listElement {
+			margin-bottom: 0;
+		}
+		&__button {
+			padding: 0.8em 1.2em;
+		}
 	}
 }

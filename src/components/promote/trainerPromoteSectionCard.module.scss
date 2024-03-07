@@ -4,28 +4,28 @@
 	background-color: $secondaryBg;
 	width: 100%;
 	margin-bottom: 4em;
-}
-.heading {
-	font-size: $headingSize;
-	color: #fff;
-	margin-bottom: 1em;
-}
-.text {
-	font-size: $subtextSize;
-	color: $subtext;
-	margin-bottom: 1em;
-}
-.link {
-	font-size: $subtextSize;
-	color: $subtext;
-	transition: color 0.3s;
-	&:hover {
-		color: #fff;
+	&__heading {
+		font-size: $headingSize;
+		color: $white;
+		margin-bottom: 1em;
 	}
-}
-.btnContainer {
-	width: 100%;
-	display: flex;
-	justify-content: flex-end;
-	margin-top: 2em;
+	&__text {
+		font-size: $subtextSize;
+		color: $subtext;
+		margin-bottom: 1em;
+	}
+	&__link {
+		font-size: $subtextSize;
+		color: $subtext;
+		transition: color 0.3s;
+		&:hover {
+			color: $white;
+		}
+	}
+	&__btnContainer {
+		width: 100%;
+		display: flex;
+		justify-content: flex-end;
+		margin-top: 2em;
+	}
 }

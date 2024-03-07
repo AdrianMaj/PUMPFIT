@@ -1,10 +1,9 @@
 'use client'
-import React, { Fragment, useState } from 'react'
+import React, { useState } from 'react'
 import SectionHeading from '../ui/sectionHeading'
 import classes from './faqSection.module.scss'
 import FaqElement from './faqElement'
-import { AnimatePresence, motion } from 'framer-motion'
-import Link from 'next/link'
+import { AnimatePresence } from 'framer-motion'
 import Wrapper from '../ui/wrapper'
 import Switch from '../ui/switch'
 
@@ -125,7 +124,7 @@ const FaqSection = () => {
 				<Switch layoutId="faq" state={questions} stateChanger={changeQuestions} />
 				<AnimatePresence>
 					{questions === true ? (
-						<div className={classes.container}>
+						<div className={classes.section__container}>
 							{trainerQuestions.map(question => (
 								<FaqElement key={question.question} question={question.question}>
 									{question.answer}
@@ -133,7 +132,7 @@ const FaqSection = () => {
 							))}
 						</div>
 					) : (
-						<div className={classes.container}>
+						<div className={classes.section__container}>
 							{userQuestions.map(question => (
 								<FaqElement key={question.question} question={question.question}>
 									{question.answer}

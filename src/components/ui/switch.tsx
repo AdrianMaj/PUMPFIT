@@ -2,11 +2,7 @@ import React from 'react'
 import classes from './switch.module.scss'
 import { motion } from 'framer-motion'
 
-const Switch: React.FC<{ stateChanger: () => void; state: boolean; layoutId: string }> = ({
-	stateChanger,
-	state,
-	layoutId,
-}) => {
+const Switch = ({ stateChanger, state, layoutId }: { stateChanger: () => void; state: boolean; layoutId: string }) => {
 	return (
 		<div className={classes.buttons}>
 			<motion.button

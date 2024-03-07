@@ -7,13 +7,7 @@
 	left: 0;
 	top: 0;
 	z-index: 1000;
-	background-color: rgba(0, 0, 0, 0.8);
-}
-.image {
-	max-width: 80svh;
-	max-height: 80dvh;
-	object-fit: contain;
-	object-position: center;
+	background-color: $backdrop;
 }
 .imageModal {
 	position: absolute;
@@ -26,5 +20,11 @@
 	z-index: 2000;
 	&::backdrop {
 		display: none;
+	}
+	&__image {
+		max-width: 80svh;
+		max-height: 80dvh;
+		object-fit: contain;
+		object-position: center;
 	}
 }

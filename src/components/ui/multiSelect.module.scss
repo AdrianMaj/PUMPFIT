@@ -1,50 +1,50 @@
 @use '../variables' as *;
 .select {
 	position: relative;
-}
-.selectOptions {
-	position: absolute;
-	width: 100%;
-	height: 20svh;
-	overflow-y: scroll;
-	background-color: $secondaryBg;
-	z-index: 15;
-}
-.selectHeading {
-	display: flex;
-	justify-content: space-between;
-	background-color: $secondaryBg;
-	padding: 0.75em;
-	border: 1px solid transparent;
-	font-size: clamp(1.6rem, 1.4041rem + 0.9796vw, 2.2rem);
-	cursor: pointer;
-}
-.selectText {
-	font-size: clamp(1.6rem, 1.4041rem + 0.9796vw, 2.2rem);
-	color: $subtext;
-}
-.selectList {
-	list-style-type: none;
-	display: flex;
-	flex-direction: column;
-	gap: 0.5em;
-	font-size: clamp(1.6rem, 1.4041rem + 0.9796vw, 2.2rem);
-}
-.selectListElement {
-	font-size: $subtextSize;
-	color: $subtext;
-	cursor: pointer;
-	padding: 0.5em 1em;
-}
-.headingList {
-	list-style-type: none;
-	display: flex;
-	flex-wrap: wrap;
-	gap: 1em;
-	li {
-		font-size: $subtextSize;
-		background-color: $mainBg;
-		padding: 0.5em;
+	&__selectOptions {
+		position: absolute;
+		width: 100%;
+		height: 20svh;
+		overflow-y: scroll;
+		background-color: $secondaryBg;
+		z-index: 15;
+	}
+	&__selectHeading {
+		display: flex;
+		justify-content: space-between;
+		background-color: $secondaryBg;
+		padding: 0.75em;
+		border: 1px solid transparent;
+		font-size: clamp(1.6rem, 1.4041rem + 0.9796vw, 2.2rem);
 		cursor: pointer;
+	}
+	&__selectText {
+		font-size: clamp(1.6rem, 1.4041rem + 0.9796vw, 2.2rem);
+		color: $subtext;
+	}
+	&__selectList {
+		list-style-type: none;
+		display: flex;
+		flex-direction: column;
+		gap: 0.5em;
+		font-size: clamp(1.6rem, 1.4041rem + 0.9796vw, 2.2rem);
+	}
+	&__selectListElement {
+		font-size: $subtextSize;
+		color: $subtext;
+		cursor: pointer;
+		padding: 0.5em 1em;
+	}
+	&__headingList {
+		list-style-type: none;
+		display: flex;
+		flex-wrap: wrap;
+		gap: 1em;
+		li {
+			font-size: $subtextSize;
+			background-color: $mainBg;
+			padding: 0.5em;
+			cursor: pointer;
+		}
 	}
 }

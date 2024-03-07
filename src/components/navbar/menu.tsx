@@ -5,11 +5,10 @@ import React, { useEffect, useState } from 'react'
 import MenuButton from './menuButton'
 import classes from './menu.module.scss'
 import Link from 'next/link'
-import { Session } from 'next-auth'
 import LogoutButton from '../ui/logoutButton'
 import { Account } from '@prisma/client'
 
-const Menu: React.FC<{ account: Account | undefined | null }> = ({ account }) => {
+const Menu = ({ account }: { account: Account | undefined | null }) => {
 	const [isOpen, setIsOpen] = useState(false)
 	const [isLogged, setIsLogged] = useState(false)
 	const isMobile = useMediaQuery({ query: '(max-width: 991px)' })
@@ -74,26 +73,26 @@ const Menu: React.FC<{ account: Account | undefined | null }> = ({ account }) =>
 					},
 				}}
 				animate={variants}>
-				<motion.ul initial={false} variants={container} animate={variants} className={classes.list}>
-					<motion.li initial={false} className={classes.listElement} variants={item} animate={variants}>
-						<Link className={classes.link} href="/trainers">
+				<motion.ul initial={false} variants={container} animate={variants} className={classes.menu__list}>
+					<motion.li initial={false} className={classes.menu__listElement} variants={item} animate={variants}>
+						<Link className={classes.menu__link} href="/trainers">
 							Our trainers
 						</Link>
 					</motion.li>
-					<motion.li initial={false} className={classes.listElement} variants={item} animate={variants}>
-						<Link className={classes.link} href="/dashboard">
+					<motion.li initial={false} className={classes.menu__listElement} variants={item} animate={variants}>
+						<Link className={classes.menu__link} href="/dashboard">
 							Control Panel
 						</Link>
 					</motion.li>
 					{isLogged ? (
 						<motion.li
 							initial={false}
-							className={`${classes.listElementButton} ${classes.margin}`}
+							className={`${classes.menu__listElementButton} ${classes.menu__margin}`}
 							variants={item}
 							animate={variants}>
 							<LogoutButton
 								initial={false}
-								className={`${classes.link} ${classes.button} ${classes.textButton}`}
+								className={`${classes.menu__link} ${classes.menu__button} ${classes.menu__textButton}`}
 								whileHover={{
 									backgroundColor: '#a50000',
 								}}>
@@ -104,24 +103,28 @@ const Menu: React.FC<{ account: Account | undefined | null }> = ({ account }) =>
 						<>
 							<motion.li
 								initial={false}
-								className={`${classes.listElementButton} ${classes.margin}`}
+								className={`${classes.menu__listElementButton} ${classes.menu__margin}`}
 								variants={item}
 								animate={variants}>
 								<MotionLink
 									whileHover={{
 										backgroundColor: '#750000',
 									}}
-									className={`${classes.link} ${classes.button} ${classes.filledButton}`}
+									className={`${classes.menu__link} ${classes.menu__button} ${classes.menu__filledButton}`}
 									href="/login">
 									Login
 								</MotionLink>
 							</motion.li>
-							<motion.li initial={false} className={`${classes.listElementButton}`} variants={item} animate={variants}>
+							<motion.li
+								initial={false}
+								className={`${classes.menu__listElementButton}`}
+								variants={item}
+								animate={variants}>
 								<MotionLink
 									whileHover={{
 										backgroundColor: '#a50000',
 									}}
-									className={`${classes.link} ${classes.button} ${classes.textButton}`}
+									className={`${classes.menu__link} ${classes.menu__button} ${classes.menu__textButton}`}
 									href="/register">
 									Register
 								</MotionLink>

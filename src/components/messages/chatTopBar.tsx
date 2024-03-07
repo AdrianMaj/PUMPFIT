@@ -55,20 +55,22 @@ const ChatTopBar = ({
 	return (
 		<div className={classes.bar}>
 			{!isSmall && (
-				<MotionLink initial="initial" whileHover="animate" href="/dashboard/messages" className={classes.link}>
-					<img src="/arrow-login.svg" className={classes.arrow} />
+				<MotionLink initial="initial" whileHover="animate" href="/dashboard/messages" className={classes.bar__link}>
+					<img src="/arrow-login.svg" className={classes.bar__arrow} />
 					{!isMobile && (
-						<motion.p variants={variants} className={classes.barText}>
+						<motion.p variants={variants} className={classes.bar__text}>
 							Go back
 						</motion.p>
 					)}
 				</MotionLink>
 			)}
-			<div className={classes.userInfo}>
-				<img className={classes.image} src={photoUrl}></img>
+			<div className={classes.bar__userInfo}>
+				<img className={classes.bar__image} src={photoUrl}></img>
 				<div>
-					<p className={classes.userInfoName}>{userName}</p>
-					<p className={classes.userInfoIndicator}>{currentlyActive ? 'Active now' : `Active ${activeTime} ago.`}</p>
+					<p className={classes.bar__userInfoName}>{userName}</p>
+					<p className={classes.bar__userInfoIndicator}>
+						{currentlyActive ? 'Active now' : `Active ${activeTime} ago.`}
+					</p>
 				</div>
 			</div>
 		</div>

@@ -6,18 +6,18 @@
 .card {
 	width: 100%;
 	background-color: #0f0f0f;
-}
-.image {
-	width: 100%;
-	aspect-ratio: 4/3;
-	object-fit: cover;
-	object-position: left;
-}
-.text {
-	padding: 2em;
-	font-size: $subtextSize;
-	color: $subtext;
-	line-height: 2em;
+	&__image {
+		width: 100%;
+		aspect-ratio: 4/3;
+		object-fit: cover;
+		object-position: left;
+	}
+	&__text {
+		padding: 2em;
+		font-size: $subtextSize;
+		color: $subtext;
+		line-height: 2em;
+	}
 }
 @media (min-width: 992px) {
 	.about {
@@ -27,12 +27,12 @@
 	.card {
 		display: flex;
 		flex-direction: row-reverse;
-	}
-	.image {
-		width: 50%;
-	}
-	.text {
-		padding: 3em;
-		width: 50%;
+		&__image {
+			width: 50%;
+		}
+		&__text {
+			padding: 3em;
+			width: 50%;
+		}
 	}
 }

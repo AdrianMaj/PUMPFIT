@@ -4,7 +4,16 @@ import classes from './trainerCard.module.scss'
 import Image from 'next/image'
 import LinkButton from '../ui/linkButton'
 
-const TrainerCard: React.FC<{
+const TrainerCard = ({
+	name,
+	categories,
+	experience,
+	description,
+	price,
+	photo,
+	id,
+	isTrainerLogged,
+}: {
 	name: string
 	categories: string[]
 	experience: string
@@ -13,22 +22,14 @@ const TrainerCard: React.FC<{
 	photo: string
 	id: string
 	isTrainerLogged: boolean | undefined
-}> = ({ name, categories, experience, description, price, photo, id, isTrainerLogged }) => {
+}) => {
 	return (
 		<div className={classes.card}>
-			<img
-				// width={0}
-				// height={0}
-				// sizes="100vw"
-				// style={{ width: 'auto', height: 'auto' }}
-				src={photo}
-				alt={name}
-				className={classes.photo}
-			/>
-			<div className={classes.textContainer}>
-				<div className={classes.titleContainer}>
-					<p className={classes.name}>{name}</p>
-					<p className={classes.experience}>
+			<img src={photo} alt={name} className={classes.card__photo} />
+			<div className={classes.card__textContainer}>
+				<div className={classes.card__titleContainer}>
+					<p className={classes.card__name}>{name}</p>
+					<p className={classes.card__experience}>
 						<Image
 							width={0}
 							height={0}
@@ -40,18 +41,18 @@ const TrainerCard: React.FC<{
 						{experience} experience
 					</p>
 				</div>
-				<ul className={classes.categories}>
+				<ul className={classes.card__categories}>
 					{categories &&
 						categories.map(category => (
-							<li key={category} className={classes.category}>
+							<li key={category} className={classes.card__category}>
 								{category}
 							</li>
 						))}
 				</ul>
-				<p className={classes.description}>{description}</p>
-				<div className={classes.bottomContainer}>
-					<p className={classes.price}>From ${price} / hour</p>
-					<div className={classes.buttons}>
+				<p className={classes.card__description}>{description}</p>
+				<div className={classes.card__bottomContainer}>
+					<p className={classes.card__price}>From ${price} / hour</p>
+					<div className={classes.card__buttons}>
 						<LinkButton fontSize="clamp(1.4rem, 1.2041rem + 0.9796vw, 2rem)" linked={`/details/${id}`}>
 							See more
 						</LinkButton>

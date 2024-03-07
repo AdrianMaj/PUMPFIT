@@ -7,7 +7,7 @@ import HeroTextSection from './heroTextSection'
 const HeroSection = () => {
 	return (
 		<section className={classes.main}>
-			<div className={classes.heroImg}></div>
+			<div className={classes.main__heroImg}></div>
 			<Wrapper>
 				<HeroTextSection />
 			</Wrapper>

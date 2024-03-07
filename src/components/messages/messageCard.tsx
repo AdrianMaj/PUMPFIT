@@ -71,32 +71,28 @@ const MessageCard = ({
 	return (
 		<div onClick={handleMessageTest} className={classes.card}>
 			<img
-				className={classes.image}
-				// width={0}
-				// height={0}
-				// sizes="100vw"
-				// style={{ width: 'auto', height: 'auto' }}
+				className={classes.card__image}
 				src={messagedAccount.photo || 'https://i.pinimg.com/originals/b9/f2/19/b9f2193028967077ad84b60a2cced514.jpg'}
 				alt={messagedAccount.name}
 			/>
-			<div className={classes.cardText}>
-				<div className={classes.activeContainer}>
-					<p className={classes.activeTime}>
+			<div className={classes.card__cardText}>
+				<div className={classes.card__activeContainer}>
+					<p className={classes.card__activeTime}>
 						{messagedAccount.currentlyActive ? 'Active now' : `Active ${activeTime} ago.`}
 					</p>
 					<div
-						className={`${classes.activeIndicator} ${
-							!messagedAccount.currentlyActive && classes.unactiveIndicator
+						className={`${classes.card__activeIndicator} ${
+							!messagedAccount.currentlyActive && classes.card__unactiveIndicator
 						}`}></div>
 				</div>
-				<p className={classes.cardTitle}>{messagedAccount.name}</p>
+				<p className={classes.card__cardTitle}>{messagedAccount.name}</p>
 				{lastMessage ? (
 					<>
-						<p className={classes.cardMessage}>
+						<p className={classes.card__cardMessage}>
 							{lastMessage.fromAccountId === accountId ? 'You: ' : messagedAccount.name + ': '}
 							{lastMessage.text}
 						</p>
-						<p className={classes.cardTime}>{time}</p>
+						<p className={classes.card__cardTime}>{time}</p>
 					</>
 				) : (
 					''

@@ -8,7 +8,6 @@ import Input from '../ui/input'
 import MultiSelect from '../ui/multiSelect'
 import { CATEGORIES } from '../my-profile/myProfileForm'
 import Button from '../ui/button'
-import { fetchTrainersWithFilters } from '@/util/fetchTrainers'
 import { useSearchParams, usePathname, useRouter } from 'next/navigation'
 
 const FormSchema = z.object({
@@ -98,8 +97,8 @@ const FilterBar = () => {
 
 	return (
 		<FormProvider {...form}>
-			<form className={classes.form} onSubmit={form.handleSubmit(onSubmit)}>
-				<div className={classes.searchRow}>
+			<form className={classes.form__form} onSubmit={form.handleSubmit(onSubmit)}>
+				<div className={classes.form__searchRow}>
 					<Input
 						type="text"
 						id="searchTerm"
@@ -116,21 +115,21 @@ const FilterBar = () => {
 						Search
 					</Button>
 				</div>
-				<div className={classes.checkboxContainer}>
-					<label className={classes.checkboxLabel} htmlFor="checkbox">
+				<div className={classes.form__checkboxContainer}>
+					<label className={classes.form__checkboxLabel} htmlFor="checkbox">
 						Search also in description
 					</label>
 					<input
 						onClick={toggleCheckbox}
-						className={`${classes.checkboxInput} ${checkbox ? classes.checked : ''}`}
+						className={`${classes.form__checkboxInput} ${checkbox ? classes.form__checked : ''}`}
 						type="checkbox"
 						name="checkbox"
 						id="checkbox"
 					/>
 				</div>
-				<p className={classes.filterText}>Filters</p>
-				<div className={classes.filterRow}>
-					<div className={classes.filterPriceTags}>
+				<p className={classes.form__filterText}>Filters</p>
+				<div className={classes.form__filterRow}>
+					<div className={classes.form__filterPriceTags}>
 						<Input
 							width="fit-content"
 							type="number"

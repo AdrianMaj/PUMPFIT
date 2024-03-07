@@ -5,7 +5,13 @@ import classes from './dashboardListElement.module.scss'
 import { motion } from 'framer-motion'
 import { usePathname } from 'next/navigation'
 
-const DashboardListElement: React.FC<{
+const DashboardListElement = ({
+	text,
+	icon,
+	link,
+	variants,
+	animate,
+}: {
 	text: string
 	icon: string
 	link: string
@@ -19,7 +25,7 @@ const DashboardListElement: React.FC<{
 		}
 	}
 	animate: 'opened' | 'closed'
-}> = ({ text, icon, link, variants, animate }) => {
+}) => {
 	const [active, setActive] = useState(false)
 	const pathName = usePathname()
 	useEffect(() => {
@@ -42,7 +48,7 @@ const DashboardListElement: React.FC<{
 						justifyContent: 'center',
 					},
 				}}
-				className={classes.listItem}>
+				className={classes.link__listItem}>
 				<motion.div
 					animate={animate}
 					variants={{
@@ -56,10 +62,10 @@ const DashboardListElement: React.FC<{
 						},
 					}}
 					layoutId="activeIndicator"
-					className={classes.activeIndicator}
+					className={classes.link__activeIndicator}
 				/>
 				<Image width={0} height={0} sizes="100vw" style={{ width: 'auto', height: 'auto' }} alt={text} src={icon} />
-				<motion.p initial={false} variants={variants} animate={animate} className={classes.text}>
+				<motion.p initial={false} variants={variants} animate={animate} className={classes.link__text}>
 					{text}
 				</motion.p>
 			</motion.li>

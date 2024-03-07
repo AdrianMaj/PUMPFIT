@@ -11,8 +11,10 @@ const HeroTextSection = () => {
 			animate={{ translateX: '0' }}
 			transition={{ duration: 0.7 }}
 			className={classes.container}>
-			<h1 className={classes.heading}>Your Fitness Journey Starts Here.</h1>
-			<p className={classes.subtext}>Unleash the best version of yourself with our dedicated personal trainers.</p>
+			<h1 className={classes.container__heading}>Your Fitness Journey Starts Here.</h1>
+			<p className={classes.container__subtext}>
+				Unleash the best version of yourself with our dedicated personal trainers.
+			</p>
 			<LinkButton linked="/trainers" filled style={{ fontSize: 'clamp(1.4rem, 1.2041rem + 0.9796vw, 2rem)' }}>
 				Find your trainer
 			</LinkButton>

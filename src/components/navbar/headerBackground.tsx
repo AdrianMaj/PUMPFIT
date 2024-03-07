@@ -16,6 +16,7 @@ const HeaderBackground = () => {
 			window.removeEventListener('scroll', handleScroll)
 		}
 	}, [])
+
 	return (
 		<AnimatePresence>
 			{scrollY > 0 && (

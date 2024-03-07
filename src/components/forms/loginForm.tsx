@@ -10,11 +10,7 @@ import { FormProvider, useForm } from 'react-hook-form'
 import { signIn } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import Spinner from '../ui/spinner'
-
-const FormSchema = z.object({
-	email: z.string().min(1, 'Email is required').email('Invalid email'),
-	password: z.string().min(1, 'Password is required'),
-})
+import { FormSchema } from './loginForm.data'
 
 const LoginForm = () => {
 	const [isLoading, setIsLoading] = useState(false)
@@ -59,17 +55,19 @@ const LoginForm = () => {
 						<form onSubmit={form.handleSubmit(onSubmit)} className={classes.form}>
 							<Input type="email" label="E-mail" id="email" error={form.formState.errors.email} />
 							<Input type="password" label="Password" id="password" error={form.formState.errors.password} />
-							{isError && <p className={classes.errorMsg}>Invalid email, password or your account is not active.</p>}
-							<MotionLink whileHover={{ color: '#fff' }} href="/forgot-password" className={classes.text}>
+							{isError && (
+								<p className={classes.form__errorMsg}>Invalid email, password or your account is not active.</p>
+							)}
+							<MotionLink whileHover={{ color: '#fff' }} href="/forgot-password" className={classes.form__text}>
 								Forgot your password?
 							</MotionLink>
 							<motion.button
 								whileHover={{
 									backgroundColor: '#750000',
 								}}
-								className={classes.button}
+								className={classes.form__button}
 								type="submit">
-								Login to your account <img src="/arrow-login.svg" alt="Arrow Icon" className={classes.arrow} />
+								Login to your account <img src="/arrow-login.svg" alt="Arrow Icon" className={classes.form__arrow} />
 							</motion.button>
 						</form>
 					</FormProvider>

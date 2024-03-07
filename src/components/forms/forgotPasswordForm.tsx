@@ -10,10 +10,7 @@ import Link from 'next/link'
 import { sendResetPasswordEmail } from '@/util/sendResetPasswordEmail'
 import { useRouter } from 'next/navigation'
 import Spinner from '../ui/spinner'
-
-const FormSchema = z.object({
-	email: z.string().min(1, 'Email is required').email('Invalid email'),
-})
+import { FormSchema } from './forgotPasswordForm.data'
 
 const ForgotPasswordForm = () => {
 	const [isLoading, setIsLoading] = useState(false)

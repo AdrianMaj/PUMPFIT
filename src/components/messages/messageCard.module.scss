@@ -4,56 +4,56 @@
 	width: 100%;
 	display: flex;
 	cursor: pointer;
-}
-.image {
-	width: 30%;
-	aspect-ratio: 1/1;
-	object-fit: cover;
-	max-width: 150px;
-	max-height: 150px;
-}
-.cardText {
-	position: relative;
-	display: flex;
-	padding: 1em;
-	flex-direction: column;
-	justify-content: space-between;
-	width: 100%;
-}
-.cardMessage {
-	margin: auto 0;
-	font-size: clamp(1.2rem, 1.0041rem + 0.9796vw, 1.8rem);
-	color: $subtext;
-}
-.cardTitle {
-	font-size: $subtextSize;
-	font-weight: 600;
-}
-.activeContainer {
-	position: absolute;
-	left: 1em;
-	bottom: 1em;
-	display: flex;
-	gap: 1em;
-	justify-content: center;
-	align-items: center;
-}
-.activeIndicator {
-	width: 2rem;
-	height: 2rem;
-	background-color: rgb(17, 117, 17);
-	border-radius: 50%;
-}
-.activeIndicator.unactiveIndicator {
-	background-color: $mainColor;
-}
-.cardTime {
-	margin-top: auto;
-	font-size: clamp(1rem, 0.8041rem + 0.9796vw, 1.6rem);
-	align-self: flex-end;
-}
-.activeTime {
-	font-size: clamp(1rem, 0.8041rem + 0.9796vw, 1.6rem);
+	&__image {
+		width: 30%;
+		aspect-ratio: 1/1;
+		object-fit: cover;
+		max-width: 150px;
+		max-height: 150px;
+	}
+	&__cardText {
+		position: relative;
+		display: flex;
+		padding: 1em;
+		flex-direction: column;
+		justify-content: space-between;
+		width: 100%;
+	}
+	&__cardMessage {
+		margin: auto 0;
+		font-size: clamp(1.2rem, 1.0041rem + 0.9796vw, 1.8rem);
+		color: $subtext;
+	}
+	&__cardTitle {
+		font-size: $subtextSize;
+		font-weight: 600;
+	}
+	&__activeContainer {
+		position: absolute;
+		left: 1em;
+		bottom: 1em;
+		display: flex;
+		gap: 1em;
+		justify-content: center;
+		align-items: center;
+	}
+	&__activeIndicator {
+		width: 2rem;
+		height: 2rem;
+		background-color: $active;
+		border-radius: 50%;
+	}
+	&__activeIndicator.unactiveIndicator {
+		background-color: $mainColor;
+	}
+	&__cardTime {
+		margin-top: auto;
+		font-size: clamp(1rem, 0.8041rem + 0.9796vw, 1.6rem);
+		align-self: flex-end;
+	}
+	&__activeTime {
+		font-size: clamp(1rem, 0.8041rem + 0.9796vw, 1.6rem);
+	}
 }
 @media (min-width: 576px) {
 	.cardText {
