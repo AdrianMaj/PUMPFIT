@@ -50,9 +50,9 @@ const ForgotPasswordForm = () => {
 							whileHover={{
 								backgroundColor: '#750000',
 							}}
-							className={classes.button}
+							className={classes.form__button}
 							type="submit">
-							Recover password <img src="/arrow-login.svg" alt="Arrow Icon" className={classes.arrow} />
+							Recover password <img src="/arrow-login.svg" alt="Arrow Icon" className={classes.form__arrow} />
 						</motion.button>
 					</form>
 				)}

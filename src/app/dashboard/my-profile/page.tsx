@@ -3,7 +3,6 @@ import fetchAccount from '@/util/fetchAccount'
 import SectionHeading from '@/components/ui/sectionHeading'
 import MyProfileForm from '../../../components/my-profile/myProfileForm'
 import { redirect } from 'next/navigation'
-import { Trainer } from '@/types/databaseTypes'
 
 const Page = async () => {
 	const userAccount = await fetchAccount()
