@@ -11,8 +11,8 @@ import LinkButton from '../ui/linkButton'
 const DashboardSection = ({ userAccount }: { userAccount: AccountWithMessages }) => {
 	const [newMessages, setNewMessages] = useState<Message[]>([])
 	const [contactedPeople, setContactedPeople] = useState<string[]>([])
-	const [profileViews, setProfileViews] = useState<number>(0)
-	const [newTestimonials, setNewTestimonials] = useState<number>(0)
+	const [profileViews, setProfileViews] = useState(0)
+	const [newTestimonials, setNewTestimonials] = useState(0)
 	useEffect(() => {
 		const filteredMessages = userAccount.messagesTo.filter(message => {
 			return userAccount.lastActive && message.createdAt >= userAccount.lastActive
@@ -43,48 +43,49 @@ const DashboardSection = ({ userAccount }: { userAccount: AccountWithMessages })
 	}, [userAccount])
 
 	const handleResetProfileViews = async () => {
-		if (userAccount.trainer) {
-			await resetProfileViews(userAccount.trainer.id)
-			setProfileViews(userAccount.trainer.announcement?.announcementViews || 0)
+		if (!userAccount.trainer) {
+			return
 		}
+		await resetProfileViews(userAccount.trainer.id)
+		setProfileViews(userAccount.trainer.announcement?.announcementViews || 0)
 	}
 
 	return (
 		<section className={classes.section}>
 			{userAccount.isTrainer && userAccount.trainer ? (
 				<>
-					<Link href={`/details/${userAccount.id}`} className={`${classes.card}`}>
+					<Link href={`/details/${userAccount.id}`} className={`${classes.section__card}`}>
 						<h3>{newMessages.length}</h3>
 						<p>New messages</p>
 					</Link>
-					<Link href="/dashboard/messages" className={`${classes.card}`}>
+					<Link href="/dashboard/messages" className={`${classes.section__card}`}>
 						<h3>{newTestimonials}</h3>
 						<p>New testimonials on your profile.</p>
 					</Link>
-					<div onClick={handleResetProfileViews} className={`${classes.card} ${classes.clickable}`}>
+					<div onClick={handleResetProfileViews} className={`${classes.section__card} ${classes.section__clickable}`}>
 						<h3>{profileViews}</h3>
 						<p>Profile views</p>
-						<p className={classes.infoText}>(Click to reset)</p>
+						<p className={classes.section__infoText}>(Click to reset)</p>
 					</div>
-					<Link href="/dashboard/my-profile" className={`${classes.card} ${classes.rowspan}`}>
+					<Link href="/dashboard/my-profile" className={`${classes.section__card} ${classes.section__rowspan}`}>
 						<h3>{userAccount.name}</h3>
 						<p>Trainer</p>
-						<ul className={classes.categoryList}>
+						<ul className={classes.section__categoryList}>
 							{userAccount.trainer.announcement?.categories.map(category => (
 								<li key={category}>{category}</li>
 							))}
 						</ul>
 					</Link>
-					<Link href="/dashboard/promote" className={`${classes.card} ${classes.rowspan2}`}>
+					<Link href="/dashboard/promote" className={`${classes.section__card} ${classes.section__rowspan2}`}>
 						<h3>{userAccount.trainer.promoted ? 'Promoted' : 'Not yet promoted'}</h3>
 						<p>Promoted trainers receive 10x more messages than usual!</p>
 					</Link>
-					<div className={`${classes.card} ${classes.colspan} ${classes.buttonContainer}`}>
+					<div className={`${classes.section__card} ${classes.section__colspan} ${classes.section__buttonContainer}`}>
 						<LogoutButton
 							whileHover={{
 								backgroundColor: '#a50000',
 							}}
-							className={classes.button}>
+							className={classes.section__button}>
 							Logout
 						</LogoutButton>
 						<LinkButton
@@ -105,24 +106,24 @@ const DashboardSection = ({ userAccount }: { userAccount: AccountWithMessages })
 				</>
 			) : (
 				<>
-					<Link href="/dashboard/messages" className={`${classes.card} ${classes.cardUser}`}>
+					<Link href="/dashboard/messages" className={`${classes.section__card} ${classes.section__cardUser}`}>
 						<h3>{newMessages.length}</h3>
 						<p>New messages</p>
 					</Link>
-					<Link href="/dashboard/messages" className={`${classes.card} ${classes.cardUser}`}>
+					<Link href="/dashboard/messages" className={`${classes.section__card} ${classes.section__cardUser}`}>
 						<h3>{contactedPeople.length}</h3>
 						<p>People messaged you when you were offline</p>
 					</Link>
-					<Link href="/dashboard/account-settings" className={`${classes.card} ${classes.rowspan}`}>
+					<Link href="/dashboard/account-settings" className={`${classes.section__card} ${classes.section__rowspan}`}>
 						<h3>{userAccount.name}</h3>
 						<p>User</p>
 					</Link>
-					<div className={`${classes.card} ${classes.buttonContainer} ${classes.buttonContainerUser}`}>
+					<div className={`${classes.section__card} ${classes.section__buttonContainer} ${classes.section__buttonContainerUser}`}>
 						<LogoutButton
 							whileHover={{
 								backgroundColor: '#a50000',
 							}}
-							className={classes.button}>
+							className={classes.section__button}>
 							Logout
 						</LogoutButton>
 						<LinkButton

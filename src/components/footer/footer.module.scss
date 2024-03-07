@@ -2,70 +2,70 @@
 .footer {
 	position: relative;
 	padding: 0 2.5em;
-}
-.background {
-	position: absolute;
-	background-color: #0f0f0f;
-	width: 100%;
-	height: 100%;
-	top: 0;
-	left: 0;
-	z-index: -1;
-}
-.attribution {
-	margin-top: 2em;
-	border-top: 1px solid rgba(255, 255, 255, 0.527);
-	padding: 2em;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-}
-.attributionText {
-	font-size: clamp(1.2rem, 1.0694rem + 0.6531vw, 1.6rem);
-	color: rgba(255, 255, 255, 0.527);
-}
-.footerFlex {
-	display: flex;
-	flex-direction: column;
-	gap: 4em;
-	padding: 6em 0;
-}
-.footerLinks {
-	display: flex;
-	flex-wrap: wrap;
-	gap: 4em;
-	width: 100%;
-	justify-content: space-around;
-}
-.footerContainer {
-	display: flex;
-	flex-direction: column;
-}
-.footerTitle {
-	font-size: $subtextSize;
-	font-weight: 600;
-	color: #fff;
-	margin-bottom: 1.2em;
-}
-.footerList {
-	list-style-type: none;
-	display: flex;
-	flex-direction: column;
-	gap: 1em;
-}
-.footerListElement {
-	a {
-		text-decoration: none;
-		color: $subtext;
+	&__background {
+		position: absolute;
+		background-color: $secondaryBg;
+		width: 100%;
+		height: 100%;
+		top: 0;
+		left: 0;
+		z-index: -1;
+	}
+	&__attribution {
+		margin-top: 2em;
+		border-top: 1px solid $footerLine;
+		padding: 2em;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+	&__attributionText {
+		font-size: clamp(1.2rem, 1.0694rem + 0.6531vw, 1.6rem);
+		color: $footerLine;
+	}
+	&__footerFlex {
+		display: flex;
+		flex-direction: column;
+		gap: 4em;
+		padding: 6em 0;
+	}
+	&__footerLinks {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 4em;
+		width: 100%;
+		justify-content: space-around;
+	}
+	&__footerContainer {
+		display: flex;
+		flex-direction: column;
+	}
+	&__footerTitle {
 		font-size: $subtextSize;
+		font-weight: 600;
+		color: $white;
+		margin-bottom: 1.2em;
+	}
+	&__footerList {
+		list-style-type: none;
+		display: flex;
+		flex-direction: column;
+		gap: 1em;
+	}
+	&__footerListElement {
+		a {
+			text-decoration: none;
+			color: $subtext;
+			font-size: $subtextSize;
+		}
 	}
 }
 
 @media (min-width: 992px) {
 	.footer {
 		padding: 0 3.5em;
-	}
-	.footerFlex {
-		flex-direction: row;
+		&__footerFlex {
+			flex-direction: row;
+		}
 	}
 }

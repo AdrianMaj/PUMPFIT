@@ -32,7 +32,7 @@ const SliderContainer = ({ trainerData }: { trainerData: AnnouncementWithTestimo
 			{!isMobile && trainerData.testimonials.length > 0 && (
 				<>
 					<button
-						className={`${classes.sliderButton} ${classes.sliderLeft}`}
+						className={`${classes.container__sliderButton} ${classes.container__sliderLeft}`}
 						onClick={() => sliderRef?.current?.slickPrev()}>
 						<MotionImage
 							src="/arrow.svg"
@@ -44,7 +44,7 @@ const SliderContainer = ({ trainerData }: { trainerData: AnnouncementWithTestimo
 						/>
 					</button>
 					<button
-						className={`${classes.sliderButton} ${classes.sliderRight}`}
+						className={`${classes.container__sliderButton} ${classes.container__sliderRight}`}
 						onClick={() => sliderRef?.current?.slickNext()}>
 						<MotionImage
 							src="/arrow.svg"
@@ -67,7 +67,7 @@ const SliderContainer = ({ trainerData }: { trainerData: AnnouncementWithTestimo
 					))}
 				</Slider>
 			) : (
-				<p className={classes.emptySection}>This trainer currently has no active testimonials.</p>
+				<p className={classes.container__emptySection}>This trainer currently has no active testimonials.</p>
 			)}
 		</div>
 	)

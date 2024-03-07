@@ -19,12 +19,12 @@ const FormSchema = z.object({
 	photourl: z.any(),
 })
 
-const AccountSettingsForm: React.FC<{ accountData: Account }> = ({ accountData }) => {
+const AccountSettingsForm = ({ accountData }: { accountData: Account }) => {
 	const deleteAccountModal = useRef<DeleteAccountModalMethods>(null)
 	const changePasswordModal = useRef<ChangePasswordModalMethods>(null)
 	const [isLoading, setisLoading] = useState(false)
 	const [activeFile, setActiveFile] = useState<File>()
-	const [photoUrl, setPhotoUrl] = useState<string>('')
+	const [photoUrl, setPhotoUrl] = useState('')
 	const [isDragging, setIsDragging] = useState(false)
 	const form = useForm<z.infer<typeof FormSchema>>({
 		resolver: zodResolver(FormSchema),
@@ -40,66 +40,64 @@ const AccountSettingsForm: React.FC<{ accountData: Account }> = ({ accountData }
 	const handleUpdateProfile = async (values: z.infer<typeof FormSchema>) => {
 		setisLoading(true)
 		let imageURL: string | undefined
-		if (activeFile && activeFile.type.startsWith('image')) {
-			const formData = new FormData()
-			formData.append('file', activeFile)
-			formData.append('upload_preset', 'pumpfit')
-			try {
-				const response = await fetch(`https://api.cloudinary.com/v1_1/dcl15uhh0/image/upload`, {
-					method: 'POST',
-					body: formData,
-				})
-				const res = await response.json()
-				imageURL = res.secure_url
-			} catch (error) {
-				console.error(error)
-			}
+		if (!activeFile || !activeFile.type.startsWith('image')) {
+			return
 		}
-		const data = {
-			name: values.name,
-			email: values.email,
-			photourl: imageURL || '',
-			accountId: accountData.id,
+		const formData = new FormData()
+		formData.append('file', activeFile)
+		formData.append('upload_preset', 'pumpfit')
+		try {
+			const response = await fetch(`https://api.cloudinary.com/v1_1/dcl15uhh0/image/upload`, {
+				method: 'POST',
+				body: formData,
+			})
+			const res = await response.json()
+			imageURL = res.secure_url
+		} catch (error) {
+			console.error(error)
 		}
 		try {
-			const updateResponse = await updateAccount(data)
-			if (!updateResponse.account?.success) {
-				setisLoading(false)
-			} else {
-				setisLoading(false)
-			}
+			await updateAccount({
+				name: values.name,
+				email: values.email,
+				photourl: imageURL || '',
+				accountId: accountData.id,
+			})
+			setisLoading(false)
 		} catch (error) {
 			console.error(error)
 		}
 	}
 
 	const handleShowDeleteModal = () => {
-		if (deleteAccountModal.current) {
-			deleteAccountModal.current.openModal()
+		if (!deleteAccountModal.current) {
+			return
 		}
+		deleteAccountModal.current.openModal()
 	}
 	const handleShowChangePasswordModal = () => {
-		if (changePasswordModal.current) {
-			changePasswordModal.current.openModal()
+		if (!changePasswordModal.current) {
+			return
 		}
+		changePasswordModal.current.openModal()
 	}
 	const handlePhotoChange = (e: ChangeEvent<HTMLInputElement>) => {
 		const files = e.target.files
-		if (files) {
-			handleUpdatePhoto(files)
+		if (!files) {
+			return
 		}
+		handleUpdatePhoto(files)
 	}
 	const handleUpdatePhoto = (files: FileList) => {
-		if (files && files[0] && files[0].type.startsWith('image') && files[0].size < 10485760) {
-			//10 MB
+		if (!files.length || !files[0].type.startsWith('image')) {
+			return
+		}
+		if (files[0].size < 10485760) {
 			setActiveFile(files[0])
 			const url = URL.createObjectURL(files[0])
 			setPhotoUrl(url)
-		} else if (files && files[0] && files[0].type.startsWith('image') && files[0].size > 10485760) {
-			// 10mb
-			alert('File is too big to be uploaded. (Max size is 10 MB)')
 		} else {
-			return
+			alert('File is too big to be uploaded. (Max size is 10 MB)')
 		}
 	}
 	const handleDrop = (e: React.DragEvent) => {
@@ -119,7 +117,7 @@ const AccountSettingsForm: React.FC<{ accountData: Account }> = ({ accountData }
 			<DeleteAccountModal id={accountData.id} ref={deleteAccountModal} />
 			<FormProvider {...form}>
 				<form className={classes.form} onSubmit={form.handleSubmit(handleUpdateProfile)}>
-					<div className={classes.input}>
+					<div>
 						<motion.label
 							animate={isDragging ? 'animate' : 'default'}
 							onDrop={handleDrop}
@@ -127,15 +125,15 @@ const AccountSettingsForm: React.FC<{ accountData: Account }> = ({ accountData }
 							whileHover="animate"
 							initial="default"
 							htmlFor="photourl"
-							className={classes.fileLabel}>
-							<p className={classes.fileLabelText}>Profile Photo</p>
+							className={classes.form__fileLabel}>
+							<p className={classes.form__fileLabelText}>Profile Photo</p>
 							{photoUrl ? (
-								<img src={photoUrl} alt="Your profile photo" className={classes.announcementImage} />
+								<img src={photoUrl} alt="Your profile photo" className={classes.form__announcementImage} />
 							) : (
-								<div className={classes.fileLabelImagePreview}></div>
+								<div className={classes.form__fileLabelImagePreview}></div>
 							)}
 							<motion.div
-								className={classes.labelAnimation}
+								className={classes.form__labelAnimation}
 								variants={{
 									animate: {
 										opacity: 1,
@@ -150,20 +148,20 @@ const AccountSettingsForm: React.FC<{ accountData: Account }> = ({ accountData }
 							accept="image/*"
 							id="photourl"
 							onChange={handlePhotoChange}
-							className={classes.fileInput}
+							className={classes.form__fileInput}
 						/>
-						<p className={classes.inputNote}>Note: You can upload image files up to 10MB.</p>
+						<p className={classes.form__inputNote}>Note: You can upload image files up to 10MB.</p>
 					</div>
 					<Input label="Name" id="name" type="text" error={form.formState.errors.name} />
 					<Input label="Email" id="email" type="email" error={form.formState.errors.email} />
 					<div>
 						<Input disabled label="Password" id="password" value="xxxxxxxxxx" type="password" />
-						<p onClick={handleShowChangePasswordModal} className={classes.changePasswordLink}>
+						<p onClick={handleShowChangePasswordModal} className={classes.form__changePasswordLink}>
 							Change password
 						</p>
 					</div>
-					<div className={classes.buttons}>
-						<LogoutButton whileHover={{ backgroundColor: '#a50000' }} className={classes.logoutBtn}>
+					<div className={classes.form__buttons}>
+						<LogoutButton whileHover={{ backgroundColor: '#a50000' }} className={classes.form__logoutBtn}>
 							Logout
 						</LogoutButton>
 						<Button

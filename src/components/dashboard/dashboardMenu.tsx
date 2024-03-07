@@ -8,7 +8,7 @@ import MenuButton from '../navbar/menuButton'
 import DashboardListElement from '../ui/dashboardListElement'
 import { usePathname } from 'next/navigation'
 
-const DashboardMenu: React.FC<{ name: string; isTrainer: boolean }> = ({ name, isTrainer }) => {
+const DashboardMenu = ({ name, isTrainer }: { name: string; isTrainer: boolean }) => {
 	const [isOpen, setIsOpen] = useState(false)
 	const [screenWidth, setScreenWidth] = useState<number | null>(null)
 	const pathname = usePathname()
@@ -16,10 +16,6 @@ const DashboardMenu: React.FC<{ name: string; isTrainer: boolean }> = ({ name, i
 	useEffect(() => {
 		setIsOpen(false)
 	}, [pathname])
-
-	const updateScreenSize = () => {
-		setScreenWidth(window.innerWidth)
-	}
 
 	useEffect(() => {
 		if (typeof window !== 'undefined') {
@@ -30,12 +26,7 @@ const DashboardMenu: React.FC<{ name: string; isTrainer: boolean }> = ({ name, i
 			}
 		}
 	}, [])
-	const toggleMenu = () => {
-		setIsOpen(prevState => {
-			const newState = !prevState
-			return newState
-		})
-	}
+
 	useEffect(() => {
 		if (typeof window !== 'undefined' && isOpen && screenWidth) {
 			document.body.classList.add('overflow')
@@ -43,6 +34,17 @@ const DashboardMenu: React.FC<{ name: string; isTrainer: boolean }> = ({ name, i
 			document.body.classList.remove('overflow')
 		}
 	}, [isOpen, screenWidth])
+
+	const updateScreenSize = () => {
+		setScreenWidth(window.innerWidth)
+	}
+
+	const toggleMenu = () => {
+		setIsOpen(prevState => {
+			const newState = !prevState
+			return newState
+		})
+	}
 	const navVariants = {
 		opened: {
 			width: screenWidth + 'px',
@@ -137,7 +139,7 @@ const DashboardMenu: React.FC<{ name: string; isTrainer: boolean }> = ({ name, i
 	return (
 		<>
 			<div className={classes.positioner}></div>
-			<motion.nav initial={false} variants={navVariants} animate={animateCondition} className={`${classes.menu}`}>
+			<motion.nav initial={false} variants={navVariants} animate={animateCondition} className={classes.menu}>
 				<motion.div
 					initial={false}
 					animate={animateCondition}
@@ -149,7 +151,7 @@ const DashboardMenu: React.FC<{ name: string; isTrainer: boolean }> = ({ name, i
 							justifyContent: 'center',
 						},
 					}}
-					className={classes.container}>
+					className={classes.menu__container}>
 					<Logo
 						variants={{
 							opened: {
@@ -169,7 +171,7 @@ const DashboardMenu: React.FC<{ name: string; isTrainer: boolean }> = ({ name, i
 						}}
 						animate={animateCondition}
 						width="70%"
-						className={classes.logo}
+						className={classes.menu__logo}
 					/>
 					<MenuButton isOpen={isOpen} toggleMenu={toggleMenu} />
 				</motion.div>
@@ -186,7 +188,7 @@ const DashboardMenu: React.FC<{ name: string; isTrainer: boolean }> = ({ name, i
 							transition: { duration: 0.5 },
 						},
 					}}
-					className={classes.list}>
+					className={classes.menu__list}>
 					{menuList.map(element => (
 						<DashboardListElement
 							key={element.text}
@@ -202,14 +204,14 @@ const DashboardMenu: React.FC<{ name: string; isTrainer: boolean }> = ({ name, i
 					initial={false}
 					variants={displayVariantsWithoutPointers}
 					animate={animateCondition}
-					className={classes.text}>
-					You're logged as <span className={classes.bold}>{name}</span>
+					className={classes.menu__text}>
+					You're logged as <span className={classes.menu__bold}>{name}</span>
 				</motion.p>
 				<LogoutButton
 					initial={false}
 					variants={displayVariants}
 					animate={animateCondition}
-					className={classes.logoutBtn}
+					className={classes.menu__logoutBtn}
 					whileHover={{
 						backgroundColor: '#a50000',
 					}}>

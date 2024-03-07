@@ -4,117 +4,119 @@
 	display: flex;
 	flex-direction: column;
 	gap: 3em;
-}
-.inputNote {
-	color: $subtext;
-	margin-top: 0.5em;
-	font-size: clamp(1.2rem, 1.0694rem + 0.6531vw, 1.6rem);
-	a {
-		font-size: clamp(1.2rem, 1.0694rem + 0.6531vw, 1.6rem);
+	&__fileLabel {
+		position: relative;
+		cursor: pointer;
+		display: flex;
+		flex-direction: column;
+		width: fit-content;
+	}
+	&__fileLabelText {
+		font-size: $subtextSize;
 		color: $subtext;
+		margin-bottom: 1em;
 	}
-}
-.changePasswordLink {
-	color: $subtext;
-	margin-top: 0.5em;
-	font-size: clamp(1.2rem, 1.0694rem + 0.6531vw, 1.6rem);
-	text-decoration: underline;
-	cursor: pointer;
-}
-.fileInput {
-	display: none;
-}
-.fileLabel {
-	position: relative;
-	cursor: pointer;
-	display: flex;
-	flex-direction: column;
-	width: fit-content;
-}
-.fileLabelText {
-	font-size: $subtextSize;
-	color: $subtext;
-	margin-bottom: 1em;
-}
-.announcementImage {
-	width: 14em;
-	height: 14em;
-	object-fit: cover;
-	object-position: center;
-}
-.fileLabelImagePreview {
-	position: relative;
-	width: 14em;
-	height: 14em;
-	background-color: $secondaryBg;
-	&::after {
-		content: '';
-		position: absolute;
-		top: 50%;
-		left: 50%;
-		transform: translate(-50%, -50%);
-		height: 25%;
-		width: 2px;
-		background-color: #fff;
+	&__announcementImage {
+		width: 140px;
+		height: 140px;
+		object-fit: cover;
+		object-position: center;
 	}
-	&::before {
-		content: '';
-		position: absolute;
-		top: 50%;
-		left: 50%;
-		transform: translate(-50%, -50%);
-		height: 2px;
-		width: 25%;
-		background-color: #fff;
+	&__fileLabelImagePreview {
+		position: relative;
+		width: 140px;
+		height: 140px;
+		background-color: $secondaryBg;
+		&::after {
+			content: '';
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			height: 25%;
+			width: 2px;
+			background-color: $white;
+		}
+		&::before {
+			content: '';
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			height: 2px;
+			width: 25%;
+			background-color: $white;
+		}
 	}
-}
-.buttons {
-	margin-top: auto;
-	width: 100%;
-	display: flex;
-	justify-content: center;
-	flex-wrap: wrap;
-	gap: 1em;
-}
-.logoutBtn {
-	padding: 0.75em 1em;
-	color: #fff;
-	font-size: clamp(1.6rem, 1.4041rem + 0.9796vw, 2.2rem);
-	text-align: center;
-	background-color: transparent;
-	border: 1.5px solid $mainColor;
-	cursor: pointer;
-}
-.labelAnimation {
-	position: absolute;
-	width: 14em;
-	height: 14em;
-	bottom: 0;
-	background-color: rgba(0, 0, 0, 0.8);
-	&::after {
-		content: '';
-		position: absolute;
-		top: 50%;
-		left: 50%;
-		transform: translate(-50%, -50%);
-		height: 25%;
-		width: 2px;
-		background-color: #fff;
+	&__fileInput {
+		display: none;
 	}
-	&::before {
-		content: '';
+	&__inputNote {
+		color: $subtext;
+		margin-top: 0.5em;
+		font-size: clamp(1.2rem, 1.0694rem + 0.6531vw, 1.6rem);
+		a {
+			font-size: clamp(1.2rem, 1.0694rem + 0.6531vw, 1.6rem);
+			color: $subtext;
+		}
+	}
+	&__changePasswordLink {
+		color: $subtext;
+		margin-top: 0.5em;
+		font-size: clamp(1.2rem, 1.0694rem + 0.6531vw, 1.6rem);
+		text-decoration: underline;
+		cursor: pointer;
+	}
+	&__buttons {
+		margin-top: auto;
+		width: 100%;
+		display: flex;
+		justify-content: center;
+		flex-wrap: wrap;
+		gap: 1em;
+	}
+	&__logoutBtn {
+		padding: 0.75em 1em;
+		color: $white;
+		font-size: clamp(1.6rem, 1.4041rem + 0.9796vw, 2.2rem);
+		text-align: center;
+		background-color: transparent;
+		border: 1.5px solid $mainColor;
+		cursor: pointer;
+	}
+	&__labelAnimation {
 		position: absolute;
-		top: 50%;
-		left: 50%;
-		transform: translate(-50%, -50%);
-		height: 2px;
-		width: 25%;
-		background-color: #fff;
+		width: 14em;
+		height: 14em;
+		bottom: 0;
+		background-color: rgba(0, 0, 0, 0.8);
+		&::after {
+			content: '';
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			height: 25%;
+			width: 2px;
+			background-color: $white;
+		}
+		&::before {
+			content: '';
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			height: 2px;
+			width: 25%;
+			background-color: $white;
+		}
 	}
 }
 
 @media (min-width: 992px) {
-	.buttons {
-		justify-content: flex-end;
+	.form {
+		&__buttons {
+			justify-content: flex-end;
+		}
 	}
 }

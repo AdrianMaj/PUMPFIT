@@ -1,25 +1,44 @@
 @use '../variables' as *;
-.image {
-	width: 100%;
-	aspect-ratio: 4/3;
-	filter: grayscale(100%) brightness(55%);
-	object-fit: cover;
-	object-position: center;
-}
 .main {
 	padding: 10em 0;
 }
-.trainerInfo {
-	display: flex;
-	flex-direction: column;
-	padding: 3em;
-	margin: 0 2.5em;
-	background-color: $secondaryBg;
-	transform: translateY(-7em);
-}
-.name {
-	font-size: $headingSize;
-	font-weight: 600;
+.heroInfo {
+	&__image {
+		width: 100%;
+		aspect-ratio: 4/3;
+		filter: grayscale(100%) brightness(55%);
+		object-fit: cover;
+		object-position: center;
+	}
+	&__trainerInfo {
+		display: flex;
+		flex-direction: column;
+		padding: 3em;
+		margin: 0 2.5em;
+		background-color: $secondaryBg;
+		transform: translateY(-7em);
+	}
+	&__name {
+		font-size: $headingSize;
+		font-weight: 600;
+	}
+	&__categories {
+		display: flex;
+		flex-wrap: wrap;
+		width: 100%;
+		margin: 1.5em 0;
+		gap: 1.5em;
+		list-style-type: none;
+	}
+	&__category {
+		font-size: 1.4rem;
+		color: $subtext;
+	}
+	&__price {
+		font-size: $headingSize;
+		text-wrap: nowrap;
+		margin-bottom: 1em;
+	}
 }
 .emptySection {
 	font-size: $subtextSize;
@@ -27,80 +46,62 @@
 	text-align: center;
 	margin-bottom: 1em;
 }
-.testimonialsInfoContainer {
-	margin-top: 5em;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	width: 100%;
-}
-.categories {
-	display: flex;
-	flex-wrap: wrap;
-	width: 100%;
-	margin: 1.5em 0;
-	gap: 1.5em;
-	list-style-type: none;
-}
-.category {
-	font-size: 1.4rem;
-	color: $subtext;
-}
-.price {
-	font-size: $headingSize;
-	text-wrap: nowrap;
-	margin-bottom: 1em;
-}
 .container {
 	display: flex;
 	flex-direction: column;
 	gap: 8em;
 	padding: 0 2.5em;
-}
-.descriptionContainer {
-	padding: 1.5em;
-	background-color: $secondaryBg;
-}
-.descriptionText {
-	font-size: $subtextSize;
-	color: $subtext;
-}
-.attribution {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	gap: 2em;
-	.attributionText {
+	&__descriptionContainer {
+		padding: 1.5em;
+		background-color: $secondaryBg;
+	}
+	&__descriptionText {
+		font-size: $subtextSize;
+		color: $subtext;
+	}
+	&__testimonialsInfoContainer {
+		margin-top: 5em;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		width: 100%;
+	}
+	&__attribution {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		gap: 2em;
+	}
+	&__attributionText {
 		color: $subtext;
 		font-size: $subtextSize;
 	}
 }
 @media (min-width: 992px) {
-	.testimonialList {
-		flex-direction: row;
-	}
-	.trainerInfo {
-		position: absolute;
-		width: 60%;
-		margin: 0;
-		right: 0;
-		bottom: 0;
-	}
-	.descriptionContainer {
-		margin-top: 8em;
+	.container {
+		&__descriptionContainer {
+			margin-top: 8em;
+		}
+		&__attribution {
+			flex-direction: row;
+		}
 	}
 	.heroInfo {
 		position: relative;
 		display: flex;
 		flex-direction: column;
 		align-items: flex-start;
-	}
-	.image {
-		width: 55%;
-		aspect-ratio: 20/17;
-	}
-	.attribution {
-		flex-direction: row;
+		&__trainerInfo {
+			position: absolute;
+			width: 60%;
+			margin: 0;
+			right: 0;
+			bottom: 0;
+		}
+		&__image {
+			width: 55%;
+			aspect-ratio: 20/17;
+		}
 	}
 }

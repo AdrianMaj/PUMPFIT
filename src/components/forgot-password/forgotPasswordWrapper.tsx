@@ -4,7 +4,7 @@ import classes from './forgotPasswordWrapper.module.scss'
 const ForgotPasswordWrapper = ({ children }: { children: React.ReactNode }) => {
 	return (
 		<section className={classes.background}>
-			<div className={classes.container}>{children}</div>
+			<div className={classes.background__container}>{children}</div>
 		</section>
 	)
 }

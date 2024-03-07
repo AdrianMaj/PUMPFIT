@@ -1,12 +1,5 @@
 @use '../variables' as *;
-.card {
-	padding: 2em;
-	display: flex;
-	margin: 0 1em;
-	flex-direction: column;
-	height: 100%;
-	background-color: $secondaryBg;
-}
+
 .cardHeading {
 	position: relative;
 	display: flex;
@@ -16,43 +9,43 @@
 	justify-content: center;
 	height: fit-content;
 	margin-bottom: 2.5em;
-}
-.cardHeadingText {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	flex-direction: column;
-	gap: 1.5em;
-	p {
-		font-size: $headingSize;
+	&__cardImage {
+		width: 25%;
+		aspect-ratio: 1/1;
+		object-fit: cover;
+		object-position: center;
+		border-radius: 50%;
+		margin-bottom: 2em;
+	}
+	&__cardDate {
+		position: absolute;
+		right: 0;
+		top: 0;
+		font-size: $smallSize;
+		color: $subtext;
+	}
+	&__cardHeadingText {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		flex-direction: column;
+		gap: 1.5em;
+		p {
+			font-size: $headingSize;
+		}
 	}
 }
 .cardContent {
 	height: 100%;
 	margin-bottom: auto;
-}
-.cardImage {
-	width: 25%;
-	aspect-ratio: 1/1;
-	object-fit: cover;
-	object-position: center;
-	border-radius: 50%;
-	margin-bottom: 2em;
-}
-.cardDate {
-	position: absolute;
-	right: 0;
-	top: 0;
-	font-size: $smallSize;
-	color: $subtext;
-}
-.cardTitle {
-	font-size: $headingSize;
-}
-.cardText {
-	margin: 1em 0;
-	font-size: $subtextSize;
-	color: $subtext;
+	&__cardText {
+		margin: 1em 0;
+		font-size: $subtextSize;
+		color: $subtext;
+	}
+	&__cardTitle {
+		font-size: $headingSize;
+	}
 }
 
 @media (min-width: 576px) {
@@ -60,13 +53,13 @@
 		flex-direction: row;
 		align-items: center;
 		justify-content: flex-start;
-	}
-	.cardHeadingText {
-		align-items: flex-start;
-	}
-	.cardImage {
-		margin-bottom: 0;
-		margin-right: 3em;
-		width: 20%;
+		&__cardHeadingText {
+			align-items: flex-start;
+		}
+		&__cardImage {
+			margin-bottom: 0;
+			margin-right: 3em;
+			width: 20%;
+		}
 	}
 }

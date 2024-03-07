@@ -10,6 +10,25 @@
 	&::backdrop {
 		display: none;
 	}
+	&__modalContent {
+		display: flex;
+		flex-direction: column;
+		gap: 2em;
+	}
+	&__modalTitle {
+		font-size: $headingSize;
+		color: #fff;
+		text-transform: uppercase;
+	}
+	&__modalText {
+		font-size: $subtextSize;
+		color: $subtext;
+	}
+	&__modalForm {
+		display: flex;
+		flex-direction: column;
+		gap: 2em;
+	}
 }
 .backdrop {
 	position: absolute;
@@ -19,23 +38,4 @@
 	top: 0;
 	z-index: 10000;
 	background-color: rgba(0, 0, 0, 0.8);
-}
-.modalContent {
-	display: flex;
-	flex-direction: column;
-	gap: 2em;
-}
-.modalTitle {
-	font-size: $headingSize;
-	color: #fff;
-	text-transform: uppercase;
-}
-.modalText {
-	font-size: $subtextSize;
-	color: $subtext;
-}
-.modalForm {
-	display: flex;
-	flex-direction: column;
-	gap: 2em;
 }

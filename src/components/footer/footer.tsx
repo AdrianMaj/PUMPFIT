@@ -12,9 +12,9 @@ const Footer = () => {
 	const year = date.getFullYear()
 	return (
 		<footer className={classes.footer}>
-			<div className={classes.background}></div>
+			<div className={classes.footer__background}></div>
 			<Wrapper>
-				<div className={classes.footerFlex}>
+				<div className={classes.footer__footerFlex}>
 					<Link href="/">
 						<Image
 							src="/logoMono.svg"
@@ -22,15 +22,15 @@ const Footer = () => {
 							height={0}
 							sizes="100vw"
 							style={{ width: 'auto', height: 'auto' }}
-							className={classes.logo}
+							className={classes.footer__logo}
 							alt="PUMPFIT Logo"
 						/>
 					</Link>
-					<div className={classes.footerLinks}>
-						<div className={classes.footerContainer}>
-							<p className={classes.footerTitle}>Company</p>
-							<ul className={classes.footerList}>
-								<li className={classes.footerListElement}>
+					<div className={classes.footer__footerLinks}>
+						<div className={classes.footer__footerContainer}>
+							<p className={classes.footer__footerTitle}>Company</p>
+							<ul className={classes.footer__footerList}>
+								<li className={classes.footer__footerListElement}>
 									<MotionLink
 										whileHover={{
 											color: '#fff',
@@ -39,7 +39,7 @@ const Footer = () => {
 										Privacy policy
 									</MotionLink>
 								</li>
-								<li className={classes.footerListElement}>
+								<li className={classes.footer__footerListElement}>
 									<MotionLink
 										whileHover={{
 											color: '#fff',
@@ -50,10 +50,10 @@ const Footer = () => {
 								</li>
 							</ul>
 						</div>
-						<div className={classes.footerContainer}>
-							<p className={classes.footerTitle}>Links</p>
-							<ul className={classes.footerList}>
-								<li className={classes.footerListElement}>
+						<div className={classes.footer__footerContainer}>
+							<p className={classes.footer__footerTitle}>Links</p>
+							<ul className={classes.footer__footerList}>
+								<li className={classes.footer__footerListElement}>
 									<MotionLink
 										whileHover={{
 											color: '#fff',
@@ -62,7 +62,7 @@ const Footer = () => {
 										Control Panel
 									</MotionLink>
 								</li>
-								<li className={classes.footerListElement}>
+								<li className={classes.footer__footerListElement}>
 									<MotionLink
 										whileHover={{
 											color: '#fff',
@@ -73,10 +73,10 @@ const Footer = () => {
 								</li>
 							</ul>
 						</div>
-						<div className={classes.footerContainer}>
-							<p className={classes.footerTitle}>Socials</p>
-							<ul className={classes.footerList}>
-								<li className={classes.footerListElement}>
+						<div className={classes.footer__footerContainer}>
+							<p className={classes.footer__footerTitle}>Socials</p>
+							<ul className={classes.footer__footerList}>
+								<li className={classes.footer__footerListElement}>
 									<MotionLink
 										whileHover={{
 											color: '#fff',
@@ -85,7 +85,7 @@ const Footer = () => {
 										Facebook
 									</MotionLink>
 								</li>
-								<li className={classes.footerListElement}>
+								<li className={classes.footer__footerListElement}>
 									<MotionLink
 										whileHover={{
 											color: '#fff',
@@ -98,9 +98,8 @@ const Footer = () => {
 						</div>
 					</div>
 				</div>
-				{/* <SocialIcon /> */}
-				<div className={classes.attribution}>
-					<p className={classes.attributionText}>&copy; {year} PUMPFIT Company</p>
+				<div className={classes.footer__attribution}>
+					<p className={classes.footer__attributionText}>&copy; {year} PUMPFIT Company</p>
 				</div>
 			</Wrapper>
 		</footer>

@@ -5,8 +5,9 @@ import { FormProvider, useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import * as z from 'zod'
 import Button from '../ui/button'
-import { changePassword, comparePassword } from '@/util/updateAccount'
+import { changePassword } from '@/util/updateAccount'
 import classes from './changePasswordModal.module.scss'
+import { FormSchema } from './changePasswordModal.data'
 
 interface ChangePasswordModalProps {
 	id: string
@@ -19,29 +20,6 @@ export type ChangePasswordModalMethods = {
 }
 
 const ChangePasswordModal = forwardRef<ChangePasswordModalMethods, ChangePasswordModalProps>((props, ref) => {
-	const FormSchema = z
-		.object({
-			oldPassword: z.string(),
-			newPassword: z.string().min(1, 'New password is required').min(8, 'New password must have 8 or more characters'),
-			confirmNewPassword: z.string(),
-		})
-		.refine(async data => {
-			const response = await comparePassword({ password: data.oldPassword, hashedPassword: props.userPassword })
-			if (!response) {
-				throw new z.ZodError([{ path: ['oldPassword'], message: 'Old password is incorrect!', code: 'custom' }])
-			} else {
-				return true
-			}
-		})
-		.refine(data => {
-			console.log(data.confirmNewPassword)
-			console.log(data.newPassword)
-			if (data.confirmNewPassword !== data.newPassword) {
-				throw new z.ZodError([{ path: ['confirmNewPassword'], message: 'Passwords do not match.', code: 'custom' }])
-			} else {
-				return true
-			}
-		})
 	const [isBackdrop, setIsBackdrop] = useState(false)
 	const [isLoading, setIsLoading] = useState(false)
 	const modal = useRef<HTMLDialogElement>(null)
@@ -72,11 +50,9 @@ const ChangePasswordModal = forwardRef<ChangePasswordModalMethods, ChangePasswor
 	useEffect(() => {
 		const dialogElement = modal.current
 		const handleKeyDown = (e: KeyboardEvent) => {
-			if (e.key === 'Escape') {
-				if (modal.current) {
-					setIsBackdrop(false)
-					modal.current.close()
-				}
+			if (e.key === 'Escape' && modal.current) {
+				setIsBackdrop(false)
+				modal.current.close()
 			}
 		}
 		const handleClickOutside = (e: MouseEvent) => {
@@ -95,25 +71,36 @@ const ChangePasswordModal = forwardRef<ChangePasswordModalMethods, ChangePasswor
 		}
 	}, [])
 
+	const closeModal = () => {
+		if (!modal.current) {
+			return
+		}
+		setIsBackdrop(false)
+		modal.current.close()
+	}
+
 	const onSubmit = async (values: z.infer<typeof FormSchema>) => {
 		setIsLoading(true)
 		const response = await changePassword({ password: values.newPassword, accountId: props.id })
-		if (!response?.account?.success) {
+		if (!response || !response.account || !response.account.success) {
 			setIsLoading(false)
-			console.log(response)
-		} else {
-			setIsLoading(false)
-			console.log('Password Changed')
+			console.error(response)
+			alert('An error occured when changing password. Please try again later!')
+			form.reset()
+			return
 		}
+		setIsLoading(false)
+		alert('Password changed successfully!')
+		closeModal()
 	}
 
 	return (
 		<>
 			<dialog ref={modal} className={classes.modal}>
-				<div className={classes.modalContent}>
-					<p className={classes.modalTitle}>Change password</p>
+				<div className={classes.modal__modalContent}>
+					<p className={classes.modal__modalTitle}>Change password</p>
 					<FormProvider {...form}>
-						<form className={classes.modalForm} onSubmit={form.handleSubmit(onSubmit)}>
+						<form className={classes.modal__modalForm} onSubmit={form.handleSubmit(onSubmit)}>
 							<Input label="Old password" type="password" id="oldPassword" error={form.formState.errors.oldPassword} />
 							<Input label="New password" type="password" id="newPassword" error={form.formState.errors.newPassword} />
 							<Input

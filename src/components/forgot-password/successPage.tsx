@@ -12,7 +12,7 @@ const SuccessPage = () => {
 			<SectionHeading>reset your password</SectionHeading>
 			<p className={classes.text}>A password reset email was sent, if it doesn't show up check your spam folder.</p>
 			<MotionLink whileHover={{ color: '#fff' }} href="/login" className={classes.link}>
-				<img src="/arrow-login.svg" alt="Arrow Icon" className={classes.arrowReversed} />
+				<img src="/arrow-login.svg" alt="Arrow Icon" className={classes.link__arrowReversed} />
 				Return to login page
 			</MotionLink>
 		</>

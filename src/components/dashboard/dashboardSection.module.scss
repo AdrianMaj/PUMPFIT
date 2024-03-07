@@ -5,62 +5,62 @@
 	gap: 2em;
 	width: 100%;
 	height: 100%;
-}
-.card {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	padding: 2em;
-	text-decoration: none;
-	background-color: $secondaryBg;
-	h3 {
-		text-align: center;
-		font-size: clamp(2rem, 1.3469rem + 3.2653vw, 4rem);
-		margin-bottom: 0.5em;
-		color: #fff;
+	&__card {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		padding: 2em;
+		text-decoration: none;
+		background-color: $secondaryBg;
+		h3 {
+			text-align: center;
+			font-size: clamp(2rem, 1.3469rem + 3.2653vw, 4rem);
+			margin-bottom: 0.5em;
+			color: $white;
+		}
+		p {
+			text-align: center;
+			font-size: $subtextSize;
+			color: $white;
+		}
 	}
-	p {
-		text-align: center;
-		font-size: $subtextSize;
-		color: #fff;
-	}
-	.infoText {
+	&__infoText {
 		margin-top: 0.5em;
 		font-size: $smallSize;
 		color: $subtext;
 	}
-}
-.button {
-	background-color: transparent;
-	padding: 0.75em 1em;
-	font-size: 1.6rem;
-	border: 1.5px solid $mainColor;
-	color: white;
-	cursor: pointer;
-	font-size: $headingSize;
-}
-.buttonContainer {
-	display: flex;
-	flex-direction: row;
-	justify-content: center;
-	flex-wrap: wrap;
-	gap: 2em;
-}
-.clickable {
-	cursor: pointer;
-}
-.categoryList {
-	margin-top: 2em;
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: center;
-	text-decoration: none;
-	color: $subtext;
-	list-style-type: none;
-	gap: 1em;
-	li {
-		font-size: $smallSize;
+	&__button {
+		background-color: transparent;
+		padding: 0.75em 1em;
+		font-size: 1.6rem;
+		border: 1.5px solid $mainColor;
+		color: $white;
+		cursor: pointer;
+		font-size: $headingSize;
+	}
+	&__buttonContainer {
+		display: flex;
+		flex-direction: row;
+		justify-content: center;
+		flex-wrap: wrap;
+		gap: 2em;
+	}
+	&__clickable {
+		cursor: pointer;
+	}
+	&__categoryList {
+		margin-top: 2em;
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+		text-decoration: none;
+		color: $subtext;
+		list-style-type: none;
+		gap: 1em;
+		li {
+			font-size: $smallSize;
+		}
 	}
 }
 @media (min-width: 992px) {
@@ -68,24 +68,24 @@
 		display: grid;
 		grid-template-columns: repeat(3, 1fr);
 		grid-template-rows: repeat(3, 1fr);
-	}
-	.rowspan {
-		grid-row: 1/3;
-		grid-column: 3/4;
-	}
-	.cardUser {
-		grid-row: 1/3;
-	}
-	.rowspan2 {
-		grid-row: 2/4;
-		grid-column: 1/2;
-	}
-	.colspan {
-		grid-row: 3/4;
-		grid-column: 2/4;
-	}
-	.buttonContainerUser {
-		grid-row: 3/4;
-		grid-column: 1/4;
+		&__rowspan {
+			grid-row: 1/3;
+			grid-column: 3/4;
+		}
+		&__cardUser {
+			grid-row: 1/3;
+		}
+		&__rowspan2 {
+			grid-row: 2/4;
+			grid-column: 1/2;
+		}
+		&__colspan {
+			grid-row: 3/4;
+			grid-column: 2/4;
+		}
+		&__buttonContainerUser {
+			grid-row: 3/4;
+			grid-column: 1/4;
+		}
 	}
 }

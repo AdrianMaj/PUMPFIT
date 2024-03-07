@@ -29,6 +29,7 @@ const FormSchema = z
 const DeleteAccountModal = forwardRef<DeleteAccountModalMethods, DeleteAccountModalProps>((props, ref) => {
 	const modal = useRef<HTMLDialogElement>(null)
 	const [isOpen, setIsOpen] = useState(false)
+	const [isDeleting, setIsDeleting] = useState(false)
 	const form = useForm<z.infer<typeof FormSchema>>({
 		resolver: zodResolver(FormSchema),
 		defaultValues: {
@@ -75,39 +76,37 @@ const DeleteAccountModal = forwardRef<DeleteAccountModalMethods, DeleteAccountMo
 		}
 	}, [])
 	const onSubmit = async () => {
+		setIsDeleting(true)
 		const response = await deleteAccount({ accountId: props.id })
 		if (!response.account?.success) {
-			console.log(response)
-		} else {
-			console.log('Account deleted successfully')
-			await signOut({ callbackUrl: '/' })
-			if (modal.current) {
-				setIsOpen(false)
-				modal.current.close()
-			}
+			setIsDeleting(false)
 		}
+		setIsDeleting(false)
+		await signOut({ callbackUrl: '/' })
+		closeModal()
 	}
 	const closeModal = () => {
-		if (modal.current) {
-			setIsOpen(false)
-			modal.current.close()
+		if (!modal.current) {
+			return
 		}
+		setIsOpen(false)
+		modal.current.close()
 	}
 
 	return (
 		<>
 			<dialog onCancel={closeModal} ref={modal} className={classes.modal}>
-				<div className={classes.modalContent}>
-					<p className={classes.modalTitle}>Delete my account</p>
-					<p className={classes.modalText}>
+				<div className={classes.modal__modalContent}>
+					<p className={classes.modal__modalTitle}>Delete my account</p>
+					<p className={classes.modal__modalText}>
 						Are you sure you want to delete your account? This operation is irreversible.
 					</p>
-					<p className={classes.modalText}>Type "I confirm that I want to delete my account."</p>
+					<p className={classes.modal__modalText}>Type "I confirm that I want to delete my account."</p>
 					<FormProvider {...form}>
-						<form className={classes.modalForm} onSubmit={form.handleSubmit(onSubmit)}>
+						<form className={classes.modal__modalForm} onSubmit={form.handleSubmit(onSubmit)}>
 							<Input label="" type="text" id="confirmation" error={form.formState.errors.confirmation} />
 							<Button style={{ fontSize: 'clamp(1.4rem, 1.2041rem + 0.9796vw, 2rem)' }} type="submit">
-								Delete my account
+								{isDeleting ? 'Deleting...' : 'Delete my account'}
 							</Button>
 						</form>
 					</FormProvider>
