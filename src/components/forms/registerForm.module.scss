@@ -15,7 +15,25 @@
 		width: 100%;
 		margin-top: 0.5em;
 		text-align: left;
-		margin-bottom: 2em;
+		margin-bottom: 0.5em;
 		cursor: pointer;
 	}
+}
+.text,
+.link {
+	color: $subtext;
+	font-size: clamp(1.4rem, 1.2041rem + 0.9796vw, 2rem);
+	line-height: 1.5em;
+}
+.link {
+	text-wrap: nowrap;
+}
+.text {
+	margin-bottom: 0.5em;
+}
+.testContainer {
+	width: 100%;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 2em;
 }

@@ -8,10 +8,11 @@ import Button from '../ui/button'
 import { changePassword } from '@/util/updateAccount'
 import classes from './changePasswordModal.module.scss'
 import { FormSchema } from './changePasswordModal.data'
+import { sendResetPasswordEmail } from '@/util/sendResetPasswordEmail'
 
 interface ChangePasswordModalProps {
 	id: string
-	userPassword: string
+	userEmail: string
 }
 
 export type ChangePasswordModalMethods = {
@@ -23,14 +24,6 @@ const ChangePasswordModal = forwardRef<ChangePasswordModalMethods, ChangePasswor
 	const [isBackdrop, setIsBackdrop] = useState(false)
 	const [isLoading, setIsLoading] = useState(false)
 	const modal = useRef<HTMLDialogElement>(null)
-	const form = useForm<z.infer<typeof FormSchema>>({
-		resolver: zodResolver(FormSchema),
-		defaultValues: {
-			oldPassword: '',
-			newPassword: '',
-			confirmNewPassword: '',
-		},
-	})
 
 	useImperativeHandle(ref, () => ({
 		openModal: () => {
@@ -79,18 +72,15 @@ const ChangePasswordModal = forwardRef<ChangePasswordModalMethods, ChangePasswor
 		modal.current.close()
 	}
 
-	const onSubmit = async (values: z.infer<typeof FormSchema>) => {
+	const handlePasswordChange = async () => {
 		setIsLoading(true)
-		const response = await changePassword({ password: values.newPassword, accountId: props.id })
-		if (!response || !response.account || !response.account.success) {
-			setIsLoading(false)
-			console.error(response)
-			alert('An error occured when changing password. Please try again later!')
-			form.reset()
-			return
-		}
+		const response = await sendResetPasswordEmail(props.userEmail)
 		setIsLoading(false)
-		alert('Password changed successfully!')
+		if (response?.emailSent) {
+			alert('Password reset email sent successfully, if you do not see a message please check SPAM or try again.')
+		} else {
+			alert('An error occurred while sending password reset email. Please try again later.')
+		}
 		closeModal()
 	}
 
@@ -99,21 +89,16 @@ const ChangePasswordModal = forwardRef<ChangePasswordModalMethods, ChangePasswor
 			<dialog ref={modal} className={classes.modal}>
 				<div className={classes.modal__modalContent}>
 					<p className={classes.modal__modalTitle}>Change password</p>
-					<FormProvider {...form}>
-						<form className={classes.modal__modalForm} onSubmit={form.handleSubmit(onSubmit)}>
-							<Input label="Old password" type="password" id="oldPassword" error={form.formState.errors.oldPassword} />
-							<Input label="New password" type="password" id="newPassword" error={form.formState.errors.newPassword} />
-							<Input
-								label="Confirm new password"
-								type="password"
-								id="confirmNewPassword"
-								error={form.formState.errors.confirmNewPassword}
-							/>
-							<Button style={{ fontSize: 'clamp(1.4rem, 1.2041rem + 0.9796vw, 2rem)' }} type="submit">
-								{isLoading ? 'Please wait...' : 'Change password'}
-							</Button>
-						</form>
-					</FormProvider>
+					<p className={classes.modal__text}>
+						To reset your password press the button below, then an email will be sent to your email address allowing you
+						to reset your password.
+					</p>
+					<Button
+						style={{ fontSize: 'clamp(1.4rem, 1.2041rem + 0.9796vw, 2rem)' }}
+						type="button"
+						onClick={handlePasswordChange}>
+						{isLoading ? 'Sending email' : 'Change password'}
+					</Button>
 				</div>
 			</dialog>
 			{isBackdrop && <div className={classes.backdrop}></div>}

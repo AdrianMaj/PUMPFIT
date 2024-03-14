@@ -113,7 +113,7 @@ const AccountSettingsForm = ({ accountData }: { accountData: Account }) => {
 
 	return (
 		<>
-			<ChangePasswordModal id={accountData.id} userPassword={accountData.password} ref={changePasswordModal} />
+			<ChangePasswordModal id={accountData.id} userEmail={accountData.email} ref={changePasswordModal} />
 			<DeleteAccountModal id={accountData.id} ref={deleteAccountModal} />
 			<FormProvider {...form}>
 				<form className={classes.form} onSubmit={form.handleSubmit(handleUpdateProfile)}>

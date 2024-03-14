@@ -11,10 +11,12 @@ import { signIn } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import Spinner from '../ui/spinner'
 import { FormSchema } from './loginForm.data'
+import Button from '../ui/button'
 
 const LoginForm = () => {
 	const [isLoading, setIsLoading] = useState(false)
-	const [isError, setIsError] = useState<boolean>()
+	const [isError, setIsError] = useState(false)
+	const [isLoggingTest, setIsLoggingTest] = useState(false)
 	const router = useRouter()
 	const form = useForm<z.infer<typeof FormSchema>>({
 		resolver: zodResolver(FormSchema),
@@ -27,10 +29,57 @@ const LoginForm = () => {
 	const onSubmit = async (values: z.infer<typeof FormSchema>) => {
 		setIsError(false)
 		setIsLoading(true)
+		setIsLoggingTest(true)
 		try {
 			const result = await signIn('credentials', {
 				email: values.email,
 				password: values.password,
+				redirect: false,
+			})
+			if (result && !result.error) {
+				router.push('/dashboard')
+			} else {
+				setIsLoading(false)
+				setIsLoggingTest(false)
+				setIsError(true)
+			}
+		} catch (error: any) {
+			setIsLoading(false)
+			setIsLoggingTest(false)
+			console.error('Error during sign-in:', error)
+		}
+	}
+
+	const handleTestUserAccount = async () => {
+		setIsError(false)
+		setIsLoading(true)
+		setIsLoggingTest(true)
+		try {
+			const result = await signIn('credentials', {
+				email: 'user@example.com',
+				password: 'pUmPf1TUs3r!',
+				redirect: false,
+			})
+			if (result && !result.error) {
+				router.push('/dashboard')
+			} else {
+				setIsLoading(false)
+				setIsLoggingTest(false)
+				setIsError(true)
+			}
+		} catch (error: any) {
+			setIsLoading(false)
+			setIsLoggingTest(false)
+			console.error('Error during sign-in:', error)
+		}
+	}
+	const handleTestTrainerAccount = async () => {
+		setIsError(false)
+		setIsLoading(true)
+		try {
+			const result = await signIn('credentials', {
+				email: 'trainer@example.com',
+				password: 'pUmPf1Ttr@1n3r',
 				redirect: false,
 			})
 			if (result && !result.error) {
@@ -44,11 +93,12 @@ const LoginForm = () => {
 			console.error('Error during sign-in:', error)
 		}
 	}
+
 	const MotionLink = motion(Link)
 	return (
 		<>
 			{isLoading ? (
-				<Spinner text="Logging in..." />
+				<Spinner text={isLoggingTest ? 'Logging to test account...' : 'Logging in...'} />
 			) : (
 				<>
 					<FormProvider {...form}>
@@ -58,7 +108,7 @@ const LoginForm = () => {
 							{isError && (
 								<p className={classes.form__errorMsg}>Invalid email, password or your account is not active.</p>
 							)}
-							<MotionLink whileHover={{ color: '#fff' }} href="/forgot-password" className={classes.form__text}>
+							<MotionLink whileHover={{ color: '#fff' }} href="/forgot-password" className={classes.text}>
 								Forgot your password?
 							</MotionLink>
 							<motion.button
@@ -77,6 +127,10 @@ const LoginForm = () => {
 							Register Now!
 						</MotionLink>
 					</p>
+					<div className={classes.testContainer}>
+						<Button onClick={handleTestUserAccount}>Test User Account</Button>
+						<Button onClick={handleTestTrainerAccount}>Test Trainer Account</Button>
+					</div>
 				</>
 			)}
 		</>

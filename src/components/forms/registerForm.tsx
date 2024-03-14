@@ -10,11 +10,15 @@ import { useRouter } from 'next/navigation'
 import classes from './registerForm.module.scss'
 import Spinner from '../ui/spinner'
 import { FormSchema } from './registerForm.data'
+import Link from 'next/link'
+import Button from '../ui/button'
+import { signIn } from 'next-auth/react'
 
 const RegisterForm = () => {
 	const router = useRouter()
 	const [isTrainer, setIsTrainer] = useState(false)
 	const [isLoading, setIsLoading] = useState(false)
+	const [isLoggingTest, setIsLoggingTest] = useState(false)
 	const trainerToggle = () => {
 		setIsTrainer(prevState => {
 			const newState = !prevState
@@ -64,11 +68,54 @@ const RegisterForm = () => {
 		console.log('Successfully created an account!')
 		router.push('/register/success')
 	}
+	const handleTestUserAccount = async () => {
+		setIsLoading(true)
+		setIsLoggingTest(true)
+		try {
+			const result = await signIn('credentials', {
+				email: 'user@example.com',
+				password: 'pUmPf1TUs3r!',
+				redirect: false,
+			})
+			if (result && !result.error) {
+				router.push('/dashboard')
+			} else {
+				setIsLoading(false)
+				setIsLoggingTest(false)
+			}
+		} catch (error: any) {
+			setIsLoading(false)
+			setIsLoggingTest(false)
+			console.error('Error during sign-in:', error)
+		}
+	}
+	const handleTestTrainerAccount = async () => {
+		setIsLoading(true)
+		setIsLoggingTest(true)
+		try {
+			const result = await signIn('credentials', {
+				email: 'trainer@example.com',
+				password: 'pUmPf1Ttr@1n3r',
+				redirect: false,
+			})
+			if (result && !result.error) {
+				router.push('/dashboard')
+			} else {
+				setIsLoading(false)
+				setIsLoggingTest(false)
+			}
+		} catch (error: any) {
+			setIsLoading(false)
+			setIsLoggingTest(false)
+			console.error('Error during sign-in:', error)
+		}
+	}
 
+	const MotionLink = motion(Link)
 	return (
 		<>
 			{isLoading ? (
-				<Spinner text="Creating account..." />
+				<Spinner text={isLoggingTest ? 'Logging to test account...' :'Creating account...'} />
 			) : (
 				<>
 					<Switch layoutId="register" state={isTrainer} stateChanger={trainerToggle}></Switch>
@@ -91,6 +138,16 @@ const RegisterForm = () => {
 								type="submit">
 								Create your account <img src="/arrow-login.svg" alt="Arrow Icon" />
 							</motion.button>
+							<p className={classes.text}>
+								Already have an account?{' '}
+								<MotionLink whileHover={{ color: '#fff' }} className={classes.link} href="/register">
+									Log in!
+								</MotionLink>
+							</p>
+							<div className={classes.testContainer}>
+								<Button onClick={handleTestUserAccount}>Test User Account</Button>
+								<Button onClick={handleTestTrainerAccount}>Test Trainer Account</Button>
+							</div>
 						</form>
 					</FormProvider>
 				</>

@@ -13,7 +13,7 @@
 		color: $white;
 		width: 100%;
 		text-align: left;
-		margin-bottom: 2em;
+		margin-bottom: 0.5em;
 		cursor: pointer;
 	}
 	&__errorMsg {
@@ -32,4 +32,13 @@
 }
 .link {
 	text-wrap: nowrap;
+}
+.text {
+	margin-bottom: 2em;
+}
+.testContainer {
+	width: 100%;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 2em;
 }
