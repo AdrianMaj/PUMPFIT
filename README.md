@@ -41,7 +41,7 @@
       </ul>
     </li>
     <li>
-      <a href="#getting-started">Getting Started</a>
+     <!-- <a href="#getting-started">Getting Started</a> -->
       <ul>
         <li><a href="#prerequisites">Prerequisites</a></li>
         <li><a href="#installation">Installation</a></li>
@@ -83,7 +83,7 @@ See <a href="#usage"><b>Usage</b></a> for more information about the application
 
 <!-- GETTING STARTED -->
 
-## Getting Started
+<!-- ## Getting Started
 
 (not filled yet)
 
@@ -98,7 +98,6 @@ This is an example of how to list things you need to use the software and how to
   ```sh
   npm install npm@latest -g
   ```
-
 ### Installation
 
 1. Get a free API Key at [https://example.com](https://example.com)
@@ -117,6 +116,7 @@ This is an example of how to list things you need to use the software and how to
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
+-->
 <!-- USAGE EXAMPLES -->
 
 ## Usage
