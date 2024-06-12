@@ -43,7 +43,7 @@
 		background-color: $active;
 		border-radius: 50%;
 	}
-	&__activeIndicator.unactiveIndicator {
+	&__unactiveIndicator {
 		background-color: $mainColor;
 	}
 	&__cardTime {

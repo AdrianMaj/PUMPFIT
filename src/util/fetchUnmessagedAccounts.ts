@@ -6,7 +6,7 @@ const fetchUnmessagedAccounts = async (userId: string) => {
 			NOT: {
 				id: userId,
 			},
-			OR: [
+			AND: [
 				{
 					messagesFrom: {
 						none: {
